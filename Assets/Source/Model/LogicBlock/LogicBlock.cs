@@ -27,7 +27,9 @@ namespace Model.LogicBlockLogic
 
         public abstract bool TryRemove();
 
-        public abstract bool TryAppend(LogicBlock logicOperator);
+        public abstract bool CanAppend(Vector2Int operandPosition);
+
+        public abstract void Append(LogicBlock operand);
 
         public abstract bool IsCorrectTree();
     }

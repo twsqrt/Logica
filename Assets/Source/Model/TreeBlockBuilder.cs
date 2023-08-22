@@ -27,8 +27,10 @@ namespace Model
 
             MapTile parentMapTile = Map.GetVicinity(position).Select(p => _map[p]).Single(t => t.IsOccupied);
             LogicBlock parentBlock = parentMapTile.Block;
-            if(parentBlock.TryAppend(newBlock))
+
+            if(parentBlock.CanAppend(position))
             {
+                parentBlock.Append(newBlock);
                 newBlock.SetParent(parentBlock);
                 return true;
             }

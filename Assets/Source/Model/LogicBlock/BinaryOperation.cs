@@ -4,7 +4,7 @@ using System.Linq;
 using Model.MapLogic;
 using UnityEngine;
 
-namespace Model.LogicBlockLogic
+namespace Model.LogicBlockLogic.BinaryOperationLogic
 {
     public class BinaryOperaion : LogicBlock
     {
@@ -27,7 +27,7 @@ namespace Model.LogicBlockLogic
             _currentState = _stateHistory.Pop();
         }
         
-        private void Append(LogicBlock operand)
+        public override void Append(LogicBlock operand)
         {
             _operands.Add(operand);
             operand.OnRemove += OnRemoveHandler;
@@ -96,16 +96,9 @@ namespace Model.LogicBlockLogic
             return true;
         }
 
-        public override bool TryAppend(LogicBlock operand)
+        public override bool CanAppend(Vector2Int operandPosition)
         {
-            Func<LogicBlock, bool> previouseState = _currentState;
-            if(_currentState(operand))
-            {
-                _stateHistory.Push(previouseState);
-                return true;
-            }
-
-            return false;
+            throw new NotImplementedException();
         }
 
         public override bool TryRemove()
@@ -116,5 +109,6 @@ namespace Model.LogicBlockLogic
             OnRemoveInvoke();
             return true;
         }
+
     }
 }

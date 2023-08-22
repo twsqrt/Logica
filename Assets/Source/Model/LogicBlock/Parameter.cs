@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Model.LogicBlockLogic
@@ -6,7 +7,12 @@ namespace Model.LogicBlockLogic
     {
         public Parameter(Vector2Int position) : base(position) {}
 
-        public override bool TryAppend(LogicBlock logicOperator) => false;
+        public override bool CanAppend(Vector2Int operandPosition) => false;
+
+        public override void Append(LogicBlock operand)
+        {
+            throw new InvalidOperationException();
+        }
 
         public override bool IsCorrectTree() => true;
 

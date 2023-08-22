@@ -22,18 +22,17 @@ namespace Model.LogicBlockLogic
             return _operand.IsCorrectTree();
         }
 
-        public override bool TryAppend(LogicBlock operand)
+        public override bool CanAppend(Vector2Int operandPosition)
         {
             if(_operand != null)
                 return false;
+            return Map.GetVicinity(_position).Contains(operandPosition);
+        }
 
-            if(Map.GetVicinity(_position).Contains(operand.Position) == false)
-                return false;
-
+        public override void Append(LogicBlock operand)
+        {
             _operand = operand;
             operand.OnRemove += _ => OnRemoveHandler();
-
-            return true;
         }
 
         public override bool TryRemove()
