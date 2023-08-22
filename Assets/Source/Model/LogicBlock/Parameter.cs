@@ -5,7 +5,7 @@ namespace Model.LogicBlockLogic
 {
     public class Parameter : LogicBlock
     {
-        public Parameter(Vector2Int position) : base(position) {}
+        public Parameter(Vector2Int position) : base(LogicBlockType.PARAMETER, position) {}
 
         public override bool CanAppend(Vector2Int operandPosition) => false;
 

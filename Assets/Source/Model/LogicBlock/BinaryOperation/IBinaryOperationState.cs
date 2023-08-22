@@ -1,4 +1,3 @@
-using Model.LogicBlockLogic.BinaryOperationLogic;
 using UnityEngine;
 
 namespace Model.LogicBlockLogic.BinaryOperationLogic

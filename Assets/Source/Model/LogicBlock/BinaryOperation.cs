@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Model.MapLogic;
 using UnityEngine;
 
 namespace Model.LogicBlockLogic.BinaryOperationLogic
@@ -14,7 +12,7 @@ namespace Model.LogicBlockLogic.BinaryOperationLogic
         private Stack<BinaryOperaionStateType> _stateHistory;
         private IBinaryOperationState _currentState;
 
-        public BinaryOperaion(Vector2Int position) : base(position)
+        public BinaryOperaion(LogicBlockType type, Vector2Int position) : base(type, position)
         {
             _operands = new List<LogicBlock>();
 

@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Model.LogicBlockLogic
 {
-    public class UnaryOperation : LogicBlock
+    public class OperationNot : LogicBlock
     {
         private LogicBlock _operand;
 
-        public UnaryOperation(Vector2Int position) : base(position)
+        public OperationNot(Vector2Int position) : base(LogicBlockType.NOT, position)
         {
             _operand = null;
         }
