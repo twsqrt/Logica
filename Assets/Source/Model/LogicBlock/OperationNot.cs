@@ -8,7 +8,7 @@ namespace Model.LogicBlockLogic
     {
         private LogicBlock _operand;
 
-        public OperationNot(Vector2Int position) : base(LogicBlockType.NOT, position)
+        public OperationNot(Vector2Int position, LogicBlock parent) : base(LogicBlockType.NOT, position, parent)
         {
             _operand = null;
         }

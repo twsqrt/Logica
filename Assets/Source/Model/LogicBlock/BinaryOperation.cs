@@ -12,7 +12,7 @@ namespace Model.LogicBlockLogic.BinaryOperationLogic
         private Stack<BinaryOperaionStateType> _stateHistory;
         private IBinaryOperationState _currentState;
 
-        public BinaryOperaion(LogicBlockType type, Vector2Int position) : base(type, position)
+        public BinaryOperaion(LogicBlockType type, Vector2Int position, LogicBlock parent) : base(type, position, parent)
         {
             _operands = new List<LogicBlock>();
 
@@ -25,7 +25,17 @@ namespace Model.LogicBlockLogic.BinaryOperationLogic
             };
 
             _stateHistory = new Stack<BinaryOperaionStateType>();
-            _currentState = _states[BinaryOperaionStateType.ROOT];
+            _currentState = _states[GetStartStateType()];
+        }
+
+        private BinaryOperaionStateType GetStartStateType()
+        {
+            if(_parent == null)
+                return BinaryOperaionStateType.ROOT;
+            
+            if(_parent.Position.x == _position.x)
+                return BinaryOperaionStateType.OPERANDS_HORIZONTALLY;
+            return BinaryOperaionStateType.OPERANDS_VERTICALLY; 
         }
 
         private void OnRemoveHandler(LogicBlock block)

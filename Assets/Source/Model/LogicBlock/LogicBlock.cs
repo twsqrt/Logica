@@ -6,8 +6,8 @@ namespace Model.LogicBlockLogic
     public abstract class LogicBlock
     {
         private readonly LogicBlockType _type;
-        protected LogicBlock _parent;
-        protected Vector2Int _position;
+        protected readonly LogicBlock _parent;
+        protected readonly Vector2Int _position;
 
         public event Action<LogicBlock> OnRemove;
 
@@ -15,15 +15,10 @@ namespace Model.LogicBlockLogic
 
         public LogicBlockType BlockType => _type;
 
-        public LogicBlock(LogicBlockType type, Vector2Int position)
+        public LogicBlock(LogicBlockType type, Vector2Int position, LogicBlock parent)
         {
             _type = type;
             _position = position;
-            _parent = null;
-        }
-
-        public virtual void SetParent(LogicBlock parent)
-        {
             _parent = parent;
         }
 
