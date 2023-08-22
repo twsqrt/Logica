@@ -9,106 +9,56 @@ namespace Model.LogicBlockLogic.BinaryOperationLogic
     public class BinaryOperaion : LogicBlock
     {
         private readonly List<LogicBlock> _operands;
+        private readonly Dictionary<BinaryOperaionStateType, IBinaryOperationState> _states;
 
-        private Func<LogicBlock, bool> _currentState;
-        private readonly Stack<Func<LogicBlock, bool>> _stateHistory;
+        private Stack<BinaryOperaionStateType> _stateHistory;
+        private IBinaryOperationState _currentState;
 
         public BinaryOperaion(Vector2Int position) : base(position)
         {
             _operands = new List<LogicBlock>();
 
-            _currentState = Root;
-            _stateHistory = new Stack<Func<LogicBlock, bool>>();
+            _states = new Dictionary<BinaryOperaionStateType, IBinaryOperationState>()
+            {
+                {BinaryOperaionStateType.ROOT, new Root(_position)},
+                {BinaryOperaionStateType.OPERANDS_HORIZONTALLY, OperandsOnLine.Horizontally(_position, _operands)},
+                {BinaryOperaionStateType.OPERANDS_VERTICALLY, OperandsOnLine.Vertically(_position, _operands)},
+                {BinaryOperaionStateType.ALL_OPERANDS_ADDED, new AllOperandsAdded()}
+            };
+
+            _stateHistory = new Stack<BinaryOperaionStateType>();
+            _currentState = _states[BinaryOperaionStateType.ROOT];
         }
 
-        private void OnRemoveHandler(LogicBlock operand)
+        private void OnRemoveHandler(LogicBlock block)
         {
-            _operands.Remove(operand);
-            _currentState = _stateHistory.Pop();
+            _operands.Remove(block);
+            _currentState = _states[_stateHistory.Pop()];
         }
-        
+
+        public override bool CanAppend(Vector2Int operandPosition)
+            => _currentState.CanAppend(operandPosition);
+
         public override void Append(LogicBlock operand)
         {
             _operands.Add(operand);
             operand.OnRemove += OnRemoveHandler;
-        }
 
-        private bool Root(LogicBlock operand)
-        {
-            Vector2Int operandPosition = operand.Position;
-            if(Map.GetVicinity(_position).Contains(operandPosition) == false)
-                return false;
-
-            Append(operand);
-            
-            if(_position.x == operandPosition.x)
-                _currentState = OperandsVertically;
-            _currentState = OperandsHorizontally;
-
-            return true;
-        }
-
-        private bool OperandsByRule(LogicBlock operand, Func<Vector2Int, bool> rule)
-        {
-            if(Map.GetVicinity(_position).Where(rule).Contains(operand.Position))
-            {
-                Append(operand);
-
-                if(_operands.Any())
-                    _currentState = AllOperandsAdded;
-
-                return true;
-            }
-            return false;
-        }
-
-        private bool OperandsHorizontally(LogicBlock operand)
-            => OperandsByRule(operand, p => p.y == _position.y);
-
-        private bool OperandsVertically(LogicBlock operand)
-            => OperandsByRule(operand, p => p.x == _position.x);
-        
-        private bool AllOperandsAdded(LogicBlock operand) => false;
-
-        public override void SetParent(LogicBlock parent)
-        {
-            _parent = parent;
-
-            if(parent == null)
-                _currentState = Root;
-            else if(parent.Position.x == _position.x)
-                _currentState = OperandsVertically;
-            else
-                _currentState = OperandsVertically;
+            _stateHistory.Push(_currentState.StateType);
+            BinaryOperaionStateType nextStateType = _currentState.NextState(operand.Position);
+            _currentState = _states[nextStateType];
         }
 
         public override bool IsCorrectTree()
         {
-            if(_currentState != AllOperandsAdded)
+            if(_operands.Count() != 2)
                 return false;
-
-            foreach(LogicBlock operand in _operands)
-            {
-                if(operand.IsCorrectTree() == false)
-                    return false;
-            }
-
-            return true;
-        }
-
-        public override bool CanAppend(Vector2Int operandPosition)
-        {
-            throw new NotImplementedException();
+            return _operands[0].IsCorrectTree() && _operands[1].IsCorrectTree();
         }
 
         public override bool TryRemove()
         {
-            if(_operands.Any())
-                return false;
-            
-            OnRemoveInvoke();
-            return true;
+            return false;
         }
-
     }
 }
