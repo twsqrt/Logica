@@ -1,3 +1,4 @@
+using System;
 using Model.LogicBlockLogic;
 using UnityEditor;
 
@@ -7,6 +8,8 @@ namespace Model.MapLogic
     {
         private LogicBlock _block;
 
+        public event Action<LogicBlock> OnBlockChange;
+
         public LogicBlock Block
         {
             get => _block;
@@ -14,6 +17,7 @@ namespace Model.MapLogic
             {
                 _block?.TryRemove();
                 _block = value;
+                OnBlockChange?.Invoke(value);
             }
         }
 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Config;
 using Extensions;
 using UnityEngine;
@@ -27,12 +28,21 @@ namespace Model.MapLogic
                 _tiles[i] = new MapTile();
         }
 
-        public MapTile this[Vector2Int position]
+        public MapTile this[int x, int y]
         {
-            get => _tiles[position.x + position.y * _width];
+            get => _tiles[x + y * _width];
             private set
             {
-                _tiles[position.x + position.y * _width] = value;
+                _tiles[x + y * _width] = value;
+            }
+        }
+
+        public MapTile this[Vector2Int position]
+        {
+            get => this[position.x, position.y];
+            private set
+            {
+                this[position.x, position.y] = value;
             }
         }
 
@@ -45,8 +55,14 @@ namespace Model.MapLogic
             return vicinity;
         }
 
+        public IEnumerable<Vector2Int> GetVicinityInMap(Vector2Int position)
+            => GetVicinity(position).Where(p => PositionInMap(p));
+
         public bool PositionInMap(int x, int y)
             => x.IsBetween(0, _width - 1) && y.IsBetween(0, _height - 1);
+
+        public bool PositionInMap(Vector2Int position)
+            => PositionInMap(position.x, position.y);
 
         public bool CanPlace(Vector2Int position)
         {

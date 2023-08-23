@@ -2,13 +2,16 @@ using Model.MapLogic;
 using Model.LogicBlockLogic;
 using System.Linq;
 using UnityEngine;
+using Model.LogicBlockLogic.BinaryOperationLogic;
+using System.Collections.Generic;
+using UnityEditor.U2D.Path;
 
 namespace Model
 {
     public class TreeBlockBuilder
     {
         private readonly Map _map;
-        private readonly LogicBlock _root;
+        private LogicBlock _root;
 
         public TreeBlockBuilder(Map map)
         {
@@ -16,25 +19,62 @@ namespace Model
             _root = null;
         }
 
-        public bool PlaceRule(Vector2Int position)
-            => _map.CanPlace(position) && Map.GetVicinity(position).Where(p => _map[p].IsOccupied).Count() == 1;
-
-        public bool TryPlace(Vector2Int position, LogicBlock newBlock)
+        private void PlaceRoot(LogicBlock newRoot)
         {
-            if(PlaceRule(position) == false)
+            _root = newRoot;
+            _map[_map.ExecutionPosition].Block = newRoot;
+        }
+        
+        private bool IsRootPlacement(Vector2Int position)
+            => _root == null && position == _map.ExecutionPosition;
+        
+        private IEnumerable<LogicBlock> GetParentsInVicinity(Vector2Int position)
+            => _map
+                .GetVicinityInMap(position)
+                .Where(p => _map.PositionInMap(p) && _map[p].IsOccupied)
+                .Select(p => _map[p].Block)
+                .Where(b => b.CanAppend(position));
+
+        private bool ExistOnlyOneParent(Vector2Int position, out LogicBlock parent)
+        {
+            IEnumerable<LogicBlock> parentsInVicinity = GetParentsInVicinity(position);
+            if(parentsInVicinity.Count() != 1)
+            {
+                parent = null;
+                return false;
+            }
+
+            parent = parentsInVicinity.Single();
+            return true;
+        }
+        
+        public bool CanPlace(Vector2Int position)
+        {
+            Debug.Log("CanPlace invoke!");
+            return _map.CanPlace(position) && (IsRootPlacement(position) || ExistOnlyOneParent(position, out _));
+        }
+
+        public bool TryPlace(Vector2Int position, LogicBlockType blockType)
+        {
+            if(_map.CanPlace(position) == false)
                 return false;
 
-            MapTile parentMapTile = Map.GetVicinity(position).Select(p => _map[p]).Single(t => t.IsOccupied);
-            LogicBlock parentBlock = parentMapTile.Block;
-
-            if(parentBlock.CanAppend(position))
+            if(IsRootPlacement(position))
             {
-                parentBlock.Append(newBlock);
-                newBlock.SetParent(parentBlock);
+                //temp
+                PlaceRoot(new BinaryOperaion(blockType, position, null));
                 return true;
             }
 
-            return false;
+            if(ExistOnlyOneParent(position, out LogicBlock parent) == false)
+                return false;
+
+            //temp
+            LogicBlock block = new BinaryOperaion(blockType, position, parent);
+            parent.Append(block);
+            _map[position].Block = block;
+
+            return true;
         }
 
         public bool TryRemove(Vector2Int position)
