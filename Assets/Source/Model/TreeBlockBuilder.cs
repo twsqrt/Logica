@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEngine;
 using Model.LogicBlockLogic.BinaryOperationLogic;
 using System.Collections.Generic;
-using UnityEditor.U2D.Path;
 
 namespace Model
 {
@@ -50,7 +49,6 @@ namespace Model
         
         public bool CanPlace(Vector2Int position)
         {
-            Debug.Log("CanPlace invoke!");
             return _map.CanPlace(position) && (IsRootPlacement(position) || ExistOnlyOneParent(position, out _));
         }
 
