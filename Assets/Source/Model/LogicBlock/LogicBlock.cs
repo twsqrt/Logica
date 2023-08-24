@@ -5,7 +5,6 @@ namespace Model.LogicBlockLogic
 {
     public abstract class LogicBlock
     {
-        private readonly LogicBlockType _type;
         protected readonly LogicBlock _parent;
         protected readonly Vector2Int _position;
 
@@ -13,11 +12,8 @@ namespace Model.LogicBlockLogic
 
         public Vector2Int Position => _position;
 
-        public LogicBlockType BlockType => _type;
-
-        public LogicBlock(LogicBlockType type, Vector2Int position, LogicBlock parent)
+        public LogicBlock(Vector2Int position, LogicBlock parent)
         {
-            _type = type;
             _position = position;
             _parent = parent;
         }

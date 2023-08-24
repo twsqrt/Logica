@@ -52,7 +52,7 @@ namespace Model
             return _map.CanPlace(position) && (IsRootPlacement(position) || ExistOnlyOneParent(position, out _));
         }
 
-        public bool TryPlace(Vector2Int position, LogicBlockType blockType)
+        public bool TryPlace(Vector2Int position, LogicOperationType blockType)
         {
             if(_map.CanPlace(position) == false)
                 return false;

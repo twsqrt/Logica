@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Model.LogicBlockLogic.BinaryOperationLogic
 {
-    public class BinaryOperaion : LogicBlock
+    public class BinaryOperaion : LogicOperation
     {
         private readonly List<LogicBlock> _operands;
         private readonly Dictionary<BinaryOperaionStateType, IBinaryOperationState> _states;
@@ -12,7 +12,7 @@ namespace Model.LogicBlockLogic.BinaryOperationLogic
         private Stack<BinaryOperaionStateType> _stateHistory;
         private IBinaryOperationState _currentState;
 
-        public BinaryOperaion(LogicBlockType type, Vector2Int position, LogicBlock parent) : base(type, position, parent)
+        public BinaryOperaion(LogicOperationType type, Vector2Int position, LogicBlock parent) : base(type, position, parent)
         {
             _operands = new List<LogicBlock>();
 

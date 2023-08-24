@@ -1,8 +1,7 @@
 namespace Model.LogicBlockLogic
 {
-    public enum LogicBlockType
+    public enum LogicOperationType
     {
-        PARAMETER,
         NOT,
         OR,
         AND,

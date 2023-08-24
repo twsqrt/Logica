@@ -14,7 +14,7 @@ namespace Presenter
             _model = model;
         }
 
-        public bool TryPlace(Vector2Int position, LogicBlockType blockType)
+        public bool TryPlace(Vector2Int position, LogicOperationType blockType)
             => _model.TryPlace(position, blockType);
     }
 }
