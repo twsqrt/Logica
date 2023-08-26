@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace Model.LogicBlockLogic
+namespace Model.LogicBlockLogic.LogicOperationLogic
 {
     public abstract class LogicOperation : LogicBlock
     {

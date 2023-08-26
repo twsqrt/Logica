@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Model.LogicBlockLogic.BinaryOperationLogic
+namespace Model.LogicBlockLogic.LogicOperationLogic.BinaryOperationLogic
 {
     public interface IBinaryOperationState
     {

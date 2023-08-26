@@ -1,4 +1,4 @@
-namespace Model.LogicBlockLogic.BinaryOperationLogic
+namespace Model.LogicBlockLogic.LogicOperationLogic.BinaryOperationLogic
 {
     public enum BinaryOperaionStateType
     {

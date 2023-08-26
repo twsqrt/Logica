@@ -2,7 +2,7 @@ using System.Linq;
 using Model.MapLogic;
 using UnityEngine;
 
-namespace Model.LogicBlockLogic
+namespace Model.LogicBlockLogic.LogicOperationLogic
 {
     public class OperationNot : LogicOperation
     {
