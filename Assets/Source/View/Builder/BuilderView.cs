@@ -60,7 +60,7 @@ namespace View.BuilderLogic
                 Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
                 if(_mapView.TryGetPosition(ray, out Vector2Int position))
                 {
-                    if(_presenter.TryPlace(position, LogicOperationType.OR))
+                    if(_presenter.TryPlace(position))
                         HighlightRefresh();
                 }
             }

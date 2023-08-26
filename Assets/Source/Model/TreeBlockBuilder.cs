@@ -5,24 +5,22 @@ using UnityEngine;
 using Model.BlockLogic.LogicOperationLogic;
 using Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic;
 using System.Collections.Generic;
+using Model.BlockLogic.BlockDataLogic;
 
 namespace Model
 {
     public class TreeBlockBuilder
     {
         private readonly Map _map;
+        private readonly BlockFactory _blockFactory;
         private Block _root;
 
-        public TreeBlockBuilder(Map map)
+        public TreeBlockBuilder(Map map, BlockFactory blockFactory)
         {
             _map = map;
-            _root = null;
-        }
+            _blockFactory = blockFactory;
 
-        private void PlaceRoot(Block newRoot)
-        {
-            _root = newRoot;
-            _map[_map.ExecutionPosition].Block = newRoot;
+            _root = null;
         }
         
         private bool IsRootPlacement(Vector2Int position)
@@ -53,25 +51,44 @@ namespace Model
             return _map.CanPlace(position) && (IsRootPlacement(position) || ExistOnlyOneParent(position, out _));
         }
 
-        public bool TryPlace(Vector2Int position, LogicOperationType blockType)
+        private void PlaceRoot(IBlockData blockData)
         {
-            if(_map.CanPlace(position) == false)
+            var context = new BlockPositionContext{
+                ParentPosition = ParentBlockPosition.NONE, 
+                Position = _map.ExecutionPosition,
+            };
+
+            _blockFactory.CreationContext = context;
+
+            Block root = blockData.AcceptFactory(_blockFactory);
+            _root = root;
+            _map[context.Position].Block = root;
+        }
+
+        public bool TryPlace(Vector2Int blockPosition, IBlockData blockData)
+        {
+            if(_map.CanPlace(blockPosition) == false)
                 return false;
 
-            if(IsRootPlacement(position))
+            if(IsRootPlacement(blockPosition))
             {
-                //temp
-                PlaceRoot(new BinaryOperaion(blockType, position, null));
+                PlaceRoot(blockData);
                 return true;
             }
 
-            if(ExistOnlyOneParent(position, out Block parent) == false)
+            if(ExistOnlyOneParent(blockPosition, out Block parent) == false)
                 return false;
 
-            //temp
-            Block block = new BinaryOperaion(blockType, position, parent);
+            var context = new BlockPositionContext{
+                ParentPosition = ParentPositionMapper.ParentPositionFrom(parent.Position, blockPosition),
+                Position = blockPosition,
+            };
+
+            _blockFactory.CreationContext = context;
+
+            Block block = blockData.AcceptFactory(_blockFactory);
             parent.Append(block);
-            _map[position].Block = block;
+            _map[context.Position].Block = block;
 
             return true;
         }

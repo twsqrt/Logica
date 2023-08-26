@@ -5,6 +5,7 @@ using View.BuilderLogic;
 using Config;
 using Presenter;
 using Model;
+using Model.BlockLogic;
 
 namespace EntryPointLogic
 {
@@ -19,7 +20,8 @@ namespace EntryPointLogic
             Map map = new Map(_mapConfig);
             _mapView.Init(map);
 
-            TreeBlockBuilder builder = new TreeBlockBuilder(map);
+            BlockFactory blockFactory = new BlockFactory();
+            TreeBlockBuilder builder = new TreeBlockBuilder(map, blockFactory);
             BuilderPresenter builderPresenter = new BuilderPresenter(builder);
             _builderView.Init(_mapView, builderPresenter, builder);
         }
