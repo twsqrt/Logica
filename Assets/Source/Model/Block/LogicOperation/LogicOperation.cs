@@ -7,7 +7,7 @@ namespace Model.BlockLogic.LogicOperationLogic
 
         public LogicOperationType OperationType => _type;
 
-        protected LogicOperation(LogicOperationType type, Vector2Int position, Block parent) : base(position, parent)
+        protected LogicOperation(LogicOperationType type, BlockPositionContext context) : base(context)
         {
             _type = type;
         }

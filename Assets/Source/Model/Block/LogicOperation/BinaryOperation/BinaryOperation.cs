@@ -12,15 +12,15 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
         private Stack<BinaryOperaionStateType> _stateHistory;
         private IBinaryOperationState _currentState;
 
-        public BinaryOperaion(LogicOperationType type, Vector2Int position, Block parent) : base(type, position, parent)
+        public BinaryOperaion(LogicOperationType type, BlockPositionContext context) : base(type, context)
         {
             _operands = new List<Block>();
 
             _states = new Dictionary<BinaryOperaionStateType, IBinaryOperationState>()
             {
-                {BinaryOperaionStateType.ROOT, new Root(_position)},
-                {BinaryOperaionStateType.OPERANDS_HORIZONTALLY, OperandsOnLine.Horizontally(_position, _operands)},
-                {BinaryOperaionStateType.OPERANDS_VERTICALLY, OperandsOnLine.Vertically(_position, _operands)},
+                {BinaryOperaionStateType.ROOT, new Root(_context.Position)},
+                {BinaryOperaionStateType.OPERANDS_HORIZONTALLY, OperandsOnLine.Horizontally(_context.Position, _operands)},
+                {BinaryOperaionStateType.OPERANDS_VERTICALLY, OperandsOnLine.Vertically(_context.Position, _operands)},
                 {BinaryOperaionStateType.ALL_OPERANDS_ADDED, new AllOperandsAdded()}
             };
 
@@ -30,12 +30,17 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
 
         private BinaryOperaionStateType GetStartStateType()
         {
-            if(_parent == null)
-                return BinaryOperaionStateType.ROOT;
-            
-            if(_parent.Position.x == _position.x)
-                return BinaryOperaionStateType.OPERANDS_HORIZONTALLY;
-            return BinaryOperaionStateType.OPERANDS_VERTICALLY; 
+            switch(_context.ParentPosition)
+            {
+                case ParentBlockPosition.UP:
+                case ParentBlockPosition.DOWN:
+                    return BinaryOperaionStateType.OPERANDS_HORIZONTALLY;
+                case ParentBlockPosition.LEFT:
+                case ParentBlockPosition.RIGHT:
+                    return BinaryOperaionStateType.OPERANDS_VERTICALLY;
+                default:
+                    return BinaryOperaionStateType.ROOT;
+            }
         }
 
         private void OnRemoveHandler(Block block)

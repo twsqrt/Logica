@@ -8,7 +8,7 @@ namespace Model.BlockLogic.LogicOperationLogic
     {
         private Block _operand;
 
-        public OperationNot(Vector2Int position, Block parent) : base(LogicOperationType.NOT, position, parent)
+        public OperationNot(BlockPositionContext context) : base(LogicOperationType.NOT, context)
         {
             _operand = null;
         }
@@ -26,7 +26,7 @@ namespace Model.BlockLogic.LogicOperationLogic
         {
             if(_operand != null)
                 return false;
-            return Map.GetVicinity(_position).Contains(operandPosition);
+            return Map.GetVicinity(_context.Position).Contains(operandPosition);
         }
 
         public override void Append(Block operand)
