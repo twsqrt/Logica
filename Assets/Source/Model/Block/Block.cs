@@ -1,18 +1,18 @@
 using System;
 using UnityEngine;
 
-namespace Model.LogicBlockLogic
+namespace Model.BlockLogic
 {
-    public abstract class LogicBlock
+    public abstract class Block
     {
-        protected readonly LogicBlock _parent;
+        protected readonly Block _parent;
         protected readonly Vector2Int _position;
 
-        public event Action<LogicBlock> OnRemove;
+        public event Action<Block> OnRemove;
 
         public Vector2Int Position => _position;
 
-        public LogicBlock(Vector2Int position, LogicBlock parent)
+        public Block(Vector2Int position, Block parent)
         {
             _position = position;
             _parent = parent;
@@ -24,7 +24,7 @@ namespace Model.LogicBlockLogic
 
         public abstract bool CanAppend(Vector2Int operandPosition);
 
-        public abstract void Append(LogicBlock operand);
+        public abstract void Append(Block operand);
 
         public abstract bool IsCorrectTree();
     }

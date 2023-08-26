@@ -1,16 +1,15 @@
 using System;
-using Model.LogicBlockLogic;
-using UnityEditor;
+using Model.BlockLogic;
 
 namespace Model.MapLogic
 {
     public class MapTile
     {
-        private LogicBlock _block;
+        private Block _block;
 
-        public event Action<LogicBlock> OnBlockChange;
+        public event Action<Block> OnBlockChange;
 
-        public LogicBlock Block
+        public Block Block
         {
             get => _block;
             set

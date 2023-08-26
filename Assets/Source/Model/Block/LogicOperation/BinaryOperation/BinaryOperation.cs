@@ -2,19 +2,19 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Model.LogicBlockLogic.LogicOperationLogic.BinaryOperationLogic
+namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
 {
     public class BinaryOperaion : LogicOperation
     {
-        private readonly List<LogicBlock> _operands;
+        private readonly List<Block> _operands;
         private readonly Dictionary<BinaryOperaionStateType, IBinaryOperationState> _states;
 
         private Stack<BinaryOperaionStateType> _stateHistory;
         private IBinaryOperationState _currentState;
 
-        public BinaryOperaion(LogicOperationType type, Vector2Int position, LogicBlock parent) : base(type, position, parent)
+        public BinaryOperaion(LogicOperationType type, Vector2Int position, Block parent) : base(type, position, parent)
         {
-            _operands = new List<LogicBlock>();
+            _operands = new List<Block>();
 
             _states = new Dictionary<BinaryOperaionStateType, IBinaryOperationState>()
             {
@@ -38,7 +38,7 @@ namespace Model.LogicBlockLogic.LogicOperationLogic.BinaryOperationLogic
             return BinaryOperaionStateType.OPERANDS_VERTICALLY; 
         }
 
-        private void OnRemoveHandler(LogicBlock block)
+        private void OnRemoveHandler(Block block)
         {
             _operands.Remove(block);
             _currentState = _states[_stateHistory.Pop()];
@@ -47,7 +47,7 @@ namespace Model.LogicBlockLogic.LogicOperationLogic.BinaryOperationLogic
         public override bool CanAppend(Vector2Int operandPosition)
             => _currentState.CanAppend(operandPosition);
 
-        public override void Append(LogicBlock operand)
+        public override void Append(Block operand)
         {
             _operands.Add(operand);
             operand.OnRemove += OnRemoveHandler;

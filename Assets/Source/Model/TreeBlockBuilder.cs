@@ -1,8 +1,9 @@
 using Model.MapLogic;
-using Model.LogicBlockLogic;
+using Model.BlockLogic;
 using System.Linq;
 using UnityEngine;
-using Model.LogicBlockLogic.BinaryOperationLogic;
+using Model.BlockLogic.LogicOperationLogic;
+using Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic;
 using System.Collections.Generic;
 
 namespace Model
@@ -10,7 +11,7 @@ namespace Model
     public class TreeBlockBuilder
     {
         private readonly Map _map;
-        private LogicBlock _root;
+        private Block _root;
 
         public TreeBlockBuilder(Map map)
         {
@@ -18,7 +19,7 @@ namespace Model
             _root = null;
         }
 
-        private void PlaceRoot(LogicBlock newRoot)
+        private void PlaceRoot(Block newRoot)
         {
             _root = newRoot;
             _map[_map.ExecutionPosition].Block = newRoot;
@@ -27,16 +28,16 @@ namespace Model
         private bool IsRootPlacement(Vector2Int position)
             => _root == null && position == _map.ExecutionPosition;
         
-        private IEnumerable<LogicBlock> GetParentsInVicinity(Vector2Int position)
+        private IEnumerable<Block> GetParentsInVicinity(Vector2Int position)
             => _map
                 .GetVicinityInMap(position)
                 .Where(p => _map.PositionInMap(p) && _map[p].IsOccupied)
                 .Select(p => _map[p].Block)
                 .Where(b => b.CanAppend(position));
 
-        private bool ExistOnlyOneParent(Vector2Int position, out LogicBlock parent)
+        private bool ExistOnlyOneParent(Vector2Int position, out Block parent)
         {
-            IEnumerable<LogicBlock> parentsInVicinity = GetParentsInVicinity(position);
+            IEnumerable<Block> parentsInVicinity = GetParentsInVicinity(position);
             if(parentsInVicinity.Count() != 1)
             {
                 parent = null;
@@ -64,11 +65,11 @@ namespace Model
                 return true;
             }
 
-            if(ExistOnlyOneParent(position, out LogicBlock parent) == false)
+            if(ExistOnlyOneParent(position, out Block parent) == false)
                 return false;
 
             //temp
-            LogicBlock block = new BinaryOperaion(blockType, position, parent);
+            Block block = new BinaryOperaion(blockType, position, parent);
             parent.Append(block);
             _map[position].Block = block;
 
@@ -81,7 +82,7 @@ namespace Model
             if(tile.IsOccupied == false)
                 return false;
             
-            LogicBlock block = tile.Block;
+            Block block = tile.Block;
             return block.TryRemove();
         }
     }

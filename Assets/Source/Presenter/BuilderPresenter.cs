@@ -1,6 +1,5 @@
 using UnityEngine;
-using Model.LogicBlockLogic;
-using View.BuilderLogic;
+using Model.BlockLogic.LogicOperationLogic;
 using Model;
 
 namespace Presenter

@@ -3,7 +3,7 @@ using System.Linq;
 using Model.MapLogic;
 using UnityEngine;
 
-namespace Model.LogicBlockLogic.LogicOperationLogic.BinaryOperationLogic
+namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
 {
     public class Root : IBinaryOperationState
     {

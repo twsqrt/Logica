@@ -1,22 +1,22 @@
 using System;
 using UnityEngine;
 
-namespace Model.LogicBlockLogic
+namespace Model.BlockLogic
 {
-    public class Parameter : LogicBlock
+    public class Parameter : Block
     {
         private readonly int _id;
 
         public int Id => _id;
 
-        public Parameter(int id, Vector2Int position, LogicBlock parent) : base(position, parent)
+        public Parameter(int id, Vector2Int position, Block parent) : base(position, parent)
         {
             _id = id;
         }
 
         public override bool CanAppend(Vector2Int operandPosition) => false;
 
-        public override void Append(LogicBlock operand)
+        public override void Append(Block operand)
         {
             throw new InvalidOperationException();
         }

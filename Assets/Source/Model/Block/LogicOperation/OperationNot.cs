@@ -2,13 +2,13 @@ using System.Linq;
 using Model.MapLogic;
 using UnityEngine;
 
-namespace Model.LogicBlockLogic.LogicOperationLogic
+namespace Model.BlockLogic.LogicOperationLogic
 {
     public class OperationNot : LogicOperation
     {
-        private LogicBlock _operand;
+        private Block _operand;
 
-        public OperationNot(Vector2Int position, LogicBlock parent) : base(LogicOperationType.NOT, position, parent)
+        public OperationNot(Vector2Int position, Block parent) : base(LogicOperationType.NOT, position, parent)
         {
             _operand = null;
         }
@@ -29,7 +29,7 @@ namespace Model.LogicBlockLogic.LogicOperationLogic
             return Map.GetVicinity(_position).Contains(operandPosition);
         }
 
-        public override void Append(LogicBlock operand)
+        public override void Append(Block operand)
         {
             _operand = operand;
             operand.OnRemove += _ => OnRemoveHandler();
