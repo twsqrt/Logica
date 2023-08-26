@@ -2,8 +2,6 @@ using Model.MapLogic;
 using Model.BlockLogic;
 using System.Linq;
 using UnityEngine;
-using Model.BlockLogic.LogicOperationLogic;
-using Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic;
 using System.Collections.Generic;
 using Model.BlockLogic.BlockDataLogic;
 
@@ -53,11 +51,7 @@ namespace Model
 
         private void PlaceRoot(IBlockData blockData)
         {
-            var context = new BlockPositionContext{
-                ParentPosition = ParentBlockPosition.NONE, 
-                Position = _map.ExecutionPosition,
-            };
-
+            var context = new BlockPositionContext{Position = _map.ExecutionPosition};
             _blockFactory.CreationContext = context;
 
             Block root = blockData.AcceptFactory(_blockFactory);
@@ -80,7 +74,7 @@ namespace Model
                 return false;
 
             var context = new BlockPositionContext{
-                ParentPosition = ParentPositionMapper.ParentPositionFrom(parent.Position, blockPosition),
+                ConnectionSide = BlockSideMapper.From(parent.Position, blockPosition),
                 Position = blockPosition,
             };
 

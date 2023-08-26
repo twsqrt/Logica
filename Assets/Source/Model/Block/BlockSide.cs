@@ -1,11 +1,11 @@
 namespace Model.BlockLogic
 {
-    public enum ParentBlockPosition
+    public enum BlockSide
     {
+        UNDEFINED = 0,
         UP,
         DOWN,
         LEFT,
         RIGHT,
-        NONE
     }
 }

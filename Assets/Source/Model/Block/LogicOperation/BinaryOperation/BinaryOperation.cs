@@ -30,13 +30,13 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
 
         private BinaryOperaionStateType GetStartStateType()
         {
-            switch(_context.ParentPosition)
+            switch(_context.ConnectionSide)
             {
-                case ParentBlockPosition.UP:
-                case ParentBlockPosition.DOWN:
+                case BlockSide.UP:
+                case BlockSide.DOWN:
                     return BinaryOperaionStateType.OPERANDS_HORIZONTALLY;
-                case ParentBlockPosition.LEFT:
-                case ParentBlockPosition.RIGHT:
+                case BlockSide.LEFT:
+                case BlockSide.RIGHT:
                     return BinaryOperaionStateType.OPERANDS_VERTICALLY;
                 default:
                     return BinaryOperaionStateType.ROOT;
