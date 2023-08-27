@@ -4,19 +4,20 @@ using System.Linq;
 using UnityEngine;
 using System.Collections.Generic;
 using Model.BlockLogic.BlockDataLogic;
+using Model.InventoryLogic;
 
 namespace Model
 {
     public class TreeBlockBuilder
     {
+        private readonly Inventory _inventory;
         private readonly Map _map;
-        private readonly BlockFactory _blockFactory;
         private Block _root;
 
-        public TreeBlockBuilder(Map map, BlockFactory blockFactory)
+        public TreeBlockBuilder(Map map, Inventory inventory)
         {
             _map = map;
-            _blockFactory = blockFactory;
+            _inventory = inventory;
 
             _root = null;
         }
@@ -49,14 +50,15 @@ namespace Model
             return _map.CanPlace(position) && (IsRootPlacement(position) || ExistOnlyOneParent(position, out _));
         }
 
-        private void PlaceRoot(IBlockData blockData)
+        private bool TryPlaceRoot(IBlockData blockData)
         {
             var context = new BlockPositionContext{Position = _map.ExecutionPosition};
-            _blockFactory.CreationContext = context;
+            if(_inventory.TryPullOut(blockData, context, out Block root) == false)
+                return false;
 
-            Block root = blockData.AcceptFactory(_blockFactory);
             _root = root;
             _map[context.Position].Block = root;
+            return true;
         }
 
         public bool TryPlace(Vector2Int blockPosition, IBlockData blockData)
@@ -65,10 +67,7 @@ namespace Model
                 return false;
 
             if(IsRootPlacement(blockPosition))
-            {
-                PlaceRoot(blockData);
-                return true;
-            }
+                return TryPlaceRoot(blockData);
 
             if(ExistOnlyOneParent(blockPosition, out Block parent) == false)
                 return false;
@@ -78,12 +77,11 @@ namespace Model
                 Position = blockPosition,
             };
 
-            _blockFactory.CreationContext = context;
+            if(_inventory.TryPullOut(blockData, context, out Block block) == false)
+                return false;
 
-            Block block = blockData.AcceptFactory(_blockFactory);
             parent.Append(block);
             _map[context.Position].Block = block;
-
             return true;
         }
 

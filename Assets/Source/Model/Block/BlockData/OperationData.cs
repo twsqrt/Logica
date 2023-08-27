@@ -13,6 +13,19 @@ namespace Model.BlockLogic.BlockDataLogic
             _type = type;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            return _type == (obj as OperationData).Type;
+        }
+        
+        public override int GetHashCode()
+            => _type.GetHashCode();
+
         public Block AcceptFactory(BlockFactory facotry)
             => facotry.Create(this);
     }

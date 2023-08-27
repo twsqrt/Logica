@@ -1,4 +1,4 @@
-namespace Model.ResourceLogic.AmountLogic
+namespace Model.InventoryLogic.AmountLogic
 {
     public interface IAmount
     {

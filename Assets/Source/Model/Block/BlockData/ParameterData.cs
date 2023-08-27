@@ -10,6 +10,18 @@ namespace Model.BlockLogic.BlockDataLogic
         {
             _id = id;
         }
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            return _id == (obj as ParameterData).Id;
+        }
+
+        public override int GetHashCode()
+            => _id.GetHashCode();
 
         public Block AcceptFactory(BlockFactory facotry)
             =>  facotry.Create(this);

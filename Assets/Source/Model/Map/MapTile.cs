@@ -1,5 +1,6 @@
 using System;
 using Model.BlockLogic;
+using UnityEngine;
 
 namespace Model.MapLogic
 {
@@ -16,6 +17,7 @@ namespace Model.MapLogic
             {
                 _block?.TryRemove();
                 _block = value;
+                Debug.Log("Block changed");
                 OnBlockChange?.Invoke(value);
             }
         }

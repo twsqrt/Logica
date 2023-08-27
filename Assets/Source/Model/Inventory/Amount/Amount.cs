@@ -1,6 +1,6 @@
 using System;
 
-namespace Model.ResourceLogic.AmountLogic
+namespace Model.InventoryLogic.AmountLogic
 {
     public class Amount : IAmount
     {
