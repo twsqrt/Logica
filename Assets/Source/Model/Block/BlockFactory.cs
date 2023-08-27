@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace Model.BlockLogic
 {
-    public class BlockFactory
+    public class BlockFactory : IBlockDataBasedFactory<Block>
     {
         public BlockPositionContext CreationContext;
 
-        public LogicOperation Create(OperationData data)
+        public Block Create(OperationData data)
         {
             switch(data.Type)
             {
@@ -20,7 +20,7 @@ namespace Model.BlockLogic
             }
         }
 
-        public Parameter Create(ParameterData data)
+        public Block Create(ParameterData data)
             => new Parameter(data.Id, CreationContext);
     }
 }

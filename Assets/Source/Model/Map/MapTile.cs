@@ -17,7 +17,6 @@ namespace Model.MapLogic
             {
                 _block?.TryRemove();
                 _block = value;
-                Debug.Log("Block changed");
                 OnBlockChange?.Invoke(value);
             }
         }

@@ -13,6 +13,9 @@ namespace Model.InventoryLogic
         public IAmount this[IBlockData data]
             => _blocks[data];
 
+        public IEnumerable<IBlockData> AllBlocksData
+            => _blocks.Keys;
+
         public Inventory(BlockFactory factory, Dictionary<IBlockData, IAmount> blocks)
         {
             _blocks = blocks;

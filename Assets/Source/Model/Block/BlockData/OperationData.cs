@@ -16,17 +16,14 @@ namespace Model.BlockLogic.BlockDataLogic
         public override bool Equals(object obj)
         {
             if (obj == null || GetType() != obj.GetType())
-            {
                 return false;
-            }
-
             return _type == (obj as OperationData).Type;
         }
         
         public override int GetHashCode()
             => _type.GetHashCode();
 
-        public Block AcceptFactory(BlockFactory facotry)
-            => facotry.Create(this);
+        public T AcceptFactory<T>(IBlockDataBasedFactory<T> factory)
+            => factory.Create(this);
     }
 }
