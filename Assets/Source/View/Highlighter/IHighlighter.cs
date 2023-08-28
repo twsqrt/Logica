@@ -1,4 +1,4 @@
-namespace View.BuilderLogic
+namespace View.HighlighterLogic
 {
     public interface IHighlighter
     {

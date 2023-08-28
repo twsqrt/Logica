@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace View.BuilderLogic
+namespace View.HighlighterLogic
 {
     public class ImageHighlighter : MonoBehaviour, IHighlighter
     {
