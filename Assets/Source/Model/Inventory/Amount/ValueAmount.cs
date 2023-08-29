@@ -2,7 +2,7 @@ using System;
 
 namespace Model.InventoryLogic.AmountLogic
 {
-    public class Amount : IAmount
+    public class ValueAmount : IAmount
     {
         private int _value;
 
@@ -18,7 +18,7 @@ namespace Model.InventoryLogic.AmountLogic
             }
         }
 
-        public Amount(int value)
+        public ValueAmount(int value)
         {
             _value = value;
         }
@@ -34,5 +34,8 @@ namespace Model.InventoryLogic.AmountLogic
             Value -= amount;
             return true;
         }
+
+        public T AcceptFactory<T>(IAmountBasedFactory<T> factory)
+            => factory.Create(this);
     }
 }

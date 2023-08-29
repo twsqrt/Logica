@@ -25,7 +25,7 @@ namespace Model.InventoryLogic
 
         public InventoryBuilder Register(IBlockData data, int amount)
         {
-            _registeredBlocks.Add(data, new Amount(amount));
+            _registeredBlocks.Add(data, new ValueAmount(amount));
             return this;
         }
 

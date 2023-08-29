@@ -5,5 +5,7 @@ namespace Model.InventoryLogic.AmountLogic
         void Increase(int amount);
 
         bool TryDecrease(int amount);
+
+        T AcceptFactory<T>(IAmountBasedFactory<T> factory);
     }
 }
