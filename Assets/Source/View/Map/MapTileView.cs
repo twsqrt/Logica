@@ -1,6 +1,6 @@
 using Model.MapLogic;
 using UnityEngine;
-using View.BuilderLogic;
+using View.HighlighterLogic;
 using View.LogicBlockLogic;
 
 namespace View.MapLogic

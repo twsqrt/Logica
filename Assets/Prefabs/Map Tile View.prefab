@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5638dfd85060abf44ab1ac30eaf392ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _logicBlockPrefab: {fileID: 2703121915715070930, guid: 0c9c531789ca4a648b3d8c1a588fe57e, type: 3}
+  _logicBlockPrefab: {fileID: -3326730497316184321, guid: 8039583c30645354aa53e45433bf5259, type: 3}
   _highlighter: {fileID: 3158538831455265914}
 --- !u!1 &2563372926535857738
 GameObject:

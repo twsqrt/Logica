@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b331961ec25dd84eb889e219f5bca5b, type: 3}
   m_Name: MapConfig
   m_EditorClassIdentifier: 
-  _width: 7
-  _height: 5
+  _width: 5
+  _height: 7
   _executionPoint: {x: 1, y: 1}

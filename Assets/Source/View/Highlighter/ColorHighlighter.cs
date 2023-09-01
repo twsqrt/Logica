@@ -9,11 +9,11 @@ namespace View.HighlighterLogic
         [SerializeField] private Color _highlightColor;
         [SerializeField] [Range(0f, 1f)] private float _lerpCoefficient;
  
-        private Dictionary<MeshRenderer, Color> _defaultColors;
+        private Dictionary<SpriteRenderer, Color> _defaultColors;
 
         public void Init()
         {
-            IEnumerable<MeshRenderer> renderers = GetComponentsInChildren<MeshRenderer>();
+            IEnumerable<SpriteRenderer> renderers = GetComponentsInChildren<SpriteRenderer>();
             _defaultColors = renderers.ToDictionary(r => r, r => r.material.color);
         }
 
