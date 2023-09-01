@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace View.HighlighterLogic
 {
-    public class ColorHighlighter : MonoBehaviour, IHighlighter
+    public class SpriteHighlighter : MonoBehaviour, IHighlighter
     {
         [SerializeField] private Color _highlightColor;
         [SerializeField] [Range(0f, 1f)] private float _lerpCoefficient;

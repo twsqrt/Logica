@@ -13,14 +13,26 @@ namespace View.InventoryLogic
 
         private BuilderPresenter _builder;
         private Dictionary<IBlockData, SlotView> _slots;
+        private SlotView _currentSlot;
 
         private void OnSlotClickHandler(IBlockData data)
-            => _builder.SelectData(data);
+        {
+            if(_slots.TryGetValue(data, out SlotView slot))
+            {
+                _currentSlot?.Highlighter.HighlightDisable();
+                _currentSlot = slot;
+                slot.Highlighter.HighlightEnable();
+
+                _builder.SelectData(data);
+            }
+        }
 
         public void Init(BuilderPresenter builder, Inventory inventory)
         {
             _builder = builder;
+
             _slots = new Dictionary<IBlockData, SlotView>();
+            _currentSlot = null;
 
             foreach(IBlockData blockData in inventory.AllBlocksData)
             {

@@ -1,12 +1,11 @@
 using Model.BlockLogic.BlockDataLogic;
-using View.HighlighterLogic;
 using UnityEngine;
-using Presenter.BuilderLogic;
 using View.BlockLogic;
 using View.InventoryLogic.AmountLogic;
 using UnityEngine.EventSystems;
 using Veiw.InventoryLogic.AmountLogic;
 using Model.InventoryLogic.AmountLogic;
+using View.HighlighterLogic;
 using System;
 
 namespace View.InventoryLogic
@@ -15,12 +14,15 @@ namespace View.InventoryLogic
     {
         [SerializeField] private BlockUIViewFactory _blockViewFactory;
         [SerializeField] private AmountViewFactory _amountViewFactory;
+        [SerializeField] private ComponentHighlighter _highlighter;
         [SerializeField] private RectTransform _blockContainer;
         [SerializeField] private RectTransform _amountContainer;
 
         private IBlockData _data;
 
         public event Action<IBlockData> OnSlotClick;
+
+        public IHighlighter Highlighter => _highlighter;
 
         private void InitBlock(IBlockData data)
         {
