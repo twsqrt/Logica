@@ -73,7 +73,7 @@ namespace Model
                 return false;
 
             var context = new BlockPositionContext{
-                ConnectionSide = BlockSideMapper.From(parent.Position, blockPosition),
+                ConnectionSide = BlockSideMapper.BlockSideFromParentPosition(blockPosition, parent.Position),
                 Position = blockPosition,
             };
 
