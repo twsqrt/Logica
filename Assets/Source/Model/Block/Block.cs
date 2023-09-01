@@ -9,11 +9,13 @@ namespace Model.BlockLogic
 
         public event Action<Block> OnRemove;
 
+        public BlockPositionContext Context => _context;
+
         public Vector2Int Position => _context.Position;
 
-        public Block(BlockPositionContext context)
+        public Block(BlockPositionContext positionContext)
         {
-            _context = context;
+            _context = positionContext;
         }
 
         protected void OnRemoveInvoke() => OnRemove?.Invoke(this);
@@ -25,5 +27,7 @@ namespace Model.BlockLogic
         public abstract void Append(Block operand);
 
         public abstract bool IsCorrectTree();
+
+        public abstract T Accept<T>(IBlockVisitor<T> visitor);
     }
 }

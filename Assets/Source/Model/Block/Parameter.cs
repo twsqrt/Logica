@@ -28,5 +28,8 @@ namespace Model.BlockLogic
             OnRemoveInvoke();
             return true;
         }
+
+        public override T Accept<T>(IBlockVisitor<T> visitor)
+            => visitor.Visit(this);
     }
 }

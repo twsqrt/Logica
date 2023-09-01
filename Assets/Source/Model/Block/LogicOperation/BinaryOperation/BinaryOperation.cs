@@ -73,5 +73,8 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
         {
             return false;
         }
+
+        public override T Accept<T>(IBlockVisitor<T> visitor)
+            => visitor.Visit(this);
     }
 }
