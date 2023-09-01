@@ -1,31 +1,27 @@
+using Model.BlockLogic;
 using Model.MapLogic;
 using UnityEngine;
+using View.BlockLogic;
 using View.HighlighterLogic;
-using View.LogicBlockLogic;
 
 namespace View.MapLogic
 {
     public class MapTileView : MonoBehaviour
     {
-        //template solution
-        [SerializeField] private LogicBlockView _logicBlockPrefab;
+        [SerializeField] private BlockViewFactory _blockFactory;
         [SerializeField] private ImageHighlighter _highlighter;
-
-        private LogicBlockView _blockView;
 
         public IHighlighter Highlighter => _highlighter;
 
         public void Init(MapTile tile)
         {
-            //tile.OnBlockChange += _ => OnBlockChangedHandler();
+            tile.OnBlockChange += OnBlockChangedHandler;
         }
 
-        private void OnBlockChangedHandler()
+        private void OnBlockChangedHandler(Block block)
         {
-            if(_blockView != null)
-                Destroy(_blockView);
-            
-            _blockView = Instantiate(_logicBlockPrefab, transform);
+            BlockView blockView = block.Accept(_blockFactory);
+            blockView.transform.SetParent(transform, false);
         }
     }
 }
