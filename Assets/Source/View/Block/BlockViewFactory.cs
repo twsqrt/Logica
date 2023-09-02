@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Config;
 using Model.BlockLogic;
 using Model.BlockLogic.LogicOperationLogic;
 using Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic;
@@ -11,11 +13,20 @@ namespace View.BlockLogic
     {
         [SerializeField] private OperationViewDataResolver _operationResolver;
         [SerializeField] private OperationView _operationPrefab;
+        [SerializeField] private ParameterViewData _parameterViewData;
+        [SerializeField] private ParameterView _parameterPrefab;
+
+        private Dictionary<int, string> _parameterNames;
+
+        public void Init(ParameterConfig config)
+        {
+            _parameterNames = config.ToDictionary();
+        }
 
         private BlockView VisitOperation(LogicOperation operation)
         {
-            OperationViewData viewData = _operationResolver.Resolve(operation.OperationType);
             OperationView view = Instantiate(_operationPrefab);
+            OperationViewData viewData = _operationResolver.Resolve(operation.OperationType);
             view.Init(viewData, operation);
 
             return view;
@@ -29,7 +40,11 @@ namespace View.BlockLogic
 
         public BlockView Visit(Parameter parameter)
         {
-            throw new System.NotImplementedException();
+            ParameterView parameterView = Instantiate(_parameterPrefab);
+            string name = _parameterNames[parameter.Id];
+            parameterView.Init(_parameterViewData, name, parameter);
+
+            return parameterView;
         }
     }
 }

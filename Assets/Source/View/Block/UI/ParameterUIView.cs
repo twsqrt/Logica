@@ -7,14 +7,14 @@ namespace View.BlockLogic
 {
     public class ParameterUIView : BlockUIView
     {
-        [SerializeField] private TextMeshPro _tmp;
+        [SerializeField] private TextMeshProUGUI _parameterName;
 
         public void Init(ParameterViewData viewData, string parameterName)
         {
             base.Init(viewData);
 
-            _tmp.color = viewData.ParameterColor;
-            _tmp.text = parameterName;
+            _parameterName.color = viewData.ParameterColor;
+            _parameterName.text = parameterName;
         }
     }
 }

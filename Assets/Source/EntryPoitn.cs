@@ -18,6 +18,9 @@ namespace EntryPointLogic
     public class EntryPoitn : MonoBehaviour
     {
         [SerializeField] private MapConfig _mapConfig;
+        [SerializeField] private ParameterConfig _parameterConfig;
+        [SerializeField] private BlockUIViewFactory _blockUIViewFactory;
+        [SerializeField] private BlockViewFactory _blockViewFactory;
         [SerializeField] private MapView _mapView;
         [SerializeField] private BuilderView _builderView;
         [SerializeField] private InventoryView _inventoryView;
@@ -27,12 +30,19 @@ namespace EntryPointLogic
             Map map = new Map(_mapConfig);
             _mapView.Init(map);
 
+            _blockUIViewFactory.Init(_parameterConfig);
+            _blockViewFactory.Init(_parameterConfig);
+
             var blockFactory = new BlockFactory();
             var inventoryBuilder = new InventoryBuilder();
 
             Inventory inventory = inventoryBuilder.StartBuilding(blockFactory)
+                .Register(new OperationData(LogicOperationType.NOT), 10)
                 .Register(new OperationData(LogicOperationType.OR), 5)
-                .RegisterInfinity(new OperationData(LogicOperationType.NOT))
+                .Register(new OperationData(LogicOperationType.AND), 5)
+                .RegisterInfinity(new ParameterData(1))
+                .RegisterInfinity(new ParameterData(2))
+                .RegisterInfinity(new ParameterData(3))
                 .Build();
             
             TreeBlockBuilder builder = new TreeBlockBuilder(map, inventory);
