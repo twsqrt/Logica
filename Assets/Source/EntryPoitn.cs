@@ -2,16 +2,15 @@ using Config;
 using Model.BlockLogic.BlockDataLogic;
 using Model.BlockLogic.LogicOperationLogic;
 using Model.BlockLogic;
+using Model.BuilderLogic;
 using Model.InventoryLogic;
 using Model.MapLogic;
-using Model;
 using Presenter.BuilderLogic;
 using UnityEngine;
-using View.BuilderLogic;
-using View.MapLogic;
-using View.InventoryLogic;
 using View.BlockLogic;
-using System.Reflection;
+using View.BuilderLogic;
+using View.InventoryLogic;
+using View.MapLogic;
 
 namespace EntryPointLogic
 {
@@ -45,11 +44,12 @@ namespace EntryPointLogic
                 .RegisterInfinity(new ParameterData(3))
                 .Build();
             
-            TreeBlockBuilder builder = new TreeBlockBuilder(map, inventory);
-            BuilderPresenter builderPresenter = new BuilderPresenter(builder);
+            BlockBuilder builder = new BlockBuilder(map, inventory);
+            BuilderPlacingPresenter placingPresenter = new BuilderPlacingPresenter(builder);
+            BuilderPresenter builderPresenter = new BuilderPresenter(map, placingPresenter, null);
 
-            _builderView.Init(_mapView, builderPresenter, builder);
-            _inventoryView.Init(builderPresenter, inventory);
+            _builderView.Init(_mapView, builderPresenter);
+            _inventoryView.Init(inventory, builderPresenter, placingPresenter);
         }
     }
 }

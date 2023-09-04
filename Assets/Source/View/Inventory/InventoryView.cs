@@ -11,7 +11,8 @@ namespace View.InventoryLogic
         [SerializeField] private SlotView _slotPrefab;
         [SerializeField] private Transform _slotContainer;
 
-        private BuilderPresenter _builder;
+        private BuilderPresenter _builderPresenter;
+        private BuilderPlacingPresenter _placingPresenter;
         private Dictionary<IBlockData, SlotView> _slots;
         private SlotView _currentSlot;
 
@@ -23,13 +24,24 @@ namespace View.InventoryLogic
                 _currentSlot = slot;
                 slot.Highlighter.HighlightEnable();
 
-                _builder.SelectData(data);
+                _placingPresenter.SelectBlockData(data);
+                _builderPresenter.SetState(BuilderPresenterStateType.PLACING);
             }
         }
 
-        public void Init(BuilderPresenter builder, Inventory inventory)
+        private void OnPlacingPresenterExitHandler()
         {
-            _builder = builder;
+            _currentSlot?.Highlighter.HighlightDisable();
+            _currentSlot = null;
+        }
+
+        public void Init(Inventory inventory, BuilderPresenter builderPresenter, BuilderPlacingPresenter placingPresenter)
+        {
+            _builderPresenter = builderPresenter;
+
+            _placingPresenter = placingPresenter;
+            _placingPresenter.OnExit += OnPlacingPresenterExitHandler;
+
 
             _slots = new Dictionary<IBlockData, SlotView>();
             _currentSlot = null;

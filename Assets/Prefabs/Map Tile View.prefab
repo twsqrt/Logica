@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _blockFactory: {fileID: 11400000, guid: d3eb46a091f56484fb4ddc1651dab7c2, type: 2}
-  _highlighter: {fileID: 3158538831455265914}
+  _tileHighlighter: {fileID: 3158538831455265914}
 --- !u!1 &2563372926535857738
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,15 +6,15 @@ using System.Collections.Generic;
 using Model.BlockLogic.BlockDataLogic;
 using Model.InventoryLogic;
 
-namespace Model
+namespace Model.BuilderLogic
 {
-    public class TreeBlockBuilder
+    public class BlockBuilder
     {
         private readonly Inventory _inventory;
         private readonly Map _map;
         private Block _root;
 
-        public TreeBlockBuilder(Map map, Inventory inventory)
+        public BlockBuilder(Map map, Inventory inventory)
         {
             _map = map;
             _inventory = inventory;
@@ -91,8 +91,7 @@ namespace Model
             if(tile.IsOccupied == false)
                 return false;
             
-            Block block = tile.Block;
-            return block.TryRemove();
+            return tile.Block.TryRemove();
         }
     }
 }

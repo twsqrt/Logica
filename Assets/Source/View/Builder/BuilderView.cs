@@ -13,30 +13,14 @@ namespace View.BuilderLogic
     {
         [SerializeField] private Camera _camera;
 
-        private IEnumerable<Vector2Int> _allPositions;
         private MapView _mapView;
         private BuilderPresenter _presenter;
-        private Func<Vector2Int, bool> _placeRule;
 
         private IEnumerable<IHighlighter> _activeHighlihghters;
 
-        public void Init(MapView mapView, BuilderPresenter presenter, TreeBlockBuilder treeBlockBuilder)
+        private void HighilghtPositions(IEnumerable<Vector2Int> positions)
         {
-            _mapView = mapView;
-            _presenter = presenter;
-
-            _placeRule = treeBlockBuilder.CanPlace;
-
-            IEnumerable<int> widthRange = Enumerable.Range(0, _mapView.Width);
-            IEnumerable<int> heightRange = Enumerable.Range(0, _mapView.Height);
-            _allPositions = widthRange.SelectMany( _ => heightRange, (x, y) => new Vector2Int(x, y));
-
-            HighlightCorrectPositions();
-        }
-
-        private void HighlightCorrectPositions()
-        {
-            _activeHighlihghters = _allPositions.Where(_placeRule).Select(p => _mapView[p].Highlighter).ToArray();
+            _activeHighlihghters = positions.Select(p => _mapView[p].Highlighter).ToArray();
             foreach(IHighlighter highlighter in _activeHighlihghters)
                 highlighter.HighlightEnable();
         }
@@ -47,10 +31,10 @@ namespace View.BuilderLogic
                 highlighter.HighlightDisable();
         }
 
-        private void HighlightRefresh()
+        private void HighlightRefresh(IEnumerable<Vector2Int> positions)
         {
             HighlightDisable();
-            HighlightCorrectPositions();
+            HighilghtPositions(positions);
         }
 
         private void Update()
@@ -59,11 +43,17 @@ namespace View.BuilderLogic
             {
                 Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
                 if(_mapView.TryGetPosition(ray, out Vector2Int position))
-                {
-                    if(_presenter.TryPlace(position))
-                        HighlightRefresh();
-                }
+                    _presenter.OnPositionSelected(position);
             }
+        }
+
+        public void Init(MapView mapView, BuilderPresenter presenter)
+        {
+            _mapView = mapView;
+
+            _presenter = presenter;
+            HighilghtPositions(presenter.CorrectPositions);
+            _presenter.OnCorrectPositionsChanged += HighlightRefresh;
         }
     }
 }
