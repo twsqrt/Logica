@@ -13,7 +13,7 @@ namespace Model.MapLogic
         private readonly Vector2Int _executionPosition;
         private readonly MapTile[] _tiles;
 
-        public int Widht => _width;
+        public int Width => _width;
         public int Height => _height;
         public Vector2Int ExecutionPosition => _executionPosition;
 
