@@ -71,7 +71,11 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
 
         public override bool TryRemove()
         {
-            return false;
+            if(_operands.Any())
+                return false;
+            
+            OnRemoveInvoke();
+            return true;
         }
 
         public override T Accept<T>(IBlockVisitor<T> visitor)
