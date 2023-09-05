@@ -85,11 +85,18 @@ namespace Model.BuilderLogic
             return true;
         }
 
-        public bool TryRemove(Vector2Int position)
+        public bool CanRemove(Vector2Int position)
         {
             MapTile tile = _map[position];
-            if(tile.IsOccupied == false || tile.TryRemoveBlock() == false)
+            return tile.IsOccupied && tile.Block.CanBeRemoved();
+        }
+
+        public bool TryRemove(Vector2Int position)
+        {
+            if(CanRemove(position) == false)
                 return false;
+            
+            _map[position].TryRemoveBlock();
 
             if(position == _map.ExecutionPosition)
                 _root = null;

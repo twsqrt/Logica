@@ -10,7 +10,7 @@ namespace Presenter.BuilderLogic
         public BuilderRemovingPresenter(BlockBuilder builder) : base(builder) {}
 
         public override IEnumerable<Vector2Int> GetCorrectPositions(IEnumerable<Vector2Int> positions)
-            => Enumerable.Empty<Vector2Int>();
+            => positions.Where(_builder.CanRemove);
 
         public override bool TryExecute(Vector2Int position)
             => _builder.TryRemove(position);
