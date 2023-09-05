@@ -23,11 +23,7 @@ namespace Model.BlockLogic
 
         public override bool IsCorrectTree() => true;
 
-        public override bool TryRemove()
-        {
-            OnRemoveInvoke();
-            return true;
-        }
+        public override bool CanBeRemoved() => true;
 
         public override T Accept<T>(IBlockVisitor<T> visitor)
             => visitor.Visit(this);

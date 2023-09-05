@@ -35,14 +35,8 @@ namespace Model.BlockLogic.LogicOperationLogic
             operand.OnRemove += _ => OnRemoveHandler();
         }
 
-        public override bool TryRemove()
-        {
-            if(_operand != null)
-                return false;
-            
-            OnRemoveInvoke();
-            return true;
-        }
+        public override bool CanBeRemoved()
+            => _operand == null;
 
         public override T Accept<T>(IBlockVisitor<T> visitor)
             => visitor.Visit(this);

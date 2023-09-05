@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Extensions;
 using UnityEngine;
 
 namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
@@ -69,14 +70,8 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
             return _operands[0].IsCorrectTree() && _operands[1].IsCorrectTree();
         }
 
-        public override bool TryRemove()
-        {
-            if(_operands.Any())
-                return false;
-            
-            OnRemoveInvoke();
-            return true;
-        }
+        public override bool CanBeRemoved()
+            => _operands.ISEmpty();
 
         public override T Accept<T>(IBlockVisitor<T> visitor)
             => visitor.Visit(this);

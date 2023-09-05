@@ -20,7 +20,18 @@ namespace Model.BlockLogic
 
         protected void OnRemoveInvoke() => OnRemove?.Invoke(this);
 
-        public abstract bool TryRemove();
+        public abstract bool CanBeRemoved();
+
+        public bool TryRemove()
+        {
+            if(CanBeRemoved())
+            {
+                OnRemove?.Invoke(this);
+                return true;
+            }
+
+            return false;
+        }
 
         public abstract bool CanAppend(Vector2Int operandPosition);
 
