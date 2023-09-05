@@ -15,12 +15,6 @@ namespace Presenter.BuilderLogic
         private BuilderPresenterStateType _currentStateType;
         private IEnumerable<Vector2Int> _correctPositions;
 
-        private void EnterCurrentState()
-        {
-            _currentState.Enter();
-            CorrectPositions = _currentState.GetCorrectPositions(_allPositions);
-        }
-
         public IEnumerable<Vector2Int> CorrectPositions
         {
             get => _correctPositions;
@@ -30,6 +24,13 @@ namespace Presenter.BuilderLogic
                 OnCorrectPositionsChanged?.Invoke(value);
             }
         }
+
+        private void EnterCurrentState()
+        {
+            _currentState.Enter();
+            CorrectPositions = _currentState.GetCorrectPositions(_allPositions);
+        }
+
 
         public event Action<BuilderPresenterStateType> OnStateChanged;
         public event Action<IEnumerable<Vector2Int>> OnCorrectPositionsChanged;
@@ -51,11 +52,13 @@ namespace Presenter.BuilderLogic
             EnterCurrentState();
         }
 
-        public void SetState(BuilderPresenterStateType newStateType)
+        public void ChangeState(BuilderPresenterStateType newStateType)
         {
             if(_currentStateType != newStateType)
             {
                 _currentState.Exit();
+
+                _currentStateType = newStateType;
                 _currentState = _states[newStateType];
                 EnterCurrentState();
 

@@ -11,6 +11,7 @@ using View.BlockLogic;
 using View.BuilderLogic;
 using View.InventoryLogic;
 using View.MapLogic;
+using Veiw.BuilderLogic;
 
 namespace EntryPointLogic
 {
@@ -22,6 +23,7 @@ namespace EntryPointLogic
         [SerializeField] private BlockViewFactory _blockViewFactory;
         [SerializeField] private MapView _mapView;
         [SerializeField] private BuilderView _builderView;
+        [SerializeField] private RemovingButton _removingButton;
         [SerializeField] private InventoryView _inventoryView;
 
         private void Awake()
@@ -45,10 +47,14 @@ namespace EntryPointLogic
                 .Build();
             
             BlockBuilder builder = new BlockBuilder(map, inventory);
+
             BuilderPlacingPresenter placingPresenter = new BuilderPlacingPresenter(builder);
-            BuilderPresenter builderPresenter = new BuilderPresenter(map, placingPresenter, null);
+            BuilderRemovingPresenter removingPresenter = new BuilderRemovingPresenter(builder);
+
+            BuilderPresenter builderPresenter = new BuilderPresenter(map, placingPresenter, removingPresenter);
 
             _builderView.Init(_mapView, builderPresenter);
+            _removingButton.Init(builderPresenter, removingPresenter);
             _inventoryView.Init(inventory, builderPresenter, placingPresenter);
         }
     }

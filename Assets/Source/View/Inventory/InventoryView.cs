@@ -25,7 +25,7 @@ namespace View.InventoryLogic
                 slot.Highlighter.HighlightEnable();
 
                 _placingPresenter.SelectBlockData(data);
-                _builderPresenter.SetState(BuilderPresenterStateType.PLACING);
+                _builderPresenter.ChangeState(BuilderPresenterStateType.PLACING);
             }
         }
 

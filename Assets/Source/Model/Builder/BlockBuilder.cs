@@ -57,7 +57,7 @@ namespace Model.BuilderLogic
                 return false;
 
             _root = root;
-            _map[context.Position].Block = root;
+            _map[context.Position].TryPlaceBlock(root);
             return true;
         }
 
@@ -81,17 +81,20 @@ namespace Model.BuilderLogic
                 return false;
 
             parent.Append(block);
-            _map[context.Position].Block = block;
+            _map[context.Position].TryPlaceBlock(block);
             return true;
         }
 
         public bool TryRemove(Vector2Int position)
         {
             MapTile tile = _map[position];
-            if(tile.IsOccupied == false)
+            if(tile.IsOccupied == false || tile.TryRemoveBlock() == false)
                 return false;
+
+            if(position == _map.ExecutionPosition)
+                _root = null;
             
-            return tile.Block.TryRemove();
+            return true;
         }
     }
 }

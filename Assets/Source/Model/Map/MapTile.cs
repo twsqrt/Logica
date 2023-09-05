@@ -8,26 +8,35 @@ namespace Model.MapLogic
     {
         private Block _block;
 
-        public event Action<Block> OnBlockChange;
-
-        public Block Block
-        {
-            get => _block;
-            set
-            {
-                _block?.TryRemove();
-                _block = value;
-                OnBlockChange?.Invoke(value);
-            }
-        }
+        public event Action<Block> OnBlockPlaced;
+        public event Action OnBlockRemoved; 
 
         public MapTile()
         {
             _block = null;
         }
 
-        public bool IsOccupied => Block != null;
+        public Block Block => _block;
+        public bool IsOccupied => _block != null;
 
-        public void RemoveBlock() => Block = null;
+        public bool TryPlaceBlock(Block block)
+        {
+            if(IsOccupied)
+                return false;
+            
+            _block = block;
+            OnBlockPlaced?.Invoke(block);
+            return true;
+        }
+
+        public bool TryRemoveBlock()
+        {
+            if(IsOccupied == false || _block.TryRemove() == false)
+                return false;
+            
+            _block = null;
+            OnBlockRemoved?.Invoke();
+            return true;
+        }
     }
 }
