@@ -31,8 +31,8 @@ namespace View.BlockLogic
                 Vector2Int position =  BlockSideMapper.PositionFromBlockSide(connectionSide);
                 arrow.localPosition = new Vector3(position.x, position.y, 0f) * 0.5f;
 
-                float angle = BlockSideMapper.AngleFromBlockSide(connectionSide);
-                arrow.eulerAngles = new Vector3(0f, 0f, angle);
+                float sideAngle = BlockSideMapper.AngleFromBlockSide(connectionSide);
+                arrow.eulerAngles = new Vector3(0f, 0f, sideAngle + 180f);
             }
 
             _highlighter.Init();

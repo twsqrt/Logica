@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Not
   m_EditorClassIdentifier: 
   _blockSprite: {fileID: 21300000, guid: 2deb7fbf0dea2eb4cbd6a2effe5a210c, type: 3}
-  _blockColor: {r: 0.8745098, g: 0.8627451, b: 0.8745098, a: 1}
+  _blockColor: {r: 0.3098039, g: 0.76489764, b: 0.9411765, a: 1}
   _operationSprite: {fileID: 21300000, guid: f8f3a94754811c443a0bf00c2c0092f1, type: 3}

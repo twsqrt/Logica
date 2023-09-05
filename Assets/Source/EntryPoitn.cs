@@ -41,6 +41,8 @@ namespace EntryPointLogic
                 .Register(new OperationData(LogicOperationType.NOT), 10)
                 .Register(new OperationData(LogicOperationType.OR), 5)
                 .Register(new OperationData(LogicOperationType.AND), 5)
+                .Register(new OperationData(LogicOperationType.XOR), 5)
+                .Register(new OperationData(LogicOperationType.NOR), 5)
                 .RegisterInfinity(new ParameterData(1))
                 .RegisterInfinity(new ParameterData(2))
                 .RegisterInfinity(new ParameterData(3))
