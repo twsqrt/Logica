@@ -11,15 +11,15 @@ namespace Model.MapLogic
         public event Action<Block> OnBlockPlaced;
         public event Action OnBlockRemoved; 
 
+        public Block Block => _block;
+        public bool IsOccupied => _block != null;
+
         public MapTile()
         {
             _block = null;
         }
 
-        public Block Block => _block;
-        public bool IsOccupied => _block != null;
-
-        public bool TryPlaceBlock(Block block)
+        public bool TryPlace(Block block)
         {
             if(IsOccupied)
                 return false;
@@ -29,14 +29,11 @@ namespace Model.MapLogic
             return true;
         }
 
-        public bool TryRemoveBlock()
+        public void RemoveBlock()
         {
-            if(IsOccupied == false || _block.TryRemove() == false)
-                return false;
-            
+            _block?.Destroy();
             _block = null;
             OnBlockRemoved?.Invoke();
-            return true;
         }
     }
 }

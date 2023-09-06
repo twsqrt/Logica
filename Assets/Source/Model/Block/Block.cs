@@ -7,7 +7,7 @@ namespace Model.BlockLogic
     {
         protected readonly BlockContext _context;
 
-        public event Action<Block> OnRemove;
+        public event Action<Block> OnDestroy;
 
         public BlockContext Context => _context;
 
@@ -18,25 +18,12 @@ namespace Model.BlockLogic
             _context = positionContext;
         }
 
-        public abstract bool CanBeRemoved();
+        public void Destroy() => OnDestroy?.Invoke(this);
 
-        public bool TryRemove()
-        {
-            if(CanBeRemoved())
-            {
-                OnRemove?.Invoke(this);
-                return true;
-            }
-
-            return false;
-        }
-
+        public abstract bool HasOperands();
         public abstract bool CanAppend(Vector2Int operandPosition);
-
         public abstract void Append(Block operand);
-
         public abstract bool IsCorrectTree();
-
         public abstract T Accept<T>(IBlockVisitor<T> visitor);
     }
 }

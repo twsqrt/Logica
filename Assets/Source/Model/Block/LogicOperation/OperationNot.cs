@@ -13,7 +13,8 @@ namespace Model.BlockLogic.LogicOperationLogic
             _operand = null;
         }
 
-        private void OnRemoveHandler() => _operand = null;
+        private void OnRemoveHandler() 
+            => _operand = null;
 
         public override bool IsCorrectTree()
         {
@@ -32,11 +33,11 @@ namespace Model.BlockLogic.LogicOperationLogic
         public override void Append(Block operand)
         {
             _operand = operand;
-            operand.OnRemove += _ => OnRemoveHandler();
+            operand.OnDestroy += _ => OnRemoveHandler();
         }
 
-        public override bool CanBeRemoved()
-            => _operand == null;
+        public override bool HasOperands()
+            => _operand != null;
 
         public override T Accept<T>(IBlockVisitor<T> visitor)
             => visitor.Visit(this);

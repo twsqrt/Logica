@@ -46,7 +46,7 @@ namespace Model.BuilderLogic
                 return false;
 
             _root = root;
-            _map[context.Position].TryPlaceBlock(root);
+            _map[context.Position].TryPlace(root);
             return true;
         }
 
@@ -79,14 +79,14 @@ namespace Model.BuilderLogic
                 return false;
 
             parent.Append(block);
-            _map[context.Position].TryPlaceBlock(block);
+            _map[context.Position].TryPlace(block);
             return true;
             }
 
         public bool CanRemove(Vector2Int position)
         {
             MapTile tile = _map[position];
-            return tile.IsOccupied && tile.Block.CanBeRemoved();
+            return tile.IsOccupied && tile.Block.HasOperands() == false;
         }
 
         public bool TryRemove(Vector2Int position)
@@ -94,7 +94,7 @@ namespace Model.BuilderLogic
             if(CanRemove(position) == false)
                 return false;
             
-            _map[position].TryRemoveBlock();
+            _map[position].RemoveBlock();
 
             if(position == _map.ExecutionPosition)
                 _root = null;

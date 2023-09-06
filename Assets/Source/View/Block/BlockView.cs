@@ -13,15 +13,12 @@ namespace View.BlockLogic
 
         public IHighlighter Highlighter => _highlighter;
 
-        private void OnBlockRemoveHandler()
-            => Destroy(gameObject);
-
         protected void Init(BlockViewData data, Block block)
         {
             _blockSprite.sprite = data.BlockSprite;
             _blockSprite.material.color = data.BlockColor;
 
-            block.OnRemove += _ => OnBlockRemoveHandler();
+            block.OnDestroy += _ => Destroy(gameObject);
 
             if(block.Context.HasParent)
             {

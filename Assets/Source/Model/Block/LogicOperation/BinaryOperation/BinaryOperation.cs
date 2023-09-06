@@ -56,7 +56,7 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
         public override void Append(Block operand)
         {
             _operands.Add(operand);
-            operand.OnRemove += OnRemoveHandler;
+            operand.OnDestroy += OnRemoveHandler;
 
             _stateHistory.Push(_currentState.StateType);
             BinaryOperaionStateType nextStateType = _currentState.NextState(operand.Position);
@@ -70,8 +70,8 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
             return _operands[0].IsCorrectTree() && _operands[1].IsCorrectTree();
         }
 
-        public override bool CanBeRemoved()
-            => _operands.ISEmpty();
+        public override bool HasOperands()
+            => _operands.Any();
 
         public override T Accept<T>(IBlockVisitor<T> visitor)
             => visitor.Visit(this);

@@ -17,13 +17,11 @@ namespace Model.BlockLogic
         public override bool CanAppend(Vector2Int operandPosition) => false;
 
         public override void Append(Block operand)
-        {
-            throw new InvalidOperationException();
-        }
+            => throw new InvalidOperationException();
 
         public override bool IsCorrectTree() => true;
 
-        public override bool CanBeRemoved() => true;
+        public override bool HasOperands() => false;
 
         public override T Accept<T>(IBlockVisitor<T> visitor)
             => visitor.Visit(this);
