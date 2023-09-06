@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using Model.BlockLogic.BlockDataLogic;
 using Model.InventoryLogic;
+using UnityEngine.UIElements;
 
 namespace Model.BuilderLogic
 {
@@ -39,7 +40,7 @@ namespace Model.BuilderLogic
 
         private bool TryPlaceRoot(IBlockData blockData)
         {
-            var context = new BlockPositionContext{Position = _map.ExecutionPosition};
+            BlockContext context = BlockContext.CreateRootContext(_map.ExecutionPosition);
             if(_inventory.TryPullOut(blockData, context, out Block root) == false)
                 return false;
 
@@ -62,29 +63,26 @@ namespace Model.BuilderLogic
             return _map.CanPlace(position) && (IsRootPlacement(position) || ExistOnlyOneParent(position, out _));
         }
 
-        public bool TryPlace(Vector2Int blockPosition, IBlockData blockData)
+        public bool TryPlace(Vector2Int placementPosition, IBlockData blockData)
         {
-            if(_map.CanPlace(blockPosition) == false)
+            if(_map.CanPlace(placementPosition) == false)
                 return false;
 
-            if(IsRootPlacement(blockPosition))
+            if(IsRootPlacement(placementPosition))
                 return TryPlaceRoot(blockData);
 
-            if(ExistOnlyOneParent(blockPosition, out Block parent) == false)
+            if(ExistOnlyOneParent(placementPosition, out Block parent) == false)
                 return false;
 
-            var context = new BlockPositionContext{
-                ConnectionSide = BlockSideMapper.BlockSideFromParentPosition(blockPosition, parent.Position),
-                Position = blockPosition,
-            };
-
+            BlockSide parentConnectionSide = BlockSideMapper.BlockSideFromParentPosition(placementPosition, parent.Position);
+            BlockContext context = BlockContext.CreateChildContext(parentConnectionSide, placementPosition);
             if(_inventory.TryPullOut(blockData, context, out Block block) == false)
                 return false;
 
             parent.Append(block);
             _map[context.Position].TryPlaceBlock(block);
             return true;
-        }
+            }
 
         public bool CanRemove(Vector2Int position)
         {

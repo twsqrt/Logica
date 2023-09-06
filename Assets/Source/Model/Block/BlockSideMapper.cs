@@ -11,7 +11,7 @@ namespace Model.BlockLogic
             (-1, 0) => BlockSide.LEFT,
             (0, 1) => BlockSide.UP,
             (0, -1) => BlockSide.DOWN,
-            _ => BlockSide.UNDEFINED,
+            _ => BlockSide.NONE,
         };
 
         public static BlockSide BlockSideFromParentPosition(Vector2Int childPosition, Vector2Int parentPosition)

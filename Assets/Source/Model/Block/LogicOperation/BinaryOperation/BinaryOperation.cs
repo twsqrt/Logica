@@ -15,7 +15,7 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
 
         private BinaryOperaionStateType GetStartStateType()
         {
-            switch(_context.ConnectionSide)
+            switch(_context.ParentConnectionSide)
             {
                 case BlockSide.UP:
                 case BlockSide.DOWN:
@@ -34,7 +34,7 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
             _currentState = _states[_stateHistory.Pop()];
         }
 
-        public BinaryOperaion(LogicOperationType type, BlockPositionContext context) : base(type, context)
+        public BinaryOperaion(LogicOperationType type, BlockContext context) : base(type, context)
         {
             _operands = new List<Block>();
 

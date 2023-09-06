@@ -9,7 +9,7 @@ namespace Model.BlockLogic
         private readonly FactoryVisitor _factoryVisitor;
         private class FactoryVisitor : IBlockDataBasedFactory<Block>
         {
-            public BlockPositionContext PositionContext;
+            public BlockContext PositionContext;
 
             public Block Create(OperationData data)
             {
@@ -29,7 +29,7 @@ namespace Model.BlockLogic
             _factoryVisitor = new FactoryVisitor();
         }
 
-        public Block Create(IBlockData blockData, BlockPositionContext positionContext)
+        public Block Create(IBlockData blockData, BlockContext positionContext)
         {
             _factoryVisitor.PositionContext = positionContext;
             return blockData.AcceptFactory(_factoryVisitor);

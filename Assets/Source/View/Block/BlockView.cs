@@ -23,9 +23,10 @@ namespace View.BlockLogic
 
             block.OnRemove += _ => OnBlockRemoveHandler();
 
-            BlockSide connectionSide = block.Context.ConnectionSide;
-            if(connectionSide != BlockSide.UNDEFINED)
+            if(block.Context.HasParent)
             {
+                BlockSide connectionSide = block.Context.ParentConnectionSide;
+
                 Transform arrow = Instantiate(_arrowPrefab, transform);
 
                 Vector2Int position =  BlockSideMapper.PositionFromBlockSide(connectionSide);

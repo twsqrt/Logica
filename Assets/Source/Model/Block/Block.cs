@@ -5,15 +5,15 @@ namespace Model.BlockLogic
 {
     public abstract class Block
     {
-        protected readonly BlockPositionContext _context;
+        protected readonly BlockContext _context;
 
         public event Action<Block> OnRemove;
 
-        public BlockPositionContext Context => _context;
+        public BlockContext Context => _context;
 
         public Vector2Int Position => _context.Position;
 
-        public Block(BlockPositionContext positionContext)
+        public Block(BlockContext positionContext)
         {
             _context = positionContext;
         }

@@ -22,7 +22,7 @@ namespace Model.InventoryLogic
             _factory = factory;
         }
 
-        public bool TryPullOut(IBlockData data, BlockPositionContext context, out Block block)
+        public bool TryPullOut(IBlockData data, BlockContext context, out Block block)
         {
             if(_blocks.TryGetValue(data, out IAmount amount ) && amount.TryDecrease(1))
             {
