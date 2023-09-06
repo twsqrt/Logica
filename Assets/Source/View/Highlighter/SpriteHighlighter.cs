@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace View.HighlighterLogic
@@ -9,24 +8,28 @@ namespace View.HighlighterLogic
         [SerializeField] private Color _highlightColor;
         [SerializeField] [Range(0f, 1f)] private float _lerpCoefficient;
  
-        private Dictionary<SpriteRenderer, Color> _defaultColors;
+        private Dictionary<SpriteRenderer, Color> _sprites;
+
+        public void Register(SpriteRenderer sprite)
+        {
+            _sprites.Add(sprite, sprite.color);
+        }
 
         public void Init()
         {
-            IEnumerable<SpriteRenderer> renderers = GetComponentsInChildren<SpriteRenderer>();
-            _defaultColors = renderers.ToDictionary(r => r, r => r.material.color);
+            _sprites = new Dictionary<SpriteRenderer, Color>();
         }
 
         public void HighlightEnable()
         {
-            foreach(var (renderer, defaultColor) in _defaultColors)
-                renderer.material.color = Color.Lerp(defaultColor, _highlightColor, _lerpCoefficient);
+            foreach(var (renderer, defaultColor) in _sprites)
+                renderer.color = Color.Lerp(defaultColor, _highlightColor, _lerpCoefficient);
         }
 
         public void HighlightDisable()
         {
-            foreach(var (renderer, defaultColor) in _defaultColors)
-                renderer.material.color = defaultColor;
+            foreach(var (renderer, defaultColor) in _sprites)
+                renderer.color = defaultColor;
         }
     }
 }

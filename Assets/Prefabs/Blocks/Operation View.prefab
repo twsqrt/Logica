@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _blockSprite: {fileID: 4637777289968654628}
   _highlighter: {fileID: 7977542880168482212}
-  _arrowPrefab: {fileID: 2170513570949924547, guid: 11a9cd635bb89f14d8bc4467018934ae, type: 3}
+  _arrowPrefab: {fileID: 5123790232596567625, guid: 11a9cd635bb89f14d8bc4467018934ae, type: 3}
   _operation: {fileID: 6970465555275769098}
 --- !u!212 &4637777289968654628
 SpriteRenderer:
