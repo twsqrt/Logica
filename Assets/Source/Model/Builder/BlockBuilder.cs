@@ -1,11 +1,10 @@
-using Model.MapLogic;
+using Model.BlockLogic.BlockDataLogic;
 using Model.BlockLogic;
+using Model.InventoryLogic;
+using Model.MapLogic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using System.Collections.Generic;
-using Model.BlockLogic.BlockDataLogic;
-using Model.InventoryLogic;
-using UnityEngine.UIElements;
 
 namespace Model.BuilderLogic
 {
@@ -14,6 +13,8 @@ namespace Model.BuilderLogic
         private readonly Inventory _inventory;
         private readonly Map _map;
         private Block _root;
+
+        public Block Root => _root;
         
         private bool IsRootPlacement(Vector2Int position)
             => _root == null && position == _map.ExecutionPosition;
@@ -59,9 +60,7 @@ namespace Model.BuilderLogic
         }
         
         public bool CanPlace(Vector2Int position)
-        {
-            return _map.CanPlace(position) && (IsRootPlacement(position) || ExistOnlyOneParent(position, out _));
-        }
+            => _map.CanPlace(position) && (IsRootPlacement(position) || ExistOnlyOneParent(position, out _));
 
         public bool TryPlace(Vector2Int placementPosition, IBlockData blockData)
         {
