@@ -26,9 +26,7 @@ namespace Model.InventoryLogic
         {
             if(_blocks.TryGetValue(data, out IAmount amount ) && amount.TryDecrease(1))
             {
-                _factory.CreationContext = context;
-
-                block = data.AcceptFactory(_factory);
+                block = _factory.Create(data, context);
                 block.OnRemove += _ => amount.Increase(1);
 
                 return true;

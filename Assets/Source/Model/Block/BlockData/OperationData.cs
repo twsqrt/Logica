@@ -4,24 +4,24 @@ namespace Model.BlockLogic.BlockDataLogic
 {
     public class OperationData : IBlockData
     {
-        private readonly LogicOperationType _type;
+        private readonly LogicOperationType _operationType;
 
-        public LogicOperationType Type => _type;
+        public LogicOperationType OperationType => _operationType;
 
-        public OperationData(LogicOperationType type)
+        public OperationData(LogicOperationType operationType)
         {
-            _type = type;
+            _operationType = operationType;
         }
 
         public override bool Equals(object obj)
         {
             if (obj == null || GetType() != obj.GetType())
                 return false;
-            return _type == (obj as OperationData).Type;
+            return _operationType == (obj as OperationData).OperationType;
         }
         
         public override int GetHashCode()
-            => _type.GetHashCode();
+            => _operationType.GetHashCode();
 
         public T AcceptFactory<T>(IBlockDataBasedFactory<T> factory)
             => factory.Create(this);

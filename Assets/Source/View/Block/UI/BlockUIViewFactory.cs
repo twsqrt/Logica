@@ -24,7 +24,7 @@ namespace View.BlockLogic
         public BlockUIView Create(OperationData data)
         {
             OperationUIView view = Instantiate(_operationPrefab);
-            OperationViewData viewData = _operationResolver.Resolve(data.Type);
+            OperationViewData viewData = _operationResolver.Resolve(data.OperationType);
             view.Init(viewData);
 
             return view;

@@ -1,26 +1,38 @@
 using Model.BlockLogic.BlockDataLogic;
 using Model.BlockLogic.LogicOperationLogic;
 using Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic;
-using UnityEngine;
 
 namespace Model.BlockLogic
 {
-    public class BlockFactory : IBlockDataBasedFactory<Block>
+    public class BlockFactory 
     {
-        public BlockPositionContext CreationContext;
-
-        public Block Create(OperationData data)
+        private readonly FactoryVisitor _factoryVisitor;
+        private class FactoryVisitor : IBlockDataBasedFactory<Block>
         {
-            switch(data.Type)
+            public BlockPositionContext PositionContext;
+
+            public Block Create(OperationData data)
             {
-                case LogicOperationType.NOT:
-                    return new OperationNot(CreationContext);
-                default:
-                    return new BinaryOperaion(data.Type, CreationContext);
+                LogicOperationType operationType = data.OperationType;
+                if(operationType == LogicOperationType.NOT)
+                    return new OperationNot(PositionContext);
+                else
+                    return new BinaryOperaion(operationType, PositionContext);
             }
+
+            public Block Create(ParameterData data)
+                => new Parameter(data.Id, PositionContext);
         }
 
-        public Block Create(ParameterData data)
-            => new Parameter(data.Id, CreationContext);
+        public BlockFactory()
+        {
+            _factoryVisitor = new FactoryVisitor();
+        }
+
+        public Block Create(IBlockData blockData, BlockPositionContext positionContext)
+        {
+            _factoryVisitor.PositionContext = positionContext;
+            return blockData.AcceptFactory(_factoryVisitor);
+        }
     }
-}
+    }
