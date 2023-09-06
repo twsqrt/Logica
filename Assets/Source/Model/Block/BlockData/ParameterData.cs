@@ -1,6 +1,6 @@
 namespace Model.BlockLogic.BlockDataLogic
 {
-    public class ParameterData : IBlockData
+    public readonly struct ParameterData : IBlockData
     {
         private readonly int _id;
 
@@ -10,15 +10,6 @@ namespace Model.BlockLogic.BlockDataLogic
         {
             _id = id;
         }
-        public override bool Equals(object obj)
-        {
-            if (obj == null || GetType() != obj.GetType())
-                return false;
-            return _id == (obj as ParameterData).Id;
-        }
-
-        public override int GetHashCode()
-            => _id.GetHashCode();
 
         public T AcceptFactory<T>(IBlockDataBasedFactory<T> factory)
             => factory.Create(this);

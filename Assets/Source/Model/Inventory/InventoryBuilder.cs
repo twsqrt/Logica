@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Model.BlockLogic.BlockDataLogic;
 using Model.InventoryLogic.AmountLogic;
 using Model.BlockLogic;
+using Model.BlockLogic.LogicOperationLogic;
 
 namespace Model.InventoryLogic
 {
@@ -34,6 +35,18 @@ namespace Model.InventoryLogic
             _registeredBlocks.Add(data, new InfinityAmount());
             return this;
         }
+
+        public InventoryBuilder RegisterOperation(LogicOperationType operationType, int amount)
+            => Register(new OperationData(operationType), amount);
+        
+        public InventoryBuilder RegisterOperationInfinity(LogicOperationType operationType)
+            => RegisterInfinity(new OperationData(operationType));
+        
+        public InventoryBuilder RegisterParameter(int parameterId, int amount)
+            => Register(new ParameterData(parameterId), amount);
+
+        public InventoryBuilder RegisterParameterInfinity(int parameterId)
+            => RegisterInfinity(new ParameterData(parameterId));
 
         public Inventory Build()
         {

@@ -2,7 +2,7 @@ using Model.BlockLogic.LogicOperationLogic;
 
 namespace Model.BlockLogic.BlockDataLogic
 {
-    public class OperationData : IBlockData
+    public readonly struct OperationData : IBlockData
     {
         private readonly LogicOperationType _operationType;
 
@@ -12,16 +12,6 @@ namespace Model.BlockLogic.BlockDataLogic
         {
             _operationType = operationType;
         }
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null || GetType() != obj.GetType())
-                return false;
-            return _operationType == (obj as OperationData).OperationType;
-        }
-        
-        public override int GetHashCode()
-            => _operationType.GetHashCode();
 
         public T AcceptFactory<T>(IBlockDataBasedFactory<T> factory)
             => factory.Create(this);

@@ -18,8 +18,6 @@ namespace Model.BlockLogic
             _context = positionContext;
         }
 
-        protected void OnRemoveInvoke() => OnRemove?.Invoke(this);
-
         public abstract bool CanBeRemoved();
 
         public bool TryRemove()

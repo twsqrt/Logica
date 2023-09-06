@@ -13,14 +13,6 @@ namespace Model.BuilderLogic
         private readonly Inventory _inventory;
         private readonly Map _map;
         private Block _root;
-
-        public BlockBuilder(Map map, Inventory inventory)
-        {
-            _map = map;
-            _inventory = inventory;
-
-            _root = null;
-        }
         
         private bool IsRootPlacement(Vector2Int position)
             => _root == null && position == _map.ExecutionPosition;
@@ -44,11 +36,6 @@ namespace Model.BuilderLogic
             parent = parentsInVicinity.Single();
             return true;
         }
-        
-        public bool CanPlace(Vector2Int position)
-        {
-            return _map.CanPlace(position) && (IsRootPlacement(position) || ExistOnlyOneParent(position, out _));
-        }
 
         private bool TryPlaceRoot(IBlockData blockData)
         {
@@ -59,6 +46,20 @@ namespace Model.BuilderLogic
             _root = root;
             _map[context.Position].TryPlaceBlock(root);
             return true;
+        }
+
+
+        public BlockBuilder(Map map, Inventory inventory)
+        {
+            _map = map;
+            _inventory = inventory;
+
+            _root = null;
+        }
+        
+        public bool CanPlace(Vector2Int position)
+        {
+            return _map.CanPlace(position) && (IsRootPlacement(position) || ExistOnlyOneParent(position, out _));
         }
 
         public bool TryPlace(Vector2Int blockPosition, IBlockData blockData)

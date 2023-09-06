@@ -38,14 +38,12 @@ namespace EntryPointLogic
             var inventoryBuilder = new InventoryBuilder();
 
             Inventory inventory = inventoryBuilder.StartBuilding(blockFactory)
-                .Register(new OperationData(LogicOperationType.NOT), 10)
-                .Register(new OperationData(LogicOperationType.OR), 5)
-                .Register(new OperationData(LogicOperationType.AND), 5)
-                .Register(new OperationData(LogicOperationType.XOR), 5)
-                .Register(new OperationData(LogicOperationType.NOR), 5)
-                .RegisterInfinity(new ParameterData(1))
-                .RegisterInfinity(new ParameterData(2))
-                .RegisterInfinity(new ParameterData(3))
+                .RegisterOperation(LogicOperationType.NOT, 10)
+                .RegisterOperation(LogicOperationType.OR, 5)
+                .RegisterOperation(LogicOperationType.AND, 5)
+                .RegisterParameterInfinity(1)
+                .RegisterParameterInfinity(2)
+                .RegisterParameterInfinity(3)
                 .Build();
             
             BlockBuilder builder = new BlockBuilder(map, inventory);

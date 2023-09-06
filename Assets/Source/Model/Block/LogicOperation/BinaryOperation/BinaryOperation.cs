@@ -13,22 +13,6 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
         private Stack<BinaryOperaionStateType> _stateHistory;
         private IBinaryOperationState _currentState;
 
-        public BinaryOperaion(LogicOperationType type, BlockPositionContext context) : base(type, context)
-        {
-            _operands = new List<Block>();
-
-            _states = new Dictionary<BinaryOperaionStateType, IBinaryOperationState>()
-            {
-                {BinaryOperaionStateType.ROOT, new Root(_context.Position)},
-                {BinaryOperaionStateType.OPERANDS_HORIZONTALLY, OperandsOnLine.Horizontally(_context.Position, _operands)},
-                {BinaryOperaionStateType.OPERANDS_VERTICALLY, OperandsOnLine.Vertically(_context.Position, _operands)},
-                {BinaryOperaionStateType.ALL_OPERANDS_ADDED, new AllOperandsAdded()}
-            };
-
-            _stateHistory = new Stack<BinaryOperaionStateType>();
-            _currentState = _states[GetStartStateType()];
-        }
-
         private BinaryOperaionStateType GetStartStateType()
         {
             switch(_context.ConnectionSide)
@@ -48,6 +32,22 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
         {
             _operands.Remove(block);
             _currentState = _states[_stateHistory.Pop()];
+        }
+
+        public BinaryOperaion(LogicOperationType type, BlockPositionContext context) : base(type, context)
+        {
+            _operands = new List<Block>();
+
+            _states = new Dictionary<BinaryOperaionStateType, IBinaryOperationState>()
+            {
+                {BinaryOperaionStateType.ROOT, new Root(_context.Position)},
+                {BinaryOperaionStateType.OPERANDS_HORIZONTALLY, OperandsOnLine.Horizontally(_context.Position, _operands)},
+                {BinaryOperaionStateType.OPERANDS_VERTICALLY, OperandsOnLine.Vertically(_context.Position, _operands)},
+                {BinaryOperaionStateType.ALL_OPERANDS_ADDED, new AllOperandsAdded()}
+            };
+
+            _stateHistory = new Stack<BinaryOperaionStateType>();
+            _currentState = _states[GetStartStateType()];
         }
 
         public override bool CanAppend(Vector2Int operandPosition)
