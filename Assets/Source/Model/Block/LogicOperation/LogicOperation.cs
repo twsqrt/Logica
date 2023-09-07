@@ -3,13 +3,14 @@ namespace Model.BlockLogic.LogicOperationLogic
 {
     public abstract class LogicOperation : Block
     {
-        private readonly LogicOperationType _type;
+        protected readonly LogicOperationType _operationType;
 
-        public LogicOperationType OperationType => _type;
+        public LogicOperationType OperationType => _operationType;
 
-        protected LogicOperation(LogicOperationType type, BlockContext context) : base(context)
+        protected LogicOperation(LogicOperationType operationType, BlockContext context) 
+        : base(operationType.ToBlockType(), context)
         {
-            _type = type;
+            _operationType = operationType;
         }
     }
 }

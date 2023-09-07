@@ -13,6 +13,9 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
         private Stack<BinaryOperaionStateType> _stateHistory;
         private IBinaryOperationState _currentState;
 
+        public Block FirstOperand => _operands.ElementAtOrDefault(0);
+        public Block SecondOperand => _operands.ElementAtOrDefault(1);
+
         private BinaryOperaionStateType GetStartStateType()
         {
             switch(_context.ParentConnectionSide)
@@ -67,7 +70,7 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
         {
             if(_operands.Count() != 2)
                 return false;
-            return _operands[0].IsCorrectTree() && _operands[1].IsCorrectTree();
+            return FirstOperand.IsCorrectTree() && SecondOperand.IsCorrectTree();
         }
 
         public override bool HasOperands()

@@ -6,15 +6,17 @@ namespace Model.BlockLogic
     public abstract class Block
     {
         protected readonly BlockContext _context;
+        protected readonly BlockType _blockType;
 
         public event Action<Block> OnDestroy;
 
         public BlockContext Context => _context;
-
+        public BlockType BlockType => _blockType;
         public Vector2Int Position => _context.Position;
 
-        public Block(BlockContext positionContext)
+        public Block(BlockType blockType, BlockContext positionContext)
         {
+            _blockType = blockType;
             _context = positionContext;
         }
 

@@ -9,7 +9,7 @@ namespace Model.BlockLogic
 
         public int Id => _id;
 
-        public Parameter(int id, BlockContext context) : base(context)
+        public Parameter(int id, BlockContext context) : base(BlockType.PARAMETER, context)
         {
             _id = id;
         }

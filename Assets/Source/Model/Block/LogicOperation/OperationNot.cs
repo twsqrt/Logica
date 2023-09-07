@@ -8,6 +8,8 @@ namespace Model.BlockLogic.LogicOperationLogic
     {
         private Block _operand;
 
+        public Block Operand => _operand;
+
         public OperationNot(BlockContext context) : base(LogicOperationType.NOT, context)
         {
             _operand = null;
