@@ -29,7 +29,7 @@ namespace View.InventoryLogic
             }
         }
 
-        private void OnPlacingPresenterExitHandler()
+        private void UnselectCurrentSlot()
         {
             _currentSlot?.Highlighter.HighlightDisable();
             _currentSlot = null;
@@ -40,7 +40,7 @@ namespace View.InventoryLogic
             _builderPresenter = builderPresenter;
 
             _placingPresenter = placingPresenter;
-            _placingPresenter.OnExit += OnPlacingPresenterExitHandler;
+            _placingPresenter.OnExit += UnselectCurrentSlot;
 
 
             _slots = new Dictionary<IBlockData, SlotView>();
