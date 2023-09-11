@@ -2,13 +2,13 @@ using UnityEngine;
 
 namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
 {
-    public class AllOperandsAdded : IBinaryOperationState
+    public class AllOperandsAdded : BinaryOperationState
     {
-        public BinaryOperaionStateType StateType => BinaryOperaionStateType.ALL_OPERANDS_ADDED;
+        public AllOperandsAdded() : base(BlockSide.NONE) {}
 
-        public bool CanAppend(Vector2Int operandPosition) => false;
+        public override BinaryOperaionStateType StateType => BinaryOperaionStateType.ALL_OPERANDS_ADDED;
 
-        public BinaryOperaionStateType NextState(Vector2Int operandPosition)
+        public override BinaryOperaionStateType NextState(BlockSide side)
             => BinaryOperaionStateType.ALL_OPERANDS_ADDED;
     }
 }

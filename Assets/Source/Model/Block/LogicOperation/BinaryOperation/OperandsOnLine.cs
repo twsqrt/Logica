@@ -6,41 +6,33 @@ using UnityEngine;
 
 namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
 {
-    public class OperandsOnLine : IBinaryOperationState
+    public class OperandsOnLine : BinaryOperationState
     {
-        private readonly Vector2Int _position;
         private readonly IEnumerable<Block> _operands;
         private readonly BinaryOperaionStateType _type;
-        private readonly Func<Vector2Int, Vector2Int, bool> _rule; 
 
-        private OperandsOnLine(Vector2Int position, 
+        private OperandsOnLine( 
             IEnumerable<Block> operands, 
             BinaryOperaionStateType type, 
-            Func<Vector2Int, Vector2Int, bool> rule)
+            BlockSide operandCorrectSides) : base(operandCorrectSides)
         {
-            _position = position;
             _operands = operands;
             _type = type;
-            _rule = rule;
         }
 
-        public static IBinaryOperationState Horizontally(Vector2Int position, IEnumerable<Block> operands)
-            => new OperandsOnLine(position, operands, BinaryOperaionStateType.OPERANDS_HORIZONTALLY, (p1, p2) => p1.y == p2.y);
+        public static OperandsOnLine Horizontally(IEnumerable<Block> operands)
+            => new OperandsOnLine(operands, BinaryOperaionStateType.OPERANDS_HORIZONTALLY, BlockSide.HORIZONTALLY);
 
-        public static IBinaryOperationState Vertically(Vector2Int position, IEnumerable<Block> operands)
-            => new OperandsOnLine(position, operands, BinaryOperaionStateType.OPERANDS_VERTICALLY, (p1, p2) => p1.x == p2.x);
+        public static OperandsOnLine Vertically(IEnumerable<Block> operands)
+            => new OperandsOnLine(operands, BinaryOperaionStateType.OPERANDS_VERTICALLY, BlockSide.VERTICALLY);
 
-        public BinaryOperaionStateType StateType => _type;
+        public override BinaryOperaionStateType StateType => _type;
 
-        public bool CanAppend(Vector2Int operandPosition)
-            => Map.GetVicinity(_position).Where(p => _rule(p, _position)).Contains(operandPosition);
-
-        public BinaryOperaionStateType NextState(Vector2Int operandPosition)
+        public override BinaryOperaionStateType NextState(BlockSide side)
         {
             if(_operands.Count() > 1)
                 return BinaryOperaionStateType.ALL_OPERANDS_ADDED;
             return _type;
         }
     }
-
 }

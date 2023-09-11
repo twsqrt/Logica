@@ -25,12 +25,8 @@ namespace Model.BlockLogic.LogicOperationLogic
             return _operand.IsCorrectTree();
         }
 
-        public override bool CanAppend(Vector2Int operandPosition)
-        {
-            if(_operand != null)
-                return false;
-            return Map.GetVicinity(_context.Position).Contains(operandPosition);
-        }
+        public override bool CanAppend(BlockSide side)
+            =>_operand == null;
 
         public override void Append(Block operand)
         {

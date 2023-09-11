@@ -5,25 +5,25 @@ using UnityEngine;
 
 namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
 {
-    public class Root : IBinaryOperationState
+    public class Root : BinaryOperationState
     {
-        private readonly Vector2Int _position;
-        public Root(Vector2Int position)
+        public Root() : base(BlockSide.ALL) {}
+
+        public override BinaryOperaionStateType StateType => BinaryOperaionStateType.ROOT;
+
+        public override BinaryOperaionStateType NextState(BlockSide operandSide)
         {
-            _position = position;
-        }
-
-        public BinaryOperaionStateType StateType => BinaryOperaionStateType.ROOT;
-
-        public bool CanAppend(Vector2Int operandPosition)
-            => Map.GetVicinity(_position).Contains(operandPosition);
-
-        public BinaryOperaionStateType NextState(Vector2Int operandPosition)
-        {
-            if(_position.x == operandPosition.x)
-                return BinaryOperaionStateType.OPERANDS_VERTICALLY;
-            return BinaryOperaionStateType.OPERANDS_HORIZONTALLY;
-
+            switch(operandSide)
+            {
+                case BlockSide.UP:
+                case BlockSide.DOWN:
+                    return BinaryOperaionStateType.OPERANDS_VERTICALLY;
+                case BlockSide.LEFT:
+                case BlockSide.RIGHT:
+                    return BinaryOperaionStateType.OPERANDS_HORIZONTALLY;
+                default:
+                    return BinaryOperaionStateType.ROOT;
+            }
         }
     }
 }

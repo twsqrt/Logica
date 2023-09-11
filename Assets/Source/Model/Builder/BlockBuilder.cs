@@ -24,7 +24,7 @@ namespace Model.BuilderLogic
                 .GetVicinityInMap(position)
                 .Where(p => _map.PositionInMap(p) && _map[p].IsOccupied)
                 .Select(p => _map[p].Block)
-                .Where(b => b.CanAppend(position));
+                .Where(b => b.CanAppend(BlockSideMapper.BlockSideFromParentPosition(b.Position, position)));
 
         private bool ExistOnlyOneParent(Vector2Int position, out Block parent)
         {

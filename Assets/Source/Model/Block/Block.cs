@@ -14,16 +14,16 @@ namespace Model.BlockLogic
         public BlockType BlockType => _blockType;
         public Vector2Int Position => _context.Position;
 
-        public Block(BlockType blockType, BlockContext positionContext)
+        public Block(BlockType blockType, BlockContext context)
         {
             _blockType = blockType;
-            _context = positionContext;
+            _context = context;
         }
 
         public void Destroy() => OnDestroy?.Invoke(this);
 
         public abstract bool HasOperands();
-        public abstract bool CanAppend(Vector2Int operandPosition);
+        public abstract bool CanAppend(BlockSide side);
         public abstract void Append(Block operand);
         public abstract bool IsCorrectTree();
         public abstract T Accept<T>(IBlockVisitor<T> visitor);
