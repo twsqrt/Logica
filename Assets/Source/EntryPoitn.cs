@@ -12,6 +12,8 @@ using View.BuilderLogic;
 using View.InventoryLogic;
 using View.MapLogic;
 using Veiw.BuilderLogic;
+using View;
+using Model.BlockConveterLogic;
 
 namespace EntryPointLogic
 {
@@ -25,6 +27,7 @@ namespace EntryPointLogic
         [SerializeField] private BuilderView _builderView;
         [SerializeField] private RemovingButton _removingButton;
         [SerializeField] private InventoryView _inventoryView;
+        [SerializeField] private BlockTextView _blockTextView;
 
         private void Awake()
         {
@@ -53,6 +56,9 @@ namespace EntryPointLogic
 
             BuilderPresenter builderPresenter = new BuilderPresenter(map, placingPresenter, removingPresenter);
 
+            BlockTextConveter textConveter = new BlockTextConveter(_parameterConfig);
+
+            _blockTextView.Init(builder, textConveter);
             _builderView.Init(_mapView, builderPresenter);
             _removingButton.Init(builderPresenter, removingPresenter);
             _inventoryView.Init(inventory, builderPresenter, placingPresenter);

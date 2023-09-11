@@ -5,6 +5,7 @@ using Model.MapLogic;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System;
 
 namespace Model.BuilderLogic
 {
@@ -15,6 +16,9 @@ namespace Model.BuilderLogic
         private Block _root;
 
         public Block Root => _root;
+
+        public event Action<BlockContext> OnPlaced;
+        public event Action<Vector2Int> OnRemoved;
         
         private bool IsRootPlacement(Vector2Int position)
             => _root == null && position == _map.ExecutionPosition;
@@ -47,6 +51,7 @@ namespace Model.BuilderLogic
 
             _root = root;
             _map[context.Position].TryPlace(root);
+            OnPlaced?.Invoke(context);
             return true;
         }
 
@@ -80,8 +85,9 @@ namespace Model.BuilderLogic
 
             parent.Append(block);
             _map[context.Position].TryPlace(block);
+            OnPlaced?.Invoke(context);
             return true;
-            }
+        }
 
         public bool CanRemove(Vector2Int position)
         {
@@ -99,6 +105,7 @@ namespace Model.BuilderLogic
             if(position == _map.ExecutionPosition)
                 _root = null;
             
+            OnRemoved?.Invoke(position);
             return true;
         }
     }
