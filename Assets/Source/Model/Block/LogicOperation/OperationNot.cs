@@ -18,13 +18,6 @@ namespace Model.BlockLogic.LogicOperationLogic
         private void OnRemoveHandler() 
             => _operand = null;
 
-        public override bool IsCorrectTree()
-        {
-            if(_operand == null)
-                return false;
-            return _operand.IsCorrectTree();
-        }
-
         public override bool CanAppend(BlockSide side)
             =>_operand == null;
 

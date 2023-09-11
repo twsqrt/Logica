@@ -19,8 +19,6 @@ namespace Model.BlockLogic
         public override void Append(Block operand)
             => throw new InvalidOperationException();
 
-        public override bool IsCorrectTree() => true;
-
         public override bool HasOperands() => false;
 
         public override T Accept<T>(IBlockVisitor<T> visitor)

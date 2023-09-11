@@ -25,7 +25,6 @@ namespace Model.BlockLogic
         public abstract bool HasOperands();
         public abstract bool CanAppend(BlockSide side);
         public abstract void Append(Block operand);
-        public abstract bool IsCorrectTree();
         public abstract T Accept<T>(IBlockVisitor<T> visitor);
     }
 }

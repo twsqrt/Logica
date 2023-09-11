@@ -69,13 +69,6 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
             _currentState = _states[nextStateType];
         }
 
-        public override bool IsCorrectTree()
-        {
-            if(_operands.Count() != 2)
-                return false;
-            return FirstOperand.IsCorrectTree() && SecondOperand.IsCorrectTree();
-        }
-
         public override bool HasOperands()
             => _operands.Any();
 
