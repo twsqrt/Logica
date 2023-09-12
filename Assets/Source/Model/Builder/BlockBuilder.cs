@@ -20,34 +20,41 @@ namespace Model.BuilderLogic
         private bool IsRootPlacement(Vector2Int position)
             => _root == null && position == _map.ExecutionPosition;
         
-        private IEnumerable<Block> GetParentsInVicinity(Vector2Int position)
-            => _map
-                .GetVicinityInMap(position)
-                .Where(p => _map.PositionInMap(p) && _map[p].IsOccupied)
-                .Select(p => _map[p].Block)
-                .Where(b => b.IsAppendCorrect(BlockSideMapper.BlockSideFromParentPosition(b.Position, position)));
-
-        private bool ExistOnlyOneParent(Vector2Int position, out Block parent)
+        private IEnumerable<BlockSide> GetParentSidesInVicinity(Vector2Int position)
         {
-            IEnumerable<Block> parentsInVicinity = GetParentsInVicinity(position);
-            if(parentsInVicinity.Count() != 1)
+            IEnumerable<Vector2Int> vicinityPositions = _map
+                .GetVicinityInMap(position)
+                .Where(p => _map.PositionInMap(p) && _map[p].IsOccupied);
+
+            foreach(Vector2Int vicinityPosition in vicinityPositions)
             {
-                parent = null;
+                BlockSide parentConnectionSide = BlockSideMapper.BlockSideFromParentPosition(vicinityPosition, position);
+                if(_map[vicinityPosition].Block.IsAppendCorrect(parentConnectionSide))
+                    yield return parentConnectionSide.Reverse();
+            }
+        }
+
+        private bool ExistOnlyOneParent(Vector2Int position, out BlockSide connectionSide)
+        {
+            IEnumerable<BlockSide> parentSides = GetParentSidesInVicinity(position);
+            if(parentSides.Count() != 1)
+            {
+                connectionSide = BlockSide.NONE;
                 return false;
             }
 
-            parent = parentsInVicinity.Single();
+            connectionSide = parentSides.First();
             return true;
         }
 
         private bool TryPlaceRoot(IBlockData blockData)
         {
-            BlockContext context = BlockContext.CreateRootContext(_map.ExecutionPosition);
+            BlockContext context = BlockContext.CreateRootContext();
             if(_inventory.TryPullOut(blockData, context, out Block root) == false)
                 return false;
 
             _root = root;
-            _map[context.Position].TryPlace(root);
+            _map[_map.ExecutionPosition].TryPlace(root);
             return true;
         }
 
@@ -71,19 +78,19 @@ namespace Model.BuilderLogic
             if(IsRootPlacement(placementPosition))
                 return TryPlaceRoot(blockData);
 
-            if(ExistOnlyOneParent(placementPosition, out Block parent) == false)
+            if(ExistOnlyOneParent(placementPosition, out BlockSide connectionSide) == false)
                 return false;
 
-            BlockSide childConnectionSide = BlockSideMapper.BlockSideFromParentPosition(placementPosition, parent.Position);
-            BlockContext context = BlockContext.CreateChildContext(childConnectionSide, placementPosition);
+            BlockContext context = BlockContext.CreateChildContext(connectionSide);
             if(_inventory.TryPullOut(blockData, context, out Block childBlock) == false)
                 return false;
 
-            BlockSide parentConnectionSide = childConnectionSide.Reverse();
-            parent.Append(parentConnectionSide, childBlock);
-            _map[context.Position].TryPlace(childBlock);
+            Vector2Int parentPosition = placementPosition + BlockSideMapper.PositionFromBlockSide(connectionSide);
+            Block parent = _map[parentPosition].Block;
+            parent.Append(connectionSide.Reverse(), childBlock);
+            _map[placementPosition].TryPlace(childBlock);
             return true;
-            }
+        }
 
         public bool CanRemove(Vector2Int position)
         {

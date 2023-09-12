@@ -12,7 +12,6 @@ namespace Model.BlockLogic
 
         public BlockContext Context => _context;
         public BlockType BlockType => _blockType;
-        public Vector2Int Position => _context.Position;
 
         public Block(BlockType blockType, BlockContext context)
         {
