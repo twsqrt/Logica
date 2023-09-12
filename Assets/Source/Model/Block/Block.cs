@@ -23,8 +23,8 @@ namespace Model.BlockLogic
         public void Destroy() => OnDestroy?.Invoke(this);
 
         public abstract bool HasOperands();
-        public abstract bool CanAppend(BlockSide side);
-        public abstract void Append(Block operand);
+        public abstract bool IsAppendCorrect(BlockSide side);
+        public abstract void Append(BlockSide side, Block operand);
         public abstract T Accept<T>(IBlockVisitor<T> visitor);
     }
 }

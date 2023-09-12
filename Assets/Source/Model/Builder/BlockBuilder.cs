@@ -1,3 +1,4 @@
+using Extensions;
 using Model.BlockLogic.BlockDataLogic;
 using Model.BlockLogic;
 using Model.InventoryLogic;
@@ -24,7 +25,7 @@ namespace Model.BuilderLogic
                 .GetVicinityInMap(position)
                 .Where(p => _map.PositionInMap(p) && _map[p].IsOccupied)
                 .Select(p => _map[p].Block)
-                .Where(b => b.CanAppend(BlockSideMapper.BlockSideFromParentPosition(b.Position, position)));
+                .Where(b => b.IsAppendCorrect(BlockSideMapper.BlockSideFromParentPosition(b.Position, position)));
 
         private bool ExistOnlyOneParent(Vector2Int position, out Block parent)
         {
@@ -73,13 +74,14 @@ namespace Model.BuilderLogic
             if(ExistOnlyOneParent(placementPosition, out Block parent) == false)
                 return false;
 
-            BlockSide parentConnectionSide = BlockSideMapper.BlockSideFromParentPosition(placementPosition, parent.Position);
-            BlockContext context = BlockContext.CreateChildContext(parentConnectionSide, placementPosition);
-            if(_inventory.TryPullOut(blockData, context, out Block block) == false)
+            BlockSide childConnectionSide = BlockSideMapper.BlockSideFromParentPosition(placementPosition, parent.Position);
+            BlockContext context = BlockContext.CreateChildContext(childConnectionSide, placementPosition);
+            if(_inventory.TryPullOut(blockData, context, out Block childBlock) == false)
                 return false;
 
-            parent.Append(block);
-            _map[context.Position].TryPlace(block);
+            BlockSide parentConnectionSide = childConnectionSide.Reverse();
+            parent.Append(parentConnectionSide, childBlock);
+            _map[context.Position].TryPlace(childBlock);
             return true;
             }
 

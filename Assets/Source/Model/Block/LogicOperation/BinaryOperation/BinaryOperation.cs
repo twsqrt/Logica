@@ -32,7 +32,7 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
             }
         }
 
-        private void OnRemoveHandler(Block block)
+        private void RemoveChild(Block block)
         {
             _operands.Remove(block);
             _currentState = _states[_stateHistory.Pop()];
@@ -54,18 +54,17 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
             _currentState = _states[GetStartStateType()];
         }
 
-        public override bool CanAppend(BlockSide side)
-            => _currentState.CanAppend(side);
+        public override bool IsAppendCorrect(BlockSide side)
+            => _currentState.IsAppendCorrect(side);
 
-        public override void Append(Block operand)
+        public override void Append(BlockSide side, Block childBlock)
         {
-            _operands.Add(operand);
-            operand.OnDestroy += OnRemoveHandler;
+            _operands.Add(childBlock);
+            childBlock.OnDestroy += RemoveChild;
 
             _stateHistory.Push(_currentState.StateType);
 
-            BlockSide operandSide = BlockSideMapper.BlockSideFromParentPosition(Position, operand.Position);
-            BinaryOperaionStateType nextStateType = _currentState.NextState(operandSide);
+            BinaryOperaionStateType nextStateType = _currentState.NextState(side);
             _currentState = _states[nextStateType];
         }
 

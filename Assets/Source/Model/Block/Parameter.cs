@@ -14,9 +14,9 @@ namespace Model.BlockLogic
             _id = id;
         }
 
-        public override bool CanAppend(BlockSide side) => false;
+        public override bool IsAppendCorrect(BlockSide side) => false;
 
-        public override void Append(Block operand)
+        public override void Append(BlockSide side, Block operand)
             => throw new InvalidOperationException();
 
         public override bool HasOperands() => false;

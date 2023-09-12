@@ -11,7 +11,7 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
             _blockCorrectSides = blockCorrectSides;
         }
 
-        public bool CanAppend(BlockSide side)
+        public bool IsAppendCorrect(BlockSide side)
             => (_blockCorrectSides & side) != 0;
 
         public abstract BinaryOperaionStateType StateType { get; }
