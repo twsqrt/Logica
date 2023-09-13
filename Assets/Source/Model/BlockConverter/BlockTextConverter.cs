@@ -50,9 +50,9 @@ namespace Model.BlockConveterLogic
             LogicOperationType binaryOperationType = binaryOperaion.OperationType;
             char operationSymbol = binaryOperationType switch
             {
-                LogicOperationType.OR => '|',
-                LogicOperationType.AND => '&',
-                LogicOperationType.XOR => '^',
+                LogicOperationType.OR => '\u2228',
+                LogicOperationType.AND => '\u2227',
+                LogicOperationType.XOR => '\u2295',
                 LogicOperationType.NOR => '\u2191',
                 _ => throw new ArgumentException($"Binary operation {binaryOperationType} not found!"),
             };
