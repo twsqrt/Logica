@@ -839,7 +839,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1737655132}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ac58142706d9bf46a20cab3a1d393bf, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d84fbf83164c58448f35fd7f3b787ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _tmp: {fileID: 106901359}
@@ -895,7 +895,7 @@ MonoBehaviour:
   _builderView: {fileID: 586183810}
   _removingButton: {fileID: 8120737854257037826}
   _inventoryView: {fileID: 485455261}
-  _blockTextView: {fileID: 1737655134}
+  _formulaView: {fileID: 1737655134}
 --- !u!1 &2097345064
 GameObject:
   m_ObjectHideFlags: 0

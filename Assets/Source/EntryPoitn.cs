@@ -27,7 +27,7 @@ namespace EntryPointLogic
         [SerializeField] private BuilderView _builderView;
         [SerializeField] private RemovingButton _removingButton;
         [SerializeField] private InventoryView _inventoryView;
-        [SerializeField] private BlockTextView _blockTextView;
+        [SerializeField] private FormulaView _formulaView;
 
         private void Awake()
         {
@@ -58,7 +58,7 @@ namespace EntryPointLogic
 
             TreeToStringConverter treeStringConverter = new TreeToStringConverter(_parameterBlocksConfig);
 
-            _blockTextView.Init(builder, treeStringConverter);
+            _formulaView.Init(builder, treeStringConverter);
             _builderView.Init(_mapView, builderPresenter);
             _removingButton.Init(builderPresenter, removingPresenter);
             _inventoryView.Init(inventory, builderPresenter, placingPresenter);

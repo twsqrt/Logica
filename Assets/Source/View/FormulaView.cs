@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace View
 {
-    public class BlockTextView : MonoBehaviour
+    public class FormulaView : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _tmp;
 
