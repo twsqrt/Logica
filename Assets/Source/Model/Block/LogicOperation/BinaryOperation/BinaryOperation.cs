@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Extensions;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
@@ -8,10 +9,10 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
     public class BinaryOperaion : LogicOperation
     {
         private readonly List<Block> _operands;
-        private readonly Dictionary<BinaryOperaionStateType, IBinaryOperationState> _states;
+        private readonly Dictionary<BinaryOperaionStateType, BinaryOperationState> _states;
 
         private Stack<BinaryOperaionStateType> _stateHistory;
-        private IBinaryOperationState _currentState;
+        private BinaryOperationState _currentState;
 
         public Block FirstOperand => _operands.ElementAtOrDefault(0);
         public Block SecondOperand => _operands.ElementAtOrDefault(1);
@@ -31,7 +32,7 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
             }
         }
 
-        private void OnRemoveHandler(Block block)
+        private void RemoveChild(Block block)
         {
             _operands.Remove(block);
             _currentState = _states[_stateHistory.Pop()];
@@ -41,11 +42,11 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
         {
             _operands = new List<Block>();
 
-            _states = new Dictionary<BinaryOperaionStateType, IBinaryOperationState>()
+            _states = new Dictionary<BinaryOperaionStateType, BinaryOperationState>()
             {
-                {BinaryOperaionStateType.ROOT, new Root(_context.Position)},
-                {BinaryOperaionStateType.OPERANDS_HORIZONTALLY, OperandsOnLine.Horizontally(_context.Position, _operands)},
-                {BinaryOperaionStateType.OPERANDS_VERTICALLY, OperandsOnLine.Vertically(_context.Position, _operands)},
+                {BinaryOperaionStateType.ROOT, new Root()},
+                {BinaryOperaionStateType.OPERANDS_HORIZONTALLY, OperandsOnLine.Horizontally(_operands)},
+                {BinaryOperaionStateType.OPERANDS_VERTICALLY, OperandsOnLine.Vertically(_operands)},
                 {BinaryOperaionStateType.ALL_OPERANDS_ADDED, new AllOperandsAdded()}
             };
 
@@ -53,24 +54,18 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
             _currentState = _states[GetStartStateType()];
         }
 
-        public override bool CanAppend(Vector2Int operandPosition)
-            => _currentState.CanAppend(operandPosition);
+        public override bool IsAppendCorrect(BlockSide side)
+            => _currentState.IsAppendCorrect(side);
 
-        public override void Append(Block operand)
+        public override void Append(BlockSide side, Block childBlock)
         {
-            _operands.Add(operand);
-            operand.OnDestroy += OnRemoveHandler;
+            _operands.Add(childBlock);
+            childBlock.OnDestroy += RemoveChild;
 
             _stateHistory.Push(_currentState.StateType);
-            BinaryOperaionStateType nextStateType = _currentState.NextState(operand.Position);
-            _currentState = _states[nextStateType];
-        }
 
-        public override bool IsCorrectTree()
-        {
-            if(_operands.Count() != 2)
-                return false;
-            return FirstOperand.IsCorrectTree() && SecondOperand.IsCorrectTree();
+            BinaryOperaionStateType nextStateType = _currentState.NextState(side);
+            _currentState = _states[nextStateType];
         }
 
         public override bool HasOperands()
