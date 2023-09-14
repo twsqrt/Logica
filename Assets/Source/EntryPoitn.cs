@@ -13,7 +13,7 @@ using View.InventoryLogic;
 using View.MapLogic;
 using Veiw.BuilderLogic;
 using View;
-using Model.BlockConveterLogic;
+using Model.TreeConverterLogic;
 
 namespace EntryPointLogic
 {
@@ -56,9 +56,9 @@ namespace EntryPointLogic
 
             BuilderPresenter builderPresenter = new BuilderPresenter(map, placingPresenter, removingPresenter);
 
-            BlockTextConveter textConveter = new BlockTextConveter(_parameterBlocksConfig);
+            TreeToStringConverter treeStringConverter = new TreeToStringConverter(_parameterBlocksConfig);
 
-            _blockTextView.Init(builder, textConveter);
+            _blockTextView.Init(builder, treeStringConverter);
             _builderView.Init(_mapView, builderPresenter);
             _removingButton.Init(builderPresenter, removingPresenter);
             _inventoryView.Init(inventory, builderPresenter, placingPresenter);

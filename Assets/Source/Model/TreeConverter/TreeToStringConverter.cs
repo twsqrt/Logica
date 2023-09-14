@@ -5,9 +5,9 @@ using Model.BlockLogic;
 using System.Collections.Generic;
 using System;
 
-namespace Model.BlockConveterLogic
+namespace Model.TreeConverterLogic
 {
-    public class BlockTextConveter : IBlockVisitor<string>
+    public class TreeToStringConverter : IBlockVisitor<string>
     {
         private const char DEFAULT_OPERAND_SYMBOL = '_';
         private readonly Dictionary<int, string> _parameterNames;
@@ -37,7 +37,7 @@ namespace Model.BlockConveterLogic
             return isBracketsNeded ? $"({operandText})" : operandText;
         }
 
-        public BlockTextConveter(ParameterBlocksConfig config)
+        public TreeToStringConverter(ParameterBlocksConfig config)
         {
             _parameterNames = config.GetParameterNameByIdDictionary();
         }
