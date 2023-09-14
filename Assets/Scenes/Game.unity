@@ -888,7 +888,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mapConfig: {fileID: 11400000, guid: aa48fea22561c8a42b23beacf5ef4323, type: 2}
-  _parameterConfig: {fileID: 11400000, guid: 9a8693a5770cafd49861210f0263b4b6, type: 2}
+  _parameterBlocksConfig: {fileID: 11400000, guid: 80f47ce5c1bafef45b0258a9809d6c30, type: 2}
   _blockUIViewFactory: {fileID: 11400000, guid: 0bc38d65d0e123f4198acfc430e13d65, type: 2}
   _blockViewFactory: {fileID: 11400000, guid: d3eb46a091f56484fb4ddc1651dab7c2, type: 2}
   _mapView: {fileID: 19607403}

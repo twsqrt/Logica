@@ -20,7 +20,7 @@ namespace EntryPointLogic
     public class EntryPoitn : MonoBehaviour
     {
         [SerializeField] private MapConfig _mapConfig;
-        [SerializeField] private ParameterConfig _parameterConfig;
+        [SerializeField] private ParameterBlocksConfig _parameterBlocksConfig;
         [SerializeField] private BlockUIViewFactory _blockUIViewFactory;
         [SerializeField] private BlockViewFactory _blockViewFactory;
         [SerializeField] private MapView _mapView;
@@ -34,8 +34,8 @@ namespace EntryPointLogic
             Map map = new Map(_mapConfig);
             _mapView.Init(map);
 
-            _blockUIViewFactory.Init(_parameterConfig);
-            _blockViewFactory.Init(_parameterConfig);
+            _blockUIViewFactory.Init(_parameterBlocksConfig);
+            _blockViewFactory.Init(_parameterBlocksConfig);
 
             var blockFactory = new BlockFactory();
             var inventoryBuilder = new InventoryBuilder();
@@ -56,7 +56,7 @@ namespace EntryPointLogic
 
             BuilderPresenter builderPresenter = new BuilderPresenter(map, placingPresenter, removingPresenter);
 
-            BlockTextConveter textConveter = new BlockTextConveter(_parameterConfig);
+            BlockTextConveter textConveter = new BlockTextConveter(_parameterBlocksConfig);
 
             _blockTextView.Init(builder, textConveter);
             _builderView.Init(_mapView, builderPresenter);

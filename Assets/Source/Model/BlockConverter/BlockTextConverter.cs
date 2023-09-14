@@ -37,9 +37,9 @@ namespace Model.BlockConveterLogic
             return isBracketsNeded ? $"({operandText})" : operandText;
         }
 
-        public BlockTextConveter(ParameterConfig config)
+        public BlockTextConveter(ParameterBlocksConfig config)
         {
-            _parameterNames = config.ToDictionary();
+            _parameterNames = config.GetParameterNameByIdDictionary();
         }
 
         public string Visit(OperationNot operationNot)

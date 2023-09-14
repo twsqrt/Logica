@@ -16,9 +16,9 @@ namespace View.BlockLogic
 
         private Dictionary<int, string> _parameterNames;
 
-        public void Init(ParameterConfig config)
+        public void Init(ParameterBlocksConfig config)
         {
-            _parameterNames = config.ToDictionary();
+            _parameterNames = config.GetParameterNameByIdDictionary();
         }
 
         public BlockUIView Create(OperationData data)
