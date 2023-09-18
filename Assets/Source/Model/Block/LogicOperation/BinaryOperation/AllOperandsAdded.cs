@@ -6,9 +6,9 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
     {
         public AllOperandsAdded() : base(BlockSide.NONE) {}
 
-        public override BinaryOperaionStateType StateType => BinaryOperaionStateType.ALL_OPERANDS_ADDED;
+        public override BinaryOperationStateType StateType => BinaryOperationStateType.ALL_OPERANDS_ADDED;
 
-        public override BinaryOperaionStateType NextState(BlockSide side)
-            => BinaryOperaionStateType.ALL_OPERANDS_ADDED;
+        public override BinaryOperationStateType NextState(BlockSide side)
+            => BinaryOperationStateType.ALL_OPERANDS_ADDED;
     }
 }

@@ -35,8 +35,8 @@ namespace View.BlockLogic
         public BlockView Visit(OperationNot operationNot)
             => VisitOperation(operationNot);
 
-        public BlockView Visit(BinaryOperaion binaryOperaion)
-            => VisitOperation(binaryOperaion);
+        public BlockView Visit(BinaryOperation binaryOperation)
+            => VisitOperation(binaryOperation);
 
         public BlockView Visit(Parameter parameter)
         {

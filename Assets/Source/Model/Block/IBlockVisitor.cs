@@ -7,7 +7,7 @@ namespace Model.BlockLogic
     {
         T Visit(OperationNot operationNot);
         
-        T Visit(BinaryOperaion binaryOperaion);
+        T Visit(BinaryOperation binaryOperation);
 
         T Visit(Parameter parameter);
     }

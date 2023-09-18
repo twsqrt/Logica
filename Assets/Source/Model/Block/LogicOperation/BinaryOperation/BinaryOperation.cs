@@ -6,29 +6,29 @@ using UnityEngine;
 
 namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
 {
-    public class BinaryOperaion : LogicOperation
+    public class BinaryOperation : LogicOperation
     {
         private readonly List<Block> _operands;
-        private readonly Dictionary<BinaryOperaionStateType, BinaryOperationState> _states;
+        private readonly Dictionary<BinaryOperationStateType, BinaryOperationState> _states;
 
-        private Stack<BinaryOperaionStateType> _stateHistory;
+        private Stack<BinaryOperationStateType> _stateHistory;
         private BinaryOperationState _currentState;
 
         public Block FirstOperand => _operands.ElementAtOrDefault(0);
         public Block SecondOperand => _operands.ElementAtOrDefault(1);
 
-        private BinaryOperaionStateType GetStartStateType()
+        private BinaryOperationStateType GetStartStateType()
         {
             switch(_context.ParentConnectionSide)
             {
                 case BlockSide.UP:
                 case BlockSide.DOWN:
-                    return BinaryOperaionStateType.OPERANDS_HORIZONTALLY;
+                    return BinaryOperationStateType.OPERANDS_HORIZONTALLY;
                 case BlockSide.LEFT:
                 case BlockSide.RIGHT:
-                    return BinaryOperaionStateType.OPERANDS_VERTICALLY;
+                    return BinaryOperationStateType.OPERANDS_VERTICALLY;
                 default:
-                    return BinaryOperaionStateType.ROOT;
+                    return BinaryOperationStateType.ROOT;
             }
         }
 
@@ -38,19 +38,19 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
             _currentState = _states[_stateHistory.Pop()];
         }
 
-        public BinaryOperaion(LogicOperationType type, BlockContext context) : base(type, context)
+        public BinaryOperation(LogicOperationType type, BlockContext context) : base(type, context)
         {
             _operands = new List<Block>();
 
-            _states = new Dictionary<BinaryOperaionStateType, BinaryOperationState>()
+            _states = new Dictionary<BinaryOperationStateType, BinaryOperationState>()
             {
-                {BinaryOperaionStateType.ROOT, new Root()},
-                {BinaryOperaionStateType.OPERANDS_HORIZONTALLY, OperandsOnLine.Horizontally(_operands)},
-                {BinaryOperaionStateType.OPERANDS_VERTICALLY, OperandsOnLine.Vertically(_operands)},
-                {BinaryOperaionStateType.ALL_OPERANDS_ADDED, new AllOperandsAdded()}
+                {BinaryOperationStateType.ROOT, new Root()},
+                {BinaryOperationStateType.OPERANDS_HORIZONTALLY, OperandsOnLine.Horizontally(_operands)},
+                {BinaryOperationStateType.OPERANDS_VERTICALLY, OperandsOnLine.Vertically(_operands)},
+                {BinaryOperationStateType.ALL_OPERANDS_ADDED, new AllOperandsAdded()}
             };
 
-            _stateHistory = new Stack<BinaryOperaionStateType>();
+            _stateHistory = new Stack<BinaryOperationStateType>();
             _currentState = _states[GetStartStateType()];
         }
 
@@ -64,7 +64,7 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
 
             _stateHistory.Push(_currentState.StateType);
 
-            BinaryOperaionStateType nextStateType = _currentState.NextState(side);
+            BinaryOperationStateType nextStateType = _currentState.NextState(side);
             _currentState = _states[nextStateType];
         }
 

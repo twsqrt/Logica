@@ -1,6 +1,6 @@
 namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
 {
-    public enum BinaryOperaionStateType
+    public enum BinaryOperationStateType
     {
         ROOT,
         OPERANDS_HORIZONTALLY,

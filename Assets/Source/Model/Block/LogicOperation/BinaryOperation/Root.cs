@@ -9,20 +9,20 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
     {
         public Root() : base(BlockSide.ALL) {}
 
-        public override BinaryOperaionStateType StateType => BinaryOperaionStateType.ROOT;
+        public override BinaryOperationStateType StateType => BinaryOperationStateType.ROOT;
 
-        public override BinaryOperaionStateType NextState(BlockSide operandSide)
+        public override BinaryOperationStateType NextState(BlockSide operandSide)
         {
             switch(operandSide)
             {
                 case BlockSide.UP:
                 case BlockSide.DOWN:
-                    return BinaryOperaionStateType.OPERANDS_VERTICALLY;
+                    return BinaryOperationStateType.OPERANDS_VERTICALLY;
                 case BlockSide.LEFT:
                 case BlockSide.RIGHT:
-                    return BinaryOperaionStateType.OPERANDS_HORIZONTALLY;
+                    return BinaryOperationStateType.OPERANDS_HORIZONTALLY;
                 default:
-                    return BinaryOperaionStateType.ROOT;
+                    return BinaryOperationStateType.ROOT;
             }
         }
     }

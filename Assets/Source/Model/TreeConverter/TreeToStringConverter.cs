@@ -45,9 +45,9 @@ namespace Model.TreeConverterLogic
         public string Visit(OperationNot operationNot)
             => '\u00AC' + GetOperandText(BlockType.OPERATION_NOT, operationNot.Operand);
 
-        public string Visit(BinaryOperaion binaryOperaion)
+        public string Visit(BinaryOperation binaryOperation)
         {
-            LogicOperationType binaryOperationType = binaryOperaion.OperationType;
+            LogicOperationType binaryOperationType = binaryOperation.OperationType;
             char operationSymbol = binaryOperationType switch
             {
                 LogicOperationType.OR => '\u2228',
@@ -58,8 +58,8 @@ namespace Model.TreeConverterLogic
             };
 
             BlockType operationType = binaryOperationType.ToBlockType();
-            string leftOperandText = GetOperandText(operationType, binaryOperaion.FirstOperand);
-            string rightOperandText = GetOperandText(operationType, binaryOperaion.SecondOperand);
+            string leftOperandText = GetOperandText(operationType, binaryOperation.FirstOperand);
+            string rightOperandText = GetOperandText(operationType, binaryOperation.SecondOperand);
 
             return $"{leftOperandText} {operationSymbol} {rightOperandText}";
         }

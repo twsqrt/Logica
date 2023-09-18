@@ -17,7 +17,7 @@ namespace Model.BlockLogic
                 if(operationType == LogicOperationType.NOT)
                     return new OperationNot(PositionContext);
                 else
-                    return new BinaryOperaion(operationType, PositionContext);
+                    return new BinaryOperation(operationType, PositionContext);
             }
 
             public Block Create(ParameterData data)
