@@ -46,29 +46,19 @@ namespace Model.MapLogic
             }
         }
 
-        public static IEnumerable<Vector2Int> GetVicinity(Vector2Int position)
-        {
-            var vicinity = new[]{Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
-            for(int i = 0; i < vicinity.Length; i++)
-                vicinity[i] += position;
-            
-            return vicinity;
-        }
-
-        public IEnumerable<Vector2Int> GetVicinityInMap(Vector2Int position)
-            => GetVicinity(position).Where(p => PositionInMap(p));
-
-        public bool PositionInMap(int x, int y)
-            => x.IsBetween(0, _width - 1) && y.IsBetween(0, _height - 1);
-
         public bool PositionInMap(Vector2Int position)
-            => PositionInMap(position.x, position.y);
+            => position.x.IsBetween(0, _width - 1) 
+            && position.y.IsBetween(0, _height - 1);
 
-        public bool CanPlace(Vector2Int position)
+        public IEnumerable<Vector2Int> GetVicinity(Vector2Int position)
         {
-            if(PositionInMap(position.x, position.y))
-                return this[position].IsOccupied == false;
-            return false;
+            var vicinityOffsets = new[]{ Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
+            foreach(Vector2Int vicinityOffset in vicinityOffsets)
+            {
+                Vector2Int vicinityPosition = position + vicinityOffset;
+                if(PositionInMap(vicinityPosition))
+                    yield return vicinityPosition;
+            }
         }
     }
 }

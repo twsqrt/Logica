@@ -42,14 +42,14 @@ namespace Presenter.BuilderLogic
         }
 
         public override IEnumerable<Vector2Int> GetCorrectPositions(IEnumerable<Vector2Int> positions)
-            => positions.Where(_builder.CanPlace);
+            => positions.Where(_builder.CanAppend);
 
         public override bool TryExecute(Vector2Int position)
         {
             if(_isDataSelected == false)
                 return false;
 
-            return _builder.TryPlace(position, _currentData);
+            return _builder.TryAppend(position, _currentData);
         }
     }
 }

@@ -26,8 +26,7 @@ namespace Model.BuilderLogic
         
         private IEnumerable<BlockSide> GetParentSidesInVicinity(Vector2Int position)
         {
-            IEnumerable<Vector2Int> vicinityPositions = _map
-                .GetVicinityInMap(position)
+            IEnumerable<Vector2Int> vicinityPositions = _map.GetVicinity(position)
                 .Where(p => _map.PositionInMap(p) && _map[p].IsOccupied);
 
             foreach(Vector2Int vicinityPosition in vicinityPositions)
@@ -71,13 +70,16 @@ namespace Model.BuilderLogic
 
             _root = null;
         }
-        
-        public bool CanPlace(Vector2Int position)
-            => _map.CanPlace(position) && (IsRootPlacement(position) || ExistOnlyOneParent(position, out _));
 
-        public bool TryPlace(Vector2Int placementPosition, IBlockData blockData)
+        private bool CanPlace(Vector2Int position)
+            => _map.PositionInMap(position) && _map[position].IsOccupied == false;
+
+        public bool CanAppend(Vector2Int position)
+            => CanPlace(position) && (IsRootPlacement(position) || ExistOnlyOneParent(position, out _));
+
+        public bool TryAppend(Vector2Int placementPosition, IBlockData blockData)
         {
-            if(_map.CanPlace(placementPosition) == false)
+            if(CanPlace(placementPosition) == false)
                 return false;
 
             if(IsRootPlacement(placementPosition))
