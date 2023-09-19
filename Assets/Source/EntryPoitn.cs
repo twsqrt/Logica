@@ -26,6 +26,7 @@ namespace EntryPointLogic
         [SerializeField] private RemovingButton _removingButton;
         [SerializeField] private InventoryView _inventoryView;
         [SerializeField] private FormulaView _formulaView;
+        [SerializeField] private ExecutionButton _executionButton;
 
         private void Awake()
         {
@@ -53,11 +54,13 @@ namespace EntryPointLogic
             var builderPresenter = new BuilderPresenter(map, placingPresenter, removingPresenter);
 
             var treeStringConverter = new TreeToStringConverter(_parameterBlocksConfig);
+            var treeVerifier = new TreeVerifier();
 
             _formulaView.Init(map, builderPresenter, treeStringConverter);
             _builderView.Init(_mapView, builderPresenter);
             _removingButton.Init(builderPresenter, removingPresenter);
             _inventoryView.Init(inventory, builderPresenter, placingPresenter);
+            _executionButton.Init(map, builderPresenter, treeVerifier);
         }
     }
 }
