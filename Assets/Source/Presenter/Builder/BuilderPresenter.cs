@@ -15,25 +15,22 @@ namespace Presenter.BuilderLogic
         private BuilderPresenterStateType _currentStateType;
         private IEnumerable<Vector2Int> _correctPositions;
 
-        public IEnumerable<Vector2Int> CorrectPositions
+        public IEnumerable<Vector2Int> CorrectPositions => _correctPositions;
+
+        public event Action<BuilderPresenterStateType> OnStateChanged;
+        public event Action<IEnumerable<Vector2Int>> OnCorrectPositionsChanged;
+
+        private void UpdateCorrectPositions()
         {
-            get => _correctPositions;
-            private set
-            {
-                _correctPositions = value;
-                OnCorrectPositionsChanged?.Invoke(value);
-            }
+            _correctPositions = _allPositions.Where(_currentState.IsPositionCorrect);
+            OnCorrectPositionsChanged?.Invoke(_correctPositions);
         }
 
         private void EnterCurrentState()
         {
             _currentState.Enter();
-            CorrectPositions = _currentState.GetCorrectPositions(_allPositions);
+            UpdateCorrectPositions();
         }
-
-
-        public event Action<BuilderPresenterStateType> OnStateChanged;
-        public event Action<IEnumerable<Vector2Int>> OnCorrectPositionsChanged;
 
         public BuilderPresenter(Map map, BuilderPresenterState placing, BuilderPresenterState removing)
         {
@@ -69,7 +66,7 @@ namespace Presenter.BuilderLogic
         public void OnPositionSelected(Vector2Int position)
         {
             if(_currentState.TryExecute(position))
-                CorrectPositions = _currentState.GetCorrectPositions(_allPositions);
+                UpdateCorrectPositions();
         }
     }
 }

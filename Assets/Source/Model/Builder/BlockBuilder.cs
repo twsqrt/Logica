@@ -22,7 +22,7 @@ namespace Model.BuilderLogic
         public event Action<Vector2Int> OnRemoved;
         
         private bool IsRootPlacement(Vector2Int position)
-            => _root == null && position == _map.ExecutionPosition;
+            => _root == null && position == _map.RootPosition;
         
         private IEnumerable<BlockSide> GetParentSidesInVicinity(Vector2Int position)
         {
@@ -57,7 +57,7 @@ namespace Model.BuilderLogic
                 return false;
 
             _root = root;
-            _map[_map.ExecutionPosition].TryPlace(root);
+            _map[_map.RootPosition].TryPlace(root);
             OnPlaced?.Invoke(context);
             return true;
         }
@@ -114,7 +114,7 @@ namespace Model.BuilderLogic
             
             _map[position].RemoveBlock();
 
-            if(position == _map.ExecutionPosition)
+            if(position == _map.RootPosition)
                 _root = null;
             
             OnRemoved?.Invoke(position);

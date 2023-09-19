@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Presenter.BuilderLogic
 {
@@ -69,8 +70,8 @@ namespace Presenter.BuilderLogic
             _isDataSelected = false;
         }
 
-        public override IEnumerable<Vector2Int> GetCorrectPositions(IEnumerable<Vector2Int> positions)
-            => positions.Where(p => CanPlace(p) && (p == _map.RootPosition || ExistOnlyOneParent(p, out _)));
+        public override bool IsPositionCorrect(Vector2Int position)
+            => CanPlace(position) && (position == _map.RootPosition || ExistOnlyOneParent(position, out _));
 
         public override bool TryExecute(Vector2Int position)
         {

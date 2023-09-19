@@ -16,7 +16,7 @@ namespace Presenter.BuilderLogic
         public virtual void Exit()
             => OnExit?.Invoke();
 
+        public abstract bool IsPositionCorrect(Vector2Int position);
         public abstract bool TryExecute(Vector2Int position);
-        public abstract IEnumerable<Vector2Int> GetCorrectPositions(IEnumerable<Vector2Int> positions);
     }
 }

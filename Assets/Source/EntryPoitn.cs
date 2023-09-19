@@ -31,7 +31,7 @@ namespace EntryPointLogic
 
         private void Awake()
         {
-            Map map = new Map(_mapConfig);
+            var map = new Map(_mapConfig);
             _mapView.Init(map);
 
             _blockUIViewFactory.Init(_parameterBlocksConfig);
@@ -49,14 +49,14 @@ namespace EntryPointLogic
                 .RegisterParameterInfinity(3)
                 .Build();
             
-            BlockBuilder builder = new BlockBuilder(map, inventory);
+            var builder = new BlockBuilder(map, inventory);
 
-            PlacingPresenter placingPresenter = new PlacingPresenter(map, inventory);
-            BuilderRemovingPresenter removingPresenter = new BuilderRemovingPresenter(builder);
+            var placingPresenter = new PlacingPresenter(map, inventory);
+            var removingPresenter = new RemovingPresenter(map);
 
-            BuilderPresenter builderPresenter = new BuilderPresenter(map, placingPresenter, removingPresenter);
+            var builderPresenter = new BuilderPresenter(map, placingPresenter, removingPresenter);
 
-            TreeToStringConverter treeStringConverter = new TreeToStringConverter(_parameterBlocksConfig);
+            var treeStringConverter = new TreeToStringConverter(_parameterBlocksConfig);
 
             _formulaView.Init(builder, treeStringConverter);
             _builderView.Init(_mapView, builderPresenter);

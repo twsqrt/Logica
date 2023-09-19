@@ -10,7 +10,7 @@ namespace Veiw.BuilderLogic
         [SerializeField] private ComponentHighlighter _highlighter;
         private BuilderPresenter _builderPresenter;
 
-        public void Init(BuilderPresenter builderPresenter, BuilderRemovingPresenter removingPresenter)
+        public void Init(BuilderPresenter builderPresenter, RemovingPresenter removingPresenter)
         {
             _builderPresenter = builderPresenter;
 
