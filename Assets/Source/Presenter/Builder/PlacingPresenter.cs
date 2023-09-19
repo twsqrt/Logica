@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Presenter.BuilderLogic
 {
@@ -45,8 +44,14 @@ namespace Presenter.BuilderLogic
         private bool ExistOnlyOneParent(Vector2Int position, out Vector2Int parentPosition)
         {
             IEnumerable<Vector2Int> parentPositions = GetParentsInVicinity(position);
-            parentPosition = parentPositions.SingleOrDefault();
-            return parentPositions.Count() == 1;
+            if(parentPositions.Count() == 1)
+            {
+                parentPosition = parentPositions.First();
+                return true;
+            }
+
+            parentPosition = Vector2Int.zero;
+            return false;
         }
 
         private bool TryExecuteForRoot(IBlockData _currentData)
