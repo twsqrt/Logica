@@ -12,7 +12,7 @@ namespace View.InventoryLogic
         [SerializeField] private Transform _slotContainer;
 
         private BuilderPresenter _builderPresenter;
-        private BuilderPlacingPresenter _placingPresenter;
+        private PlacingPresenter _placingPresenter;
         private Dictionary<IBlockData, SlotView> _slots;
         private SlotView _currentSlot;
 
@@ -24,7 +24,7 @@ namespace View.InventoryLogic
                 _currentSlot = slot;
                 slot.Highlighter.HighlightEnable();
 
-                _placingPresenter.SelectBlockData(data);
+                _placingPresenter.CurrentData = data;
                 _builderPresenter.ChangeState(BuilderPresenterStateType.PLACING);
             }
         }
@@ -35,7 +35,7 @@ namespace View.InventoryLogic
             _currentSlot = null;
         }
 
-        public void Init(Inventory inventory, BuilderPresenter builderPresenter, BuilderPlacingPresenter placingPresenter)
+        public void Init(Inventory inventory, BuilderPresenter builderPresenter, PlacingPresenter placingPresenter)
         {
             _builderPresenter = builderPresenter;
 

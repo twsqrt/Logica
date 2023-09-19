@@ -7,7 +7,12 @@ namespace Presenter.BuilderLogic
 {
     public class BuilderRemovingPresenter : BuilderPresenterState
     {
-        public BuilderRemovingPresenter(BlockBuilder builder) : base(builder) {}
+        private BlockBuilder _builder;
+
+        public BuilderRemovingPresenter(BlockBuilder builder)
+        {
+            _builder = builder;
+        }
 
         public override IEnumerable<Vector2Int> GetCorrectPositions(IEnumerable<Vector2Int> positions)
             => positions.Where(_builder.CanRemove);

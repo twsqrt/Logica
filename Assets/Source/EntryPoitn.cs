@@ -51,7 +51,7 @@ namespace EntryPointLogic
             
             BlockBuilder builder = new BlockBuilder(map, inventory);
 
-            BuilderPlacingPresenter placingPresenter = new BuilderPlacingPresenter(builder);
+            PlacingPresenter placingPresenter = new PlacingPresenter(map, inventory);
             BuilderRemovingPresenter removingPresenter = new BuilderRemovingPresenter(builder);
 
             BuilderPresenter builderPresenter = new BuilderPresenter(map, placingPresenter, removingPresenter);
