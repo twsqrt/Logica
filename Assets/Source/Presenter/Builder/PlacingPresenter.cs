@@ -35,7 +35,7 @@ namespace Presenter.BuilderLogic
         {
             foreach(Vector2Int vicinityPosition in _map.GetVicinity(position).Where(p => _map[p].IsOccupied))
             {
-                BlockSide toVicinityCenter = BlockSideMapper.BlockSideFromParentPosition(vicinityPosition, position);
+                Direction toVicinityCenter = DirectionMapper.DirectionFromSegment(vicinityPosition, position);
                 if(_map[vicinityPosition].Block.IsAppendCorrect(toVicinityCenter))
                     yield return vicinityPosition;
             }
@@ -89,7 +89,7 @@ namespace Presenter.BuilderLogic
             if(ExistOnlyOneParent(position, out Vector2Int parentPosition) == false)
                 return false;
 
-            BlockSide fromChildToParent = BlockSideMapper.BlockSideFromParentPosition(position, parentPosition);
+            Direction fromChildToParent = DirectionMapper.DirectionFromSegment(position, parentPosition);
             BlockContext context = BlockContext.CreateChildContext(fromChildToParent);
             if(_inventory.TryPullOut(_currentData, context, out Block childBlock) == false)
                 return false;

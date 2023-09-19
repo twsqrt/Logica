@@ -18,10 +18,10 @@ namespace Model.BlockLogic.LogicOperationLogic
         private void OnRemoveHandler() 
             => _operand = null;
 
-        public override bool IsAppendCorrect(BlockSide side)
+        public override bool IsAppendCorrect(Direction direction)
             =>_operand == null;
 
-        public override void Append(BlockSide side, Block operand)
+        public override void Append(Direction direction, Block operand)
         {
             _operand = operand;
             operand.OnDestroy += _ => OnRemoveHandler();

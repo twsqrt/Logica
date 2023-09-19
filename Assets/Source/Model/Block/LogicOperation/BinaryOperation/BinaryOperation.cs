@@ -19,13 +19,13 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
 
         private BinaryOperationStateType GetStartStateType()
         {
-            switch(_context.ParentConnectionSide)
+            switch(_context.DirectionToParent)
             {
-                case BlockSide.UP:
-                case BlockSide.DOWN:
+                case Direction.UP:
+                case Direction.DOWN:
                     return BinaryOperationStateType.OPERANDS_HORIZONTALLY;
-                case BlockSide.LEFT:
-                case BlockSide.RIGHT:
+                case Direction.LEFT:
+                case Direction.RIGHT:
                     return BinaryOperationStateType.OPERANDS_VERTICALLY;
                 default:
                     return BinaryOperationStateType.ROOT;
@@ -54,17 +54,17 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
             _currentState = _states[GetStartStateType()];
         }
 
-        public override bool IsAppendCorrect(BlockSide side)
-            => _currentState.IsAppendCorrect(side);
+        public override bool IsAppendCorrect(Direction direction)
+            => _currentState.IsAppendCorrect(direction);
 
-        public override void Append(BlockSide side, Block childBlock)
+        public override void Append(Direction direction, Block childBlock)
         {
             _operands.Add(childBlock);
             childBlock.OnDestroy += RemoveChild;
 
             _stateHistory.Push(_currentState.StateType);
 
-            BinaryOperationStateType nextStateType = _currentState.NextState(side);
+            BinaryOperationStateType nextStateType = _currentState.NextState(direction);
             _currentState = _states[nextStateType];
         }
 

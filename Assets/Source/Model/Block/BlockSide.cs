@@ -3,7 +3,7 @@ using System;
 namespace Model.BlockLogic
 {
     [Flags]
-    public enum BlockSide
+    public enum Direction
     {
         NONE = 0,
         UP = 1,

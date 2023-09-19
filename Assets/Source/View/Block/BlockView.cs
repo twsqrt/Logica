@@ -26,15 +26,15 @@ namespace View.BlockLogic
 
             if(block.Context.HasParent)
             {
-                BlockSide connectionSide = block.Context.ParentConnectionSide;
+                Direction directionToParent = block.Context.DirectionToParent;
 
                 SpriteRenderer arrow = Instantiate(_arrowPrefab, transform);
 
-                Vector2Int position =  BlockSideMapper.PositionFromBlockSide(connectionSide);
-                arrow.transform.localPosition = new Vector3(position.x, position.y, 0f) * 0.5f;
+                Vector2Int offset =  DirectionMapper.OffsetFromDirection(directionToParent);
+                arrow.transform.localPosition = new Vector3(offset.x, offset.y, 0f) * 0.5f;
 
-                float sideAngle = BlockSideMapper.AngleFromBlockSide(connectionSide);
-                arrow.transform.eulerAngles = new Vector3(0f, 0f, sideAngle + 180f);
+                float angle = DirectionMapper.AngleFromDirection(directionToParent);
+                arrow.transform.eulerAngles = new Vector3(0f, 0f, angle + 180f);
 
                 _highlighter.Register(arrow);
             }

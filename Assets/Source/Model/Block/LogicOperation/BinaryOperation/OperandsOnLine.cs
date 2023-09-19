@@ -14,21 +14,21 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
         private OperandsOnLine( 
             IEnumerable<Block> operands, 
             BinaryOperationStateType type, 
-            BlockSide operandCorrectSides) : base(operandCorrectSides)
+            Direction operandCorrectDirections) : base(operandCorrectDirections)
         {
             _operands = operands;
             _type = type;
         }
 
         public static OperandsOnLine Horizontally(IEnumerable<Block> operands)
-            => new OperandsOnLine(operands, BinaryOperationStateType.OPERANDS_HORIZONTALLY, BlockSide.HORIZONTALLY);
+            => new OperandsOnLine(operands, BinaryOperationStateType.OPERANDS_HORIZONTALLY, Direction.HORIZONTALLY);
 
         public static OperandsOnLine Vertically(IEnumerable<Block> operands)
-            => new OperandsOnLine(operands, BinaryOperationStateType.OPERANDS_VERTICALLY, BlockSide.VERTICALLY);
+            => new OperandsOnLine(operands, BinaryOperationStateType.OPERANDS_VERTICALLY, Direction.VERTICALLY);
 
         public override BinaryOperationStateType StateType => _type;
 
-        public override BinaryOperationStateType NextState(BlockSide side)
+        public override BinaryOperationStateType NextState(Direction direction)
         {
             if(_operands.Count() > 1)
                 return BinaryOperationStateType.ALL_OPERANDS_ADDED;

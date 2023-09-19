@@ -5,18 +5,18 @@ namespace Model.BlockLogic
     public readonly struct BlockContext
     {
         public readonly bool HasParent;
-        public readonly BlockSide ParentConnectionSide;
+        public readonly Direction DirectionToParent;
 
-        private BlockContext(bool hasParent, BlockSide parentConnectionSide)
+        private BlockContext(bool hasParent, Direction directionToParent)
         {
             HasParent = hasParent;
-            ParentConnectionSide = parentConnectionSide;
+            DirectionToParent = directionToParent;
         }
 
         public static BlockContext CreateRootContext()
-            => new BlockContext(false, BlockSide.NONE);
+            => new BlockContext(false, Direction.NONE);
         
-        public static BlockContext CreateChildContext(BlockSide parentConnectionSide)
-            => new BlockContext(true, parentConnectionSide);
+        public static BlockContext CreateChildContext(Direction directionToParent)
+            => new BlockContext(true, directionToParent);
     }
 }

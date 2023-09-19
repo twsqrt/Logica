@@ -4,17 +4,17 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
 {
     public abstract class BinaryOperationState
     {
-        private readonly BlockSide _blockCorrectSides;
+        private readonly Direction _operandCorrectDirections;
 
-        public BinaryOperationState(BlockSide blockCorrectSides)
+        public BinaryOperationState(Direction operandCorrectDirections)
         {
-            _blockCorrectSides = blockCorrectSides;
+            _operandCorrectDirections = operandCorrectDirections;
         }
 
-        public bool IsAppendCorrect(BlockSide side)
-            => (_blockCorrectSides & side) != 0;
+        public bool IsAppendCorrect(Direction direction)
+            => (_operandCorrectDirections & direction) != 0;
 
         public abstract BinaryOperationStateType StateType { get; }
-        public abstract BinaryOperationStateType NextState(BlockSide side);
+        public abstract BinaryOperationStateType NextState(Direction direction);
     }
 }

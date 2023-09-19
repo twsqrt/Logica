@@ -7,19 +7,19 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
 {
     public class Root : BinaryOperationState
     {
-        public Root() : base(BlockSide.ALL) {}
+        public Root() : base(Direction.ALL) {}
 
         public override BinaryOperationStateType StateType => BinaryOperationStateType.ROOT;
 
-        public override BinaryOperationStateType NextState(BlockSide operandSide)
+        public override BinaryOperationStateType NextState(Direction direction)
         {
-            switch(operandSide)
+            switch(direction)
             {
-                case BlockSide.UP:
-                case BlockSide.DOWN:
+                case Direction.UP:
+                case Direction.DOWN:
                     return BinaryOperationStateType.OPERANDS_VERTICALLY;
-                case BlockSide.LEFT:
-                case BlockSide.RIGHT:
+                case Direction.LEFT:
+                case Direction.RIGHT:
                     return BinaryOperationStateType.OPERANDS_HORIZONTALLY;
                 default:
                     return BinaryOperationStateType.ROOT;
