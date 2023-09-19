@@ -9,7 +9,7 @@ namespace View.MapLogic
     public class MapTileView : MonoBehaviour
     {
         [SerializeField] private BlockViewFactory _blockFactory;
-        [SerializeField] private ImageHighlighter _tileHighlighter;
+        [SerializeField] private SpriteHighlighter _tileHighlighter;
 
         private IHighlighter _currentHighlighter;
 
