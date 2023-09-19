@@ -9,7 +9,7 @@ namespace View.BlockLogic
     public abstract class BlockView : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _blockSprite;
-        [SerializeField] private SpriteHighlighter _highlighter;
+        [SerializeField] private ColorHighlighter _highlighter;
         [SerializeField] private SpriteRenderer _arrowPrefab;
 
         public IHighlighter Highlighter => _highlighter;

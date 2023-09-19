@@ -1,35 +1,21 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace View.HighlighterLogic
 {
     public class SpriteHighlighter : MonoBehaviour, IHighlighter
     {
-        [SerializeField] private Color _highlightColor;
-        [SerializeField] [Range(0f, 1f)] private float _lerpCoefficient;
- 
-        private Dictionary<SpriteRenderer, Color> _sprites;
-
-        public void Register(SpriteRenderer sprite)
-        {
-            _sprites.Add(sprite, sprite.color);
-        }
-
-        public void Init()
-        {
-            _sprites = new Dictionary<SpriteRenderer, Color>();
-        }
+        [SerializeField] private SpriteRenderer _spriteRender;
+        [SerializeField] private Sprite _defaultSprite;
+        [SerializeField] private Sprite _highlightSprite;
 
         public void HighlightEnable()
         {
-            foreach(var (renderer, defaultColor) in _sprites)
-                renderer.color = Color.Lerp(defaultColor, _highlightColor, _lerpCoefficient);
+            _spriteRender.sprite = _highlightSprite;
         }
 
         public void HighlightDisable()
         {
-            foreach(var (renderer, defaultColor) in _sprites)
-                renderer.color = defaultColor;
+            _spriteRender.sprite = _defaultSprite;
         }
     }
 }
