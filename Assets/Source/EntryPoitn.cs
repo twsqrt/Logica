@@ -1,19 +1,17 @@
 using Config;
-using Model.BlockLogic.BlockDataLogic;
 using Model.BlockLogic.LogicOperationLogic;
 using Model.BlockLogic;
-using Model.BuilderLogic;
 using Model.InventoryLogic;
 using Model.MapLogic;
+using Model.TreeConverterLogic;
 using Presenter.BuilderLogic;
 using UnityEngine;
+using Veiw.BuilderLogic;
 using View.BlockLogic;
 using View.BuilderLogic;
 using View.InventoryLogic;
 using View.MapLogic;
-using Veiw.BuilderLogic;
 using View;
-using Model.TreeConverterLogic;
 
 namespace EntryPointLogic
 {
@@ -49,8 +47,6 @@ namespace EntryPointLogic
                 .RegisterParameterInfinity(3)
                 .Build();
             
-            var builder = new BlockBuilder(map, inventory);
-
             var placingPresenter = new PlacingPresenter(map, inventory);
             var removingPresenter = new RemovingPresenter(map);
 
@@ -58,7 +54,7 @@ namespace EntryPointLogic
 
             var treeStringConverter = new TreeToStringConverter(_parameterBlocksConfig);
 
-            _formulaView.Init(builder, treeStringConverter);
+            _formulaView.Init(map, builderPresenter, treeStringConverter);
             _builderView.Init(_mapView, builderPresenter);
             _removingButton.Init(builderPresenter, removingPresenter);
             _inventoryView.Init(inventory, builderPresenter, placingPresenter);

@@ -1,26 +1,26 @@
+using Model.MapLogic;
 using Model.BlockLogic;
-using Model.BuilderLogic;
 using Model.TreeConverterLogic;
 using TMPro;
 using UnityEngine;
+using Presenter.BuilderLogic;
 
 namespace View
 {
     public class FormulaView : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _tmp;
+        [SerializeField] private TextMeshProUGUI _formulaText;
 
         private TreeToStringConverter _converter;
 
         private void WriteFromRoot(Block root)
-            => _tmp.text = root != null ? root.Accept(_converter) : string.Empty;
+            => _formulaText.text = root != null ? root.Accept(_converter) : string.Empty;
 
-        public void Init(BlockBuilder builder, TreeToStringConverter conveter)
+        public void Init(Map map, BuilderPresenter builder, TreeToStringConverter conveter)
         {
             _converter = conveter;
-
-            builder.OnPlaced += _ => WriteFromRoot(builder.Root);
-            builder.OnRemoved += _ => WriteFromRoot(builder.Root);
+            MapTile rootTile = map[map.RootPosition];
+            builder.OnExecuted += () => WriteFromRoot(rootTile.Block);
         }
     }
 }

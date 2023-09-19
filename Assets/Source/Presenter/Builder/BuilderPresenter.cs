@@ -19,6 +19,7 @@ namespace Presenter.BuilderLogic
 
         public event Action<BuilderPresenterStateType> OnStateChanged;
         public event Action<IEnumerable<Vector2Int>> OnCorrectPositionsChanged;
+        public event Action OnExecuted;
 
         private void UpdateCorrectPositions()
         {
@@ -66,7 +67,10 @@ namespace Presenter.BuilderLogic
         public void OnPositionSelected(Vector2Int position)
         {
             if(_currentState.TryExecute(position))
+            {
                 UpdateCorrectPositions();
+                OnExecuted?.Invoke();
+            }
         }
     }
 }
