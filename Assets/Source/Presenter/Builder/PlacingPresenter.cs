@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using UnityEngine;
-using TMPro.EditorUtilities;
 
 namespace Presenter.BuilderLogic
 {
@@ -17,7 +16,6 @@ namespace Presenter.BuilderLogic
         private readonly Inventory _inventory;
 
         private IBlockData _currentData;
-        private Block _root;
         private bool _isDataSelected;
 
         public event Action<IBlockData> OnDataSelected;
@@ -33,28 +31,21 @@ namespace Presenter.BuilderLogic
             }
         }
 
-        private bool IsRootPlacement(Vector2Int position)
-            => _root == null && position == _map.ExecutionPosition;
-        
-        private bool ExistOnlyOneParent(Vector2Int position, out Vector2Int parentPosition)
+        private IEnumerable<Vector2Int> GetParentsInVicinity(Vector2Int position)
         {
-            parentPosition = Vector2Int.zero;
-
-            bool isPositionAlreadySelected = false;
             foreach(Vector2Int vicinityPosition in _map.GetVicinity(position).Where(p => _map[p].IsOccupied))
             {
                 BlockSide toVicinityCenter = BlockSideMapper.BlockSideFromParentPosition(vicinityPosition, position);
                 if(_map[vicinityPosition].Block.IsAppendCorrect(toVicinityCenter))
-                {
-                    if(isPositionAlreadySelected)
-                        return false;
-
-                    isPositionAlreadySelected = true;
-                    parentPosition = vicinityPosition;
-                }
+                    yield return vicinityPosition;
             }
+        }
 
-            return isPositionAlreadySelected;
+        private bool ExistOnlyOneParent(Vector2Int position, out Vector2Int parentPosition)
+        {
+            IEnumerable<Vector2Int> parentPositions = GetParentsInVicinity(position);
+            parentPosition = parentPositions.SingleOrDefault();
+            return parentPositions.Count() == 1;
         }
 
         private bool TryExecuteForRoot(IBlockData _currentData)
@@ -63,8 +54,7 @@ namespace Presenter.BuilderLogic
             if(_inventory.TryPullOut(_currentData, context, out Block root) == false)
                 return false;
 
-            _root = root;
-            _map[_map.ExecutionPosition].TryPlace(root);
+            _map[_map.RootPosition].TryPlace(root);
             return true;
         }
 
@@ -80,14 +70,14 @@ namespace Presenter.BuilderLogic
         }
 
         public override IEnumerable<Vector2Int> GetCorrectPositions(IEnumerable<Vector2Int> positions)
-            => positions.Where(p => CanPlace(p) && ( IsRootPlacement(p) || ExistOnlyOneParent(p, out _)));
+            => positions.Where(p => CanPlace(p) && (p == _map.RootPosition || ExistOnlyOneParent(p, out _)));
 
         public override bool TryExecute(Vector2Int position)
         {
             if(_isDataSelected == false || CanPlace(position) == false)
                 return false;
 
-            if(IsRootPlacement(position))
+            if(position == _map.RootPosition)
                 return TryExecuteForRoot(_currentData);
 
             if(ExistOnlyOneParent(position, out Vector2Int parentPosition) == false)
