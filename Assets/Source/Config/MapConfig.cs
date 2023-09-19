@@ -7,10 +7,10 @@ namespace Config
     {
         [SerializeField] private int _width;
         [SerializeField] private int _height;
-        [SerializeField] private Vector2Int _executionPoint;
+        [SerializeField] private Vector2Int _rootPosition;
 
         public int Widht => _width;
         public int Height => _height;
-        public Vector2Int ExecutionPoint => _executionPoint;
+        public Vector2Int RootPosition => _rootPosition;
     }
 }
