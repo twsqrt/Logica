@@ -5,7 +5,7 @@ using Model.BlockLogic;
 using System.Collections.Generic;
 using System;
 
-namespace Model.TreeConverterLogic
+namespace Model.TreeLogic
 {
     public class TreeToStringConverter : IBlockVisitor<string>
     {
