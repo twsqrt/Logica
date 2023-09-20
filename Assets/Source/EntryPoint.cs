@@ -15,7 +15,7 @@ using View;
 
 namespace EntryPointLogic
 {
-    public class EntryPoitn : MonoBehaviour
+    public class EntryPoint : MonoBehaviour
     {
         [SerializeField] private MapConfig _mapConfig;
         [SerializeField] private ParameterBlocksConfig _parameterBlocksConfig;
