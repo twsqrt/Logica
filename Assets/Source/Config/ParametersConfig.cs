@@ -5,8 +5,8 @@ using UnityEngine;
 
 namespace Config
 {
-    [CreateAssetMenu(fileName = "ParameterBlocksConfig", menuName = "Config/ParameterBlocksConfig", order = 51)]
-    public class ParameterBlocksConfig : ScriptableObject
+    [CreateAssetMenu(fileName = "ParametersConfig", menuName = "Config/ParametersConfig", order = 51)]
+    public class ParametersConfig : ScriptableObject
     {
         [Serializable]
         private class ParameterInfo
@@ -16,6 +16,11 @@ namespace Config
         }
 
         [SerializeField] private List<ParameterInfo> _names;
+
+        public int NumberOfParameters => _names.Count();
+
+        public IEnumerable<int> GetParametersId()
+            => _names.Select(p => p.Id);
 
         public Dictionary<int, string> GetParameterNameByIdDictionary()
             => _names.ToDictionary(p => p.Id, p => p.Name);

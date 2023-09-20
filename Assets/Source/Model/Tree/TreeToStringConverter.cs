@@ -37,7 +37,7 @@ namespace Model.TreeLogic
             return isBracketsNeded ? $"({operandText})" : operandText;
         }
 
-        public TreeToStringConverter(ParameterBlocksConfig config)
+        public TreeToStringConverter(ParametersConfig config)
         {
             _parameterNames = config.GetParameterNameByIdDictionary();
         }

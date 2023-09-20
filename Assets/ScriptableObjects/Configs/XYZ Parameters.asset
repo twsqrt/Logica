@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20bf01db71a9ca148a73b8f0a53178ef, type: 3}
-  m_Name: ParameterBlocksConfig
+  m_Script: {fileID: 11500000, guid: f1e53e01a26aab64d9358c8f39bb1cd0, type: 3}
+  m_Name: XYZ Parameters
   m_EditorClassIdentifier: 
   _names:
   - Id: 1

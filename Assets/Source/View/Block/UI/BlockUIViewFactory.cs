@@ -16,7 +16,7 @@ namespace View.BlockLogic
 
         private Dictionary<int, string> _parameterNames;
 
-        public void Init(ParameterBlocksConfig config)
+        public void Init(ParametersConfig config)
         {
             _parameterNames = config.GetParameterNameByIdDictionary();
         }
