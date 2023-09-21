@@ -5,6 +5,7 @@ using Model.InventoryLogic;
 using Model.MapLogic;
 using Model.TreeLogic;
 using Presenter.BuilderLogic;
+using Presenter;
 using UnityEngine;
 using Veiw.BuilderLogic;
 using View.BlockLogic;
@@ -25,7 +26,7 @@ namespace EntryPointLogic
         [SerializeField] private BuilderView _builderView;
         [SerializeField] private RemovingButton _removingButton;
         [SerializeField] private InventoryView _inventoryView;
-        [SerializeField] private FormulaView _formulaView;
+        [SerializeField] private PlayerFormulaView _formulaView;
         [SerializeField] private ExecutionButton _executionButton;
 
         private void Awake()
@@ -56,7 +57,9 @@ namespace EntryPointLogic
             var treeStringConverter = new TreeToStringConverter(_parameterBlocksConfig);
             var treeVerifier = new TreeVerifier();
 
-            _formulaView.Init(map, builderPresenter, treeStringConverter);
+            var formulaPresenter = new PlayerFormulaPresenter(map, treeStringConverter);
+
+            _formulaView.Init(formulaPresenter, builderPresenter);
             _builderView.Init(_mapView, builderPresenter);
             _removingButton.Init(builderPresenter, removingPresenter);
             _inventoryView.Init(inventory, builderPresenter, placingPresenter);
