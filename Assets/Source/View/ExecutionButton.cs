@@ -5,45 +5,35 @@ using Model.TreeLogic;
 using Model.MapLogic;
 using Presenter.BuilderLogic;
 using Model.BlockLogic;
-using System;
+using Presenter;
+using Unity.VisualScripting;
 
 namespace View
 {
     public class ExecutionButton : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] private UIColorHighlighter _highlighter;
-        
-        private TreeVerifier _treeVerifier;
-        private bool _isTreeCorrect;
 
-        public bool IsTreeCorrect
+        private ExecutionPresenter _presenter;
+
+        private void UpdateButtonView()
         {
-            get => _isTreeCorrect;
-            private set 
-            {
-                _isTreeCorrect = value;
-
-                if(_isTreeCorrect) 
-                    _highlighter.HighlightEnable();
-                else
-                    _highlighter.HighlightDisable();
-            }
+            if(_presenter.CanExecute())
+                _highlighter.HighlightEnable();
+            else
+                _highlighter.HighlightDisable();
         }
 
-        private void CheckTree(Block root)
-            => IsTreeCorrect = root != null && root.Accept(_treeVerifier);
-
-        public void Init(Map map, BuilderPresenter builderPresenter, TreeVerifier treeVerifier)
+        public void Init(BuilderPresenter builder, ExecutionPresenter presenter)
         {
-            _treeVerifier = treeVerifier;
-            MapTile rootTile = map[map.RootPosition];
-            builderPresenter.OnExecuted += () => CheckTree(rootTile.Block);
+            _presenter = presenter;
 
-            CheckTree(rootTile.Block);
+            builder.OnExecuted += UpdateButtonView;
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
+
         }
     }
 }
