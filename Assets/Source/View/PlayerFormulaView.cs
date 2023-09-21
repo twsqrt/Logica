@@ -7,7 +7,7 @@ using Presenter.BuilderLogic;
 
 namespace View
 {
-    public class FormulaView : MonoBehaviour
+    public class PlayerFormulaView : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _formulaText;
 
