@@ -6,6 +6,7 @@ using Model.MapLogic;
 using Presenter.BuilderLogic;
 using Model.BlockLogic;
 using System;
+using System.Xml;
 
 namespace View
 {
@@ -15,6 +16,8 @@ namespace View
         
         private TreeVerifier _treeVerifier;
         private bool _isTreeCorrect;
+
+        public event Action OnClick;
 
         public bool IsTreeCorrect
         {
@@ -44,6 +47,8 @@ namespace View
 
         public void OnPointerClick(PointerEventData eventData)
         {
+            if(_isTreeCorrect)
+                OnClick?.Invoke();
         }
     }
 }

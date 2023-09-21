@@ -12,6 +12,7 @@ using View.BuilderLogic;
 using View.InventoryLogic;
 using View.MapLogic;
 using View;
+using Model;
 
 namespace EntryPointLogic
 {
@@ -56,11 +57,15 @@ namespace EntryPointLogic
             var treeStringConverter = new TreeToStringConverter(_parametersConfig);
             var treeVerifier = new TreeVerifier();
 
+            var treeExpressionConverter = new TreeToExpressionConverter(_parametersConfig);
+            var rule = new FormulaRule(null, _parametersConfig, treeExpressionConverter);
+
             _formulaView.Init(map, builderPresenter, treeStringConverter);
             _builderView.Init(_mapView, builderPresenter);
             _removingButton.Init(builderPresenter, removingPresenter);
             _inventoryView.Init(inventory, builderPresenter, placingPresenter);
             _executionButton.Init(map, builderPresenter, treeVerifier);
+            _executionButton.OnClick += () => Debug.Log(rule.Execute(map));
         }
     }
 }
