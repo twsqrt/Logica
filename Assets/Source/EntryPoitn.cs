@@ -20,6 +20,7 @@ namespace EntryPointLogic
     {
         [SerializeField] private MapConfig _mapConfig;
         [SerializeField] private ParametersConfig _parametersConfig;
+        [SerializeField] private FormulaRuleConfig _formulaRuleConfig;
         [SerializeField] private BlockUIViewFactory _blockUIViewFactory;
         [SerializeField] private BlockViewFactory _blockViewFactory;
         [SerializeField] private MapView _mapView;
@@ -58,8 +59,8 @@ namespace EntryPointLogic
             var tree = new BlockTree(map);
 
             var treeExpressionConverter = new TreeToExpressionConverter(_parametersConfig);
-            var rule = new FormulaRule(null, _parametersConfig, treeExpressionConverter);
-
+            var rule = new FormulaRule(_formulaRuleConfig, _parametersConfig, treeExpressionConverter);
+    
             _formulaView.Init(tree, builderPresenter, treeStringConverter);
             _builderView.Init(_mapView, builderPresenter);
             _removingButton.Init(builderPresenter, removingPresenter);
