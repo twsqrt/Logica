@@ -1,13 +1,11 @@
-using Model.MapLogic;
+using Config;
+using Extensions;
+using Model.TreeLogic;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Extensions;
-using Config;
-using Model.TreeLogic;
 using System.Linq;
 using System;
 using UnityEngine;
-using Model.BlockLogic;
 
 namespace Model
 {
@@ -19,22 +17,20 @@ namespace Model
         //template
         private readonly Func<bool, bool, bool, bool> _sourceFunction;
 
-        public FormulaRule(FormulaRuleConfig ruleConfig, ParametersConfig parametersConfig, TreeToExpressionConverter treeConverter)
+        public FormulaRule(FormulaRuleConfig ruleConfig, TreeToExpressionConverter treeConverter)
         {
             _treeConverter = treeConverter;
 
             IEnumerable<bool> booleanDomain = new[]{false, true};
-            _definitionArea = booleanDomain.InPower(parametersConfig.NumberOfParameters).Select(s => s.ToArray());
+            _definitionArea = booleanDomain.InPower(treeConverter.Parameters.Count()).Select(s => s.ToArray());
 
             //template
             _sourceFunction = (bool id1, bool id2, bool id3) => !(id1 && id3) || id2;
         }
 
-        public bool Execute(Map map)
+        public bool Execute(BlockTree tree)
         {
-            Block root = map[map.RootPosition].Block;
-
-            Expression body = root.Accept(_treeConverter);
+            Expression body = tree.Root.Accept(_treeConverter);
             LambdaExpression lambdaExpression = Expression.Lambda(body, _treeConverter.Parameters);
             Delegate playerFunction = lambdaExpression.Compile();
 

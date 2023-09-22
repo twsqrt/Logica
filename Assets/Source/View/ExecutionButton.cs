@@ -1,11 +1,8 @@
-using View.HighlighterLogic;
-using UnityEngine;
-using UnityEngine.EventSystems;
-using Model.TreeLogic;
-using Model.MapLogic;
 using Presenter.BuilderLogic;
-using Model.BlockLogic;
-using System;
+using Presenter;
+using UnityEngine.EventSystems;
+using UnityEngine;
+using View.HighlighterLogic;
 
 namespace View
 {
@@ -13,32 +10,26 @@ namespace View
     {
         [SerializeField] private UIColorHighlighter _highlighter;
 
-        private BlockTree _tree;
-        private bool _isCorrect;
+        private ExecutionPresenter _presenter;
 
-        public event Action OnClick;
-
-        private void UpdateHiglighting()
+        private void UpdateButtonView()
         {
-            _isCorrect = _tree.IsCorrect();
-            if(_isCorrect)
+            if(_presenter.CanExecute())
                 _highlighter.HighlightEnable();
             else
                 _highlighter.HighlightDisable();
         }
 
-        public void Init(BlockTree tree, BuilderPresenter builderPresenter)
+        public void Init(BuilderPresenter builder, ExecutionPresenter presenter)
         {
-            _tree = tree;
-            _isCorrect = false;
+            _presenter = presenter;
 
-            builderPresenter.OnExecuted += UpdateHiglighting;
+            builder.OnExecuted += UpdateButtonView;
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if(_isCorrect)
-                OnClick?.Invoke();
+            _presenter.TryExecute();
         }
     }
 }

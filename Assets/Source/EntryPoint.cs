@@ -12,22 +12,25 @@ using View.BuilderLogic;
 using View.InventoryLogic;
 using View.MapLogic;
 using View;
+using Presenter;
 using Model;
 
 namespace EntryPointLogic
 {
-    public class EntryPoitn : MonoBehaviour
+    public class EntryPoint : MonoBehaviour
     {
         [SerializeField] private MapConfig _mapConfig;
         [SerializeField] private ParametersConfig _parametersConfig;
         [SerializeField] private FormulaRuleConfig _formulaRuleConfig;
+
         [SerializeField] private BlockUIViewFactory _blockUIViewFactory;
         [SerializeField] private BlockViewFactory _blockViewFactory;
+
         [SerializeField] private MapView _mapView;
         [SerializeField] private BuilderView _builderView;
         [SerializeField] private RemovingButton _removingButton;
         [SerializeField] private InventoryView _inventoryView;
-        [SerializeField] private FormulaView _formulaView;
+        [SerializeField] private PlayerFormulaView _formulaView;
         [SerializeField] private ExecutionButton _executionButton;
 
         private void Awake()
@@ -52,21 +55,20 @@ namespace EntryPointLogic
             
             var placingPresenter = new PlacingPresenter(map, inventory);
             var removingPresenter = new RemovingPresenter(map);
-
             var builderPresenter = new BuilderPresenter(map, placingPresenter, removingPresenter);
 
-            var treeStringConverter = new TreeToStringConverter(_parametersConfig);
             var tree = new BlockTree(map);
-
+            var treeStringConverter = new TreeToStringConverter(_parametersConfig);
+            var playerFormulaPresenter = new PlayerFormulaPresenter(tree, treeStringConverter);
             var treeExpressionConverter = new TreeToExpressionConverter(_parametersConfig);
-            var rule = new FormulaRule(_formulaRuleConfig, _parametersConfig, treeExpressionConverter);
-    
-            _formulaView.Init(tree, builderPresenter, treeStringConverter);
+            var formulaRule = new FormulaRule(_formulaRuleConfig, treeExpressionConverter);
+            var executionPresenter = new ExecutionPresenter(tree, formulaRule);
+
+            _formulaView.Init(playerFormulaPresenter, builderPresenter);
             _builderView.Init(_mapView, builderPresenter);
             _removingButton.Init(builderPresenter, removingPresenter);
             _inventoryView.Init(inventory, builderPresenter, placingPresenter);
-            _executionButton.Init(tree, builderPresenter);
-            _executionButton.OnClick += () => Debug.Log(rule.Execute(map));
+            _executionButton.Init(builderPresenter, executionPresenter);
         }
     }
 }
