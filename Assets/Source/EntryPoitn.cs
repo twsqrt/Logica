@@ -55,16 +55,16 @@ namespace EntryPointLogic
             var builderPresenter = new BuilderPresenter(map, placingPresenter, removingPresenter);
 
             var treeStringConverter = new TreeToStringConverter(_parametersConfig);
-            var treeVerifier = new TreeVerifier();
+            var tree = new BlockTree(map);
 
             var treeExpressionConverter = new TreeToExpressionConverter(_parametersConfig);
             var rule = new FormulaRule(null, _parametersConfig, treeExpressionConverter);
 
-            _formulaView.Init(map, builderPresenter, treeStringConverter);
+            _formulaView.Init(tree, builderPresenter, treeStringConverter);
             _builderView.Init(_mapView, builderPresenter);
             _removingButton.Init(builderPresenter, removingPresenter);
             _inventoryView.Init(inventory, builderPresenter, placingPresenter);
-            _executionButton.Init(map, builderPresenter, treeVerifier);
+            _executionButton.Init(tree, builderPresenter);
             _executionButton.OnClick += () => Debug.Log(rule.Execute(map));
         }
     }

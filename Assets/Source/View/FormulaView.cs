@@ -1,5 +1,3 @@
-using Model.MapLogic;
-using Model.BlockLogic;
 using Model.TreeLogic;
 using TMPro;
 using UnityEngine;
@@ -11,16 +9,17 @@ namespace View
     {
         [SerializeField] private TextMeshProUGUI _formulaText;
 
+        private BlockTree _tree;
         private TreeToStringConverter _converter;
 
-        private void WriteFromRoot(Block root)
-            => _formulaText.text = root != null ? root.Accept(_converter) : string.Empty;
+        private void UpdateText()
+            => _formulaText.text = _tree.IsEmpty ? string.Empty : _tree.Root.Accept(_converter);
 
-        public void Init(Map map, BuilderPresenter builder, TreeToStringConverter conveter)
+        public void Init(BlockTree tree, BuilderPresenter builder, TreeToStringConverter conveter)
         {
+            _tree = tree;
             _converter = conveter;
-            MapTile rootTile = map[map.RootPosition];
-            builder.OnExecuted += () => WriteFromRoot(rootTile.Block);
+            builder.OnExecuted   += UpdateText;
         }
     }
 }
