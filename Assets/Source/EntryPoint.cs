@@ -14,6 +14,7 @@ using View.MapLogic;
 using View;
 using Presenter;
 using Model;
+using Converter;
 
 namespace EntryPointLogic
 {
@@ -58,10 +59,13 @@ namespace EntryPointLogic
             var builderPresenter = new BuilderPresenter(map, placingPresenter, removingPresenter);
 
             var tree = new BlockTree(map);
-            var treeStringConverter = new TreeToStringConverter(_parametersConfig);
-            var playerFormulaPresenter = new PlayerFormulaPresenter(tree, treeStringConverter);
-            var treeExpressionConverter = new TreeToExpressionConverter(_parametersConfig);
-            var formulaRule = new FormulaRule(_formulaRuleConfig, treeExpressionConverter);
+            var treeToViewString = new TreeToViewString(_parametersConfig);
+            var playerFormulaPresenter = new PlayerFormulaPresenter(tree, treeToViewString);
+
+            var configStringToDelegate = new ConfigStringToDelegate();
+            var TreeToDelegate = new TreeToDelegate(_parametersConfig);
+            var formulaRule = new FormulaRule(_formulaRuleConfig, _parametersConfig, configStringToDelegate, TreeToDelegate);
+
             var executionPresenter = new ExecutionPresenter(tree, formulaRule);
 
             _formulaView.Init(playerFormulaPresenter, builderPresenter);

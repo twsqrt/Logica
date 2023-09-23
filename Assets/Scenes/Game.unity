@@ -1443,6 +1443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mapConfig: {fileID: 11400000, guid: aa48fea22561c8a42b23beacf5ef4323, type: 2}
   _parametersConfig: {fileID: 11400000, guid: 6de2fc87c3a76284ab042b431be73dab, type: 2}
+  _formulaRuleConfig: {fileID: 11400000, guid: 8b3e26c201abadf49a417ae80a4eea99, type: 2}
   _blockUIViewFactory: {fileID: 11400000, guid: 0bc38d65d0e123f4198acfc430e13d65, type: 2}
   _blockViewFactory: {fileID: 11400000, guid: d3eb46a091f56484fb4ddc1651dab7c2, type: 2}
   _mapView: {fileID: 19607403}
@@ -1541,8 +1542,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1196763498481478729, guid: e7b8567766c8adf44b87cca348fbee85, type: 3}
+      propertyPath: m_Color.b
+      value: 0.19999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 1196763498481478729, guid: e7b8567766c8adf44b87cca348fbee85, type: 3}
       propertyPath: m_Color.g
       value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1196763498481478729, guid: e7b8567766c8adf44b87cca348fbee85, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3722806657850102562, guid: e7b8567766c8adf44b87cca348fbee85, type: 3}
       propertyPath: m_Pivot.x
