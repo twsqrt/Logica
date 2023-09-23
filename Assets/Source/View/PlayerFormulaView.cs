@@ -1,7 +1,7 @@
+using Model.TreeLogic;
+using Presenter;
 using TMPro;
 using UnityEngine;
-using Presenter.BuilderLogic;
-using Presenter;
 
 namespace View
 {
@@ -9,9 +9,9 @@ namespace View
     {
         [SerializeField] private TextMeshProUGUI _formulaText;
 
-        public void Init(PlayerFormulaPresenter formulaPresenter, BuilderPresenter builder)
+        public void Init(BlockTree tree, PlayerFormulaPresenter formulaPresenter)
         {
-            builder.OnExecuted += () => _formulaText.text = formulaPresenter.GetFormulaString();
+            tree.OnChanged += () => _formulaText.text = formulaPresenter.GetFormulaString();
         }
     }
 }

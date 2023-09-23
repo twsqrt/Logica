@@ -31,7 +31,7 @@ namespace EntryPointLogic
         [SerializeField] private BuilderView _builderView;
         [SerializeField] private RemovingButton _removingButton;
         [SerializeField] private InventoryView _inventoryView;
-        [SerializeField] private PlayerFormulaView _formulaView;
+        [SerializeField] private PlayerFormulaView _playerFormulaView;
         [SerializeField] private ExecutionButton _executionButton;
 
         private void Awake()
@@ -68,11 +68,11 @@ namespace EntryPointLogic
 
             var executionPresenter = new ExecutionPresenter(tree, formulaRule);
 
-            _formulaView.Init(playerFormulaPresenter, builderPresenter);
+            _playerFormulaView.Init(tree, playerFormulaPresenter);
             _builderView.Init(_mapView, builderPresenter);
             _removingButton.Init(builderPresenter, removingPresenter);
             _inventoryView.Init(inventory, builderPresenter, placingPresenter);
-            _executionButton.Init(builderPresenter, executionPresenter);
+            _executionButton.Init(tree, executionPresenter);
         }
     }
 }

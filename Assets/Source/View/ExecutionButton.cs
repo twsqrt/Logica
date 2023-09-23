@@ -1,8 +1,8 @@
-using Presenter.BuilderLogic;
 using Presenter;
 using UnityEngine.EventSystems;
 using UnityEngine;
 using View.HighlighterLogic;
+using Model.TreeLogic;
 
 namespace View
 {
@@ -20,11 +20,10 @@ namespace View
                 _highlighter.HighlightDisable();
         }
 
-        public void Init(BuilderPresenter builder, ExecutionPresenter presenter)
+        public void Init(BlockTree tree, ExecutionPresenter presenter)
         {
             _presenter = presenter;
-
-            builder.OnExecuted += UpdateButtonView;
+            tree.OnChanged += UpdateButtonView;
         }
 
         public void OnPointerClick(PointerEventData eventData)
