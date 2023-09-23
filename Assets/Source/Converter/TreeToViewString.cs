@@ -79,6 +79,6 @@ namespace Converter
         }
         
         public string Converter(BlockTree tree)
-            => tree.IsEmpty ? string.Empty : tree.Root.Accept(_visitor);
+            => tree.IsEmpty ? string.Empty : tree.CurrentRoot.Accept(_visitor);
     }
 }

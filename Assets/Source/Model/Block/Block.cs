@@ -9,6 +9,7 @@ namespace Model.BlockLogic
         protected readonly BlockType _blockType;
 
         public event Action<Block> OnDestroy;
+        public event Action OnSubTreeChanged;
 
         public BlockContext Context => _context;
         public BlockType BlockType => _blockType;
@@ -18,6 +19,9 @@ namespace Model.BlockLogic
             _blockType = blockType;
             _context = context;
         }
+
+        protected void OnSubTreeChangedInvoke()
+            => OnSubTreeChanged?.Invoke();
 
         public void Destroy() => OnDestroy?.Invoke(this);
 

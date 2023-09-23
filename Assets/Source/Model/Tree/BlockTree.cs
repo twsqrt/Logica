@@ -2,12 +2,13 @@ using Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic;
 using Model.BlockLogic.LogicOperationLogic;
 using Model.BlockLogic;
 using Model.MapLogic;
+using System;
 
 namespace Model.TreeLogic
 {
     public class BlockTree
     {
-        private class Visitor : IBlockVisitor<bool>
+        private class Verifier : IBlockVisitor<bool>
         {
             public bool Visit(OperationNot operationNot)
                 => operationNot.HasOperands() && operationNot.Operand.Accept(this);
@@ -26,18 +27,45 @@ namespace Model.TreeLogic
         }
 
 
-        private readonly Visitor _visitor;
-        private readonly Map _map; 
-        public Block Root => _map[_map.RootPosition].Block;
-        public bool IsEmpty => Root == null;
+        private readonly Verifier _verifier;
+        private readonly MapTile _rootTile;
+
+        private Block _currentRoot;
+
+        public event Action OnChanged;
+
+
+        public Block CurrentRoot => _currentRoot;
+
+        public bool IsEmpty => _currentRoot == null;
+
+        private void OnRootSubTreeChanged()
+            => OnChanged?.Invoke();
+
+        private void SetRoot(Block root)
+        {
+            _currentRoot = root;
+            root.OnSubTreeChanged += OnRootSubTreeChanged;
+            OnChanged?.Invoke();
+        }
+
+        private void RemoveRoot()
+        {
+            _currentRoot.OnSubTreeChanged -= OnRootSubTreeChanged;
+            _currentRoot = null;
+            OnChanged?.Invoke();
+        }
 
         public BlockTree(Map map)
         {
-            _visitor = new Visitor();
-            _map = map;
+            _verifier = new Verifier();
+            _rootTile = map[map.RootPosition];
+
+            _rootTile.OnBlockPlaced += SetRoot;
+            _rootTile.OnBlockRemoved += RemoveRoot;
         }
 
         public bool IsCorrect()
-            => Root != null && Root.Accept(_visitor);
+            => IsEmpty == false && _currentRoot.Accept(_verifier);
     }
 }
