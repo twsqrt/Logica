@@ -3,6 +3,8 @@ using Model.BlockLogic.LogicOperationLogic;
 using Model.BlockLogic;
 using Model.MapLogic;
 using System;
+using UnityEngine;
+using Config;
 
 namespace Model.TreeLogic
 {
@@ -56,10 +58,10 @@ namespace Model.TreeLogic
             OnChanged?.Invoke();
         }
 
-        public BlockTree(Map map)
+        public BlockTree(TreeConfig config, Map map)
         {
             _verifier = new Verifier();
-            _rootTile = map[map.RootPosition];
+            _rootTile = map[config.RootPosition];
 
             _rootTile.OnBlockPlaced += SetRoot;
             _rootTile.OnBlockRemoved += RemoveRoot;

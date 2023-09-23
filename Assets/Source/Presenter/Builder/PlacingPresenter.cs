@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using UnityEngine;
+using Config;
 
 namespace Presenter.BuilderLogic
 {
@@ -14,6 +15,7 @@ namespace Presenter.BuilderLogic
     {
         private readonly Map _map;
         private readonly Inventory _inventory;
+        private readonly Vector2Int _rootPosition;
 
         private IBlockData _currentData;
         private bool _isDataSelected;
@@ -60,30 +62,31 @@ namespace Presenter.BuilderLogic
             if(_inventory.TryPullOut(_currentData, context, out Block root) == false)
                 return false;
 
-            _map[_map.RootPosition].TryPlace(root);
+            _map[_rootPosition].TryPlace(root);
             return true;
         }
 
         private bool CanPlace(Vector2Int position)
             => _map.PositionInMap(position) && _map[position].IsOccupied == false;
 
-        public PlacingPresenter(Map map, Inventory inventory)
+        public PlacingPresenter(Map map, Inventory inventory, TreeConfig treeConfig)
         {
             _map = map;
             _inventory = inventory;
+            _rootPosition = treeConfig.RootPosition;
 
             _isDataSelected = false;
         }
 
         public override bool IsPositionCorrect(Vector2Int position)
-            => CanPlace(position) && (position == _map.RootPosition || ExistOnlyOneParent(position, out _));
+            => CanPlace(position) && (position == _rootPosition || ExistOnlyOneParent(position, out _));
 
         public override bool TryExecute(Vector2Int position)
         {
             if(_isDataSelected == false || CanPlace(position) == false)
                 return false;
 
-            if(position == _map.RootPosition)
+            if(position == _rootPosition)
                 return TryExecuteForRoot(_currentData);
 
             if(ExistOnlyOneParent(position, out Vector2Int parentPosition) == false)

@@ -10,18 +10,15 @@ namespace Model.MapLogic
     {
         private readonly int _width;
         private readonly int _height;
-        private readonly Vector2Int _rootPosition;
         private readonly MapTile[] _tiles;
 
         public int Width => _width;
         public int Height => _height;
-        public Vector2Int RootPosition => _rootPosition;
 
         public Map(MapConfig config)
         {
             _width = config.Widht;
             _height = config.Height;
-            _rootPosition = config.RootPosition;
 
             _tiles = new MapTile[_width * _height]; 
             for(int i = 0; i < _tiles.Length; i++)

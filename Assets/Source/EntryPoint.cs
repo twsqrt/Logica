@@ -21,6 +21,7 @@ namespace EntryPointLogic
     public class EntryPoint : MonoBehaviour
     {
         [SerializeField] private MapConfig _mapConfig;
+        [SerializeField] private TreeConfig _treeConfig;
         [SerializeField] private ParametersConfig _parametersConfig;
         [SerializeField] private FormulaRuleConfig _formulaRuleConfig;
 
@@ -54,11 +55,11 @@ namespace EntryPointLogic
                 .RegisterParameterInfinity(3)
                 .Build();
             
-            var placingPresenter = new PlacingPresenter(map, inventory);
+            var placingPresenter = new  PlacingPresenter(map, inventory, _treeConfig);
             var removingPresenter = new RemovingPresenter(map);
             var builderPresenter = new BuilderPresenter(map, placingPresenter, removingPresenter);
 
-            var tree = new BlockTree(map);
+            var tree = new BlockTree(_treeConfig, map);
             var treeToViewString = new TreeToViewString(_parametersConfig);
             var playerFormulaPresenter = new PlayerFormulaPresenter(tree, treeToViewString);
 
