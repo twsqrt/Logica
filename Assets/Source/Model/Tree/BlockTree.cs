@@ -36,24 +36,18 @@ namespace Model.TreeLogic
 
         public event Action OnChanged;
 
-
         public Block CurrentRoot => _currentRoot;
-
         public bool IsEmpty => _currentRoot == null;
-
-        private void OnRootSubTreeChanged()
-            => OnChanged?.Invoke();
 
         private void SetRoot(Block root)
         {
             _currentRoot = root;
-            root.OnSubTreeChanged += OnRootSubTreeChanged;
+            root.OnSubTreeChanged += () => OnChanged?.Invoke();
             OnChanged?.Invoke();
         }
 
         private void RemoveRoot()
         {
-            _currentRoot.OnSubTreeChanged -= OnRootSubTreeChanged;
             _currentRoot = null;
             OnChanged?.Invoke();
         }

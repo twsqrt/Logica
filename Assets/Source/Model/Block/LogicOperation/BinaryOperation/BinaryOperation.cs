@@ -32,11 +32,12 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
             }
         }
 
-        private void RemoveChild(Block block)
+        protected override void RemoveOperand(Block operand)
         {
-            _operands.Remove(block);
+            _operands.Remove(operand);
             _currentState = _states[_stateHistory.Pop()];
-            OnSubTreeChangedInvoke();
+
+            base.RemoveOperand(operand);
         }
 
         public BinaryOperation(LogicOperationType type, BlockContext context) : base(type, context)
@@ -61,15 +62,11 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
         public override void Append(Direction direction, Block childBlock)
         {
             _operands.Add(childBlock);
-            childBlock.OnSubTreeChanged += OnSubTreeChangedInvoke;
-            childBlock.OnDestroy += RemoveChild;
-
             _stateHistory.Push(_currentState.StateType);
-
             BinaryOperationStateType nextStateType = _currentState.NextState(direction);
             _currentState = _states[nextStateType];
 
-            OnSubTreeChangedInvoke();
+            base.Append(direction, childBlock);
         }
 
         public override bool HasOperands()

@@ -1,4 +1,5 @@
 using System;
+using System.Security.Authentication.ExtendedProtection;
 using UnityEngine;
 
 namespace Model.BlockLogic
@@ -20,14 +21,22 @@ namespace Model.BlockLogic
             _context = context;
         }
 
-        protected void OnSubTreeChangedInvoke()
-            => OnSubTreeChanged?.Invoke();
+        protected virtual void RemoveOperand(Block operand)
+        {
+            OnSubTreeChanged?.Invoke();
+        }
 
         public void Destroy() => OnDestroy?.Invoke(this);
 
+        public virtual void Append(Direction direction, Block operand)
+        {
+            operand.OnSubTreeChanged += () => OnSubTreeChanged?.Invoke();
+            operand.OnDestroy += RemoveOperand;
+            OnSubTreeChanged?.Invoke();
+        }
+
         public abstract bool HasOperands();
         public abstract bool IsAppendCorrect(Direction direction);
-        public abstract void Append(Direction direction, Block operand);
         public abstract T Accept<T>(IBlockVisitor<T> visitor);
     }
 }

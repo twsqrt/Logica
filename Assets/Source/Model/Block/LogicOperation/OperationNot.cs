@@ -15,11 +15,12 @@ namespace Model.BlockLogic.LogicOperationLogic
             _operand = null;
         }
 
-        private void RemoveOperand() 
+        protected override void RemoveOperand(Block operand)
         {
             _operand = null;
-            OnSubTreeChangedInvoke();
+            base.RemoveOperand(operand);
         }
+
 
         public override bool IsAppendCorrect(Direction direction)
             =>_operand == null;
@@ -27,10 +28,7 @@ namespace Model.BlockLogic.LogicOperationLogic
         public override void Append(Direction direction, Block operand)
         {
             _operand = operand;
-            operand.OnSubTreeChanged += OnSubTreeChangedInvoke;
-            operand.OnDestroy += _ => RemoveOperand();
-
-            OnSubTreeChangedInvoke();
+            base.Append(direction, operand);
         }
 
         public override bool HasOperands()
