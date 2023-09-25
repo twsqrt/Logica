@@ -55,7 +55,7 @@ namespace EntryPointLogic
                 .RegisterParameterInfinity(3)
                 .Build();
             
-            var placingPresenter = new  PlacingPresenter(map, inventory, _treeConfig);
+            var placingPresenter = new  PlacingPresenter(new VectorToDirection(), map, inventory, _treeConfig);
             var removingPresenter = new RemovingPresenter(map);
             var builderPresenter = new BuilderPresenter(map, placingPresenter, removingPresenter);
 
@@ -63,9 +63,8 @@ namespace EntryPointLogic
             var treeToViewString = new TreeToViewString(_parametersConfig);
             var playerFormulaPresenter = new PlayerFormulaPresenter(tree, treeToViewString);
 
-            var configStringToDelegate = new ConfigStringToDelegate();
-            var TreeToDelegate = new TreeToDelegate(_parametersConfig);
-            var formulaRule = new FormulaRule(_formulaRuleConfig, _parametersConfig, configStringToDelegate, TreeToDelegate);
+            var treeToDelegate = new TreeToDelegate(_parametersConfig);
+            var formulaRule = new FormulaRule(_formulaRuleConfig, _parametersConfig, new ConfigStringToDelegate(), treeToDelegate);
 
             var executionPresenter = new ExecutionPresenter(tree, formulaRule);
 

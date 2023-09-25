@@ -8,11 +8,13 @@ using System.Linq;
 using System;
 using UnityEngine;
 using Config;
+using Converter;
 
 namespace Presenter.BuilderLogic
 {
     public class PlacingPresenter : BuilderPresenterState
     {
+        private readonly IConverter<Vector2Int, Direction> _directionFromVector;
         private readonly Map _map;
         private readonly Inventory _inventory;
         private readonly Vector2Int _rootPosition;
@@ -37,7 +39,7 @@ namespace Presenter.BuilderLogic
         {
             foreach(Vector2Int vicinityPosition in _map.GetVicinity(position).Where(p => _map[p].IsOccupied))
             {
-                Direction toVicinityCenter = DirectionMapper.DirectionFromSegment(vicinityPosition, position);
+                Direction toVicinityCenter = _directionFromVector.Convert(vicinityPosition - position);
                 if(_map[vicinityPosition].Block.IsAppendCorrect(toVicinityCenter))
                     yield return vicinityPosition;
             }
@@ -69,8 +71,9 @@ namespace Presenter.BuilderLogic
         private bool CanPlace(Vector2Int position)
             => _map.PositionInMap(position) && _map[position].IsOccupied == false;
 
-        public PlacingPresenter(Map map, Inventory inventory, TreeConfig treeConfig)
+        public PlacingPresenter(IConverter<Vector2Int, Direction> directionFromVector, Map map, Inventory inventory, TreeConfig treeConfig)
         {
+            _directionFromVector = directionFromVector;
             _map = map;
             _inventory = inventory;
             _rootPosition = treeConfig.RootPosition;
@@ -92,7 +95,7 @@ namespace Presenter.BuilderLogic
             if(ExistOnlyOneParent(position, out Vector2Int parentPosition) == false)
                 return false;
 
-            Direction fromChildToParent = DirectionMapper.DirectionFromSegment(position, parentPosition);
+            Direction fromChildToParent = _directionFromVector.Convert(parentPosition - position);
             BlockContext context = BlockContext.CreateChildContext(fromChildToParent);
             if(_inventory.TryPullOut(_currentData, context, out Block childBlock) == false)
                 return false;

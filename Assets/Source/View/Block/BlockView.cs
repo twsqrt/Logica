@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Converter;
+using Extensions;
 using Model.BlockLogic;
 using UnityEngine;
 using View.BlockLogic.ViewDataLogic;
@@ -30,10 +32,10 @@ namespace View.BlockLogic
 
                 SpriteRenderer arrow = Instantiate(_arrowPrefab, transform);
 
-                Vector2Int offset =  DirectionMapper.OffsetFromDirection(directionToParent);
+                Vector2Int offset =  directionToParent.ToVector();
                 arrow.transform.localPosition = new Vector3(offset.x, offset.y, 0f) * 0.5f;
 
-                float angle = DirectionMapper.AngleFromDirection(directionToParent);
+                float angle = directionToParent.Angle();
                 arrow.transform.eulerAngles = new Vector3(0f, 0f, angle + 180f);
 
                 _highlighter.Register(arrow);
