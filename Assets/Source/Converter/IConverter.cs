@@ -2,6 +2,6 @@ namespace Converter
 {
     public interface IConverter<in Tin, out Tout>
     {
-        Tout Converter(Tin input);
+        Tout Convert(Tin input);
     }
 }

@@ -9,7 +9,7 @@ namespace Presenter
         private readonly IConverter<BlockTree, string> _converter;
 
         public string GetFormulaString()
-            => _converter.Converter(_tree);
+            => _converter.Convert(_tree);
 
         public PlayerFormulaPresenter(BlockTree tree, IConverter<BlockTree, string> conveter)
         {

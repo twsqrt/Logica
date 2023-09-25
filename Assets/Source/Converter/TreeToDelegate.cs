@@ -63,7 +63,7 @@ namespace Converter
             _visitor = new Visitor(parametersConfig);
         }
 
-        public Delegate Converter(BlockTree tree)
+        public Delegate Convert(BlockTree tree)
         {
             Expression body = tree.CurrentRoot.Accept(_visitor);
             LambdaExpression lambdaExpression = Expression.Lambda(body, _visitor.Parameters);

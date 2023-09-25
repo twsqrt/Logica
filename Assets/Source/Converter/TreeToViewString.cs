@@ -78,7 +78,7 @@ namespace Converter
             _visitor = new Visitor(parametersConfig);
         }
         
-        public string Converter(BlockTree tree)
+        public string Convert(BlockTree tree)
             => tree.IsEmpty ? string.Empty : tree.CurrentRoot.Accept(_visitor);
     }
 }

@@ -24,12 +24,12 @@ namespace Model
             IEnumerable<bool> booleanDomain = new[]{false, true};
             _definitionArea = booleanDomain.InPower(parametersConfig.NumberOfParameters).Select(s => s.ToArray());
 
-            _sourceFunction = fromConfigString.Converter(ruleConfig.ParseString);
+            _sourceFunction = fromConfigString.Convert(ruleConfig.ParseString);
         }
 
         public bool Execute(BlockTree tree)
         {
-            Delegate playerFunction = _treeToDelegate.Converter(tree);
+            Delegate playerFunction = _treeToDelegate.Convert(tree);
             foreach(IEnumerable<bool> parameters in _definitionArea)
             {
                 object[] dynamicInvokeParameters = parameters.Cast<object>().ToArray();

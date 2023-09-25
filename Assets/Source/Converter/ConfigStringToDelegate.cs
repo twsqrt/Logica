@@ -9,7 +9,7 @@ namespace Converter
         private static bool TemplateFunction(bool p1, bool p2, bool p3)
             => !(p1 && p3) || p2;
 
-        public Delegate Converter(string configString)
+        public Delegate Convert(string configString)
         {
             Type type = typeof(ConfigStringToDelegate);
             MethodInfo methodInfo = type.GetMethod("TemplateFunction", BindingFlags.Static | BindingFlags.NonPublic);
