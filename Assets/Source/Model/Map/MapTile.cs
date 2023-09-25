@@ -19,14 +19,13 @@ namespace Model.MapLogic
             _block = null;
         }
 
-        public bool TryPlace(Block block)
+        public void PlaceBlock(Block block)
         {
             if(IsOccupied)
-                return false;
+                throw new InvalidOperationException();
             
             _block = block;
             OnBlockPlaced?.Invoke(block);
-            return true;
         }
 
         public void RemoveBlock()

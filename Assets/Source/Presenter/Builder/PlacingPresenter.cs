@@ -62,7 +62,7 @@ namespace Presenter.BuilderLogic
             if(_inventory.TryPullOut(_currentData, context, out Block root) == false)
                 return false;
 
-            _map[_rootPosition].TryPlace(root);
+            _map[_rootPosition].PlaceBlock(root);
             return true;
         }
 
@@ -99,7 +99,7 @@ namespace Presenter.BuilderLogic
 
             Block parent = _map[parentPosition].Block;
             parent.Append(fromChildToParent.Reverse(), childBlock);
-            _map[position].TryPlace(childBlock);
+            _map[position].PlaceBlock(childBlock);
 
             return true;
         }
