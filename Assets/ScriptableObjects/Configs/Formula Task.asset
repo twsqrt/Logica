@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e9eafb0155d41741830889ab3f9dbeb, type: 3}
-  m_Name: Formula Rule
+  m_Script: {fileID: 11500000, guid: 0cec73e45b76f204fb90be0956ee1228, type: 3}
+  m_Name: Formula Task
   m_EditorClassIdentifier: 
   _parseString: "\xAC(x \u2227 z) \u2228 y"

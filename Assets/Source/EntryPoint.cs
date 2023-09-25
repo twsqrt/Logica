@@ -23,7 +23,7 @@ namespace EntryPointLogic
         [SerializeField] private MapConfig _mapConfig;
         [SerializeField] private TreeConfig _treeConfig;
         [SerializeField] private ParametersConfig _parametersConfig;
-        [SerializeField] private FormulaRuleConfig _formulaRuleConfig;
+        [SerializeField] private FormulaTaskConfig _FormulaTaskConfig;
 
         [SerializeField] private BlockUIViewFactory _blockUIViewFactory;
         [SerializeField] private BlockViewFactory _blockViewFactory;
@@ -64,9 +64,9 @@ namespace EntryPointLogic
             var playerFormulaPresenter = new PlayerFormulaPresenter(tree, treeToViewString);
 
             var treeToDelegate = new TreeToDelegate(_parametersConfig);
-            var formulaRule = new FormulaRule(_formulaRuleConfig, _parametersConfig, new ConfigStringToDelegate(), treeToDelegate);
+            var FormulaTask = new FormulaTask(tree, _FormulaTaskConfig, _parametersConfig, new ConfigStringToDelegate(), treeToDelegate);
 
-            var executionPresenter = new ExecutionPresenter(tree, formulaRule);
+            var executionPresenter = new ExecutionPresenter(tree, FormulaTask);
 
             _playerFormulaView.Init(tree, playerFormulaPresenter);
             _builderView.Init(_mapView, builderPresenter);

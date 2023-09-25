@@ -5,31 +5,36 @@ using Model.TreeLogic;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Model.LevelTaskLogic;
+using UnityEngine.UIElements;
 
 namespace Model
 {
-    public class FormulaRule
+    public class FormulaTask : ILevelTask
     {
         private readonly IConverter<BlockTree, Delegate> _treeToDelegate;
+        private readonly BlockTree _tree;
         private readonly IEnumerable<IEnumerable<bool>> _definitionArea;
         private readonly Delegate _sourceFunction;
 
-        public FormulaRule(FormulaRuleConfig ruleConfig, 
+        public FormulaTask(BlockTree tree, 
+            FormulaTaskConfig taskConfig, 
             ParametersConfig parametersConfig,
             IConverter<string, Delegate> fromConfigString, 
             IConverter<BlockTree, Delegate> fromTree)
         {
             _treeToDelegate = fromTree;
+            _tree = tree;
 
             IEnumerable<bool> booleanDomain = new[]{false, true};
             _definitionArea = booleanDomain.InPower(parametersConfig.NumberOfParameters).Select(s => s.ToArray());
 
-            _sourceFunction = fromConfigString.Convert(ruleConfig.ParseString);
+            _sourceFunction = fromConfigString.Convert(taskConfig.ParseString);
         }
 
-        public bool Execute(BlockTree tree)
+        public bool CheckCompletion()
         {
-            Delegate playerFunction = _treeToDelegate.Convert(tree);
+            Delegate playerFunction = _treeToDelegate.Convert(_tree);
             foreach(IEnumerable<bool> parameters in _definitionArea)
             {
                 object[] dynamicInvokeParameters = parameters.Cast<object>().ToArray();

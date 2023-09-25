@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace Config
 {
-    [CreateAssetMenu(fileName = "Formula Rule Config", menuName = "Config/Rule/Formula Rule", order = 51)]
-    public class FormulaRuleConfig : ScriptableObject
+    [CreateAssetMenu(fileName = "Formula Task Config", menuName = "Config/Task/Formula Task", order = 51)]
+    public class FormulaTaskConfig : ScriptableObject
     {
         [SerializeField] private string _parseString;
 
