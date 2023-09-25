@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6fc54072491f19841aacbe94f64d9a70, type: 3}
-  m_Name: BlockUIViewFactory
+  m_Name: Block UI View Factory
   m_EditorClassIdentifier: 
   _operationResolver: {fileID: 11400000, guid: 93d177ff836b32347890b7b2da570378, type: 2}
   _parameterViewData: {fileID: 11400000, guid: ec45c0305c93a8e4581241496c1d9916, type: 2}

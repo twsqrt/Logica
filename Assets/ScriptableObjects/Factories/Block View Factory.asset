@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b754e9854264a2040a646828847370b2, type: 3}
-  m_Name: BlockViewFactory
+  m_Name: Block View Factory
   m_EditorClassIdentifier: 
   _operationResolver: {fileID: 11400000, guid: 93d177ff836b32347890b7b2da570378, type: 2}
   _operationPrefab: {fileID: 8637023185215769557, guid: a6430ccead374184e9d37321dd4450dc, type: 3}

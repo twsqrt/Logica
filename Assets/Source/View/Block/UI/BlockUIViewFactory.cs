@@ -6,7 +6,7 @@ using View.BlockLogic.ViewDataLogic;
 
 namespace View.BlockLogic
 {
-    [CreateAssetMenu(fileName = "BlockUIViewFactory", menuName = "View/BlockUIViewFactory", order = 51)]
+    [CreateAssetMenu(fileName = "Block UI View Factory", menuName = "Factory/Block UI View", order = 51)]
     public class BlockUIViewFactory : ScriptableObject, IBlockDataBasedFactory<BlockUIView>
     {
         [SerializeField] private OperationViewDataResolver _operationResolver;

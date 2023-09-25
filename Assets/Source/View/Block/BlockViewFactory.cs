@@ -8,7 +8,7 @@ using View.BlockLogic.ViewDataLogic;
 
 namespace View.BlockLogic
 {
-    [CreateAssetMenu(fileName = "BlockViewFactory", menuName = "View/BlockViewFactory", order = 51)]
+    [CreateAssetMenu(fileName = "Block View Factory", menuName = "Factory/Block View", order = 51)]
     public class BlockViewFactory : ScriptableObject, IBlockVisitor<BlockView>
     {
         [SerializeField] private OperationViewDataResolver _operationResolver;

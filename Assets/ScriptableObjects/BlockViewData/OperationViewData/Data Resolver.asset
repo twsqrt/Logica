@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc3a0fdc6e8c3e344925b927d9440a85, type: 3}
-  m_Name: OperationViewDataResolver
+  m_Name: Data Resolver
   m_EditorClassIdentifier: 
   _operationNot: {fileID: 11400000, guid: 48792678d2b57f64ea950e4935f382f0, type: 2}
   _operationOr: {fileID: 11400000, guid: 393554e19466851488f0a414cf3b7f30, type: 2}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace View.BlockLogic.ViewDataLogic
 {
-    [CreateAssetMenu(fileName = "OperationViewDataResolver", menuName = "View/ViewData/OperationViewDataResolver", order = 51)]
+    [CreateAssetMenu(fileName = "Operation View Data Resolver", menuName = "Data/Operation View Resolver", order = 51)]
     public class OperationViewDataResolver : ScriptableObject
     {
         [SerializeField] private OperationViewData _operationNot;

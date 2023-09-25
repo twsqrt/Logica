@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Config
 {
-    [CreateAssetMenu(fileName = "TreeConfig", menuName = "Config/TreeConfig", order = 51)]
+    [CreateAssetMenu(fileName = "Tree Config", menuName = "Config/Tree", order = 51)]
     public class TreeConfig : ScriptableObject
     {
         [SerializeField] private Vector2Int _rootPosition;

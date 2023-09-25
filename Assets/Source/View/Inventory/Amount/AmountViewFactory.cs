@@ -4,7 +4,7 @@ using View.InventoryLogic.AmountLogic;
 
 namespace Veiw.InventoryLogic.AmountLogic
 {
-    [CreateAssetMenu(fileName = "AmountViewFactory", menuName = "View/AmountViewFactory", order = 51)]
+    [CreateAssetMenu(fileName = "Amount View Factory", menuName = "Factory/Amount View", order = 51)]
     public class AmountViewFactory : ScriptableObject, IAmountBasedFactory<AmountView>
     {
         [SerializeField] private ValueAmountView _valueAmountView;

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace View.BlockLogic.ViewDataLogic
 {
-    [CreateAssetMenu(fileName = "ParameterViewData", menuName = "View/ViewData/ParameterViewData", order = 51)]
+    [CreateAssetMenu(fileName = "Parameter View Data", menuName = "Data/Parameter View", order = 51)]
     public class ParameterViewData : BlockViewData
     {
         [SerializeField] private Color _parameterColor;
