@@ -1,17 +1,14 @@
-using System;
 using System.Collections.Generic;
 using System.Linq; 
-using Model.MapLogic;
-using UnityEngine;
 
 namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
 {
-    public class OperandsOnLine : BinaryOperationState
+    public class OperandsOnLineState : BinaryOperationState
     {
         private readonly IEnumerable<Block> _operands;
         private readonly BinaryOperationStateType _type;
 
-        private OperandsOnLine( 
+        private OperandsOnLineState( 
             IEnumerable<Block> operands, 
             BinaryOperationStateType type, 
             Direction operandCorrectDirections) : base(operandCorrectDirections)
@@ -20,11 +17,11 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
             _type = type;
         }
 
-        public static OperandsOnLine Horizontally(IEnumerable<Block> operands)
-            => new OperandsOnLine(operands, BinaryOperationStateType.OPERANDS_HORIZONTALLY, Direction.HORIZONTALLY);
+        public static OperandsOnLineState Horizontally(IEnumerable<Block> operands)
+            => new OperandsOnLineState(operands, BinaryOperationStateType.OPERANDS_HORIZONTALLY, Direction.HORIZONTALLY);
 
-        public static OperandsOnLine Vertically(IEnumerable<Block> operands)
-            => new OperandsOnLine(operands, BinaryOperationStateType.OPERANDS_VERTICALLY, Direction.VERTICALLY);
+        public static OperandsOnLineState Vertically(IEnumerable<Block> operands)
+            => new OperandsOnLineState(operands, BinaryOperationStateType.OPERANDS_VERTICALLY, Direction.VERTICALLY);
 
         public override BinaryOperationStateType StateType => _type;
 

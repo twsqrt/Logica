@@ -46,10 +46,10 @@ namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
 
             _states = new Dictionary<BinaryOperationStateType, BinaryOperationState>()
             {
-                {BinaryOperationStateType.ROOT, new Root()},
-                {BinaryOperationStateType.OPERANDS_HORIZONTALLY, OperandsOnLine.Horizontally(_operands)},
-                {BinaryOperationStateType.OPERANDS_VERTICALLY, OperandsOnLine.Vertically(_operands)},
-                {BinaryOperationStateType.ALL_OPERANDS_ADDED, new AllOperandsAdded()}
+                {BinaryOperationStateType.ROOT, new RootState()},
+                {BinaryOperationStateType.OPERANDS_HORIZONTALLY, OperandsOnLineState.Horizontally(_operands)},
+                {BinaryOperationStateType.OPERANDS_VERTICALLY, OperandsOnLineState.Vertically(_operands)},
+                {BinaryOperationStateType.ALL_OPERANDS_ADDED, new AllAddedState()}
             };
 
             _stateHistory = new Stack<BinaryOperationStateType>();

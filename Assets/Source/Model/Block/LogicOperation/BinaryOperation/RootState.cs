@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
 {
-    public class Root : BinaryOperationState
+    public class RootState : BinaryOperationState
     {
-        public Root() : base(Direction.ALL) {}
+        public RootState() : base(Direction.ALL) {}
 
         public override BinaryOperationStateType StateType => BinaryOperationStateType.ROOT;
 
