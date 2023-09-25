@@ -35,7 +35,11 @@ namespace Model.InventoryLogic.AmountLogic
             return true;
         }
 
+        public bool NotMoreThan(int amount)
+            => _value <= amount;
+
         public T AcceptFactory<T>(IAmountBasedFactory<T> factory)
             => factory.Create(this);
+
     }
 }
