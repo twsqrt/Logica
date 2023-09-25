@@ -5,16 +5,14 @@ namespace Presenter
 {
     public class PlayerFormulaPresenter
     {
-        private readonly BlockTree _tree;
-        private readonly IConverter<BlockTree, string> _converter;
+        private readonly TreeStringValue _treeStringValue;
 
         public string GetFormulaString()
-            => _converter.Converter(_tree);
+            => _treeStringValue.GetValue();
 
-        public PlayerFormulaPresenter(BlockTree tree, IConverter<BlockTree, string> conveter)
+        public PlayerFormulaPresenter(TreeStringValue treeStringValue)
         {
-            _tree = tree;
-            _converter = conveter;
+            _treeStringValue = treeStringValue;
         }
     }
 }
