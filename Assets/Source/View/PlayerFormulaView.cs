@@ -9,9 +9,9 @@ namespace View
     {
         [SerializeField] private TextMeshProUGUI _formulaText;
 
-        public void Init(BlockTree tree, PlayerFormulaPresenter formulaPresenter)
+        public void Init(PlayerFormulaPresenter formulaPresenter)
         {
-            tree.OnChanged += () => _formulaText.text = formulaPresenter.GetFormulaString();
+            formulaPresenter.OnFormulaTextChanged += t => _formulaText.text = t;
         }
     }
 }

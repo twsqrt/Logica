@@ -9,7 +9,7 @@ namespace Model.TreeLogic
 {
     public abstract class TreeCacheValue<T>
     {
-        private class ConverterVisitor : IBlockVisitor<T>, IConverter<Block, T>
+        private class ConverterVisitor : IBlockVisitor<T>
         {
             private readonly TreeCacheValue<T> _treeCacheValue;
             private readonly Dictionary<Block, BlockCacheValue<T>> _blocksCache;

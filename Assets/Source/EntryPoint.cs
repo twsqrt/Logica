@@ -20,6 +20,8 @@ namespace EntryPointLogic
 {
     public class EntryPoint : MonoBehaviour
     {
+        [SerializeField] private CoroutineTarget _coroutineTarget;
+
         [SerializeField] private MapConfig _mapConfig;
         [SerializeField] private TreeConfig _treeConfig;
         [SerializeField] private ParametersConfig _parametersConfig;
@@ -60,8 +62,7 @@ namespace EntryPointLogic
             var builderPresenter = new BuilderPresenter(map, placingPresenter, removingPresenter);
 
             var tree = new BlockTree(_treeConfig, map);
-            var treeStringValue = new TreeStringValue(tree, _parametersConfig);
-            var playerFormulaPresenter = new PlayerFormulaPresenter(treeStringValue);
+            var playerFormulaPresenter = new PlayerFormulaPresenter(tree, _parametersConfig, _coroutineTarget);
     
             var configStringToDelegate = new ConfigStringToDelegate();
             var TreeToDelegate = new TreeToDelegate(_parametersConfig);
@@ -69,7 +70,7 @@ namespace EntryPointLogic
 
             var executionPresenter = new ExecutionPresenter(tree, formulaRule);
 
-            _playerFormulaView.Init(tree, playerFormulaPresenter);
+            _playerFormulaView.Init(playerFormulaPresenter);
             _builderView.Init(_mapView, builderPresenter);
             _removingButton.Init(builderPresenter, removingPresenter);
             _inventoryView.Init(inventory, builderPresenter, placingPresenter);

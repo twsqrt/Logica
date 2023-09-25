@@ -1,18 +1,30 @@
-using Converter;
+using System;
+using System.Collections;
+using Config;
 using Model.TreeLogic;
+using View;
 
 namespace Presenter
 {
     public class PlayerFormulaPresenter
     {
+        private readonly CoroutineTarget _coroutineTarget;
         private readonly TreeStringValue _treeStringValue;
 
-        public string GetFormulaString()
-            => _treeStringValue.GetValue();
+        public event Action<string> OnFormulaTextChanged;
 
-        public PlayerFormulaPresenter(TreeStringValue treeStringValue)
+        private IEnumerator ChangeFormulaOnNextFrame()
         {
-            _treeStringValue = treeStringValue;
+            yield return null;
+            OnFormulaTextChanged?.Invoke(_treeStringValue.GetValue());
+        }
+
+        public PlayerFormulaPresenter(BlockTree tree, ParametersConfig parametersConfig, CoroutineTarget coroutineTarget)
+        {
+            _coroutineTarget = coroutineTarget;
+            _treeStringValue = new TreeStringValue(tree, parametersConfig);
+
+            tree.OnChanged += () => _coroutineTarget.StartCoroutine(ChangeFormulaOnNextFrame());
         }
     }
 }
