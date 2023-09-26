@@ -15,6 +15,9 @@ using View;
 using Presenter;
 using Model;
 using Converter;
+using Model.LevelTaskLogic;
+using UnityEngine.Windows.Speech;
+using System.Collections.Generic;
 
 namespace EntryPointLogic
 {
@@ -64,9 +67,21 @@ namespace EntryPointLogic
             var playerFormulaPresenter = new PlayerFormulaPresenter(tree, treeToViewString);
 
             var treeToDelegate = new TreeToDelegate(_parametersConfig);
-            var FormulaTask = new FormulaTask(tree, _FormulaTaskConfig, _parametersConfig, new ConfigStringToDelegate(), treeToDelegate);
 
-            var executionPresenter = new ExecutionPresenter(tree, FormulaTask);
+            var formulaTask = new FormulaTask(tree, _FormulaTaskConfig, _parametersConfig, new ConfigStringToDelegate(), treeToDelegate);
+            var amountTaskBuilder = new AmountTaskBuilder();
+            AmountTask amountTask = amountTaskBuilder
+                .RegisterOperation(LogicOperationType.NOT, 8)
+                .RegisterOperation(LogicOperationType.OR, 4)
+                .Build(inventory);
+            
+            var levelTasksBuilder = new LevelTasksBuilder();
+            LevelTasks levelTasks = levelTasksBuilder.StartBuilding()
+                .RegisterForOneStar(formulaTask)
+                .RegisterForTreeStars(amountTask)
+                .Build();
+
+            var executionPresenter = new ExecutionPresenter(tree, levelTasks);
 
             _playerFormulaView.Init(tree, playerFormulaPresenter);
             _builderView.Init(_mapView, builderPresenter);

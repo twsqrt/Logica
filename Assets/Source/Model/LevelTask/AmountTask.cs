@@ -22,7 +22,7 @@ namespace Model.LevelTaskLogic
         {
             foreach(var (data, limit) in _amountLimits)
             {
-                if(_inventory[data].NotMoreThan(limit) == false)
+                if(_inventory[data].LessThan(limit))
                     return false;
             }
 
