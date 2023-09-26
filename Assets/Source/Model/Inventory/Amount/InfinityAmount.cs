@@ -6,7 +6,7 @@ namespace Model.InventoryLogic.AmountLogic
 
         public bool TryDecrease(int amount) => true;
 
-        public bool NotMoreThan(int amount) => false;
+        public bool LessThan(int amount) => false;
 
         public T AcceptFactory<T>(IAmountBasedFactory<T> factory)
             => factory.Create(this);
