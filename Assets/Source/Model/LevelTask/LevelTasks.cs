@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using Unity.VisualScripting;
 
 namespace Model.LevelTaskLogic
 {
@@ -28,6 +27,11 @@ namespace Model.LevelTaskLogic
             }
 
             return true;
+        }
+
+        public LevelTasks(Dictionary<LevelScore, IEnumerable<ILevelTask>> scoreTasks)
+        {
+            _scoreTasks = new SortedDictionary<LevelScore, IEnumerable<ILevelTask>>(scoreTasks);
         }
 
         public LevelScore CalculateScore()
