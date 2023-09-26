@@ -18,6 +18,7 @@ using Converter;
 using Model.LevelTaskLogic;
 using UnityEngine.Windows.Speech;
 using System.Collections.Generic;
+using View.LevelTaskLogic;
 
 namespace EntryPointLogic
 {
@@ -37,6 +38,7 @@ namespace EntryPointLogic
         [SerializeField] private InventoryView _inventoryView;
         [SerializeField] private PlayerFormulaView _playerFormulaView;
         [SerializeField] private ExecutionButton _executionButton;
+        [SerializeField] private LevelTasksView _levelTasksView;
 
         private void Awake()
         {
@@ -88,6 +90,7 @@ namespace EntryPointLogic
             _removingButton.Init(builderPresenter, removingPresenter);
             _inventoryView.Init(inventory, builderPresenter, placingPresenter);
             _executionButton.Init(tree, executionPresenter);
+            _levelTasksView.Init(levelTasks);
         }
     }
 }

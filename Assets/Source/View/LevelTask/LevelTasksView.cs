@@ -36,7 +36,10 @@ namespace View.LevelTaskLogic
             {
                 Instantiate(_headherPrefabs[score], _container);
                 foreach(ILevelTask task in _levelTasks[score])
-                    task.Accept(_taskViewFactory);
+                {
+                    LevelTaskView view = task.Accept(_taskViewFactory);
+                    view.transform.SetParent(_container, false);
+                }
             }
         }
     }
