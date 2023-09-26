@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cec73e45b76f204fb90be0956ee1228, type: 3}
   m_Name: Formula Task
   m_EditorClassIdentifier: 
+  _viewString: "\xAC(x \u2227 z) \u2228 y"
   _parseString: "\xAC(x \u2227 z) \u2228 y"

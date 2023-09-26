@@ -5,9 +5,8 @@ using Model.TreeLogic;
 using System.Collections.Generic;
 using System.Linq;
 using System;
-using Model.LevelTaskLogic;
 
-namespace Model
+namespace Model.LevelTaskLogic
 {
     public class FormulaTask : ILevelTask
     {
@@ -15,6 +14,9 @@ namespace Model
         private readonly BlockTree _tree;
         private readonly IEnumerable<IEnumerable<bool>> _definitionArea;
         private readonly Delegate _sourceFunction;
+        private readonly FormulaTaskConfig _taskConfig;
+
+        public FormulaTaskConfig TaskConfig => _taskConfig;
 
         public FormulaTask(BlockTree tree, 
             FormulaTaskConfig taskConfig, 
@@ -24,6 +26,7 @@ namespace Model
         {
             _treeToDelegate = fromTree;
             _tree = tree;
+            _taskConfig = taskConfig;
 
             IEnumerable<bool> booleanDomain = new[]{false, true};
             _definitionArea = booleanDomain.InPower(parametersConfig.NumberOfParameters).Select(s => s.ToArray());

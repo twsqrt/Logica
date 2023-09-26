@@ -1,4 +1,4 @@
-using Model;
+using Model.LevelTaskLogic;
 using TMPro;
 using UnityEngine;
 
@@ -6,11 +6,11 @@ namespace View.LevelTaskLogic
 {
     public class FormulaTaskView : LevelTaskView
     {
-        [SerializeField] private TextMeshProUGUI _tmp;
+        [SerializeField] private TextMeshProUGUI _formulaText;
 
         public void Init(FormulaTask task)
         {
-            _tmp.text = "Formula Task Template";
+            _formulaText.text= task.TaskConfig.ViewString;
         }
     }
 }
