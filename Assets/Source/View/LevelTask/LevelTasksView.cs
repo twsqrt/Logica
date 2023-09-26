@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Model.LevelTaskLogic;
 using UnityEngine;
 
@@ -34,11 +35,15 @@ namespace View.LevelTaskLogic
         {
             foreach(LevelScore score in _levelScores)
             {
-                Instantiate(_headherPrefabs[score], _container);
-                foreach(ILevelTask task in _levelTasks[score])
+                IEnumerable<ILevelTask> tasks = _levelTasks[score];
+                if(tasks.Any())
                 {
-                    LevelTaskView view = task.Accept(_taskViewFactory);
-                    view.transform.SetParent(_container, false);
+                    Instantiate(_headherPrefabs[score], _container);
+                    foreach(ILevelTask task in tasks)
+                    {
+                        LevelTaskView view = task.Accept(_taskViewFactory);
+                        view.transform.SetParent(_container, false);
+                    }
                 }
             }
         }
