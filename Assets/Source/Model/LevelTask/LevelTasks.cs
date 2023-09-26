@@ -1,10 +1,23 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 
 namespace Model.LevelTaskLogic
 {
     public class LevelTasks
     {
         private readonly SortedDictionary<LevelScore, IEnumerable<ILevelTask>> _scoreTasks;
+
+        public IEnumerable<ILevelTask> this[LevelScore score]
+        {
+            get 
+            {
+                if(_scoreTasks.TryGetValue(score, out IEnumerable<ILevelTask> tasks))
+                    return tasks;
+                return Enumerable.Empty<ILevelTask>();
+            }
+        }
 
         private bool IsAllTaskCompleted(IEnumerable<ILevelTask> tasks)
         {

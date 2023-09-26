@@ -28,5 +28,8 @@ namespace Model.LevelTaskLogic
 
             return true;
         }
+
+        public T Accept<T>(ILevelTaskVisitor<T> visitor)
+            => visitor.Visit(this);
     }
 }

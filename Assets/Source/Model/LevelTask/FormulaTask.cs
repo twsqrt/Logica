@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Model.LevelTaskLogic;
-using UnityEngine.UIElements;
 
 namespace Model
 {
@@ -47,5 +46,8 @@ namespace Model
 
             return true;
         }
+
+        public T Accept<T>(ILevelTaskVisitor<T> visitor)
+            => visitor.Visit(this);
     }
 }
