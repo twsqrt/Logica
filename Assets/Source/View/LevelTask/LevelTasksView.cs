@@ -47,5 +47,11 @@ namespace View.LevelTaskLogic
                 }
             }
         }
+
+        public void Open()
+            => gameObject.SetActive(true);
+
+        public void Close()
+            => gameObject.SetActive(false);
     }
 }
