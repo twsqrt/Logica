@@ -10,7 +10,7 @@ namespace View.LevelTaskLogic
         [SerializeField] private RectTransform _oneStarHeaderPrefab;
         [SerializeField] private RectTransform _twoStarsHeaderPrefab;
         [SerializeField] private RectTransform _treeStarsHeaderPrefab;
-        [SerializeField] private RectTransform _container;
+        [SerializeField] private Transform _container;
         [SerializeField] private LevelTaskViewFactory _taskViewFactory;
 
         private Dictionary<LevelScore, RectTransform> _headherPrefabs;

@@ -1,6 +1,6 @@
-using Model;
 using Model.LevelTaskLogic;
-using UnityEngine;
+using View.LevelTaskLogic.AmountTaskLogic;
+using UnityEngine   ;
 
 namespace View.LevelTaskLogic
 {
