@@ -26,7 +26,7 @@ namespace Converter
 
             public Visitor(ParametersConfig config)
             {
-                _parameters = config.GetParametersId()
+                _parameters = config.ParametersId
                     .ToDictionary(i => i, i => Expression.Parameter(typeof(bool), $"id{i}"));
             }
 

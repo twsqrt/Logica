@@ -1,28 +1,24 @@
 using System.Collections.Generic;
 using System.Linq;
-using System;
-using UnityEngine;
 
 namespace Config
 {
-    [CreateAssetMenu(fileName = "Parameters Config", menuName = "Config/Parameters", order = 51)]
-    public class ParametersConfig : ScriptableObject
+    public class ParametersConfig
     {
-        [Serializable]
-        private class ParameterInfo
+        private readonly IReadOnlyCollection<ParameterConfig> _parameters;
+
+        public int NumberOfParameters 
+            => _parameters.Count();
+        
+        public IEnumerable<int> ParametersId
+            => _parameters.Select(p => p.Id);
+
+        public ParametersConfig(IReadOnlyCollection<ParameterConfig> parameters)
         {
-            public int Id;
-            public string Name; 
+            _parameters = parameters;
         }
 
-        [SerializeField] private List<ParameterInfo> _names;
-
-        public int NumberOfParameters => _names.Count();
-
-        public IEnumerable<int> GetParametersId()
-            => _names.Select(p => p.Id);
-
-        public Dictionary<int, string> GetParameterNameByIdDictionary()
-            => _names.ToDictionary(p => p.Id, p => p.Name);
+        public Dictionary<int, string> ToNameDictionary()
+            => _parameters.ToDictionary(p => p.Id, p => p.Name);
     }
 }

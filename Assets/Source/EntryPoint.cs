@@ -13,20 +13,17 @@ using View.InventoryLogic;
 using View.MapLogic;
 using View;
 using Presenter;
-using Model;
 using Converter;
 using Model.LevelTaskLogic;
-using UnityEngine.Windows.Speech;
-using System.Collections.Generic;
 using View.LevelTaskLogic;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace EntryPointLogic
 {
     public class EntryPoint : MonoBehaviour
     {
-        [SerializeField] private MapConfig _mapConfig;
         [SerializeField] private TreeConfig _treeConfig;
-        [SerializeField] private ParametersConfig _parametersConfig;
         [SerializeField] private FormulaTaskConfig _FormulaTaskConfig;
 
         [SerializeField] private BlockUIViewFactory _blockUIViewFactory;
@@ -42,11 +39,12 @@ namespace EntryPointLogic
 
         private void Awake()
         {
-            var map = new Map(_mapConfig);
-            _mapView.Init(map);
+            LevelConfig levelConfig = LevelConfigLoader.Load("level_0.json");
 
-            _blockUIViewFactory.Init(_parametersConfig);
-            _blockViewFactory.Init(_parametersConfig);
+            var map = new Map(levelConfig.Map);
+
+            _blockUIViewFactory.Init(levelConfig.Parameters);
+            _blockViewFactory.Init(levelConfig.Parameters);
 
             var blockFactory = new BlockFactory();
             var inventoryBuilder = new InventoryBuilder();
@@ -65,12 +63,12 @@ namespace EntryPointLogic
             var builderPresenter = new BuilderPresenter(map, placingPresenter, removingPresenter);
 
             var tree = new BlockTree(_treeConfig, map);
-            var treeToViewString = new TreeToViewString(_parametersConfig);
+            var treeToViewString = new TreeToViewString(levelConfig.Parameters);
             var playerFormulaPresenter = new PlayerFormulaPresenter(tree, treeToViewString);
 
-            var treeToDelegate = new TreeToDelegate(_parametersConfig);
+            var treeToDelegate = new TreeToDelegate(levelConfig.Parameters);
 
-            var formulaTask = new FormulaTask(tree, _FormulaTaskConfig, _parametersConfig, new ConfigStringToDelegate(), treeToDelegate);
+            var formulaTask = new FormulaTask(tree, _FormulaTaskConfig, levelConfig.Parameters, new ConfigStringToDelegate(), treeToDelegate);
             var amountTaskBuilder = new AmountTaskBuilder();
             AmountTask amountTask2Stars = amountTaskBuilder
                 .StartBuilding()
@@ -93,6 +91,7 @@ namespace EntryPointLogic
 
             var executionPresenter = new ExecutionPresenter(tree, levelTasks);
 
+            _mapView.Init(map);
             _playerFormulaView.Init(tree, playerFormulaPresenter);
             _builderView.Init(_mapView, builderPresenter);
             _removingButton.Init(builderPresenter, removingPresenter);

@@ -1,14 +1,13 @@
-using UnityEngine;
+using Newtonsoft.Json;
 
 namespace Config
 {
-    [CreateAssetMenu(fileName = "Map Config", menuName = "Config/Map", order = 51)]
-    public class MapConfig : ScriptableObject
+    public class MapConfig
     {
-        [SerializeField] private int _width;
-        [SerializeField] private int _height;
+        [JsonProperty("width")] private int _width;
+        [JsonProperty("height")] private int _height;
 
-        public int Widht => _width;
+        public int Width => _width;
         public int Height => _height;
     }
 }

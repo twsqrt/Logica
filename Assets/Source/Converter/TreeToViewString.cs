@@ -42,7 +42,7 @@ namespace Converter
 
             public Visitor(ParametersConfig parametersConfig)
             {
-                _parameterNames = parametersConfig.GetParameterNameByIdDictionary();
+                _parameterNames = parametersConfig.ToNameDictionary();
             }
 
             public string Visit(OperationNot operationNot)

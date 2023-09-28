@@ -1,8 +1,9 @@
-using System.Collections.Generic;
 using Config;
-using Model.BlockLogic;
-using Model.BlockLogic.LogicOperationLogic;
 using Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic;
+using Model.BlockLogic.LogicOperationLogic;
+using Model.BlockLogic;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using View.BlockLogic.ViewDataLogic;
 
@@ -18,9 +19,9 @@ namespace View.BlockLogic
 
         private Dictionary<int, string> _parameterNames;
 
-        public void Init(ParametersConfig config)
+        public void Init(ParametersConfig parametersConfig)
         {
-            _parameterNames = config.GetParameterNameByIdDictionary();
+            _parameterNames = parametersConfig.ToNameDictionary();
         }
 
         private BlockView VisitOperation(LogicOperation operation)

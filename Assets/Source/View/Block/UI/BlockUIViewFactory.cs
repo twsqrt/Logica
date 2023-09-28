@@ -3,6 +3,7 @@ using Model.BlockLogic.BlockDataLogic;
 using System.Collections.Generic;
 using Config;
 using View.BlockLogic.ViewDataLogic;
+using System.Linq;
 
 namespace View.BlockLogic
 {
@@ -16,9 +17,9 @@ namespace View.BlockLogic
 
         private Dictionary<int, string> _parameterNames;
 
-        public void Init(ParametersConfig config)
+        public void Init(ParametersConfig parametersConfig)
         {
-            _parameterNames = config.GetParameterNameByIdDictionary();
+            _parameterNames = parametersConfig.ToNameDictionary();
         }
 
         public BlockUIView Create(OperationData data)

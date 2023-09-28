@@ -17,7 +17,7 @@ namespace Model.MapLogic
 
         public Map(MapConfig config)
         {
-            _width = config.Widht;
+            _width = config.Width;
             _height = config.Height;
 
             _tiles = new MapTile[_width * _height]; 
