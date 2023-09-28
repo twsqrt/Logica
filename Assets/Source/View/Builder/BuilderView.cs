@@ -11,8 +11,6 @@ namespace View.BuilderLogic
 {
     public class BuilderView : MonoBehaviour
     {
-        [SerializeField] private Camera _camera;
-
         private MapView _mapView;
         private BuilderPresenter _presenter;
 
@@ -37,19 +35,10 @@ namespace View.BuilderLogic
             HighilghtPositions(positions);
         }
 
-        private void Update()
-        {
-            if(Input.GetMouseButtonUp(0))
-            {
-                Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-                if(_mapView.TryGetPosition(ray, out Vector2Int position))
-                    _presenter.OnPositionSelected(position);
-            }
-        }
-
         public void Init(MapView mapView, BuilderPresenter presenter)
         {
             _mapView = mapView;
+            _mapView.OnTileClicked += p => presenter.OnPositionSelected(p);
 
             _presenter = presenter;
             HighilghtPositions(presenter.CorrectPositions);

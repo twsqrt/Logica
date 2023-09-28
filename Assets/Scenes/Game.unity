@@ -230,6 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _quad: {fileID: 470331084}
+  _camera: {fileID: 519420031}
   _tileContainer: {fileID: 1649900726}
   _tilePrefab: {fileID: 4884046867406124348, guid: 7f68564656f6a234e84ed8a237f85a1a, type: 3}
   _scale: 1
@@ -728,7 +729,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c792a05a971ced84b995833fbc4fb6ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 519420031}
 --- !u!4 &586183811
 Transform:
   m_ObjectHideFlags: 0
@@ -2575,7 +2575,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1998227500}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
