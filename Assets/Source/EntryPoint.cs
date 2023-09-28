@@ -72,15 +72,23 @@ namespace EntryPointLogic
 
             var formulaTask = new FormulaTask(tree, _FormulaTaskConfig, _parametersConfig, new ConfigStringToDelegate(), treeToDelegate);
             var amountTaskBuilder = new AmountTaskBuilder();
-            AmountTask amountTask = amountTaskBuilder
+            AmountTask amountTask2Stars = amountTaskBuilder
+                .StartBuilding()
                 .RegisterOperation(LogicOperationType.NOT, 8)
                 .RegisterOperation(LogicOperationType.OR, 4)
                 .Build(inventory);
+
+            AmountTask amountTask3Stars = amountTaskBuilder
+                .StartBuilding()
+                .RegisterOperation(LogicOperationType.OR, 5)
+                .Build(inventory);
             
             var levelTasksBuilder = new LevelTasksBuilder();
-            LevelTasks levelTasks = levelTasksBuilder.StartBuilding()
+            LevelTasks levelTasks = levelTasksBuilder
+                .StartBuilding()
                 .RegisterForOneStar(formulaTask)
-                .RegisterForTreeStars(amountTask)
+                .RegisterForTwoStars(amountTask2Stars)
+                .RegisterForTreeStars(amountTask3Stars)
                 .Build();
 
             var executionPresenter = new ExecutionPresenter(tree, levelTasks);

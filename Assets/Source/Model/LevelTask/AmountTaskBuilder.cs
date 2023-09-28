@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Model.BlockLogic.BlockDataLogic;
 using Model.BlockLogic.LogicOperationLogic;
 using Model.InventoryLogic;
@@ -15,6 +16,12 @@ namespace Model.LevelTaskLogic
             _registeredLimits = new Dictionary<IBlockData, int>();
         }
 
+        public AmountTaskBuilder StartBuilding()
+        {
+            _registeredLimits.Clear();
+            return this;
+        }
+
         public AmountTaskBuilder RegisterOperation(LogicOperationType operationType, int limit)
         {
             _registeredLimits.Add(new OperationData(operationType), limit);
@@ -28,6 +35,6 @@ namespace Model.LevelTaskLogic
         }
 
         public AmountTask Build(Inventory inventory)
-            => new AmountTask(inventory, _registeredLimits);
+            => new AmountTask(inventory, _registeredLimits.ToDictionary(p => p.Key, p => p.Value));
     }
 }

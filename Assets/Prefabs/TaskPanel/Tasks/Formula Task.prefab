@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Build a formula <b>equivalent</b> to: '
+  m_text: 'Build a formula <b><color=#79B250>equivalent</color></b> to: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -93,12 +93,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
+  m_fontSize: 27.05
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 24
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -261,7 +261,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3722806657850102562, guid: e7b8567766c8adf44b87cca348fbee85, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -40
+      value: -80
       objectReference: {fileID: 0}
     - target: {fileID: 3722806657850102562, guid: e7b8567766c8adf44b87cca348fbee85, type: 3}
       propertyPath: m_SizeDelta.y
@@ -321,7 +321,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6151754300418799561, guid: e7b8567766c8adf44b87cca348fbee85, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6654310030581979926, guid: e7b8567766c8adf44b87cca348fbee85, type: 3}
       propertyPath: m_text
@@ -353,15 +353,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6821529980201228134, guid: e7b8567766c8adf44b87cca348fbee85, type: 3}
       propertyPath: m_Color.b
-      value: 0.21000001
+      value: 0.26250002
       objectReference: {fileID: 0}
     - target: {fileID: 6821529980201228134, guid: e7b8567766c8adf44b87cca348fbee85, type: 3}
       propertyPath: m_Color.g
-      value: 0.7
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6821529980201228134, guid: e7b8567766c8adf44b87cca348fbee85, type: 3}
       propertyPath: m_Color.r
-      value: 0.4123913
+      value: 0.46645412
       objectReference: {fileID: 0}
     - target: {fileID: 6821529980201228134, guid: e7b8567766c8adf44b87cca348fbee85, type: 3}
       propertyPath: m_Enabled
