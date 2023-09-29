@@ -3,7 +3,7 @@ using Config.JsonConverterLogic;
 using Model.BlockLogic.BlockDataLogic;
 using Newtonsoft.Json;
 
-namespace Config
+namespace Config.InventoryLogic
 {
     public class InventorySlotConfig
     {  

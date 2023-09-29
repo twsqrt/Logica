@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Config
+namespace Config.ParametersLogic
 {
     public class ParameterConfig
     {

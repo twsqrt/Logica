@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json;
+using Config.InventoryLogic;
 
 namespace Config.JsonConverterLogic
 {

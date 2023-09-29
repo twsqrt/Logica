@@ -1,6 +1,4 @@
-using Newtonsoft.Json;
-
-namespace Config
+namespace Config.InventoryLogic
 {
     public class AmountConfig
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Config
+namespace Config.LevelTaskLogic
 {
     [CreateAssetMenu(fileName = "Formula Task Config", menuName = "Config/Task/Formula Task", order = 51)]
     public class FormulaTaskConfig : ScriptableObject
