@@ -1,12 +1,13 @@
 using UnityEngine;
+using Newtonsoft.Json;
 
 namespace Config
 {
-    [CreateAssetMenu(fileName = "Tree Config", menuName = "Config/Tree", order = 51)]
-    public class TreeConfig : ScriptableObject
+    public class TreeConfig
     {
-        [SerializeField] private Vector2Int _rootPosition;
+        [JsonProperty("rootX")] private int _rootX;
+        [JsonProperty("rootY")] private int _rootY;
         
-        public Vector2Int RootPosition => _rootPosition;
+        public Vector2Int RootPosition => new Vector2Int(_rootX, _rootY);
     }
 }
