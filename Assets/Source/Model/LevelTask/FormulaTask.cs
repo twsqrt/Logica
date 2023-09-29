@@ -32,7 +32,7 @@ namespace Model.LevelTaskLogic
             IEnumerable<bool> booleanDomain = new[]{false, true};
             _definitionArea = booleanDomain.InPower(parametersConfig.NumberOfParameters).Select(s => s.ToArray());
 
-            _sourceFunction = fromConfigString.Convert(taskConfig.ParseString);
+            _sourceFunction = fromConfigString.Convert(taskConfig.ParseText);
         }
 
         public bool CheckCompletion()

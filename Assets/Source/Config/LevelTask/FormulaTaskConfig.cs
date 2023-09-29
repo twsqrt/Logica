@@ -1,14 +1,13 @@
-using UnityEngine;
+using Newtonsoft.Json;
 
 namespace Config.LevelTaskLogic
 {
-    [CreateAssetMenu(fileName = "Formula Task Config", menuName = "Config/Task/Formula Task", order = 51)]
-    public class FormulaTaskConfig : ScriptableObject
+    public class FormulaTaskConfig
     {
-        [SerializeField] private string _viewString;
-        [SerializeField] private string _parseString;
+        [JsonProperty("formulaViewText")] private string _viewText;
+        [JsonProperty("formulaParseText")] private string _parseText;
 
-        public string ViewString => _viewString;
-        public string ParseString => _parseString;
+        public string ViewText => _viewText;
+        public string ParseText => _parseText;
     }
-    }
+}

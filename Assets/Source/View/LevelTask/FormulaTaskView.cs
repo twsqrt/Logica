@@ -10,7 +10,7 @@ namespace View.LevelTaskLogic
 
         public void Init(FormulaTask task)
         {
-            _formulaText.text= task.TaskConfig.ViewString;
+            _formulaText.text= task.TaskConfig.ViewText;
         }
     }
 }
