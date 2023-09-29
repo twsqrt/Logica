@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using Model.BlockLogic.BlockDataLogic;
 using Model.InventoryLogic.AmountLogic;
 using Model.BlockLogic;
+using Config;
+using UnityEngine;
 
 namespace Model.InventoryLogic
 {
@@ -16,10 +18,13 @@ namespace Model.InventoryLogic
         public IEnumerable<IBlockData> AllBlocksData
             => _blocks.Keys;
 
-        public Inventory(BlockFactory factory, Dictionary<IBlockData, IAmount> blocks)
+        public Inventory(BlockFactory factory, InventoryConfig config)
         {
-            _blocks = blocks;
             _factory = factory;
+
+            _blocks = new Dictionary<IBlockData, IAmount>();
+            foreach(InventorySlotConfig slot in config.Slots)
+                _blocks.Add(slot.Data, AmountFactory.Create(slot.Amount));
         }
 
         public bool TryPullOut(IBlockData data, BlockContext context, out Block block)
