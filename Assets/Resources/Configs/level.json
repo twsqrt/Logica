@@ -1,0 +1,70 @@
+{
+    "name": "first level",
+    "map": {
+        "width": 5,
+        "height": 6
+    },
+    "tree": {
+        "rootX": 1,
+        "rootY": 1
+    },
+    "parameters": {
+        "parameters": [
+            {
+                "id": 1,
+                "name": "x"
+            },
+            {
+                "id": 2,
+                "name": "y"
+            },
+            {
+                "id": 3,
+                "name": "z"
+            }
+        ]
+    },
+    "inventory": {
+        "slots": [
+            {
+                "data": "OPERATION_NOT",
+                "amount": 10
+            },
+            {
+                "data": "OPERATION_OR",
+                "amount": 5
+            },
+            {
+                "data": "OPERATION_AND",
+                "amount": 5
+            },
+            {
+                "data": {
+                    "blockType": "PARAMETER",
+                    "id": 1
+                },
+                "amount": "INF"
+            },
+            {
+                "data": {
+                    "blockType": "PARAMETER",
+                    "id": 2
+                },
+                "amount": "INF"
+            },
+            {
+                "data": {
+                    "blockType": "PARAMETER",
+                    "id": 3
+                },
+                "amount": "INF"
+            }
+        ]
+    },
+    "tasks": {
+        "formulaTask": {
+            "formulaViewText": "¬(x ∧ z) ∨ y",
+            "formulaPraseText": "¬(x ∧ z) ∨ y"
+        }
+    }
+}

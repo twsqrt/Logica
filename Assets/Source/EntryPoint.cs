@@ -1,31 +1,27 @@
+using Config.LevelTaskLogic;
 using Config;
+using Converter;
 using Model.BlockLogic.LogicOperationLogic;
 using Model.BlockLogic;
 using Model.InventoryLogic;
+using Model.LevelTaskLogic;
 using Model.MapLogic;
 using Model.TreeLogic;
 using Presenter.BuilderLogic;
+using Presenter;
 using UnityEngine;
 using Veiw.BuilderLogic;
 using View.BlockLogic;
 using View.BuilderLogic;
 using View.InventoryLogic;
+using View.LevelTaskLogic;
 using View.MapLogic;
 using View;
-using Presenter;
-using Converter;
-using Model.LevelTaskLogic;
-using View.LevelTaskLogic;
-using Newtonsoft.Json;
-using System.IO;
 
 namespace EntryPointLogic
 {
     public class EntryPoint : MonoBehaviour
     {
-        [SerializeField] private TreeConfig _treeConfig;
-        [SerializeField] private FormulaTaskConfig _FormulaTaskConfig;
-
         [SerializeField] private BlockUIViewFactory _blockUIViewFactory;
         [SerializeField] private BlockViewFactory _blockViewFactory;
 
@@ -39,36 +35,27 @@ namespace EntryPointLogic
 
         private void Awake()
         {
-            LevelConfig levelConfig = LevelConfigLoader.Load("level_0.json");
+            LevelConfig levelConfig = LevelConfigLoader.Load("level.json");
 
             var map = new Map(levelConfig.Map);
-
+    
             _blockUIViewFactory.Init(levelConfig.Parameters);
             _blockViewFactory.Init(levelConfig.Parameters);
 
             var blockFactory = new BlockFactory();
-            var inventoryBuilder = new InventoryBuilder();
-
-            Inventory inventory = inventoryBuilder.StartBuilding(blockFactory)
-                .RegisterOperation(LogicOperationType.NOT, 10)
-                .RegisterOperation(LogicOperationType.OR, 5)
-                .RegisterOperation(LogicOperationType.AND, 5)
-                .RegisterParameterInfinity(1)
-                .RegisterParameterInfinity(2)
-                .RegisterParameterInfinity(3)
-                .Build();
+            var inventory = new Inventory(blockFactory, levelConfig.Inventory);
             
-            var placingPresenter = new  PlacingPresenter(new VectorToDirection(), map, inventory, _treeConfig);
+            var placingPresenter = new  PlacingPresenter(new VectorToDirection(), map, inventory, levelConfig.Tree);
             var removingPresenter = new RemovingPresenter(map);
             var builderPresenter = new BuilderPresenter(map, placingPresenter, removingPresenter);
 
-            var tree = new BlockTree(_treeConfig, map);
+            var tree = new BlockTree(levelConfig.Tree, map);
             var treeToViewString = new TreeToViewString(levelConfig.Parameters);
             var playerFormulaPresenter = new PlayerFormulaPresenter(tree, treeToViewString);
 
             var treeToDelegate = new TreeToDelegate(levelConfig.Parameters);
 
-            var formulaTask = new FormulaTask(tree, _FormulaTaskConfig, levelConfig.Parameters, new ConfigStringToDelegate(), treeToDelegate);
+            var formulaTask = new FormulaTask(tree, levelConfig.Tasks.FormulaTask, levelConfig.Parameters, new ConfigStringToDelegate(), treeToDelegate);
             var amountTaskBuilder = new AmountTaskBuilder();
             AmountTask amountTask2Stars = amountTaskBuilder
                 .StartBuilding()
