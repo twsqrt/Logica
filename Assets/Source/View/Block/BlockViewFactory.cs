@@ -5,15 +5,15 @@ using Model.BlockLogic;
 using System.Collections.Generic;
 using UnityEngine;
 using View.BlockLogic.ViewDataLogic;
+using Config.JsonConverter;
 
 namespace View.BlockLogic
 {
     [CreateAssetMenu(fileName = "Block View Factory", menuName = "Factory/Block View", order = 51)]
     public class BlockViewFactory : ScriptableObject, IBlockVisitor<BlockView>
     {
-        [SerializeField] private OperationViewDataResolver _operationResolver;
+        [SerializeField] private BlockViewDataResolver _viewDataResolver;
         [SerializeField] private OperationView _operationPrefab;
-        [SerializeField] private ParameterViewData _parameterViewData;
         [SerializeField] private ParameterView _parameterPrefab;
 
         private Dictionary<int, string> _parameterNames;
@@ -26,7 +26,7 @@ namespace View.BlockLogic
         private BlockView VisitOperation(LogicOperation operation)
         {
             OperationView view = Instantiate(_operationPrefab);
-            OperationViewData viewData = _operationResolver.Resolve(operation.OperationType);
+            OperationViewData viewData = _viewDataResolver.GetOperationData(operation.OperationType);
             view.Init(viewData, operation);
 
             return view;
@@ -42,7 +42,7 @@ namespace View.BlockLogic
         {
             ParameterView parameterView = Instantiate(_parameterPrefab);
             string name = _parameterNames[parameter.Id];
-            parameterView.Init(_parameterViewData, name, parameter);
+            parameterView.Init(_viewDataResolver.ParameterData, name, parameter);
 
             return parameterView;
         }
