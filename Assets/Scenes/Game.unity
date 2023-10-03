@@ -2449,10 +2449,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1654748138}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 273cbcaf677e5d14b81ae0eab5eaa941, type: 3}
+  m_Script: {fileID: 11500000, guid: 7cbf295479aa6544183f765324eaf005, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _parameterNamesConfig: {fileID: 11400000, guid: ef425b19b5069844eaca50b8f2b0572e, type: 2}
   _mapView: {fileID: 19607403}
   _builderView: {fileID: 586183810}
   _removingButton: {fileID: 8120737854257037826}

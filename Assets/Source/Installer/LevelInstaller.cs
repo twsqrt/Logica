@@ -18,12 +18,10 @@ using View.MapLogic;
 using View;
 using Zenject;
 
-namespace EntryPointLogic
+namespace InstallerLogic
 {
-    public class EntryPoint : MonoInstaller
+    public class LevelInstaller : MonoInstaller
     {
-        [SerializeField] private ParameterNamesConfig _parameterNamesConfig;
-
         [SerializeField] private MapView _mapView;
         [SerializeField] private BuilderView _builderView;
         [SerializeField] private RemovingButton _removingButton;
@@ -32,9 +30,9 @@ namespace EntryPointLogic
         [SerializeField] private ExecutionButton _executionButton;
         [SerializeField] private LevelTasksView _levelTasksView;
 
-        private void BindConfigs(LevelConfig levelConfig)
+        private void BindConfigs()
         {
-            Container.BindInstance(_parameterNamesConfig);
+            LevelConfig levelConfig = LevelConfigLoader.Load("level.json");
 
             Container.BindInstance(levelConfig.Map);
             Container.BindInstance(levelConfig.Inventory);
@@ -96,9 +94,7 @@ namespace EntryPointLogic
 
         public override void InstallBindings()
         {
-            LevelConfig levelConfig = LevelConfigLoader.Load("level.json");
-
-            BindConfigs(levelConfig);
+            BindConfigs();
             Container.Bind<BlockFactory>().AsSingle();
             BindConverters();
             BindModel();
