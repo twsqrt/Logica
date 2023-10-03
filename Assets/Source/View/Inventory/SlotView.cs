@@ -24,9 +24,9 @@ namespace View.InventoryLogic
 
         public IHighlighter Highlighter => _highlighter;
 
-        private void InitBlock(IBlockData data)
+        private void InitBlock()
         {
-            BlockUIView blockView = data.AcceptFactory(_blockViewFactory);
+            BlockUIView blockView = _data.AcceptFactory(_blockViewFactory);
             blockView.transform.SetParent(_blockContainer, false);
         }
 
@@ -40,7 +40,7 @@ namespace View.InventoryLogic
         {
             _data = data;
 
-            InitBlock(data);
+            InitBlock();
             InitAmount(amount);
         }
 

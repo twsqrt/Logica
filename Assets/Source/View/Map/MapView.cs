@@ -1,7 +1,7 @@
 using UnityEngine;
 using Model.MapLogic;
 using System;
-using UnityEngine.Events;
+using Zenject;
 
 namespace View.MapLogic
 {
@@ -52,7 +52,7 @@ namespace View.MapLogic
             }
         }
 
-        public void Init(Map map)
+        [Inject] private void Init(Map map)
         {
             _width = map.Width;
             _height = map.Height;

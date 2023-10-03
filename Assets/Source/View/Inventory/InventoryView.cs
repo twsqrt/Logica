@@ -3,6 +3,8 @@ using Model.InventoryLogic;
 using Presenter.BuilderLogic;
 using System.Collections.Generic;
 using UnityEngine;
+using View.BlockLogic;
+using Zenject;
 
 namespace View.InventoryLogic
 {
@@ -35,7 +37,10 @@ namespace View.InventoryLogic
             _currentSlot = null;
         }
 
-        public void Init(Inventory inventory, BuilderPresenter builderPresenter, PlacingPresenter placingPresenter)
+        [Inject] private void Init(
+            Inventory inventory, 
+            BuilderPresenter builderPresenter, 
+            PlacingPresenter placingPresenter)
         {
             _builderPresenter = builderPresenter;
 

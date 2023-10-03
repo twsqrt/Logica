@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using View.HighlighterLogic;
 using Model.TreeLogic;
+using Zenject;
 
 namespace View
 {
@@ -20,7 +21,7 @@ namespace View
                 _highlighter.HighlightDisable();
         }
 
-        public void Init(BlockTree tree, ExecutionPresenter presenter)
+        [Inject] private void Init(BlockTree tree, ExecutionPresenter presenter)
         {
             _presenter = presenter;
             tree.OnChanged += UpdateButtonView;

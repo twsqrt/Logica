@@ -2,6 +2,7 @@ using Model.TreeLogic;
 using Presenter;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace View
 {
@@ -9,7 +10,7 @@ namespace View
     {
         [SerializeField] private TextMeshProUGUI _formulaText;
 
-        public void Init(BlockTree tree, PlayerFormulaPresenter formulaPresenter)
+        [Inject] private void Init(BlockTree tree, PlayerFormulaPresenter formulaPresenter)
         {
             tree.OnChanged += () => _formulaText.text = formulaPresenter.GetFormulaString();
         }

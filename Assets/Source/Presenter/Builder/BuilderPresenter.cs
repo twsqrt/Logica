@@ -32,7 +32,7 @@ namespace Presenter.BuilderLogic
             UpdateCorrectPositions();
         }
 
-        public BuilderPresenter(Map map, BuilderPresenterState placing, BuilderPresenterState removing)
+        public BuilderPresenter(Map map, PlacingPresenter placing, RemovingPresenter removing)
         {
             IEnumerable<int> widthRange = Enumerable.Range(0, map.Width);
             IEnumerable<int> heightRange = Enumerable.Range(0, map.Height);

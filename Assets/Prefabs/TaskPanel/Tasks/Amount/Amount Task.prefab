@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f93bffda66ed1644894b46e6429b5ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _blockViewFactory: {fileID: 11400000, guid: 0bc38d65d0e123f4198acfc430e13d65, type: 2}
   _conditionPrefab: {fileID: 843655574845631233, guid: c93e8495f5b42444c80eda6190b5a1b0, type: 3}
   _container: {fileID: 5493960216067555942}
 --- !u!114 &1228565407619439326

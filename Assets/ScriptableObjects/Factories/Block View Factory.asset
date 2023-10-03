@@ -15,4 +15,4 @@ MonoBehaviour:
   _viewDataResolver: {fileID: 11400000, guid: 711674108cf254b4499bbc3493b3c0d3, type: 2}
   _operationPrefab: {fileID: 8637023185215769557, guid: a6430ccead374184e9d37321dd4450dc, type: 3}
   _parameterPrefab: {fileID: 711945134623570403, guid: 4c136edf134b5bc4d8b443ddd287b704, type: 3}
-  _parametersConifg: {fileID: 11400000, guid: ef425b19b5069844eaca50b8f2b0572e, type: 2}
+  _parametersConfig: {fileID: 11400000, guid: ef425b19b5069844eaca50b8f2b0572e, type: 2}

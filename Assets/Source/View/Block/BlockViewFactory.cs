@@ -2,7 +2,6 @@ using Config;
 using Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic;
 using Model.BlockLogic.LogicOperationLogic;
 using Model.BlockLogic;
-using System.Collections.Generic;
 using UnityEngine;
 using View.BlockLogic.ViewDataLogic;
 
@@ -14,8 +13,7 @@ namespace View.BlockLogic
         [SerializeField] private BlockViewDataResolver _viewDataResolver;
         [SerializeField] private OperationView _operationPrefab;
         [SerializeField] private ParameterView _parameterPrefab;
-        [SerializeField] private ParameterNamesConfig _parametersConifg;
-
+        [SerializeField] private ParameterNamesConfig _parametersConfig;
 
         private BlockView VisitOperation(LogicOperation operation)
         {
@@ -35,7 +33,7 @@ namespace View.BlockLogic
         public BlockView Visit(Parameter parameter)
         {
             ParameterView parameterView = Instantiate(_parameterPrefab);
-            string name = _parametersConifg[parameter.Id];
+            string name = _parametersConfig[parameter.Id];
             parameterView.Init(_viewDataResolver.ParameterData, name, parameter);
 
             return parameterView;

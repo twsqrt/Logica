@@ -1,7 +1,8 @@
 using Presenter.BuilderLogic;
-using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine;
 using View.HighlighterLogic;
+using Zenject;
 
 namespace Veiw.BuilderLogic
 {
@@ -10,7 +11,7 @@ namespace Veiw.BuilderLogic
         [SerializeField] private ComponentHighlighter _highlighter;
         private BuilderPresenter _builderPresenter;
 
-        public void Init(BuilderPresenter builderPresenter, RemovingPresenter removingPresenter)
+        [Inject] private void Init(BuilderPresenter builderPresenter, RemovingPresenter removingPresenter)
         {
             _builderPresenter = builderPresenter;
 

@@ -19,7 +19,8 @@ namespace Model.LevelTaskLogic
 
         public FormulaTaskConfig TaskConfig => _taskConfig;
 
-        public FormulaTask(BlockTree tree, 
+        public FormulaTask(
+            BlockTree tree, 
             FormulaTaskConfig taskConfig, 
             IConverter<string, Delegate> fromConfigString, 
             IConverter<BlockTree, Delegate> fromTree)

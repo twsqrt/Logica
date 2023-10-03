@@ -6,6 +6,7 @@ using System;
 using UnityEngine;
 using View.HighlighterLogic;
 using View.MapLogic;
+using Zenject;
 
 namespace View.BuilderLogic
 {
@@ -35,7 +36,7 @@ namespace View.BuilderLogic
             HighilghtPositions(positions);
         }
 
-        public void Init(MapView mapView, BuilderPresenter presenter)
+        [Inject] private void Init(MapView mapView, BuilderPresenter presenter)
         {
             _mapView = mapView;
             _mapView.OnTileClicked += p => presenter.OnPositionSelected(p);

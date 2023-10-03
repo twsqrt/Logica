@@ -2,32 +2,34 @@ using System.Collections.Generic;
 using System.Linq;
 using Model.LevelTaskLogic;
 using UnityEngine;
+using Zenject;
 
 namespace View.LevelTaskLogic
 {
     public class LevelTasksView : MonoBehaviour
     {
+        [SerializeField] private LevelTaskViewFactory _taskViewFactory;
         [SerializeField] private RectTransform _oneStarHeaderPrefab;
         [SerializeField] private RectTransform _twoStarsHeaderPrefab;
         [SerializeField] private RectTransform _treeStarsHeaderPrefab;
         [SerializeField] private Transform _container;
-        [SerializeField] private LevelTaskViewFactory _taskViewFactory;
 
         private Dictionary<LevelScore, RectTransform> _headherPrefabs;
         private IEnumerable<LevelScore> _levelScores;
         private LevelTasks _levelTasks;
 
-        public void Init(LevelTasks levelTasks)
+        [Inject] private void Init(LevelTasks levelTasks)
         {
+            _levelTasks = levelTasks;
+
             _headherPrefabs = new Dictionary<LevelScore, RectTransform>()
             {
                 {LevelScore.ONE_STAR, _oneStarHeaderPrefab},
                 {LevelScore.TWO_STARS, _twoStarsHeaderPrefab},
                 {LevelScore.TREE_STARS, _treeStarsHeaderPrefab},
             };
-            _levelScores = _headherPrefabs.Keys;
-            _levelTasks = levelTasks;
 
+            _levelScores = _headherPrefabs.Keys;
             Render();
         }
 
@@ -47,11 +49,5 @@ namespace View.LevelTaskLogic
                 }
             }
         }
-
-        public void Open()
-            => gameObject.SetActive(true);
-
-        public void Close()
-            => gameObject.SetActive(false);
     }
 }

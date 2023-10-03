@@ -1,4 +1,3 @@
-using Config.LevelLogic.LevelTaskLogic;
 using Config;
 using Converter;
 using Model.BlockLogic.LogicOperationLogic;
@@ -9,20 +8,21 @@ using Model.MapLogic;
 using Model.TreeLogic;
 using Presenter.BuilderLogic;
 using Presenter;
+using System;
 using UnityEngine;
 using Veiw.BuilderLogic;
-using View.BlockLogic;
 using View.BuilderLogic;
 using View.InventoryLogic;
 using View.LevelTaskLogic;
 using View.MapLogic;
 using View;
+using Zenject;
 
 namespace EntryPointLogic
 {
-    public class EntryPoint : MonoBehaviour
+    public class EntryPoint : MonoInstaller
     {
-        [SerializeField] private ParameterNamesConfig _parametersConfig;
+        [SerializeField] private ParameterNamesConfig _parameterNamesConfig;
 
         [SerializeField] private MapView _mapView;
         [SerializeField] private BuilderView _builderView;
@@ -32,26 +32,80 @@ namespace EntryPointLogic
         [SerializeField] private ExecutionButton _executionButton;
         [SerializeField] private LevelTasksView _levelTasksView;
 
-        private void Awake()
+        private void BindConfigs(LevelConfig levelConfig)
+        {
+            Container.BindInstance(_parameterNamesConfig);
+
+            Container.BindInstance(levelConfig.Map);
+            Container.BindInstance(levelConfig.Inventory);
+            Container.BindInstance(levelConfig.Tree);
+            Container.BindInstance(levelConfig.Tasks.FormulaTask);
+        }
+
+        private void BindConverters()
+        {
+            Container
+                .Bind<IConverter<Vector2Int, Direction>>()
+                .To<VectorToDirection>()
+                .AsSingle();
+            
+            Container
+                .Bind<IConverter<string, Delegate>>()
+                .To<ConfigStringToDelegate>()
+                .AsSingle();
+            
+            Container
+                .Bind<IConverter<BlockTree, string>>()
+                .To<TreeToViewString>()
+                .AsSingle();
+            
+            Container
+                .Bind<IConverter<BlockTree, Delegate>>()
+                .To<TreeToDelegate>()
+                .AsSingle();
+        }
+
+        private void BindModel()
+        {
+            Container.Bind<Map>().AsSingle();
+            Container.Bind<Inventory>().AsSingle();
+            Container.Bind<BlockTree>().AsSingle();
+            Container.Bind<FormulaTask>().AsSingle();
+        }
+
+        private void BindPresenters()
+        {
+            Container.Bind<PlacingPresenter>().AsSingle();
+            Container.Bind<RemovingPresenter>().AsSingle();
+            Container.Bind<BuilderPresenter>().AsSingle();
+            Container.Bind<PlayerFormulaPresenter>().AsSingle();
+            Container.Bind<ExecutionPresenter>().AsSingle();
+        }
+
+        private void BindView()
+        {
+            Container.BindInstance(_mapView).NonLazy();
+            Container.BindInstance(_builderView).NonLazy();
+            Container.BindInstance(_inventoryView).NonLazy();
+            Container.BindInstance(_playerFormulaView).NonLazy();
+            Container.BindInstance(_levelTasksView).NonLazy();
+
+            Container.BindInstance(_removingButton).NonLazy();
+            Container.BindInstance(_executionButton).NonLazy();
+        }
+
+        public override void InstallBindings()
         {
             LevelConfig levelConfig = LevelConfigLoader.Load("level.json");
 
-            var map = new Map(levelConfig.Map);
-    
-            var blockFactory = new BlockFactory();
-            var inventory = new Inventory(blockFactory, levelConfig.Inventory);
-            
-            var placingPresenter = new  PlacingPresenter(new VectorToDirection(), map, inventory, levelConfig.Tree);
-            var removingPresenter = new RemovingPresenter(map);
-            var builderPresenter = new BuilderPresenter(map, placingPresenter, removingPresenter);
+            BindConfigs(levelConfig);
+            Container.Bind<BlockFactory>().AsSingle();
+            BindConverters();
+            BindModel();
 
-            var tree = new BlockTree(levelConfig.Tree, map);
-            var treeToViewString = new TreeToViewString(_parametersConfig);
-            var playerFormulaPresenter = new PlayerFormulaPresenter(tree, treeToViewString);
+            Inventory inventory = Container.Resolve<Inventory>();
+            FormulaTask formulaTask = Container.Resolve<FormulaTask>();
 
-            var treeToDelegate = new TreeToDelegate(levelConfig.Tasks.FormulaTask);
-    
-            var formulaTask = new FormulaTask(tree, levelConfig.Tasks.FormulaTask, new ConfigStringToDelegate(), treeToDelegate);
             var amountTaskBuilder = new AmountTaskBuilder();
             AmountTask amountTask2Stars = amountTaskBuilder
                 .StartBuilding()
@@ -71,16 +125,11 @@ namespace EntryPointLogic
                 .RegisterForTwoStars(amountTask2Stars)
                 .RegisterForTreeStars(amountTask3Stars)
                 .Build();
+            
+            Container.BindInstance(levelTasks);
 
-            var executionPresenter = new ExecutionPresenter(tree, levelTasks);
-
-            _mapView.Init(map);
-            _playerFormulaView.Init(tree, playerFormulaPresenter);
-            _builderView.Init(_mapView, builderPresenter);
-            _removingButton.Init(builderPresenter, removingPresenter);
-            _inventoryView.Init(inventory, builderPresenter, placingPresenter);
-            _executionButton.Init(tree, executionPresenter);
-            _levelTasksView.Init(levelTasks);
+            BindPresenters();
+            BindView();
         }
     }
 }
