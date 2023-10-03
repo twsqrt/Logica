@@ -24,9 +24,6 @@ namespace EntryPointLogic
     {
         [SerializeField] private ParameterNamesConfig _parametersConfig;
 
-        [SerializeField] private BlockUIViewFactory _blockUIViewFactory;
-        [SerializeField] private BlockViewFactory _blockViewFactory;
-
         [SerializeField] private MapView _mapView;
         [SerializeField] private BuilderView _builderView;
         [SerializeField] private RemovingButton _removingButton;
@@ -52,9 +49,9 @@ namespace EntryPointLogic
             var treeToViewString = new TreeToViewString(_parametersConfig);
             var playerFormulaPresenter = new PlayerFormulaPresenter(tree, treeToViewString);
 
-            var treeToDelegate = new TreeToDelegate(_parametersConfig);
-
-            var formulaTask = new FormulaTask(tree, levelConfig.Tasks.FormulaTask, _parametersConfig, new ConfigStringToDelegate(), treeToDelegate);
+            var treeToDelegate = new TreeToDelegate(levelConfig.Tasks.FormulaTask);
+    
+            var formulaTask = new FormulaTask(tree, levelConfig.Tasks.FormulaTask, new ConfigStringToDelegate(), treeToDelegate);
             var amountTaskBuilder = new AmountTaskBuilder();
             AmountTask amountTask2Stars = amountTaskBuilder
                 .StartBuilding()

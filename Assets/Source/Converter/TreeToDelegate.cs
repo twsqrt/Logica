@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Linq;
 using System;
+using Config.LevelLogic.LevelTaskLogic;
 
 namespace Converter
 {
@@ -24,9 +25,9 @@ namespace Converter
                 return Expression.Not(or);
             }
 
-            public Visitor(ParameterNamesConfig config)
+            public Visitor(FormulaTaskConfig formulaTaskConfig)
             {
-                _parameters = config.ParametersId
+                _parameters = formulaTaskConfig.ParametersId
                     .ToDictionary(i => i, i => Expression.Parameter(typeof(bool), $"id{i}"));
             }
 
@@ -58,9 +59,9 @@ namespace Converter
 
         private readonly Visitor _visitor;
 
-        public TreeToDelegate(ParameterNamesConfig parametersConfig)
+        public TreeToDelegate(FormulaTaskConfig formulaTaskConfig)
         {
-            _visitor = new Visitor(parametersConfig);
+            _visitor = new Visitor(formulaTaskConfig);
         }
 
         public Delegate Convert(BlockTree tree)

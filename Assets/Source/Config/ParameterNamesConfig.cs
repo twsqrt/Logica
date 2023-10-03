@@ -21,13 +21,7 @@ namespace Config
         [SerializeField] private ParameterConfig[] _parameters;
 
         private Dictionary<int, string> _parametersDictionary = null;
-
-        public IEnumerable<int> ParametersId 
-            => _parameters.Select(p => p.Id);
         
-        public int NumberOfParameters
-            => _parameters.Count(); 
-
         public string this[int id]
         {
             get

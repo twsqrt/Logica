@@ -21,7 +21,6 @@ namespace Model.LevelTaskLogic
 
         public FormulaTask(BlockTree tree, 
             FormulaTaskConfig taskConfig, 
-            ParameterNamesConfig parametersConfig,
             IConverter<string, Delegate> fromConfigString, 
             IConverter<BlockTree, Delegate> fromTree)
         {
@@ -30,7 +29,8 @@ namespace Model.LevelTaskLogic
             _taskConfig = taskConfig;
 
             IEnumerable<bool> booleanDomain = new[]{false, true};
-            _definitionArea = booleanDomain.InPower(parametersConfig.NumberOfParameters).Select(s => s.ToArray());
+            int numberOfParameters = taskConfig.ParametersId.Count();
+            _definitionArea = booleanDomain.InPower(numberOfParameters).Select(s => s.ToArray());
 
             _sourceFunction = fromConfigString.Convert(taskConfig.ParseText);
         }

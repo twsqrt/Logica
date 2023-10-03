@@ -47,6 +47,11 @@
     },
     "tasks": {
         "formulaTask": {
+            "parameters": [
+                1,
+                2,
+                3
+            ],
             "formulaViewText": "¬(x ∧ z) ∨ y",
             "formulaPraseText": "¬(x ∧ z) ∨ y"
         }
