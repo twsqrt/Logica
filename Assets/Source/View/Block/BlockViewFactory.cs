@@ -14,13 +14,8 @@ namespace View.BlockLogic
         [SerializeField] private BlockViewDataResolver _viewDataResolver;
         [SerializeField] private OperationView _operationPrefab;
         [SerializeField] private ParameterView _parameterPrefab;
+        [SerializeField] private ParametersConfig _parametersConifg;
 
-        private Dictionary<int, string> _parameterNames;
-
-        public void Init(ParametersConfig parametersConfig)
-        {
-            _parameterNames = parametersConfig.ToNameDictionary();
-        }
 
         private BlockView VisitOperation(LogicOperation operation)
         {
@@ -40,7 +35,7 @@ namespace View.BlockLogic
         public BlockView Visit(Parameter parameter)
         {
             ParameterView parameterView = Instantiate(_parameterPrefab);
-            string name = _parameterNames[parameter.Id];
+            string name = _parametersConifg[parameter.Id];
             parameterView.Init(_viewDataResolver.ParameterData, name, parameter);
 
             return parameterView;

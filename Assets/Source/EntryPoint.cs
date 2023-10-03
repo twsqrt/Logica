@@ -41,9 +41,6 @@ namespace EntryPointLogic
 
             var map = new Map(levelConfig.Map);
     
-            _blockUIViewFactory.Init(_parametersConfig);
-            _blockViewFactory.Init(_parametersConfig);
-
             var blockFactory = new BlockFactory();
             var inventory = new Inventory(blockFactory, levelConfig.Inventory);
             

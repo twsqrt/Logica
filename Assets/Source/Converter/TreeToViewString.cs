@@ -13,7 +13,7 @@ namespace Converter
         private class Visitor : IBlockVisitor<string>
         {
             private const char DEFAULT_OPERAND_SYMBOL = '_';
-            private readonly Dictionary<int, string> _parameterNames;
+            private readonly ParametersConfig _parametersConfig;
 
             private bool IsBracketsNeded(BlockType operation, BlockType operand)
             {
@@ -42,7 +42,7 @@ namespace Converter
 
             public Visitor(ParametersConfig parametersConfig)
             {
-                _parameterNames = parametersConfig.ToNameDictionary();
+                _parametersConfig = parametersConfig;
             }
 
             public string Visit(OperationNot operationNot)
@@ -68,7 +68,7 @@ namespace Converter
             }
 
             public string Visit(Parameter parameter)
-                => _parameterNames[parameter.Id];
+                => _parametersConfig[parameter.Id];
         }
 
         private readonly Visitor _visitor;

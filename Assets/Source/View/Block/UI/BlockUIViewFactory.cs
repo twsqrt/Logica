@@ -12,13 +12,7 @@ namespace View.BlockLogic
         [SerializeField] private BlockViewDataResolver _viewDataResolver;
         [SerializeField] private OperationUIView _operationPrefab;
         [SerializeField] private ParameterUIView _parameterPrefab;
-
-        private Dictionary<int, string> _parameterNames;
-
-        public void Init(ParametersConfig parametersConfig)
-        {
-            _parameterNames = parametersConfig.ToNameDictionary();
-        }
+        [SerializeField] private ParametersConfig _parametersConfig;
 
         public BlockUIView Create(OperationData data)
         {
@@ -31,7 +25,7 @@ namespace View.BlockLogic
 
         public BlockUIView Create(ParameterData data)
         {
-            string parameterName = _parameterNames[data.Id];
+            string parameterName = _parametersConfig[data.Id];
             ParameterUIView view = Instantiate(_parameterPrefab);
             view.Init(_viewDataResolver.ParameterData, parameterName);
             
