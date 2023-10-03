@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc54072491f19841aacbe94f64d9a70, type: 3}
   m_Name: Block UI View Factory
   m_EditorClassIdentifier: 
-  _operationResolver: {fileID: 11400000, guid: 93d177ff836b32347890b7b2da570378, type: 2}
-  _parameterViewData: {fileID: 11400000, guid: ec45c0305c93a8e4581241496c1d9916, type: 2}
+  _viewDataResolver: {fileID: 11400000, guid: 711674108cf254b4499bbc3493b3c0d3, type: 2}
   _operationPrefab: {fileID: 1197424431135455758, guid: 764d4b1b6044fb04bafc4b6b75c556c9, type: 3}
   _parameterPrefab: {fileID: 2363059482917959722, guid: d567e2727d98fe047b6388ee5910d368, type: 3}

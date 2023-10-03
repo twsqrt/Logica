@@ -22,6 +22,8 @@ namespace EntryPointLogic
 {
     public class EntryPoint : MonoBehaviour
     {
+        [SerializeField] private ParametersConfig _parametersConfig;
+
         [SerializeField] private BlockUIViewFactory _blockUIViewFactory;
         [SerializeField] private BlockViewFactory _blockViewFactory;
 
@@ -39,8 +41,8 @@ namespace EntryPointLogic
 
             var map = new Map(levelConfig.Map);
     
-            _blockUIViewFactory.Init(levelConfig.Parameters);
-            _blockViewFactory.Init(levelConfig.Parameters);
+            _blockUIViewFactory.Init(_parametersConfig);
+            _blockViewFactory.Init(_parametersConfig);
 
             var blockFactory = new BlockFactory();
             var inventory = new Inventory(blockFactory, levelConfig.Inventory);
@@ -50,12 +52,12 @@ namespace EntryPointLogic
             var builderPresenter = new BuilderPresenter(map, placingPresenter, removingPresenter);
 
             var tree = new BlockTree(levelConfig.Tree, map);
-            var treeToViewString = new TreeToViewString(levelConfig.Parameters);
+            var treeToViewString = new TreeToViewString(_parametersConfig);
             var playerFormulaPresenter = new PlayerFormulaPresenter(tree, treeToViewString);
 
-            var treeToDelegate = new TreeToDelegate(levelConfig.Parameters);
+            var treeToDelegate = new TreeToDelegate(_parametersConfig);
 
-            var formulaTask = new FormulaTask(tree, levelConfig.Tasks.FormulaTask, levelConfig.Parameters, new ConfigStringToDelegate(), treeToDelegate);
+            var formulaTask = new FormulaTask(tree, levelConfig.Tasks.FormulaTask, _parametersConfig, new ConfigStringToDelegate(), treeToDelegate);
             var amountTaskBuilder = new AmountTaskBuilder();
             AmountTask amountTask2Stars = amountTaskBuilder
                 .StartBuilding()

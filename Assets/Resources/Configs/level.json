@@ -8,22 +8,6 @@
         "rootX": 1,
         "rootY": 1
     },
-    "parameters": {
-        "parameters": [
-            {
-                "id": 1,
-                "name": "x"
-            },
-            {
-                "id": 2,
-                "name": "y"
-            },
-            {
-                "id": 3,
-                "name": "z"
-            }
-        ]
-    },
     "inventory": {
         "slots": [
             {
