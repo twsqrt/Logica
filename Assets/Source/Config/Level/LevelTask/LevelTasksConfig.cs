@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Config.LevelTaskLogic
+namespace Config.LevelLogic.LevelTaskLogic
 {
     public class LevelTasksConfig
     {

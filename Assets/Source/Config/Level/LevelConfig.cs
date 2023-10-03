@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
-using Config.ParametersLogic;
-using Config.InventoryLogic;
-using Config.LevelTaskLogic;
+using Config.LevelLogic.ParametersLogic;
+using Config.LevelLogic.InventoryLogic;
+using Config.LevelLogic.LevelTaskLogic;
 
 namespace Config
 {

@@ -1,4 +1,4 @@
-using Config.ParametersLogic;
+using Config.LevelLogic.ParametersLogic;
 using Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic;
 using Model.BlockLogic.LogicOperationLogic;
 using Model.BlockLogic;

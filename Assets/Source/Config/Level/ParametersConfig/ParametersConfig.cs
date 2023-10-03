@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace Config.ParametersLogic
+namespace Config.LevelLogic.ParametersLogic
 {
     public class ParametersConfig
     {

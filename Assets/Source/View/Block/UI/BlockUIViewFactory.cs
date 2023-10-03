@@ -1,4 +1,4 @@
-using Config.ParametersLogic;
+using Config.LevelLogic.ParametersLogic;
 using Model.BlockLogic.BlockDataLogic;
 using System.Collections.Generic;
 using UnityEngine;

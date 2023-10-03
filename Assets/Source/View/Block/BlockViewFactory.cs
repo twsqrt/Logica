@@ -1,11 +1,11 @@
-using Config.ParametersLogic;
+using Config.LevelLogic.ParametersLogic;
 using Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic;
 using Model.BlockLogic.LogicOperationLogic;
 using Model.BlockLogic;
 using System.Collections.Generic;
 using UnityEngine;
 using View.BlockLogic.ViewDataLogic;
-using Config.JsonConverter;
+using Config.LevelLogic.JsonConverter;
 
 namespace View.BlockLogic
 {

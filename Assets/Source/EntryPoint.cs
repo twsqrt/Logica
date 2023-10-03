@@ -1,4 +1,4 @@
-using Config.LevelTaskLogic;
+using Config.LevelLogic.LevelTaskLogic;
 using Config;
 using Converter;
 using Model.BlockLogic.LogicOperationLogic;
