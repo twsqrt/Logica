@@ -24,7 +24,7 @@ namespace Converter
                 return Expression.Not(or);
             }
 
-            public Visitor(ParametersConfig config)
+            public Visitor(ParameterNamesConfig config)
             {
                 _parameters = config.ParametersId
                     .ToDictionary(i => i, i => Expression.Parameter(typeof(bool), $"id{i}"));
@@ -58,7 +58,7 @@ namespace Converter
 
         private readonly Visitor _visitor;
 
-        public TreeToDelegate(ParametersConfig parametersConfig)
+        public TreeToDelegate(ParameterNamesConfig parametersConfig)
         {
             _visitor = new Visitor(parametersConfig);
         }

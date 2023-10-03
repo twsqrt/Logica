@@ -12,7 +12,7 @@ namespace View.BlockLogic
         [SerializeField] private BlockViewDataResolver _viewDataResolver;
         [SerializeField] private OperationUIView _operationPrefab;
         [SerializeField] private ParameterUIView _parameterPrefab;
-        [SerializeField] private ParametersConfig _parametersConfig;
+        [SerializeField] private ParameterNamesConfig _parametersConfig;
 
         public BlockUIView Create(OperationData data)
         {

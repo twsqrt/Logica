@@ -21,7 +21,7 @@ namespace Model.LevelTaskLogic
 
         public FormulaTask(BlockTree tree, 
             FormulaTaskConfig taskConfig, 
-            ParametersConfig parametersConfig,
+            ParameterNamesConfig parametersConfig,
             IConverter<string, Delegate> fromConfigString, 
             IConverter<BlockTree, Delegate> fromTree)
         {

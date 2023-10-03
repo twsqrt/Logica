@@ -14,7 +14,7 @@ namespace View.BlockLogic
         [SerializeField] private BlockViewDataResolver _viewDataResolver;
         [SerializeField] private OperationView _operationPrefab;
         [SerializeField] private ParameterView _parameterPrefab;
-        [SerializeField] private ParametersConfig _parametersConifg;
+        [SerializeField] private ParameterNamesConfig _parametersConifg;
 
 
         private BlockView VisitOperation(LogicOperation operation)

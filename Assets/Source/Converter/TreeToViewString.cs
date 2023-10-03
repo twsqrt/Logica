@@ -13,7 +13,7 @@ namespace Converter
         private class Visitor : IBlockVisitor<string>
         {
             private const char DEFAULT_OPERAND_SYMBOL = '_';
-            private readonly ParametersConfig _parametersConfig;
+            private readonly ParameterNamesConfig _parametersConfig;
 
             private bool IsBracketsNeded(BlockType operation, BlockType operand)
             {
@@ -40,7 +40,7 @@ namespace Converter
                 return isBracketsNeded ? $"({operandText})" : operandText;
             }
 
-            public Visitor(ParametersConfig parametersConfig)
+            public Visitor(ParameterNamesConfig parametersConfig)
             {
                 _parametersConfig = parametersConfig;
             }
@@ -73,7 +73,7 @@ namespace Converter
 
         private readonly Visitor _visitor;
 
-        public TreeToViewString(ParametersConfig parametersConfig)
+        public TreeToViewString(ParameterNamesConfig parametersConfig)
         {
             _visitor = new Visitor(parametersConfig);
         }

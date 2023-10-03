@@ -7,8 +7,8 @@ using UnityEngine;
 namespace Config
 {
 
-    [CreateAssetMenu(fileName = "Parameters Config", menuName = "Config/Parameters Config", order = 51)]
-    public class ParametersConfig : ScriptableObject
+    [CreateAssetMenu(fileName = "Parameters Names Config", menuName = "Config/Parameters Names", order = 51)]
+    public class ParameterNamesConfig : ScriptableObject
     {
         [Serializable] private class ParameterConfig
         {

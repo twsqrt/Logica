@@ -22,7 +22,7 @@ namespace EntryPointLogic
 {
     public class EntryPoint : MonoBehaviour
     {
-        [SerializeField] private ParametersConfig _parametersConfig;
+        [SerializeField] private ParameterNamesConfig _parametersConfig;
 
         [SerializeField] private BlockUIViewFactory _blockUIViewFactory;
         [SerializeField] private BlockViewFactory _blockViewFactory;
