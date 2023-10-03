@@ -1,4 +1,4 @@
-using Config.LevelTaskLogic;
+using Config.LevelLogic.LevelTaskLogic;
 using Config;
 using Converter;
 using Model.BlockLogic.LogicOperationLogic;
@@ -22,8 +22,7 @@ namespace EntryPointLogic
 {
     public class EntryPoint : MonoBehaviour
     {
-        [SerializeField] private BlockUIViewFactory _blockUIViewFactory;
-        [SerializeField] private BlockViewFactory _blockViewFactory;
+        [SerializeField] private ParameterNamesConfig _parametersConfig;
 
         [SerializeField] private MapView _mapView;
         [SerializeField] private BuilderView _builderView;
@@ -39,9 +38,6 @@ namespace EntryPointLogic
 
             var map = new Map(levelConfig.Map);
     
-            _blockUIViewFactory.Init(levelConfig.Parameters);
-            _blockViewFactory.Init(levelConfig.Parameters);
-
             var blockFactory = new BlockFactory();
             var inventory = new Inventory(blockFactory, levelConfig.Inventory);
             
@@ -50,12 +46,12 @@ namespace EntryPointLogic
             var builderPresenter = new BuilderPresenter(map, placingPresenter, removingPresenter);
 
             var tree = new BlockTree(levelConfig.Tree, map);
-            var treeToViewString = new TreeToViewString(levelConfig.Parameters);
+            var treeToViewString = new TreeToViewString(_parametersConfig);
             var playerFormulaPresenter = new PlayerFormulaPresenter(tree, treeToViewString);
 
-            var treeToDelegate = new TreeToDelegate(levelConfig.Parameters);
-
-            var formulaTask = new FormulaTask(tree, levelConfig.Tasks.FormulaTask, levelConfig.Parameters, new ConfigStringToDelegate(), treeToDelegate);
+            var treeToDelegate = new TreeToDelegate(levelConfig.Tasks.FormulaTask);
+    
+            var formulaTask = new FormulaTask(tree, levelConfig.Tasks.FormulaTask, new ConfigStringToDelegate(), treeToDelegate);
             var amountTaskBuilder = new AmountTaskBuilder();
             AmountTask amountTask2Stars = amountTaskBuilder
                 .StartBuilding()

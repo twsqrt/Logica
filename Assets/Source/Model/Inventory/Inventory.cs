@@ -1,4 +1,4 @@
-using Config.InventoryLogic;
+using Config.LevelLogic.InventoryLogic;
 using Model.BlockLogic.BlockDataLogic;
 using Model.BlockLogic;
 using Model.InventoryLogic.AmountLogic;

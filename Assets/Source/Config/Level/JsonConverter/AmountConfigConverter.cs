@@ -1,8 +1,8 @@
 using System;
 using Newtonsoft.Json;
-using Config.InventoryLogic;
+using Config.LevelLogic.InventoryLogic;
 
-namespace Config.JsonConverterLogic
+namespace Config.LevelLogic.JsonConverterLogic
 {
     public class AmountConfigConverter : JsonConverter<AmountConfig>
     {

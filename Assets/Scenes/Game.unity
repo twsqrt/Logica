@@ -2637,7 +2637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 273cbcaf677e5d14b81ae0eab5eaa941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _FormulaTaskConfig: {fileID: 11400000, guid: b92b18ed74d21be47ad114ea762c8349, type: 2}
+  _parametersConfig: {fileID: 11400000, guid: ef425b19b5069844eaca50b8f2b0572e, type: 2}
   _blockUIViewFactory: {fileID: 11400000, guid: 0bc38d65d0e123f4198acfc430e13d65, type: 2}
   _blockViewFactory: {fileID: 11400000, guid: d3eb46a091f56484fb4ddc1651dab7c2, type: 2}
   _mapView: {fileID: 19607403}

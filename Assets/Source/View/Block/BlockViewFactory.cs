@@ -1,4 +1,4 @@
-using Config.ParametersLogic;
+using Config;
 using Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic;
 using Model.BlockLogic.LogicOperationLogic;
 using Model.BlockLogic;
@@ -11,22 +11,16 @@ namespace View.BlockLogic
     [CreateAssetMenu(fileName = "Block View Factory", menuName = "Factory/Block View", order = 51)]
     public class BlockViewFactory : ScriptableObject, IBlockVisitor<BlockView>
     {
-        [SerializeField] private OperationViewDataResolver _operationResolver;
+        [SerializeField] private BlockViewDataResolver _viewDataResolver;
         [SerializeField] private OperationView _operationPrefab;
-        [SerializeField] private ParameterViewData _parameterViewData;
         [SerializeField] private ParameterView _parameterPrefab;
+        [SerializeField] private ParameterNamesConfig _parametersConifg;
 
-        private Dictionary<int, string> _parameterNames;
-
-        public void Init(ParametersConfig parametersConfig)
-        {
-            _parameterNames = parametersConfig.ToNameDictionary();
-        }
 
         private BlockView VisitOperation(LogicOperation operation)
         {
             OperationView view = Instantiate(_operationPrefab);
-            OperationViewData viewData = _operationResolver.Resolve(operation.OperationType);
+            OperationViewData viewData = _viewDataResolver.GetOperationData(operation.OperationType);
             view.Init(viewData, operation);
 
             return view;
@@ -41,8 +35,8 @@ namespace View.BlockLogic
         public BlockView Visit(Parameter parameter)
         {
             ParameterView parameterView = Instantiate(_parameterPrefab);
-            string name = _parameterNames[parameter.Id];
-            parameterView.Init(_parameterViewData, name, parameter);
+            string name = _parametersConifg[parameter.Id];
+            parameterView.Init(_viewDataResolver.ParameterData, name, parameter);
 
             return parameterView;
         }

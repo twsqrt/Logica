@@ -1,5 +1,5 @@
-using Config.ParametersLogic;
 using Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic;
+using Config;
 using Model.BlockLogic.LogicOperationLogic;
 using Model.BlockLogic;
 using Model.TreeLogic;
@@ -13,7 +13,7 @@ namespace Converter
         private class Visitor : IBlockVisitor<string>
         {
             private const char DEFAULT_OPERAND_SYMBOL = '_';
-            private readonly Dictionary<int, string> _parameterNames;
+            private readonly ParameterNamesConfig _parametersConfig;
 
             private bool IsBracketsNeded(BlockType operation, BlockType operand)
             {
@@ -40,9 +40,9 @@ namespace Converter
                 return isBracketsNeded ? $"({operandText})" : operandText;
             }
 
-            public Visitor(ParametersConfig parametersConfig)
+            public Visitor(ParameterNamesConfig parametersConfig)
             {
-                _parameterNames = parametersConfig.ToNameDictionary();
+                _parametersConfig = parametersConfig;
             }
 
             public string Visit(OperationNot operationNot)
@@ -68,12 +68,12 @@ namespace Converter
             }
 
             public string Visit(Parameter parameter)
-                => _parameterNames[parameter.Id];
+                => _parametersConfig[parameter.Id];
         }
 
         private readonly Visitor _visitor;
 
-        public TreeToViewString(ParametersConfig parametersConfig)
+        public TreeToViewString(ParameterNamesConfig parametersConfig)
         {
             _visitor = new Visitor(parametersConfig);
         }
