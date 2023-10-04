@@ -1,14 +1,12 @@
 using Configs.LevelConfigs;
+using Extensions;
 using Model.BlocksLogic.BlocksData;
+using Model.BlocksLogic;
 using Model.InventoryLogic;
 using Model.MapLogic;
 using System.Linq;
 using System;
 using UnityEngine;
-using Model.BlocksLogic;
-using Extensions;
-using Converter;
-using System.Net.Http.Headers;
 
 namespace Presenter.Builder
 {
@@ -17,7 +15,6 @@ namespace Presenter.Builder
         private readonly Map _map;
         private readonly Inventory _inventory;
         private readonly Vector2Int _rootPosition;
-        private readonly IConverter<Vector2Int, Direction> _vectorToDirection;
 
         private IBlockData _currentData;
         private bool _isDataSelected;
@@ -38,15 +35,16 @@ namespace Presenter.Builder
         private bool PositionIsNotOccupied(Vector2Int position)
             => _map[position].IsOccupied == false;
 
-        private bool ExistOnlyOneParent(Vector2Int position)
+        private bool ExistOnlyOneParent(Vector2Int at)
         {
             bool isOneParentFound = false;
 
-            foreach(Vector2Int vicinityPosition in _map.GetVicinity(position).Where(p => _map[p].IsOccupied))
+            MapVicinity vicinity = _map.GetVicinity(at);
+            foreach(var (fromCenter, position) in vicinity.Positions.Where(p => _map[p.Value].IsOccupied))
             {
-                Block block = _map[vicinityPosition].Block;
-                Direction toChild = _vectorToDirection.Convert(position - vicinityPosition);
-                if(block.IsAppendCorrect(toChild))
+                Block block = _map[position].Block;
+                Direction toCenter = fromCenter.Reverse();
+                if(block.IsAppendCorrect(toCenter))
                 {
                     if(isOneParentFound)
                         return false;
@@ -57,12 +55,11 @@ namespace Presenter.Builder
             return isOneParentFound;
         }
 
-        public PlacingPresenter(Map map, Inventory inventory, TreeConfig treeConfig, IConverter<Vector2Int, Direction> vectorToDirection)
+        public PlacingPresenter(Map map, Inventory inventory, TreeConfig treeConfig)
         {
             _map = map;
             _inventory = inventory;
             _rootPosition = treeConfig.RootPosition;
-            _vectorToDirection = vectorToDirection;
 
             _isDataSelected = false;
         }

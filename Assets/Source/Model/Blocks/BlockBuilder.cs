@@ -1,4 +1,3 @@
-using Converter;
 using Extensions;
 using Model.BlocksLogic.BlocksData;
 using Model.BlocksLogic;
@@ -13,29 +12,28 @@ namespace Model.BlockLogic
     {
         private readonly BlockFactory _factory;
         private readonly Map _map;
-        private readonly IConverter<Vector2Int, Direction> _vectorToDirection;
 
-        public BlockBuilder(BlockFactory factory, Map map, IConverter<Vector2Int, Direction> vectorToDirection)
+        public BlockBuilder(BlockFactory factory, Map map)
         {
             _factory = factory;
             _map = map;
-            _vectorToDirection = vectorToDirection;
         }
 
-        private bool TryGetParent(Vector2Int position, out Direction toParent)
+        private bool TryGetParent(Vector2Int at, out Direction fromCenterToParent)
         {
-            foreach(Vector2Int vicinityPosition in _map.GetVicinity(position).Where(p => _map[p].IsOccupied))
+            MapVicinity vicinity = _map.GetVicinity(at);
+            foreach(var (fromCenter, position) in vicinity.Positions.Where(p => _map[p.Value].IsOccupied))
             {
-                Block block = _map[vicinityPosition].Block;
-                Direction toChild = _vectorToDirection.Convert(position - vicinityPosition);
-                if(block.IsAppendCorrect(toChild))
+                Block block = _map[position].Block;
+                Direction toCenter = fromCenter.Reverse();
+                if(block.IsAppendCorrect(toCenter))
                 {
-                    toParent = toChild.Reverse();
+                    fromCenterToParent = fromCenter;
                     return true;
                 }
             }
 
-            toParent = Direction.NONE;
+            fromCenterToParent = Direction.NONE;
             return false;
         }
 
@@ -48,12 +46,12 @@ namespace Model.BlockLogic
                 throw new ArgumentException("Can't create block on occupied tile");
             
             Block block;
-            if(TryGetParent(position, out Direction toParent))
+            if(TryGetParent(position, out Direction fromCenterToParent))
             {
-                BlockContext context = BlockContext.CreateChildContext(toParent);
+                BlockContext context = BlockContext.CreateChildContext(fromCenterToParent);
                 block = _factory.Create(data, context);
-                Block parent = _map[position + toParent.ToVector()].Block;
-                parent.Append(toParent.Reverse(), block);
+                Block parent = _map[position + fromCenterToParent.ToVector()].Block;
+                parent.Append(fromCenterToParent.Reverse(), block);
             }
             else
             {

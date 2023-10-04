@@ -38,10 +38,10 @@ namespace EntryPointLogic
             var map = new Map(levelConfig.Map);
     
             var blockFactory = new BlockFactory();
-            var blockBuilder = new BlockBuilder(blockFactory, map, new VectorToDirection());
+            var blockBuilder = new BlockBuilder(blockFactory, map);
             var inventory = new Inventory(blockBuilder, levelConfig.Inventory);
             
-            var placingPresenter = new  PlacingPresenter(map, inventory, levelConfig.Tree, new VectorToDirection());
+            var placingPresenter = new  PlacingPresenter(map, inventory, levelConfig.Tree);
             var removingPresenter = new RemovingPresenter(map);
             var builderPresenter = new BuilderPresenter(map, placingPresenter, removingPresenter);
 

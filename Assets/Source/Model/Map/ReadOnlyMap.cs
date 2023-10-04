@@ -25,7 +25,7 @@ namespace Model.MapLogic
         public bool PositionInMap(Vector2Int position)
             => _map.PositionInMap(position);
 
-        public IEnumerable<Vector2Int> GetVicinity(Vector2Int position)
+        public MapVicinity GetVicinity(Vector2Int position)
             => _map.GetVicinity(position);
     }
 }
