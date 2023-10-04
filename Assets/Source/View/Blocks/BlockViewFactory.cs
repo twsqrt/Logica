@@ -2,9 +2,9 @@ using Configs;
 using Model.BlocksLogic.OperationBlocksLogic;
 using Model.BlocksLogic;
 using UnityEngine;
-using View.BlockLogic.ViewDataLogic;
+using View.Blocks.ViewData;
 
-namespace View.BlockLogic
+namespace View.Blocks
 {
     [CreateAssetMenu(fileName = "Block View Factory", menuName = "Factory/Block View", order = 51)]
     public class BlockViewFactory : ScriptableObject, IBlockVisitor<BlockView>

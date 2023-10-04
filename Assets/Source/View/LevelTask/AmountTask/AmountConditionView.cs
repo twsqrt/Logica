@@ -1,7 +1,7 @@
 using Model.BlocksLogic.BlocksData;
 using TMPro;
 using UnityEngine;
-using View.BlockLogic;
+using View.Blocks.UI;
 
 namespace View.LevelTaskLogic.AmountTaskLogic
 {

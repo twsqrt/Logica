@@ -1,12 +1,10 @@
-using System.Collections.Generic;
-using Converter;
 using Extensions;
 using Model.BlocksLogic;
 using UnityEngine;
-using View.BlockLogic.ViewDataLogic;
+using View.Blocks.ViewData;
 using View.HighlighterLogic;
 
-namespace View.BlockLogic
+namespace View.Blocks
 {
     public abstract class BlockView : MonoBehaviour
     {

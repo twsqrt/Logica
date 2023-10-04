@@ -1,7 +1,7 @@
 using Model.BlocksLogic;
 using Model.MapLogic;
 using UnityEngine;
-using View.BlockLogic;
+using View.Blocks;
 using View.HighlighterLogic;
 
 namespace View.MapLogic

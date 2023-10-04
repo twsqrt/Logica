@@ -1,9 +1,8 @@
-using Model.BlocksLogic;
 using Model.BlocksLogic.OperationBlocksLogic;
 using UnityEngine;
-using View.BlockLogic.ViewDataLogic;
+using View.Blocks.ViewData;
 
-namespace View.BlockLogic
+namespace View.Blocks
 {
     public class OperationView : BlockView 
     {

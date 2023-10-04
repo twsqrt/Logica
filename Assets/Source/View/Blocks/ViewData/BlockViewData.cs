@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace View.BlockLogic.ViewDataLogic
+namespace View.Blocks.ViewData
 {
     public class BlockViewData : ScriptableObject
     {

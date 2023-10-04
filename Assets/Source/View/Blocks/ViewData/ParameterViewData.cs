@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace View.BlockLogic.ViewDataLogic
+namespace View.Blocks.ViewData
 {
     [CreateAssetMenu(fileName = "ParameterBlock View Data", menuName = "Data/ParameterBlock View", order = 51)]
     public class ParameterViewData : BlockViewData

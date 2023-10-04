@@ -1,9 +1,9 @@
 using Model.BlocksLogic;
 using TMPro;
 using UnityEngine;
-using View.BlockLogic.ViewDataLogic;
+using View.Blocks.ViewData;
 
-namespace View.BlockLogic
+namespace View.Blocks
 {
     public class ParameterView : BlockView
     {

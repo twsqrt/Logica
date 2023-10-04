@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
-using View.BlockLogic.ViewDataLogic;
+using View.Blocks.ViewData;
 
-namespace View.BlockLogic
+namespace View.Blocks.UI
 {
     public abstract class BlockUIView : MonoBehaviour
     {

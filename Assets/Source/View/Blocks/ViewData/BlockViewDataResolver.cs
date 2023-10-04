@@ -1,10 +1,8 @@
 using System;
-using Model.BlocksLogic;
-using Model.BlocksLogic.BlocksData;
 using Model.BlocksLogic.OperationBlocksLogic;
 using UnityEngine;
 
-namespace View.BlockLogic.ViewDataLogic
+namespace View.Blocks.ViewData
 {
     [CreateAssetMenu(fileName = "Block View Data Resolver", menuName = "Data/Block View Data Resolver", order = 51)]
     public class BlockViewDataResolver : ScriptableObject

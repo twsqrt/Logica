@@ -1,6 +1,6 @@
 using Model.BlocksLogic.BlocksData;
 using UnityEngine;
-using View.BlockLogic;
+using View.Blocks.UI;
 using View.InventoryLogic.AmountLogic;
 using UnityEngine.EventSystems;
 using Veiw.InventoryLogic.AmountLogic;

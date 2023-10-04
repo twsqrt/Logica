@@ -1,10 +1,9 @@
 using Model.BlocksLogic.BlocksData;
 using Configs;
-using System.Collections.Generic;
 using UnityEngine;
-using View.BlockLogic.ViewDataLogic;
+using View.Blocks.ViewData;
 
-namespace View.BlockLogic
+namespace View.Blocks.UI
 {
     [CreateAssetMenu(fileName = "Block UI View Factory", menuName = "Factory/Block UI View", order = 51)]
     public class BlockUIViewFactory : ScriptableObject, IBlockDataBasedFactory<BlockUIView>

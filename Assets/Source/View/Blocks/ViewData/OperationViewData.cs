@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace View.BlockLogic.ViewDataLogic
+namespace View.Blocks.ViewData
 {
     [CreateAssetMenu(fileName = "Operation View Data", menuName = "Data/Operation View", order = 51)]
     public class OperationViewData : BlockViewData
