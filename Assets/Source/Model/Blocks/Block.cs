@@ -2,7 +2,7 @@ using System;
 
 namespace Model.BlocksLogic
 {
-    public abstract class Block
+    public abstract class Block : IReadOnlyBlock
     {
         protected readonly BlockContext _context;
         protected readonly BlockType _blockType;

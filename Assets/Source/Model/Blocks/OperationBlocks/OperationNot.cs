@@ -1,6 +1,6 @@
 namespace Model.BlocksLogic.OperationBlocksLogic
 {
-    public class OperationNot : OperationBlock
+    public class OperationNot : OperationBlock, IReadOnlyOperationNot
     {
         private Block _operand;
 

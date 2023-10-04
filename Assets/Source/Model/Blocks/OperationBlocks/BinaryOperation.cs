@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Model.BlocksLogic.OperationBlocksLogic
 {
-    public class BinaryOperation : OperationBlock
+    public class BinaryOperation : OperationBlock, IReadOnlyBinaryOperation
     {
         private readonly List<Block> _operands;
         private readonly Dictionary<BinaryOperationStateType, BinaryOperationState> _states;
