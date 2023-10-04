@@ -1,6 +1,6 @@
 namespace Model.BlocksLogic.OperationBlocksLogic
 {
-    public abstract class OperationBlock : Block
+    public abstract class OperationBlock : Block, IReadOnlyOperationBlock
     {
         protected readonly OperationBlockType _operationType;
 

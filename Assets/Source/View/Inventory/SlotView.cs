@@ -30,13 +30,13 @@ namespace View.InventoryLogic
             blockView.transform.SetParent(_blockContainer, false);
         }
 
-        private void InitAmount(IAmount amount)
+        private void InitAmount(IReadOnlyAmount amount)
         {
             AmountView amountView = amount.AcceptFactory(_amountViewFactory);
             amountView.transform.SetParent(_amountContainer, false);
         }
 
-        public void Init(IBlockData data, IAmount amount)
+        public void Init(IBlockData data, IReadOnlyAmount amount)
         {
             _data = data;
 

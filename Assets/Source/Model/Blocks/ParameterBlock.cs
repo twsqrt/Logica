@@ -2,7 +2,7 @@ using System;
 
 namespace Model.BlocksLogic
 {
-    public class ParameterBlock : Block
+    public class ParameterBlock : Block, IReadOnlyParameterBlock
     {
         private readonly int _id;
 

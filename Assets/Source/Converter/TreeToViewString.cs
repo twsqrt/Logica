@@ -28,7 +28,7 @@ namespace Converter
                 return (blocksThatNeedBrackets & operand) != 0;
             }
 
-            private string GetOperandText(BlockType operationType, Block operand)
+            private string GetOperandText(BlockType operationType, IReadOnlyBlock operand)
             {
                 if(operand == null)
                     return DEFAULT_OPERAND_SYMBOL.ToString();
@@ -43,10 +43,10 @@ namespace Converter
                 _parametersConfig = parametersConfig;
             }
 
-            public string Visit(OperationNot operationNot)
+            public string Visit(IReadOnlyOperationNot operationNot)
                 => '\u00AC' + GetOperandText(BlockType.OPERATION_NOT, operationNot.Operand);
 
-            public string Visit(BinaryOperation binaryOperation)
+            public string Visit(IReadOnlyBinaryOperation binaryOperation)
             {
                 OperationBlockType binaryOperationType = binaryOperation.OperationType;
                 char operationSymbol = binaryOperationType switch
@@ -65,7 +65,7 @@ namespace Converter
                 return $"{leftOperandText} {operationSymbol} {rightOperandText}";
             }
 
-            public string Visit(ParameterBlock parameter)
+            public string Visit(IReadOnlyParameterBlock parameter)
                 => _parametersConfig[parameter.Id];
         }
 

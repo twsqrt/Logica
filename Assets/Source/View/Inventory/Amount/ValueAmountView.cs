@@ -16,7 +16,7 @@ namespace View.InventoryLogic.AmountLogic
             _valueText.text = value.ToString();
         }
 
-        public void Init(ValueAmount amount)
+        public void Init(IReadOnlyValueAmount amount)
         {
             UpdateAmountText(amount.Value);
             amount.OnValueChange += UpdateAmountText;

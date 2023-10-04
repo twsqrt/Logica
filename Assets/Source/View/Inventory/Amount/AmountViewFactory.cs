@@ -10,7 +10,7 @@ namespace Veiw.InventoryLogic.AmountLogic
         [SerializeField] private ValueAmountView _valueAmountView;
         [SerializeField] private AmountView _infinityAmountView;
 
-        public AmountView Create(ValueAmount amount)
+        public AmountView Create(IReadOnlyValueAmount amount)
         {
             ValueAmountView view = Instantiate(_valueAmountView);
             view.Init(amount);

@@ -1,7 +1,6 @@
 using UnityEngine;
 using Model.MapLogic;
 using System;
-using UnityEngine.Events;
 
 namespace View.MapLogic
 {
@@ -36,7 +35,7 @@ namespace View.MapLogic
         public MapTileView this[Vector2Int position] 
             => this[position.x, position.y];
 
-        private void Render(Map map)
+        private void Render(ReadOnlyMap map)
         {
             Vector3 offset = new Vector3(map.Width - 1f, map.Height - 1f, 0f) * 0.5f * _scale;
             for(int i =0; i < map.Width; i++)
@@ -52,7 +51,7 @@ namespace View.MapLogic
             }
         }
 
-        public void Init(Map map)
+        public void Init(ReadOnlyMap map)
         {
             _width = map.Width;
             _height = map.Height;

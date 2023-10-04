@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Model.BlocksLogic.OperationBlocksLogic
 {
-    public class BinaryOperation : OperationBlock
+    public class BinaryOperation : OperationBlock, IReadOnlyBinaryOperation
     {
         private readonly List<Block> _operands;
         private readonly Dictionary<BinaryOperationStateType, BinaryOperationState> _states;
@@ -12,8 +12,8 @@ namespace Model.BlocksLogic.OperationBlocksLogic
         private Stack<BinaryOperationStateType> _stateHistory;
         private BinaryOperationState _currentState;
 
-        public Block FirstOperand => _operands.ElementAtOrDefault(0);
-        public Block SecondOperand => _operands.ElementAtOrDefault(1);
+        public IReadOnlyBlock FirstOperand => _operands.ElementAtOrDefault(0);
+        public IReadOnlyBlock SecondOperand => _operands.ElementAtOrDefault(1);
 
         private BinaryOperationStateType GetStartStateType()
         {

@@ -8,30 +8,37 @@ namespace Model.InventoryLogic
 {
     public class Inventory
     {
-        private readonly Dictionary<IBlockData, IAmount> _blocks;
+        private readonly Dictionary<IBlockData, IAmount> _amounts;
         private readonly BlockFactory _factory;
 
-        public IAmount this[IBlockData data]
-            => _blocks[data];
+        public IReadOnlyAmount this[IBlockData data]
+        {
+            get
+            {
+                if(_amounts.TryGetValue(data, out IAmount amount))
+                    return amount;
+                return ValueAmount.Zero; 
+            }
+        }
 
         public IEnumerable<IBlockData> AllBlocksData
-            => _blocks.Keys;
+            => _amounts.Keys;
 
         public Inventory(BlockFactory factory, InventoryConfig config)
         {
             _factory = factory;
 
-            _blocks = new Dictionary<IBlockData, IAmount>();
+            _amounts = new Dictionary<IBlockData, IAmount>();
             foreach(InventorySlotConfig slot in config.Slots)
-                _blocks.Add(slot.Data, AmountFactory.Create(slot.Amount));
+                _amounts.Add(slot.Data, AmountFactory.Create(slot.Amount));
         }
 
         public bool TryPullOut(IBlockData data, BlockContext context, out Block block)
         {
-            if(_blocks.TryGetValue(data, out IAmount amount ) && amount.TryDecrease(1))
+            if(_amounts.TryGetValue(data, out IAmount amount ) && amount.TryDecrease())
             {
                 block = _factory.Create(data, context);
-                block.OnDestroy += _ => amount.Increase(1);
+                block.OnDestroy += () => amount.Increase();
 
                 return true;
             }

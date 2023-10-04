@@ -43,7 +43,7 @@ namespace EntryPointLogic
             var removingPresenter = new RemovingPresenter(map);
             var builderPresenter = new BuilderPresenter(map, placingPresenter, removingPresenter);
 
-            var tree = new BlockTree(levelConfig.Tree, map);
+            var tree = new BlockTree(levelConfig.Tree, map.AsReadOnly());
             var treeToViewString = new TreeToViewString(_parametersConfig);
             var playerFormulaPresenter = new PlayerFormulaPresenter(tree, treeToViewString);
 
@@ -72,7 +72,7 @@ namespace EntryPointLogic
 
             var executionPresenter = new ExecutionPresenter(tree, levelTasks);
 
-            _mapView.Init(map);
+            _mapView.Init(map.AsReadOnly());
             _playerFormulaView.Init(tree, playerFormulaPresenter);
             _builderView.Init(_mapView, builderPresenter);
             _removingButton.Init(builderPresenter, removingPresenter);

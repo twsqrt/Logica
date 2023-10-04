@@ -15,7 +15,7 @@ namespace View.Blocks
         [SerializeField] private ParameterNamesConfig _parametersConifg;
 
 
-        private BlockView VisitOperation(OperationBlock operation)
+        private BlockView VisitOperation(IReadOnlyOperationBlock operation)
         {
             OperationView view = Instantiate(_operationPrefab);
             OperationViewData viewData = _viewDataResolver.GetOperationData(operation.OperationType);
@@ -24,13 +24,13 @@ namespace View.Blocks
             return view;
         }
 
-        public BlockView Visit(OperationNot operationNot)
+        public BlockView Visit(IReadOnlyOperationNot operationNot)
             => VisitOperation(operationNot);
 
-        public BlockView Visit(BinaryOperation binaryOperation)
+        public BlockView Visit(IReadOnlyBinaryOperation binaryOperation)
             => VisitOperation(binaryOperation);
 
-        public BlockView Visit(ParameterBlock parameter)
+        public BlockView Visit(IReadOnlyParameterBlock parameter)
         {
             ParameterView parameterView = Instantiate(_parameterPrefab);
             string name = _parametersConifg[parameter.Id];

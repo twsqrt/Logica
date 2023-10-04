@@ -15,7 +15,7 @@ namespace View.MapLogic
 
         public IHighlighter Highlighter => _currentHighlighter;
 
-        private void OnBlockPlacedHandler(Block block)
+        private void OnBlockPlacedHandler(IReadOnlyBlock block)
         {
             BlockView blockView = block.Accept(_blockFactory);
             blockView.transform.SetParent(transform, false);
@@ -29,7 +29,7 @@ namespace View.MapLogic
 
         }
 
-        public void Init(MapTile tile)
+        public void Init(ReadOnlyMapTile tile)
         {
             _currentHighlighter = _tileHighlighter;
 

@@ -56,5 +56,8 @@ namespace Model.MapLogic
                     yield return vicinityPosition;
             }
         }
+
+        public ReadOnlyMap AsReadOnly()
+            => new ReadOnlyMap(this);
     }
 }
