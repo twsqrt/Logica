@@ -3,13 +3,16 @@ using Model.BlocksLogic.BlocksData;
 using Model.BlocksLogic;
 using Model.InventoryLogic.AmountLogic;
 using System.Collections.Generic;
+using UnityEngine;
+using Model.BlockLogic;
+using System;
 
 namespace Model.InventoryLogic
 {
     public class Inventory
     {
         private readonly Dictionary<IBlockData, IAmount> _amounts;
-        private readonly BlockFactory _factory;
+        private readonly BlockBuilder _builder;
 
         public IReadOnlyAmount this[IBlockData data]
         {
@@ -24,27 +27,28 @@ namespace Model.InventoryLogic
         public IEnumerable<IBlockData> AllBlocksData
             => _amounts.Keys;
 
-        public Inventory(BlockFactory factory, InventoryConfig config)
+        public Inventory(BlockBuilder builder, InventoryConfig config)
         {
-            _factory = factory;
+            _builder = builder;
 
             _amounts = new Dictionary<IBlockData, IAmount>();
             foreach(InventorySlotConfig slot in config.Slots)
                 _amounts.Add(slot.Data, AmountFactory.Create(slot.Amount));
         }
 
-        public bool TryPullOut(IBlockData data, BlockContext context, out Block block)
-        {
-            if(_amounts.TryGetValue(data, out IAmount amount ) && amount.TryDecrease())
-            {
-                block = _factory.Create(data, context);
-                block.OnDestroy += () => amount.Increase();
+        public bool CanPullOut(IBlockData data, Vector2Int at)
+            => _amounts.TryGetValue(data, out IAmount amount)
+            && amount.MoreThan(0)
+            && _builder.CanPlace(at);
 
-                return true;
-            }
-            
-            block = null;
-            return false;
+        public void PullOut(IBlockData data, Vector2Int at)
+        {
+            if(_amounts.TryGetValue(data, out IAmount amount ) == false
+                || amount.TryDecrease() == false)
+                throw new InvalidOperationException();
+
+            Block block = _builder.Place(data, at);
+            block.OnDestroy += () => amount.Increase();
         }
     }
 }

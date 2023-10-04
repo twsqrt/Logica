@@ -15,6 +15,7 @@ using View.InventoryLogic;
 using View.LevelTasksLogic;
 using View.MapLogic;
 using View;
+using Model.BlockLogic;
 
 namespace EntryPointLogic
 {
@@ -37,9 +38,10 @@ namespace EntryPointLogic
             var map = new Map(levelConfig.Map);
     
             var blockFactory = new BlockFactory();
-            var inventory = new Inventory(blockFactory, levelConfig.Inventory);
+            var blockBuilder = new BlockBuilder(blockFactory, map, new VectorToDirection());
+            var inventory = new Inventory(blockBuilder, levelConfig.Inventory);
             
-            var placingPresenter = new  PlacingPresenter(new VectorToDirection(), map, inventory, levelConfig.Tree);
+            var placingPresenter = new  PlacingPresenter(map, inventory, levelConfig.Tree, new VectorToDirection());
             var removingPresenter = new RemovingPresenter(map);
             var builderPresenter = new BuilderPresenter(map, placingPresenter, removingPresenter);
 
