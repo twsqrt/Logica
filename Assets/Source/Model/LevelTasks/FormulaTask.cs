@@ -1,5 +1,4 @@
 using Configs.LevelConfigs.LevelTasksConfigs;
-using Configs;
 using Converter;
 using Extensions;
 using Model.TreeLogic;
@@ -7,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
-namespace Model.LevelTaskLogic
+namespace Model.LevelTasksLogic
 {
     public class FormulaTask : ILevelTask
     {

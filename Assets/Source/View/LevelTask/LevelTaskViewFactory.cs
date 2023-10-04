@@ -1,4 +1,4 @@
-using Model.LevelTaskLogic;
+using Model.LevelTasksLogic;
 using View.LevelTaskLogic.AmountTaskLogic;
 using UnityEngine   ;
 

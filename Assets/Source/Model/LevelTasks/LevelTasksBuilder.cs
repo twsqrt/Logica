@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Model.LevelTaskLogic
+namespace Model.LevelTasksLogic
 {
     public class LevelTasksBuilder
     {

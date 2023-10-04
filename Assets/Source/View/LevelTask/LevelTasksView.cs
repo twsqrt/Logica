@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Model.LevelTaskLogic;
+using Model.LevelTasksLogic;
 using UnityEngine;
 
 namespace View.LevelTaskLogic

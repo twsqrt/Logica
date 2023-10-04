@@ -3,9 +3,8 @@ using System.Linq;
 using Model.BlockLogic.BlockDataLogic;
 using Model.BlockLogic.LogicOperationLogic;
 using Model.InventoryLogic;
-using View.BlockLogic.ViewDataLogic;
 
-namespace Model.LevelTaskLogic
+namespace Model.LevelTasksLogic
 {
     public class AmountTaskBuilder
     {

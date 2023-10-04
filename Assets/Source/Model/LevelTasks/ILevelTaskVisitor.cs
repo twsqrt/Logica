@@ -1,4 +1,4 @@
-namespace Model.LevelTaskLogic
+namespace Model.LevelTasksLogic
 {
     public interface ILevelTaskVisitor<T>
     {

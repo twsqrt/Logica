@@ -4,7 +4,7 @@ using Converter;
 using Model.BlockLogic.LogicOperationLogic;
 using Model.BlockLogic;
 using Model.InventoryLogic;
-using Model.LevelTaskLogic;
+using Model.LevelTasksLogic;
 using Model.MapLogic;
 using Model.TreeLogic;
 using Presenter.BuilderLogic;
