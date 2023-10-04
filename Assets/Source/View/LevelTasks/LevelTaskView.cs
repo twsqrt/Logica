@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace View.LevelTaskLogic
+namespace View.LevelTasksLogic
 {
     public class LevelTaskView : MonoBehaviour
     {

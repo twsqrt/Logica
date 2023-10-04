@@ -1,8 +1,8 @@
 using Model.LevelTasksLogic;
-using View.LevelTaskLogic.AmountTaskLogic;
-using UnityEngine   ;
+using View.LevelTasksLogic.AmountTaskLogic;
+using UnityEngine;
 
-namespace View.LevelTaskLogic
+namespace View.LevelTasksLogic
 {
     [CreateAssetMenu(fileName = "Level Task View Factory", menuName = "Factory/Level Task View", order = 51)]
     public class LevelTaskViewFactory : ScriptableObject, ILevelTaskVisitor<LevelTaskView>

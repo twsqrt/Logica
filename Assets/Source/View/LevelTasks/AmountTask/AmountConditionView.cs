@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using View.Blocks.UI;
 
-namespace View.LevelTaskLogic.AmountTaskLogic
+namespace View.LevelTasksLogic.AmountTaskLogic
 {
     public class AmountConditionView : MonoBehaviour
     {

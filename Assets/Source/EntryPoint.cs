@@ -13,7 +13,7 @@ using UnityEngine;
 using Veiw.BuilderLogic;
 using View.BuilderLogic;
 using View.InventoryLogic;
-using View.LevelTaskLogic;
+using View.LevelTasksLogic;
 using View.MapLogic;
 using View;
 

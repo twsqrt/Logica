@@ -3,7 +3,7 @@ using System.Linq;
 using Model.LevelTasksLogic;
 using UnityEngine;
 
-namespace View.LevelTaskLogic
+namespace View.LevelTasksLogic
 {
     public class LevelTasksView : MonoBehaviour
     {

@@ -2,7 +2,7 @@ using Model.LevelTasksLogic;
 using TMPro;
 using UnityEngine;
 
-namespace View.LevelTaskLogic.AmountTaskLogic
+namespace View.LevelTasksLogic.AmountTaskLogic
 {
     public class AmountTaskView : LevelTaskView
     {

@@ -2,7 +2,7 @@ using Model.LevelTasksLogic;
 using TMPro;
 using UnityEngine;
 
-namespace View.LevelTaskLogic
+namespace View.LevelTasksLogic
 {
     public class FormulaTaskView : LevelTaskView
     {
