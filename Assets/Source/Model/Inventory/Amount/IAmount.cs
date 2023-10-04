@@ -1,13 +1,9 @@
 namespace Model.InventoryLogic.AmountLogic
 {
-    public interface IAmount
+    public interface IAmount : IReadOnlyAmount
     {
-        void Increase(int amount);
+        void Increase();
 
-        bool TryDecrease(int amount);
-
-        bool LessThan(int amount);
-
-        T AcceptFactory<T>(IAmountBasedFactory<T> factory);
+        bool TryDecrease();
     }
 }
