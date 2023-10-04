@@ -3,7 +3,7 @@ using System.Linq;
 using Model.MapLogic;
 using UnityEngine;
 
-namespace Presenter.BuilderLogic
+namespace Presenter.Builder
 {
     public class RemovingPresenter : BuilderPresenterState
     {

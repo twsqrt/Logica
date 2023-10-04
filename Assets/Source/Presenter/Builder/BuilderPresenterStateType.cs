@@ -1,4 +1,4 @@
-namespace Presenter.BuilderLogic
+namespace Presenter.Builder
 {
     public enum BuilderPresenterStateType
     {

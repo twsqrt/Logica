@@ -10,7 +10,7 @@ using System.Linq;
 using System;
 using UnityEngine;
 
-namespace Presenter.BuilderLogic
+namespace Presenter.Builder
 {
     public class PlacingPresenter : BuilderPresenterState
     {

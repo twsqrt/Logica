@@ -4,7 +4,7 @@ using System.Linq;
 using System;
 using Model.MapLogic;
 
-namespace Presenter.BuilderLogic
+namespace Presenter.Builder
 {
     public class BuilderPresenter
     {
