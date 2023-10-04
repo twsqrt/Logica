@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
-using Model.BlockLogic;
-using Model.BlockLogic.BlockDataLogic;
-using Model.BlockLogic.LogicOperationLogic;
+using Model.BlocksLogic;
+using Model.BlocksLogic.BlocksData;
+using Model.BlocksLogic.OperationBlocksLogic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Converters;

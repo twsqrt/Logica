@@ -1,7 +1,6 @@
 using Configs;
-using Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic;
-using Model.BlockLogic.LogicOperationLogic;
-using Model.BlockLogic;
+using Model.BlocksLogic.OperationBlocksLogic;
+using Model.BlocksLogic;
 using Model.TreeLogic;
 using System.Collections.Generic;
 using System.Linq.Expressions;

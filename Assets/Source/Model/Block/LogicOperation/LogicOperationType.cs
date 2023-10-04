@@ -1,6 +1,4 @@
-using Model.BlockLogic;
-
-namespace Model.BlockLogic.LogicOperationLogic
+namespace Model.BlocksLogic.OperationBlocksLogic
 {
     public enum LogicOperationType
     {

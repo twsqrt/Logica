@@ -1,4 +1,4 @@
-namespace Model.BlockLogic
+namespace Model.BlocksLogic
 {
     public enum BlockType
     {

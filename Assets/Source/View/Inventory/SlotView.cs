@@ -1,4 +1,4 @@
-using Model.BlockLogic.BlockDataLogic;
+using Model.BlocksLogic.BlocksData;
 using UnityEngine;
 using View.BlockLogic;
 using View.InventoryLogic.AmountLogic;

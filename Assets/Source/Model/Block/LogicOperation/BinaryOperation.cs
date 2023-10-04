@@ -1,10 +1,8 @@
+using Model.BlocksLogic.OperationBlocksLogic.BinaryOperationStatesLogic;
 using System.Collections.Generic;
 using System.Linq;
-using Extensions;
-using Unity.VisualScripting;
-using UnityEngine;
 
-namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
+namespace Model.BlocksLogic.OperationBlocksLogic
 {
     public class BinaryOperation : LogicOperation
     {

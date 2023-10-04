@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
+namespace Model.BlocksLogic.OperationBlocksLogic.BinaryOperationStatesLogic
 {
     public abstract class BinaryOperationState
     {

@@ -1,8 +1,8 @@
 using Configs.LevelConfigs;
 using Configs;
 using Converter;
-using Model.BlockLogic.LogicOperationLogic;
-using Model.BlockLogic;
+using Model.BlocksLogic.OperationBlocksLogic;
+using Model.BlocksLogic;
 using Model.InventoryLogic;
 using Model.LevelTasksLogic;
 using Model.MapLogic;

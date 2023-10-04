@@ -1,7 +1,6 @@
 using Configs.LevelConfigs;
-using Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic;
-using Model.BlockLogic.LogicOperationLogic;
-using Model.BlockLogic;
+using Model.BlocksLogic.OperationBlocksLogic;
+using Model.BlocksLogic;
 using Model.MapLogic;
 using System;
 

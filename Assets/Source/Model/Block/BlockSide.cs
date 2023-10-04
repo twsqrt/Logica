@@ -1,6 +1,6 @@
 using System;
 
-namespace Model.BlockLogic
+namespace Model.BlocksLogic
 {
     [Flags]
     public enum Direction

@@ -1,4 +1,4 @@
-using Model.BlockLogic.BlockDataLogic;
+using Model.BlocksLogic.BlocksData;
 using TMPro;
 using UnityEngine;
 using View.BlockLogic.ViewDataLogic;

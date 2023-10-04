@@ -1,8 +1,7 @@
-using Model.BlockLogic.BlockDataLogic;
-using Model.BlockLogic.LogicOperationLogic;
-using Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic;
+using Model.BlocksLogic.BlocksData;
+using Model.BlocksLogic.OperationBlocksLogic;
 
-namespace Model.BlockLogic
+namespace Model.BlocksLogic
 {
     public class BlockFactory 
     {

@@ -1,7 +1,6 @@
-using Model.BlockLogic.LogicOperationLogic;
-using Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic;
+using Model.BlocksLogic.OperationBlocksLogic;
 
-namespace Model.BlockLogic
+namespace Model.BlocksLogic
 {
     public interface IBlockVisitor<T>
     {

@@ -1,4 +1,4 @@
-namespace Model.BlockLogic.BlockDataLogic
+namespace Model.BlocksLogic.BlocksData
 {
     public readonly struct ParameterData : IBlockData
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq; 
 
-namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
+namespace Model.BlocksLogic.OperationBlocksLogic.BinaryOperationStatesLogic
 {
     public class OperandsOnLineState : BinaryOperationState
     {

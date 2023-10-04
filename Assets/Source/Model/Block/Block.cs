@@ -1,8 +1,6 @@
 using System;
-using System.Security.Authentication.ExtendedProtection;
-using UnityEngine;
 
-namespace Model.BlockLogic
+namespace Model.BlocksLogic
 {
     public abstract class Block
     {

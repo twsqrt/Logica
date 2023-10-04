@@ -1,6 +1,6 @@
 using Configs.LevelConfigs.JsonConverter;
 using Configs.LevelConfigs.JsonConverters;
-using Model.BlockLogic.BlockDataLogic;
+using Model.BlocksLogic.BlocksData;
 using Newtonsoft.Json;
 
 namespace Configs.LevelConfigs.InventoryConfigs

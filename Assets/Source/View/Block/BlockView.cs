@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Converter;
 using Extensions;
-using Model.BlockLogic;
+using Model.BlocksLogic;
 using UnityEngine;
 using View.BlockLogic.ViewDataLogic;
 using View.HighlighterLogic;

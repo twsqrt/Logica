@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace Model.BlockLogic
+namespace Model.BlocksLogic
 {
     public readonly struct BlockContext
     {

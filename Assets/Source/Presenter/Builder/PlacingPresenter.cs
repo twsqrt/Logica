@@ -1,8 +1,8 @@
 using Configs.LevelConfigs;
 using Converter;
 using Extensions;
-using Model.BlockLogic.BlockDataLogic;
-using Model.BlockLogic;
+using Model.BlocksLogic.BlocksData;
+using Model.BlocksLogic;
 using Model.InventoryLogic;
 using Model.MapLogic;
 using System.Collections.Generic;

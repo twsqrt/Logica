@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Model.BlockLogic.BlockDataLogic;
-using Model.BlockLogic.LogicOperationLogic;
+using Model.BlocksLogic.BlocksData;
+using Model.BlocksLogic.OperationBlocksLogic;
 using Model.InventoryLogic;
 
 namespace Model.LevelTasksLogic

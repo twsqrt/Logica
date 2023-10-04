@@ -1,6 +1,6 @@
-using Model.BlockLogic.LogicOperationLogic;
+using Model.BlocksLogic.OperationBlocksLogic;
 
-namespace Model.BlockLogic.BlockDataLogic
+namespace Model.BlocksLogic.BlocksData
 {
     public readonly struct OperationData : IBlockData
     {

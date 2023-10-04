@@ -1,7 +1,6 @@
 using System;
-using UnityEngine;
 
-namespace Model.BlockLogic
+namespace Model.BlocksLogic
 {
     public class Parameter : Block
     {

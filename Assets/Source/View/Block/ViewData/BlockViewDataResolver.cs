@@ -1,7 +1,7 @@
 using System;
-using Model.BlockLogic;
-using Model.BlockLogic.BlockDataLogic;
-using Model.BlockLogic.LogicOperationLogic;
+using Model.BlocksLogic;
+using Model.BlocksLogic.BlocksData;
+using Model.BlocksLogic.OperationBlocksLogic;
 using UnityEngine;
 
 namespace View.BlockLogic.ViewDataLogic

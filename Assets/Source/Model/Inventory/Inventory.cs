@@ -1,6 +1,6 @@
 using Configs.LevelConfigs.InventoryConfigs;
-using Model.BlockLogic.BlockDataLogic;
-using Model.BlockLogic;
+using Model.BlocksLogic.BlocksData;
+using Model.BlocksLogic;
 using Model.InventoryLogic.AmountLogic;
 using System.Collections.Generic;
 

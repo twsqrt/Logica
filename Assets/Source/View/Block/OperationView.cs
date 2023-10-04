@@ -1,5 +1,5 @@
-using Model.BlockLogic;
-using Model.BlockLogic.LogicOperationLogic;
+using Model.BlocksLogic;
+using Model.BlocksLogic.OperationBlocksLogic;
 using UnityEngine;
 using View.BlockLogic.ViewDataLogic;
 

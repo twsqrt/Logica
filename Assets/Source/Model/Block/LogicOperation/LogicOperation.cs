@@ -1,5 +1,4 @@
-using UnityEngine;
-namespace Model.BlockLogic.LogicOperationLogic
+namespace Model.BlocksLogic.OperationBlocksLogic
 {
     public abstract class LogicOperation : Block
     {

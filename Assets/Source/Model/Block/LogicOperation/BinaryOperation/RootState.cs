@@ -1,9 +1,4 @@
-using System;
-using System.Linq;
-using Model.MapLogic;
-using UnityEngine;
-
-namespace Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic
+namespace Model.BlocksLogic.OperationBlocksLogic.BinaryOperationStatesLogic
 {
     public class RootState : BinaryOperationState
     {

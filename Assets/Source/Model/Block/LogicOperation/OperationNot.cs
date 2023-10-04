@@ -1,8 +1,4 @@
-using System.Linq;
-using Model.MapLogic;
-using UnityEngine;
-
-namespace Model.BlockLogic.LogicOperationLogic
+namespace Model.BlocksLogic.OperationBlocksLogic
 {
     public class OperationNot : LogicOperation
     {

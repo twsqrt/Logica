@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Model.BlockLogic.BlockDataLogic;
+using Model.BlocksLogic.BlocksData;
 using Model.InventoryLogic;
 
 namespace Model.LevelTasksLogic

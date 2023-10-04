@@ -1,5 +1,5 @@
 using UnityEngine;
-using Model.BlockLogic;
+using Model.BlocksLogic;
 using Converter;
 
 namespace Extensions
