@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace View.HighlighterLogic
+namespace View.Highlighters
 {
     public class SpriteHighlighter : MonoBehaviour, IHighlighter
     {

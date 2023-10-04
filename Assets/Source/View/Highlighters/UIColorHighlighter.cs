@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace View.HighlighterLogic
+namespace View.Highlighters
 {
     public class UIColorHighlighter : MonoBehaviour, IHighlighter
     {

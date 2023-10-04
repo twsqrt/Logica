@@ -5,7 +5,7 @@ using View.InventoryLogic.AmountLogic;
 using UnityEngine.EventSystems;
 using Veiw.InventoryLogic.AmountLogic;
 using Model.InventoryLogic.AmountLogic;
-using View.HighlighterLogic;
+using View.Highlighters;
 using System;
 
 namespace View.InventoryLogic

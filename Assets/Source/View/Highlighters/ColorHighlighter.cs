@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace View.HighlighterLogic
+namespace View.Highlighters
 {
     public class ColorHighlighter : MonoBehaviour, IHighlighter
     {

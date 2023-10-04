@@ -2,7 +2,7 @@ using Extensions;
 using Model.BlocksLogic;
 using UnityEngine;
 using View.Blocks.ViewData;
-using View.HighlighterLogic;
+using View.Highlighters;
 
 namespace View.Blocks
 {
