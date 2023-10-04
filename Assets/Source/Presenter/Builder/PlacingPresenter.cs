@@ -100,9 +100,9 @@ namespace Presenter.Builder
             if(_inventory.TryPullOut(_currentData, context, out Block childBlock) == false)
                 return false;
 
+            _map[position].PlaceBlock(childBlock);
             Block parent = _map[parentPosition].Block;
             parent.Append(fromChildToParent.Reverse(), childBlock);
-            _map[position].PlaceBlock(childBlock);
 
             return true;
         }

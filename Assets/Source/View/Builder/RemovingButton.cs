@@ -19,6 +19,6 @@ namespace View.Builder
         }
 
         public void OnPointerClick(PointerEventData eventData)
-            => _builderPresenter.ChangeState(BuilderPresenterStateType.REMOVING);
+            => _builderPresenter.SetMode(BuildingMode.REMOVING);
     }
 }

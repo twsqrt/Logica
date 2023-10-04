@@ -20,9 +20,10 @@ namespace View.InventoryLogic
 
         private IBlockData _data;
 
-        public event Action<IBlockData> OnSlotClick;
+        public event Action OnSlotClick;
 
         public IHighlighter Highlighter => _highlighter;
+        public IBlockData Data => _data;
 
         private void InitBlock(IBlockData data)
         {
@@ -45,6 +46,6 @@ namespace View.InventoryLogic
         }
 
         public void OnPointerClick(PointerEventData eventData)
-            => OnSlotClick?.Invoke(_data);
+            => OnSlotClick?.Invoke();
     }
 }

@@ -1,6 +1,6 @@
 namespace Presenter.Builder
 {
-    public enum BuilderPresenterStateType
+    public enum BuildingMode
     {
         PLACING,
         REMOVING,

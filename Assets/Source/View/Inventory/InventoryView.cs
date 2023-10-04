@@ -13,20 +13,18 @@ namespace View.InventoryLogic
 
         private BuilderPresenter _builderPresenter;
         private PlacingPresenter _placingPresenter;
-        private Dictionary<IBlockData, SlotView> _slots;
         private SlotView _currentSlot;
 
-        private void OnSlotClickHandler(IBlockData data)
+        private void SelectSlot(SlotView slot)
         {
-            if(_slots.TryGetValue(data, out SlotView slot))
-            {
-                _currentSlot?.Highlighter.HighlightDisable();
-                _currentSlot = slot;
-                slot.Highlighter.HighlightEnable();
+            _currentSlot?.Highlighter.HighlightDisable();
+            _currentSlot = slot;
+            _currentSlot.Highlighter.HighlightEnable();
 
-                _placingPresenter.CurrentData = data;
-                _builderPresenter.ChangeState(BuilderPresenterStateType.PLACING);
-            }
+            _placingPresenter.CurrentData = slot.Data;
+
+            if(_builderPresenter.Mode != BuildingMode.PLACING)
+                _builderPresenter.SetMode(BuildingMode.PLACING);
         }
 
         private void UnselectCurrentSlot()
@@ -38,21 +36,16 @@ namespace View.InventoryLogic
         public void Init(Inventory inventory, BuilderPresenter builderPresenter, PlacingPresenter placingPresenter)
         {
             _builderPresenter = builderPresenter;
-
             _placingPresenter = placingPresenter;
             _placingPresenter.OnExit += UnselectCurrentSlot;
 
-
-            _slots = new Dictionary<IBlockData, SlotView>();
             _currentSlot = null;
 
             foreach(IBlockData blockData in inventory.AllBlocksData)
             {
                 SlotView view = Instantiate(_slotPrefab, _slotContainer);
                 view.Init(blockData, inventory[blockData]);
-                view.OnSlotClick += OnSlotClickHandler;
-
-                _slots.Add(blockData, view);
+                view.OnSlotClick += () => SelectSlot(view);
             }
         }
     }

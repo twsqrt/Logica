@@ -1,20 +1,16 @@
 using UnityEngine;
 using Model.MapLogic;
-using System;
 
 namespace View.MapLogic
 {
     public class MapView : MonoBehaviour
     {
         [SerializeField] private MeshCollider _quad;
-        [SerializeField] private Camera _camera;
         [SerializeField] private Transform _tileContainer;
         [SerializeField] private MapTileView _tilePrefab;
         [SerializeField] private float _scale;
 
         private const int MAP_COLLIDER_LAYER = 1 << 3; 
-
-        public event Action<Vector2Int> OnTileClicked;
 
         private int _width;
         private int _height;
@@ -61,13 +57,6 @@ namespace View.MapLogic
             Render(map);
         }
 
-
-        private void CleanUp()
-        {
-            foreach(MapTileView view in _tileContainer.GetComponents<MapTileView>())
-                Destroy(view);
-        }
-
         public bool TryGetPosition(Ray ray, out Vector2Int position)
         {
             if(Physics.Raycast(ray, out RaycastHit hit, 64f, MAP_COLLIDER_LAYER))
@@ -81,16 +70,6 @@ namespace View.MapLogic
 
             position = Vector2Int.zero;
             return false;
-        }
-
-        private void Update()
-        {
-            if(Input.GetMouseButtonUp(0))
-            {
-                Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-                if(TryGetPosition(ray, out Vector2Int position))
-                    OnTileClicked?.Invoke(position);
-            }
         }
     }
 }
