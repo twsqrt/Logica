@@ -30,7 +30,7 @@ namespace View.BlockLogic
         public BlockView Visit(BinaryOperation binaryOperation)
             => VisitOperation(binaryOperation);
 
-        public BlockView Visit(Parameter parameter)
+        public BlockView Visit(ParameterBlock parameter)
         {
             ParameterView parameterView = Instantiate(_parameterPrefab);
             string name = _parametersConifg[parameter.Id];

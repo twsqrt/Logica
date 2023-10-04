@@ -9,7 +9,7 @@ namespace View.BlockLogic
     {
         [SerializeField] private TextMeshPro _parameterName;
 
-        public void Init(ParameterViewData viewData, string parameterName, Parameter parameter)
+        public void Init(ParameterViewData viewData, string parameterName, ParameterBlock parameter)
         {
             base.Init(viewData, parameter);
             _parameterName.color = viewData.ParameterColor;

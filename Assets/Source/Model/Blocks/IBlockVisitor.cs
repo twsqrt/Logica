@@ -8,6 +8,6 @@ namespace Model.BlocksLogic
         
         T Visit(BinaryOperation binaryOperation);
 
-        T Visit(Parameter parameter);
+        T Visit(ParameterBlock parameter);
     }
 }

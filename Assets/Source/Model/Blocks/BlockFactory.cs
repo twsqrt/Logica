@@ -20,7 +20,7 @@ namespace Model.BlocksLogic
             }
 
             public Block Create(ParameterData data)
-                => new Parameter(data.Id, PositionContext);
+                => new ParameterBlock(data.Id, PositionContext);
         }
 
         public BlockFactory()

@@ -2,13 +2,13 @@ using System;
 
 namespace Model.BlocksLogic
 {
-    public class Parameter : Block
+    public class ParameterBlock : Block
     {
         private readonly int _id;
 
         public int Id => _id;
 
-        public Parameter(int id, BlockContext context) : base(BlockType.PARAMETER, context)
+        public ParameterBlock(int id, BlockContext context) : base(BlockType.PARAMETER, context)
         {
             _id = id;
         }

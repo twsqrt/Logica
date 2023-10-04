@@ -65,7 +65,7 @@ namespace Converter
                 return $"{leftOperandText} {operationSymbol} {rightOperandText}";
             }
 
-            public string Visit(Parameter parameter)
+            public string Visit(ParameterBlock parameter)
                 => _parametersConfig[parameter.Id];
         }
 

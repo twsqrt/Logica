@@ -52,7 +52,7 @@ namespace Converter
                 };
             }
 
-            public Expression Visit(Parameter parameter)
+            public Expression Visit(ParameterBlock parameter)
                 => _parameters[parameter.Id];
         }
 

@@ -22,7 +22,7 @@ namespace Model.TreeLogic
                     && firstOperand.Accept(this) && secondOperand.Accept(this);
             }
 
-            public bool Visit(Parameter parameter)
+            public bool Visit(ParameterBlock parameter)
                 => true;
         }
 
