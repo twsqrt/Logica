@@ -1,5 +1,5 @@
-using Config.LevelLogic.LevelTaskLogic;
-using Config;
+using Configs.LevelConfigs.LevelTasksConfigs;
+using Configs;
 using Converter;
 using Extensions;
 using Model.TreeLogic;

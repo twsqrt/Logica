@@ -1,10 +1,9 @@
+using Configs.LevelConfigs;
 using Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic;
 using Model.BlockLogic.LogicOperationLogic;
 using Model.BlockLogic;
 using Model.MapLogic;
 using System;
-using UnityEngine;
-using Config;
 
 namespace Model.TreeLogic
 {

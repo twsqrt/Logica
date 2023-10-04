@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Converters;
 
-namespace Config.LevelLogic.JsonConverter
+namespace Configs.LevelConfigs.JsonConverter
 {
     public class BlockDataConverter : JsonConverter<IBlockData>
     {

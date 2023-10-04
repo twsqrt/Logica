@@ -1,7 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
-using Config;
+using Configs.LevelConfigs;
 using Extensions;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Model.MapLogic

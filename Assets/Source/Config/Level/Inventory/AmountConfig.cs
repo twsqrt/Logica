@@ -1,4 +1,4 @@
-namespace Config.LevelLogic.InventoryLogic
+namespace Configs.LevelConfigs.InventoryConfigs
 {
     public class AmountConfig
     {

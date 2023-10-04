@@ -1,8 +1,8 @@
 using Newtonsoft.Json;
-using Config.LevelLogic.InventoryLogic;
-using Config.LevelLogic.LevelTaskLogic;
+using Configs.LevelConfigs.InventoryConfigs;
+using Configs.LevelConfigs.LevelTasksConfigs;
 
-namespace Config
+namespace Configs.LevelConfigs
 {
     public class LevelConfig
     {

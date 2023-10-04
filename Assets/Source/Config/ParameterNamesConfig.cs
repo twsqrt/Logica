@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mono.Cecil;
 using UnityEngine;
 
-namespace Config
+namespace Configs
 {
 
-    [CreateAssetMenu(fileName = "Parameters Names Config", menuName = "Config/Parameters Names", order = 51)]
+    [CreateAssetMenu(fileName = "Parameters Names Configs", menuName = "Configs/Parameters Names", order = 51)]
     public class ParameterNamesConfig : ScriptableObject
     {
         [Serializable] private class ParameterConfig

@@ -1,5 +1,5 @@
-using Config.LevelLogic.LevelTaskLogic;
-using Config;
+using Configs.LevelConfigs;
+using Configs;
 using Converter;
 using Model.BlockLogic.LogicOperationLogic;
 using Model.BlockLogic;
@@ -11,7 +11,6 @@ using Presenter.BuilderLogic;
 using Presenter;
 using UnityEngine;
 using Veiw.BuilderLogic;
-using View.BlockLogic;
 using View.BuilderLogic;
 using View.InventoryLogic;
 using View.LevelTaskLogic;

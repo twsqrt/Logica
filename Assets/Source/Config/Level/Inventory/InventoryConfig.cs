@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Config.LevelLogic.InventoryLogic
+namespace Configs.LevelConfigs.InventoryConfigs
 {
     public class InventoryConfig
     {

@@ -1,9 +1,9 @@
-using Config.LevelLogic.JsonConverter;
-using Config.LevelLogic.JsonConverterLogic;
+using Configs.LevelConfigs.JsonConverter;
+using Configs.LevelConfigs.JsonConverters;
 using Model.BlockLogic.BlockDataLogic;
 using Newtonsoft.Json;
 
-namespace Config.LevelLogic.InventoryLogic
+namespace Configs.LevelConfigs.InventoryConfigs
 {
     public class InventorySlotConfig
     {  

@@ -2,7 +2,7 @@ using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace Config
+namespace Configs.LevelConfigs
 {
     public static class LevelConfigLoader
     {

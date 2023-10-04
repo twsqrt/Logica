@@ -1,4 +1,4 @@
-using Config;
+using Configs;
 using Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic;
 using Model.BlockLogic.LogicOperationLogic;
 using Model.BlockLogic;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Linq;
 using System;
-using Config.LevelLogic.LevelTaskLogic;
+using Configs.LevelConfigs.LevelTasksConfigs;
 
 namespace Converter
 {

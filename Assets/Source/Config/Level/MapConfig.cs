@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Config
+namespace Configs.LevelConfigs
 {
     public class MapConfig
     {

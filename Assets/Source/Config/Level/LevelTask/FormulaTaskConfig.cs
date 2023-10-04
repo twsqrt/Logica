@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Config.LevelLogic.LevelTaskLogic
+namespace Configs.LevelConfigs.LevelTasksConfigs
 {
     public class FormulaTaskConfig
     {

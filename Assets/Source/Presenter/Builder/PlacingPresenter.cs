@@ -1,3 +1,5 @@
+using Configs.LevelConfigs;
+using Converter;
 using Extensions;
 using Model.BlockLogic.BlockDataLogic;
 using Model.BlockLogic;
@@ -7,8 +9,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using UnityEngine;
-using Config;
-using Converter;
 
 namespace Presenter.BuilderLogic
 {

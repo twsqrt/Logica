@@ -1,5 +1,5 @@
 using Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic;
-using Config;
+using Configs;
 using Model.BlockLogic.LogicOperationLogic;
 using Model.BlockLogic;
 using Model.TreeLogic;
