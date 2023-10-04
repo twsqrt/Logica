@@ -28,16 +28,16 @@ namespace Model.TreeLogic
 
 
         private readonly Verifier _verifier;
-        private readonly MapTile _rootTile;
+        private readonly ReadOnlyMapTile _rootTile;
 
-        private Block _currentRoot;
+        private IReadOnlyBlock _currentRoot;
 
         public event Action OnChanged;
 
-        public Block CurrentRoot => _currentRoot;
+        public IReadOnlyBlock CurrentRoot => _currentRoot;
         public bool IsEmpty => _currentRoot == null;
 
-        private void SetRoot(Block root)
+        private void SetRoot(IReadOnlyBlock root)
         {
             _currentRoot = root;
             root.OnSubTreeChanged += () => OnChanged?.Invoke();
@@ -50,7 +50,7 @@ namespace Model.TreeLogic
             OnChanged?.Invoke();
         }
 
-        public BlockTree(TreeConfig config, Map map)
+        public BlockTree(TreeConfig config, ReadOnlyMap map)
         {
             _verifier = new Verifier();
             _rootTile = map[config.RootPosition];
