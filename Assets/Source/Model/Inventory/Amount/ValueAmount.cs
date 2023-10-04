@@ -41,6 +41,9 @@ namespace Model.InventoryLogic.AmountLogic
         public bool LessThan(int amount)
             => Value < amount;
 
+        public bool MoreThan(int amount)
+            => Value > amount;
+
         public T AcceptFactory<T>(IAmountBasedFactory<T> factory)
             => factory.Create(this);
 
