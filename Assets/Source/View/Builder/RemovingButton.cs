@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using View.Highlighters;
 
-namespace Veiw.BuilderLogic
+namespace View.Builder
 {
     public class RemovingButton : MonoBehaviour, IPointerClickHandler
     {

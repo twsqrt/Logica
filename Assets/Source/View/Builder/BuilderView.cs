@@ -1,13 +1,11 @@
-using Model;
 using Presenter.Builder;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 using UnityEngine;
 using View.Highlighters;
 using View.MapLogic;
 
-namespace View.BuilderLogic
+namespace View.Builder
 {
     public class BuilderView : MonoBehaviour
     {
