@@ -7,7 +7,7 @@ namespace Model.BlocksLogic
         protected readonly BlockContext _context;
         protected readonly BlockType _blockType;
 
-        public event Action<Block> OnDestroy;
+        public event Action OnDestroy;
         public event Action OnSubTreeChanged;
 
         public BlockContext Context => _context;
@@ -24,12 +24,12 @@ namespace Model.BlocksLogic
             OnSubTreeChanged?.Invoke();
         }
 
-        public void Destroy() => OnDestroy?.Invoke(this);
+        public void Destroy() => OnDestroy?.Invoke();
 
         public virtual void Append(Direction direction, Block operand)
         {
             operand.OnSubTreeChanged += () => OnSubTreeChanged?.Invoke();
-            operand.OnDestroy += RemoveOperand;
+            operand.OnDestroy += () => RemoveOperand(operand);
             OnSubTreeChanged?.Invoke();
         }
 

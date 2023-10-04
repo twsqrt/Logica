@@ -4,7 +4,7 @@ namespace Model.BlocksLogic
 {
     public interface IReadOnlyBlock
     {
-        event Action<Block> OnDestroy;
+        event Action OnDestroy;
         event Action OnSubTreeChanged;
 
         BlockContext Context { get; }

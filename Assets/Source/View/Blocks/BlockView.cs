@@ -19,7 +19,7 @@ namespace View.Blocks
             _blockSprite.sprite = data.BlockSprite;
             _blockSprite.color = data.BlockColor;
 
-            block.OnDestroy += _ => Destroy(gameObject);
+            block.OnDestroy += () => Destroy(gameObject);
 
             _highlighter.Init();
             _highlighter.Register(_blockSprite);
