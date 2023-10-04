@@ -15,7 +15,7 @@ namespace View.BlockLogic
         [SerializeField] private ParameterNamesConfig _parametersConifg;
 
 
-        private BlockView VisitOperation(LogicOperation operation)
+        private BlockView VisitOperation(OperationBlock operation)
         {
             OperationView view = Instantiate(_operationPrefab);
             OperationViewData viewData = _viewDataResolver.GetOperationData(operation.OperationType);

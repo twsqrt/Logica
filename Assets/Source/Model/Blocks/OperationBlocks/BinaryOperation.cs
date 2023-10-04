@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Model.BlocksLogic.OperationBlocksLogic
 {
-    public class BinaryOperation : LogicOperation
+    public class BinaryOperation : OperationBlock
     {
         private readonly List<Block> _operands;
         private readonly Dictionary<BinaryOperationStateType, BinaryOperationState> _states;
@@ -38,7 +38,7 @@ namespace Model.BlocksLogic.OperationBlocksLogic
             base.RemoveOperand(operand);
         }
 
-        public BinaryOperation(LogicOperationType type, BlockContext context) : base(type, context)
+        public BinaryOperation(OperationBlockType type, BlockContext context) : base(type, context)
         {
             _operands = new List<Block>();
 

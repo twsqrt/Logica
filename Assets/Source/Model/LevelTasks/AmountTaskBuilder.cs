@@ -21,7 +21,7 @@ namespace Model.LevelTasksLogic
             return this;
         }
 
-        public AmountTaskBuilder RegisterOperation(LogicOperationType operationType, int limit)
+        public AmountTaskBuilder RegisterOperation(OperationBlockType operationType, int limit)
         {
             _registeredLimits.Add(new OperationData(operationType), limit);
             return this;

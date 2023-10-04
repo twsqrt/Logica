@@ -9,7 +9,7 @@ namespace View.BlockLogic
     {
         [SerializeField] private SpriteRenderer _operation;
 
-        public void Init(OperationViewData viewData, LogicOperation operation)
+        public void Init(OperationViewData viewData, OperationBlock operation)
         {
             base.Init(viewData, operation);
             _operation.sprite = viewData.OperationSprite;

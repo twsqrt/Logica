@@ -48,13 +48,13 @@ namespace Converter
 
             public string Visit(BinaryOperation binaryOperation)
             {
-                LogicOperationType binaryOperationType = binaryOperation.OperationType;
+                OperationBlockType binaryOperationType = binaryOperation.OperationType;
                 char operationSymbol = binaryOperationType switch
                 {
-                    LogicOperationType.OR => '\u2228',
-                    LogicOperationType.AND => '\u2227',
-                    LogicOperationType.XOR => '\u2295',
-                    LogicOperationType.NOR => '\u2191',
+                    OperationBlockType.OR => '\u2228',
+                    OperationBlockType.AND => '\u2227',
+                    OperationBlockType.XOR => '\u2295',
+                    OperationBlockType.NOR => '\u2191',
                     _ => throw new ArgumentException($"Binary operation {binaryOperationType} not found!"),
                 };
 

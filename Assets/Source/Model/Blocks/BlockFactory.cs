@@ -12,8 +12,8 @@ namespace Model.BlocksLogic
 
             public Block Create(OperationData data)
             {
-                LogicOperationType operationType = data.OperationType;
-                if(operationType == LogicOperationType.NOT)
+                OperationBlockType operationType = data.OperationType;
+                if(operationType == OperationBlockType.NOT)
                     return new OperationNot(PositionContext);
                 else
                     return new BinaryOperation(operationType, PositionContext);

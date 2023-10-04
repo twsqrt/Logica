@@ -1,12 +1,12 @@
 namespace Model.BlocksLogic.OperationBlocksLogic
 {
-    public class OperationNot : LogicOperation
+    public class OperationNot : OperationBlock
     {
         private Block _operand;
 
         public Block Operand => _operand;
 
-        public OperationNot(BlockContext context) : base(LogicOperationType.NOT, context)
+        public OperationNot(BlockContext context) : base(OperationBlockType.NOT, context)
         {
             _operand = null;
         }
