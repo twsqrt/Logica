@@ -4,7 +4,7 @@ namespace Model.BlocksLogic.OperationBlocksLogic
     {
         private Block _operand;
 
-        public Block Operand => _operand;
+        public IReadOnlyBlock Operand => _operand;
 
         public OperationNot(BlockContext context) : base(OperationBlockType.NOT, context)
         {

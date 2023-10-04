@@ -2,7 +2,7 @@ namespace Model.BlocksLogic.OperationBlocksLogic
 {
     public interface IReadOnlyBinaryOperation : IReadOnlyOperationBlock
     {
-        Block FirstOperand { get; }
-        Block SecondOperand { get; }
+        IReadOnlyBlock FirstOperand { get; }
+        IReadOnlyBlock SecondOperand { get; }
     }
 }

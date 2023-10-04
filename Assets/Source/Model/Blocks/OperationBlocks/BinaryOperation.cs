@@ -12,8 +12,8 @@ namespace Model.BlocksLogic.OperationBlocksLogic
         private Stack<BinaryOperationStateType> _stateHistory;
         private BinaryOperationState _currentState;
 
-        public Block FirstOperand => _operands.ElementAtOrDefault(0);
-        public Block SecondOperand => _operands.ElementAtOrDefault(1);
+        public IReadOnlyBlock FirstOperand => _operands.ElementAtOrDefault(0);
+        public IReadOnlyBlock SecondOperand => _operands.ElementAtOrDefault(1);
 
         private BinaryOperationStateType GetStartStateType()
         {

@@ -14,7 +14,7 @@ namespace View.Blocks
 
         public IHighlighter Highlighter => _highlighter;
 
-        protected void Init(BlockViewData data, Block block)
+        protected void Init(BlockViewData data, IReadOnlyBlock block)
         {
             _blockSprite.sprite = data.BlockSprite;
             _blockSprite.color = data.BlockColor;

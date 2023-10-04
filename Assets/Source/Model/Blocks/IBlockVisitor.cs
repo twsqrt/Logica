@@ -4,10 +4,10 @@ namespace Model.BlocksLogic
 {
     public interface IBlockVisitor<T>
     {
-        T Visit(OperationNot operationNot);
+        T Visit(IReadOnlyOperationNot operationNot);
         
-        T Visit(BinaryOperation binaryOperation);
+        T Visit(IReadOnlyBinaryOperation binaryOperation);
 
-        T Visit(ParameterBlock parameter);
+        T Visit(IReadOnlyParameterBlock parameter);
     }
 }

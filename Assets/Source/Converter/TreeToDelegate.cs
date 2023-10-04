@@ -30,13 +30,13 @@ namespace Converter
                     .ToDictionary(i => i, i => Expression.Parameter(typeof(bool), $"id{i}"));
             }
 
-            public Expression Visit(OperationNot operationNot)
+            public Expression Visit(IReadOnlyOperationNot operationNot)
             {
                 Expression operandExpression = operationNot.Operand.Accept(this);
                 return Expression.Not(operandExpression);
             }
 
-            public Expression Visit(BinaryOperation binaryOperation)
+            public Expression Visit(IReadOnlyBinaryOperation binaryOperation)
             {
                 Expression left = binaryOperation.FirstOperand.Accept(this);
                 Expression right = binaryOperation.SecondOperand.Accept(this);
@@ -52,7 +52,7 @@ namespace Converter
                 };
             }
 
-            public Expression Visit(ParameterBlock parameter)
+            public Expression Visit(IReadOnlyParameterBlock parameter)
                 => _parameters[parameter.Id];
         }
 

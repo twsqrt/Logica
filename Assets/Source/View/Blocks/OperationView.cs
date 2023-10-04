@@ -8,7 +8,7 @@ namespace View.Blocks
     {
         [SerializeField] private SpriteRenderer _operation;
 
-        public void Init(OperationViewData viewData, OperationBlock operation)
+        public void Init(OperationViewData viewData, IReadOnlyOperationBlock operation)
         {
             base.Init(viewData, operation);
             _operation.sprite = viewData.OperationSprite;

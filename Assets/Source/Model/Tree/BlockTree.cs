@@ -10,19 +10,19 @@ namespace Model.TreeLogic
     {
         private class Verifier : IBlockVisitor<bool>
         {
-            public bool Visit(OperationNot operationNot)
+            public bool Visit(IReadOnlyOperationNot operationNot)
                 => operationNot.HasOperands() && operationNot.Operand.Accept(this);
 
-            public bool Visit(BinaryOperation binaryOperation)
+            public bool Visit(IReadOnlyBinaryOperation binaryOperation)
             {
-                Block firstOperand = binaryOperation.FirstOperand;
-                Block secondOperand = binaryOperation.SecondOperand;
+                IReadOnlyBlock firstOperand = binaryOperation.FirstOperand;
+                IReadOnlyBlock secondOperand = binaryOperation.SecondOperand;
 
                 return firstOperand != null && secondOperand != null
                     && firstOperand.Accept(this) && secondOperand.Accept(this);
             }
 
-            public bool Visit(ParameterBlock parameter)
+            public bool Visit(IReadOnlyParameterBlock parameter)
                 => true;
         }
 
