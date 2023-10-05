@@ -18,9 +18,9 @@ using View;
 using Zenject;
 using Model.BlockLogic;
 
-namespace InstallerLogic
+namespace EntryPoints
 {
-    public class LevelInstaller : MonoInstaller
+    public class LevelEntryPoint : MonoInstaller
     {
         [SerializeField] private MapView _mapView;
         [SerializeField] private BuilderView _builderView;

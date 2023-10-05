@@ -2,9 +2,9 @@ using Configs;
 using UnityEngine;
 using Zenject;
 
-namespace InstallerLogic
+namespace EntryPoints
 {
-    public class GameInstaller : MonoInstaller
+    public class GameEntryPoint : MonoInstaller
     {
         [SerializeField] private ParameterNamesConfig _parameterNamesConfig;
 
