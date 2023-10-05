@@ -2452,6 +2452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57a52382495864f4fb89e80022d8eda7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _taskViewFactory: {fileID: 11400000, guid: 7b205762f3067274098c4c7b01837f68, type: 2}
   _mapView: {fileID: 19607403}
   _builderView: {fileID: 586183810}
   _removingButton: {fileID: 8120737854257037826}
