@@ -52,7 +52,7 @@
                 2,
                 3
             ],
-            "formulaViewText": "¬(x ∧ z) ∨ y",
+            "formulaViewText": "<not>(<param=1> <and> <param=3>) <or> <param=2>",
             "formulaPraseText": "¬(x ∧ z) ∨ y"
         }
     }

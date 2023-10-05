@@ -17,11 +17,14 @@ using View.MapLogic;
 using View;
 using Zenject;
 using Model.BlockLogic;
+using UnityEngine.Rendering;
 
 namespace EntryPoints
 {
     public class LevelEntryPoint : MonoInstaller
     {
+        [SerializeField] private LevelTaskViewFactory _taskViewFactory;
+
         [SerializeField] private MapView _mapView;
         [SerializeField] private BuilderView _builderView;
         [SerializeField] private RemovingButton _removingButton;
@@ -86,6 +89,11 @@ namespace EntryPoints
         {
             BindConfigs();
             BindMappers();
+
+            FormulaMapper mapper = Container.Resolve<FormulaMapper>();
+            _taskViewFactory.Init(mapper);
+
+            Container.BindInstance(_taskViewFactory);
             BindModel();
 
             Inventory inventory = Container.Resolve<Inventory>();

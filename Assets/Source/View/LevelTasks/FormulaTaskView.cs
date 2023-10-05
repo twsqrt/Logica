@@ -1,4 +1,5 @@
-using Model.LevelTasksLogic;
+using Configs.LevelConfigs.LevelTasksConfigs;
+using Mappers;
 using TMPro;
 using UnityEngine;
 
@@ -8,9 +9,9 @@ namespace View.LevelTasksLogic
     {
         [SerializeField] private TextMeshProUGUI _formulaText;
 
-        public void Init(FormulaTask task)
+        public void Init(FormulaTaskConfig taskConfig, FormulaMapper mapper)
         {
-            _formulaText.text= task.TaskConfig.ViewText;
+            _formulaText.text= mapper.From(taskConfig.ViewText);
         }
     }
 }

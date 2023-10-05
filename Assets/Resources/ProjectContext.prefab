@@ -75,3 +75,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parameterNamesConfig: {fileID: 11400000, guid: ef425b19b5069844eaca50b8f2b0572e, type: 2}
+  _taskViewFactory: {fileID: 11400000, guid: 7b205762f3067274098c4c7b01837f68, type: 2}
