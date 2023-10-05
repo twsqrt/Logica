@@ -20,6 +20,9 @@ namespace Configs
         [SerializeField] private ParameterConfig[] _parameters;
 
         private Dictionary<int, string> _parametersDictionary = null;
+
+        public Dictionary<int, string> ToDictionary()
+            => _parameters.ToDictionary(p => p.Id, p => p.Name);
         
         public string this[int id]
         {
