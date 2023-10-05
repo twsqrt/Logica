@@ -16,6 +16,7 @@ using View.LevelTasksLogic;
 using View.MapLogic;
 using View;
 using Zenject;
+using Model.BlockLogic;
 
 namespace InstallerLogic
 {
@@ -59,8 +60,14 @@ namespace InstallerLogic
 
         private void BindModel()
         {
+
             Container.Bind<Map>().AsSingle();
+            Container.Bind<ReadOnlyMap>().AsSingle();
+
+            Container.Bind<BlockFactory>().AsSingle();
+            Container.Bind<BlockBuilder>().AsSingle();
             Container.Bind<Inventory>().AsSingle();
+
             Container.Bind<BlockTree>().AsSingle();
             Container.Bind<FormulaTask>().AsSingle();
         }
@@ -70,6 +77,7 @@ namespace InstallerLogic
             Container.Bind<PlacingPresenter>().AsSingle();
             Container.Bind<RemovingPresenter>().AsSingle();
             Container.Bind<BuilderPresenter>().AsSingle();
+
             Container.Bind<PlayerFormulaPresenter>().AsSingle();
             Container.Bind<ExecutionPresenter>().AsSingle();
         }
@@ -89,7 +97,6 @@ namespace InstallerLogic
         public override void InstallBindings()
         {
             BindConfigs();
-            Container.Bind<BlockFactory>().AsSingle();
             BindConverters();
             BindModel();
 
