@@ -35,7 +35,7 @@ namespace EntryPoints
 
         private void BindConfigs()
         {
-            LevelConfig levelConfig = LevelConfigLoader.Load("level.json");
+            LevelConfig levelConfig = LevelConfigLoader.Load("level");
 
             Container.BindInstance(levelConfig.Map);
             Container.BindInstance(levelConfig.Inventory);
