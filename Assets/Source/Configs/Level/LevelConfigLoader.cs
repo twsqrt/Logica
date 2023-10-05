@@ -6,10 +6,12 @@ namespace Configs.LevelConfigs
 {
     public static class LevelConfigLoader
     {
-        public static LevelConfig Load(string fileName)
+        private static readonly string PATH_FORMAT = Application.dataPath + "/Resources/Levels/{0}.json";
+
+        public static LevelConfig Load(string levelName)
         {
-            string fullPath = Application.dataPath + "/Resources/Configs/" + fileName;
-            string jsonValue = File.ReadAllText(fullPath);
+            string path = string.Format(PATH_FORMAT, levelName);
+            string jsonValue = File.ReadAllText(path);
             return JsonConvert.DeserializeObject<LevelConfig>(jsonValue);
         }
     }
