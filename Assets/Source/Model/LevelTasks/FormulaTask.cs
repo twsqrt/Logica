@@ -1,6 +1,6 @@
 using Configs.LevelConfigs.LevelTasksConfigs;
-using Converter;
 using Extensions;
+using Mappers;
 using Model.TreeLogic;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ namespace Model.LevelTasksLogic
 {
     public class FormulaTask : ILevelTask
     {
-        private readonly IConverter<BlockTree, Delegate> _treeToDelegate;
+        private readonly DelegateMapper _delegateMaper;
         private readonly BlockTree _tree;
         private readonly IEnumerable<IEnumerable<bool>> _definitionArea;
         private readonly Delegate _sourceFunction;
@@ -18,26 +18,22 @@ namespace Model.LevelTasksLogic
 
         public FormulaTaskConfig TaskConfig => _taskConfig;
 
-        public FormulaTask(
-            BlockTree tree, 
-            FormulaTaskConfig taskConfig, 
-            IConverter<string, Delegate> fromConfigString, 
-            IConverter<BlockTree, Delegate> fromTree)
+        public FormulaTask(BlockTree tree, FormulaTaskConfig taskConfig, DelegateMapper delegateMapper)
         {
-            _treeToDelegate = fromTree;
             _tree = tree;
+            _delegateMaper = delegateMapper;
             _taskConfig = taskConfig;
 
             IEnumerable<bool> booleanDomain = new[]{false, true};
             int numberOfParameters = taskConfig.ParametersId.Count();
             _definitionArea = booleanDomain.InPower(numberOfParameters).Select(s => s.ToArray());
 
-            _sourceFunction = fromConfigString.Convert(taskConfig.ParseText);
+            _sourceFunction = _delegateMaper.From(taskConfig.ParseText);
         }
 
         public bool CheckCompletion()
         {
-            Delegate playerFunction = _treeToDelegate.Convert(_tree);
+            Delegate playerFunction = _delegateMaper.From(_tree);
             foreach(IEnumerable<bool> parameters in _definitionArea)
             {
                 object[] dynamicInvokeParameters = parameters.Cast<object>().ToArray();

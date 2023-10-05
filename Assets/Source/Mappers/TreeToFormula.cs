@@ -4,9 +4,9 @@ using Model.BlocksLogic;
 using Model.TreeLogic;
 using System;
 
-namespace Converter
+namespace Mappers
 {
-    public class TreeToViewString : IConverter<BlockTree, string>
+    public class TreeToFormula
     {
         private class Visitor : IBlockVisitor<string>
         {
@@ -71,7 +71,7 @@ namespace Converter
 
         private readonly Visitor _visitor;
 
-        public TreeToViewString(ParameterNamesConfig parametersConfig)
+        public TreeToFormula(ParameterNamesConfig parametersConfig)
         {
             _visitor = new Visitor(parametersConfig);
         }

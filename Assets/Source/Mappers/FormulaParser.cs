@@ -1,18 +1,17 @@
-using System;
 using System.Collections.Generic;
 using System.Text;
 using Configs;
 
-namespace Converter
+namespace Mappers
 {
-    public class ConfigStringToViewString : IConverter<string, string>
+    public class FormulaParser
     {
         private const string PARAMETER_TAG_FORMAT = "<param={0}>";
 
         private readonly ParameterNamesConfig _parameterNamesConifg;
         private readonly Dictionary<string, char> _operationTags;
 
-        public ConfigStringToViewString(ParameterNamesConfig parameterNamesConfig)
+        public FormulaParser(ParameterNamesConfig parameterNamesConfig)
         {
             _parameterNamesConifg = parameterNamesConfig;
 
@@ -41,7 +40,7 @@ namespace Converter
             }
         }
 
-        public string Convert(string input)
+        public string Parse(string input)
         {
             var sb = new StringBuilder(input);
 

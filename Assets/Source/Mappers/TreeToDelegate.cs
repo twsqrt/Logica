@@ -7,9 +7,9 @@ using System.Linq;
 using System;
 using Configs.LevelConfigs.LevelTasksConfigs;
 
-namespace Converter
+namespace Mappers
 {
-    public class TreeToDelegate : IConverter<BlockTree, Delegate>
+    public class TreeToDelegate
     {
         private class Visitor : IBlockVisitor<Expression>
         {

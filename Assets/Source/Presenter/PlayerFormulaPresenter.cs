@@ -1,20 +1,20 @@
-using Converter;
 using Model.TreeLogic;
+using Mappers;
 
 namespace Presenter
 {
     public class PlayerFormulaPresenter
     {
         private readonly BlockTree _tree;
-        private readonly IConverter<BlockTree, string> _converter;
+        private readonly FormulaMapper _stringMapper;
 
         public string GetFormulaString()
-            => _converter.Convert(_tree);
+            => _stringMapper.From(_tree);
 
-        public PlayerFormulaPresenter(BlockTree tree, IConverter<BlockTree, string> conveter)
+        public PlayerFormulaPresenter(BlockTree tree, FormulaMapper stringMapper)
         {
             _tree = tree;
-            _converter = conveter;
+            _stringMapper = stringMapper;
         }
     }
 }

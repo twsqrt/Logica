@@ -1,5 +1,5 @@
 using Configs.LevelConfigs;
-using Converter;
+using Mappers;
 using Model.BlocksLogic.OperationBlocksLogic;
 using Model.BlocksLogic;
 using Model.InventoryLogic;
@@ -40,22 +40,10 @@ namespace EntryPoints
             Container.BindInstance(levelConfig.Tasks.FormulaTask);
         }
 
-        private void BindConverters()
+        private void BindMappers()
         {
-            Container
-                .Bind<IConverter<string, Delegate>>()
-                .To<ConfigStringToDelegate>()
-                .AsSingle();
-            
-            Container
-                .Bind<IConverter<BlockTree, string>>()
-                .To<TreeToViewString>()
-                .AsSingle();
-            
-            Container
-                .Bind<IConverter<BlockTree, Delegate>>()
-                .To<TreeToDelegate>()
-                .AsSingle();
+            Container.Bind<FormulaMapper>().AsSingle();
+            Container.Bind<DelegateMapper>().AsSingle();
         }
 
         private void BindModel()
@@ -97,7 +85,7 @@ namespace EntryPoints
         public override void InstallBindings()
         {
             BindConfigs();
-            BindConverters();
+            BindMappers();
             BindModel();
 
             Inventory inventory = Container.Resolve<Inventory>();
