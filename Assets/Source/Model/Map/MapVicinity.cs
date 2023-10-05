@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using Extensions;
 using Model.BlocksLogic;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 namespace Model.MapLogic
@@ -11,7 +9,6 @@ namespace Model.MapLogic
         private readonly static Vector2Int[] vectorOffsets 
             = new[]{ Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
 
-        private readonly Map _map;
         private readonly Vector2Int _center;
         private readonly Dictionary<Direction, Vector2Int> _positions;
 
@@ -30,14 +27,13 @@ namespace Model.MapLogic
 
         public MapVicinity(Map map, Vector2Int center)
         {
-            _map = map;
             _center = center;
 
             _positions = new Dictionary<Direction, Vector2Int>();
             foreach(Vector2Int offset in vectorOffsets)
             {
                 Vector2Int position = center + offset;
-                if(_map.PositionInMap(position))
+                if(map.PositionInMap(position))
                 {
                     Direction fromCenter = DirectionFromOffset(offset);
                     _positions.Add(fromCenter, position);
