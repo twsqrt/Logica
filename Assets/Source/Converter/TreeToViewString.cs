@@ -1,11 +1,8 @@
-using Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic;
-using Config;
-using Model.BlockLogic.LogicOperationLogic;
-using Model.BlockLogic;
+using Configs;
+using Model.BlocksLogic.OperationBlocksLogic;
+using Model.BlocksLogic;
 using Model.TreeLogic;
-using System.Collections.Generic;
 using System;
-using UnityEngine;
 
 namespace Converter
 {
@@ -31,7 +28,7 @@ namespace Converter
                 return (blocksThatNeedBrackets & operand) != 0;
             }
 
-            private string GetOperandText(BlockType operationType, Block operand)
+            private string GetOperandText(BlockType operationType, IReadOnlyBlock operand)
             {
                 if(operand == null)
                     return DEFAULT_OPERAND_SYMBOL.ToString();
@@ -46,18 +43,18 @@ namespace Converter
                 _parametersConfig = parametersConfig;
             }
 
-            public string Visit(OperationNot operationNot)
+            public string Visit(IReadOnlyOperationNot operationNot)
                 => '\u00AC' + GetOperandText(BlockType.OPERATION_NOT, operationNot.Operand);
 
-            public string Visit(BinaryOperation binaryOperation)
+            public string Visit(IReadOnlyBinaryOperation binaryOperation)
             {
-                LogicOperationType binaryOperationType = binaryOperation.OperationType;
+                OperationBlockType binaryOperationType = binaryOperation.OperationType;
                 char operationSymbol = binaryOperationType switch
                 {
-                    LogicOperationType.OR => '\u2228',
-                    LogicOperationType.AND => '\u2227',
-                    LogicOperationType.XOR => '\u2295',
-                    LogicOperationType.NOR => '\u2191',
+                    OperationBlockType.OR => '\u2228',
+                    OperationBlockType.AND => '\u2227',
+                    OperationBlockType.XOR => '\u2295',
+                    OperationBlockType.NOR => '\u2191',
                     _ => throw new ArgumentException($"Binary operation {binaryOperationType} not found!"),
                 };
 
@@ -68,7 +65,7 @@ namespace Converter
                 return $"{leftOperandText} {operationSymbol} {rightOperandText}";
             }
 
-            public string Visit(Parameter parameter)
+            public string Visit(IReadOnlyParameterBlock parameter)
                 => _parametersConfig[parameter.Id];
         }
 

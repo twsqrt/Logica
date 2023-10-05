@@ -1,11 +1,11 @@
-using Model.BlockLogic.BlockDataLogic;
+using Model.BlocksLogic.BlocksData;
 using UnityEngine;
-using View.BlockLogic;
+using View.Blocks.UI;
 using View.InventoryLogic.AmountLogic;
 using UnityEngine.EventSystems;
 using Veiw.InventoryLogic.AmountLogic;
 using Model.InventoryLogic.AmountLogic;
-using View.HighlighterLogic;
+using View.Highlighters;
 using System;
 
 namespace View.InventoryLogic
@@ -20,9 +20,10 @@ namespace View.InventoryLogic
 
         private IBlockData _data;
 
-        public event Action<IBlockData> OnSlotClick;
+        public event Action OnSlotClick;
 
         public IHighlighter Highlighter => _highlighter;
+        public IBlockData Data => _data;
 
         private void InitBlock()
         {
@@ -30,13 +31,13 @@ namespace View.InventoryLogic
             blockView.transform.SetParent(_blockContainer, false);
         }
 
-        private void InitAmount(IAmount amount)
+        private void InitAmount(IReadOnlyAmount amount)
         {
             AmountView amountView = amount.AcceptFactory(_amountViewFactory);
             amountView.transform.SetParent(_amountContainer, false);
         }
 
-        public void Init(IBlockData data, IAmount amount)
+        public void Init(IBlockData data, IReadOnlyAmount amount)
         {
             _data = data;
 
@@ -45,6 +46,6 @@ namespace View.InventoryLogic
         }
 
         public void OnPointerClick(PointerEventData eventData)
-            => OnSlotClick?.Invoke(_data);
+            => OnSlotClick?.Invoke();
     }
 }

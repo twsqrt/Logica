@@ -1,4 +1,4 @@
-using Config.LevelLogic.InventoryLogic;
+using Configs.LevelConfigs.InventoryConfigs;
 
 namespace Model.InventoryLogic.AmountLogic
 {

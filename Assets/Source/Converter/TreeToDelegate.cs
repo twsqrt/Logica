@@ -1,13 +1,11 @@
-using Config;
-using Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic;
-using Model.BlockLogic.LogicOperationLogic;
-using Model.BlockLogic;
+using Model.BlocksLogic.OperationBlocksLogic;
+using Model.BlocksLogic;
 using Model.TreeLogic;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Linq;
 using System;
-using Config.LevelLogic.LevelTaskLogic;
+using Configs.LevelConfigs.LevelTasksConfigs;
 
 namespace Converter
 {
@@ -31,29 +29,29 @@ namespace Converter
                     .ToDictionary(i => i, i => Expression.Parameter(typeof(bool), $"id{i}"));
             }
 
-            public Expression Visit(OperationNot operationNot)
+            public Expression Visit(IReadOnlyOperationNot operationNot)
             {
                 Expression operandExpression = operationNot.Operand.Accept(this);
                 return Expression.Not(operandExpression);
             }
 
-            public Expression Visit(BinaryOperation binaryOperation)
+            public Expression Visit(IReadOnlyBinaryOperation binaryOperation)
             {
                 Expression left = binaryOperation.FirstOperand.Accept(this);
                 Expression right = binaryOperation.SecondOperand.Accept(this);
 
-                LogicOperationType binaryOperationType = binaryOperation.OperationType;
+                OperationBlockType binaryOperationType = binaryOperation.OperationType;
                 return binaryOperationType switch
                 {
-                    LogicOperationType.OR => Expression.OrElse(left, right),
-                    LogicOperationType.AND => Expression.AndAlso(left, right),
-                    LogicOperationType.XOR => Expression.ExclusiveOr(left, right),
-                    LogicOperationType.NOR => CreateNorExpression(left, right),
+                    OperationBlockType.OR => Expression.OrElse(left, right),
+                    OperationBlockType.AND => Expression.AndAlso(left, right),
+                    OperationBlockType.XOR => Expression.ExclusiveOr(left, right),
+                    OperationBlockType.NOR => CreateNorExpression(left, right),
                     _ => throw new ArgumentException($"Binary operation {binaryOperationType} not found!"),
                 };
             }
 
-            public Expression Visit(Parameter parameter)
+            public Expression Visit(IReadOnlyParameterBlock parameter)
                 => _parameters[parameter.Id];
         }
 

@@ -230,7 +230,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _quad: {fileID: 470331084}
-  _camera: {fileID: 519420031}
   _tileContainer: {fileID: 1649900726}
   _tilePrefab: {fileID: 4884046867406124348, guid: 7f68564656f6a234e84ed8a237f85a1a, type: 3}
   _scale: 1
@@ -727,6 +726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c792a05a971ced84b995833fbc4fb6ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _camera: {fileID: 519420031}
 --- !u!4 &586183811
 Transform:
   m_ObjectHideFlags: 0
@@ -735,7 +735,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 586183809}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.7337794, y: 0.123904794, z: 0.02767805}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2677,6 +2677,58 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &1998227500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1998227501}
+  - component: {fileID: 1998227502}
+  m_Layer: 0
+  m_Name: Entry Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1998227501
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998227500}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1998227502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998227500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 273cbcaf677e5d14b81ae0eab5eaa941, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parametersConfig: {fileID: 11400000, guid: ef425b19b5069844eaca50b8f2b0572e, type: 2}
+  _mapView: {fileID: 19607403}
+  _builderView: {fileID: 586183810}
+  _removingButton: {fileID: 8120737854257037826}
+  _inventoryView: {fileID: 485455261}
+  _playerFormulaView: {fileID: 1737655134}
+  _executionButton: {fileID: 1216331798}
+  _levelTasksView: {fileID: 253794528}
 --- !u!1 &1999052328
 GameObject:
   m_ObjectHideFlags: 0

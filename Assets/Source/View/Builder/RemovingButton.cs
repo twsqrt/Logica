@@ -1,10 +1,10 @@
-using Presenter.BuilderLogic;
 using UnityEngine.EventSystems;
 using UnityEngine;
-using View.HighlighterLogic;
 using Zenject;
+using Presenter.Builder;
+using View.Highlighters;
 
-namespace Veiw.BuilderLogic
+namespace View.Builder
 {
     public class RemovingButton : MonoBehaviour, IPointerClickHandler
     {
@@ -20,6 +20,6 @@ namespace Veiw.BuilderLogic
         }
 
         public void OnPointerClick(PointerEventData eventData)
-            => _builderPresenter.ChangeState(BuilderPresenterStateType.REMOVING);
+            => _builderPresenter.SetMode(BuildingMode.REMOVING);
     }
 }

@@ -1,43 +1,54 @@
-using Config.LevelLogic.InventoryLogic;
-using Model.BlockLogic.BlockDataLogic;
-using Model.BlockLogic;
+using Configs.LevelConfigs.InventoryConfigs;
+using Model.BlocksLogic.BlocksData;
+using Model.BlocksLogic;
 using Model.InventoryLogic.AmountLogic;
 using System.Collections.Generic;
+using UnityEngine;
+using Model.BlockLogic;
+using System;
 
 namespace Model.InventoryLogic
 {
     public class Inventory
     {
-        private readonly Dictionary<IBlockData, IAmount> _blocks;
-        private readonly BlockFactory _factory;
+        private readonly Dictionary<IBlockData, IAmount> _amounts;
+        private readonly BlockBuilder _builder;
 
-        public IAmount this[IBlockData data]
-            => _blocks[data];
-
-        public IEnumerable<IBlockData> AllBlocksData
-            => _blocks.Keys;
-
-        public Inventory(BlockFactory factory, InventoryConfig config)
+        public IReadOnlyAmount this[IBlockData data]
         {
-            _factory = factory;
-
-            _blocks = new Dictionary<IBlockData, IAmount>();
-            foreach(InventorySlotConfig slot in config.Slots)
-                _blocks.Add(slot.Data, AmountFactory.Create(slot.Amount));
+            get
+            {
+                if(_amounts.TryGetValue(data, out IAmount amount))
+                    return amount;
+                return ValueAmount.Zero; 
+            }
         }
 
-        public bool TryPullOut(IBlockData data, BlockContext context, out Block block)
-        {
-            if(_blocks.TryGetValue(data, out IAmount amount ) && amount.TryDecrease(1))
-            {
-                block = _factory.Create(data, context);
-                block.OnDestroy += _ => amount.Increase(1);
+        public IEnumerable<IBlockData> AllBlocksData
+            => _amounts.Keys;
 
-                return true;
-            }
-            
-            block = null;
-            return false;
+        public Inventory(BlockBuilder builder, InventoryConfig config)
+        {
+            _builder = builder;
+
+            _amounts = new Dictionary<IBlockData, IAmount>();
+            foreach(InventorySlotConfig slot in config.Slots)
+                _amounts.Add(slot.Data, AmountFactory.Create(slot.Amount));
+        }
+
+        public bool CanPullOut(IBlockData data, Vector2Int at)
+            => _amounts.TryGetValue(data, out IAmount amount)
+            && amount.MoreThan(0)
+            && _builder.CanPlace(at);
+
+        public void PullOut(IBlockData data, Vector2Int at)
+        {
+            if(_amounts.TryGetValue(data, out IAmount amount ) == false
+                || amount.TryDecrease() == false)
+                throw new InvalidOperationException();
+
+            Block block = _builder.Place(data, at);
+            block.OnDestroy += () => amount.Increase();
         }
     }
 }

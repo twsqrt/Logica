@@ -1,7 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
-using Config;
+using Configs.LevelConfigs;
 using Extensions;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Model.MapLogic
@@ -47,15 +46,10 @@ namespace Model.MapLogic
             => position.x.IsBetween(0, _width - 1) 
             && position.y.IsBetween(0, _height - 1);
 
-        public IEnumerable<Vector2Int> GetVicinity(Vector2Int position)
-        {
-            var vicinityOffsets = new[]{ Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
-            foreach(Vector2Int vicinityOffset in vicinityOffsets)
-            {
-                Vector2Int vicinityPosition = position + vicinityOffset;
-                if(PositionInMap(vicinityPosition))
-                    yield return vicinityPosition;
-            }
-        }
+        public MapVicinity GetVicinity(Vector2Int position)
+            => new MapVicinity(this, position);
+
+        public ReadOnlyMap AsReadOnly()
+            => new ReadOnlyMap(this);
     }
 }

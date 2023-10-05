@@ -1,10 +1,8 @@
-using Model.BlockLogic.LogicOperationLogic.BinaryOperationLogic;
-using Model.BlockLogic.LogicOperationLogic;
-using Model.BlockLogic;
+using Configs.LevelConfigs;
+using Model.BlocksLogic.OperationBlocksLogic;
+using Model.BlocksLogic;
 using Model.MapLogic;
 using System;
-using UnityEngine;
-using Config;
 
 namespace Model.TreeLogic
 {
@@ -12,34 +10,34 @@ namespace Model.TreeLogic
     {
         private class Verifier : IBlockVisitor<bool>
         {
-            public bool Visit(OperationNot operationNot)
+            public bool Visit(IReadOnlyOperationNot operationNot)
                 => operationNot.HasOperands() && operationNot.Operand.Accept(this);
 
-            public bool Visit(BinaryOperation binaryOperation)
+            public bool Visit(IReadOnlyBinaryOperation binaryOperation)
             {
-                Block firstOperand = binaryOperation.FirstOperand;
-                Block secondOperand = binaryOperation.SecondOperand;
+                IReadOnlyBlock firstOperand = binaryOperation.FirstOperand;
+                IReadOnlyBlock secondOperand = binaryOperation.SecondOperand;
 
                 return firstOperand != null && secondOperand != null
                     && firstOperand.Accept(this) && secondOperand.Accept(this);
             }
 
-            public bool Visit(Parameter parameter)
+            public bool Visit(IReadOnlyParameterBlock parameter)
                 => true;
         }
 
 
         private readonly Verifier _verifier;
-        private readonly MapTile _rootTile;
+        private readonly ReadOnlyMapTile _rootTile;
 
-        private Block _currentRoot;
+        private IReadOnlyBlock _currentRoot;
 
         public event Action OnChanged;
 
-        public Block CurrentRoot => _currentRoot;
+        public IReadOnlyBlock CurrentRoot => _currentRoot;
         public bool IsEmpty => _currentRoot == null;
 
-        private void SetRoot(Block root)
+        private void SetRoot(IReadOnlyBlock root)
         {
             _currentRoot = root;
             root.OnSubTreeChanged += () => OnChanged?.Invoke();
@@ -52,7 +50,7 @@ namespace Model.TreeLogic
             OnChanged?.Invoke();
         }
 
-        public BlockTree(TreeConfig config, Map map)
+        public BlockTree(TreeConfig config, ReadOnlyMap map)
         {
             _verifier = new Verifier();
             _rootTile = map[config.RootPosition];

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Presenter.BuilderLogic
+namespace Presenter.Builder
 {
     public abstract class BuilderPresenterState
     {

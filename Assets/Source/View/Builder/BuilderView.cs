@@ -1,25 +1,24 @@
-using Model;
-using Presenter.BuilderLogic;
+using Presenter.Builder;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 using UnityEngine;
-using View.HighlighterLogic;
+using View.Highlighters;
 using View.MapLogic;
 using Zenject;
 
-namespace View.BuilderLogic
+namespace View.Builder
 {
     public class BuilderView : MonoBehaviour
     {
+        [SerializeField] private Camera _camera;
+
         private MapView _mapView;
         private BuilderPresenter _presenter;
-
         private IEnumerable<IHighlighter> _activeHighlihghters;
 
-        private void HighilghtPositions(IEnumerable<Vector2Int> positions)
+        private void HighilghtPositions()
         {
-            _activeHighlihghters = positions.Select(p => _mapView[p].Highlighter).ToArray();
+            _activeHighlihghters = _presenter.CorrectPositions.Select(p => _mapView[p].Highlighter).ToArray();
             foreach(IHighlighter highlighter in _activeHighlihghters)
                 highlighter.HighlightEnable();
         }
@@ -30,20 +29,31 @@ namespace View.BuilderLogic
                 highlighter.HighlightDisable();
         }
 
-        private void HighlightRefresh(IEnumerable<Vector2Int> positions)
+        private void HighlightRefresh()
         {
             HighlightDisable();
-            HighilghtPositions(positions);
+            HighilghtPositions();
+        }
+
+        private void Update()
+        {
+            if(Input.GetMouseButtonUp(0))
+            {
+                Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+                if(_mapView.TryGetPosition(ray, out Vector2Int position))
+                    _presenter.OnPositionSelected(position);
+            }
         }
 
         [Inject] private void Init(MapView mapView, BuilderPresenter presenter)
         {
             _mapView = mapView;
-            _mapView.OnTileClicked += p => presenter.OnPositionSelected(p);
-
             _presenter = presenter;
-            HighilghtPositions(presenter.CorrectPositions);
-            _presenter.OnCorrectPositionsChanged += HighlightRefresh;
+
+            _presenter.OnModeChanged += _ => HighlightRefresh();
+            _presenter.OnExecuted += () => HighlightRefresh();
+
+            HighilghtPositions();
         }
     }
 }

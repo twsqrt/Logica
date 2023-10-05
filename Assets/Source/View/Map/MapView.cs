@@ -8,14 +8,11 @@ namespace View.MapLogic
     public class MapView : MonoBehaviour
     {
         [SerializeField] private MeshCollider _quad;
-        [SerializeField] private Camera _camera;
         [SerializeField] private Transform _tileContainer;
         [SerializeField] private MapTileView _tilePrefab;
         [SerializeField] private float _scale;
 
         private const int MAP_COLLIDER_LAYER = 1 << 3; 
-
-        public event Action<Vector2Int> OnTileClicked;
 
         private int _width;
         private int _height;
@@ -36,7 +33,7 @@ namespace View.MapLogic
         public MapTileView this[Vector2Int position] 
             => this[position.x, position.y];
 
-        private void Render(Map map)
+        private void Render(ReadOnlyMap map)
         {
             Vector3 offset = new Vector3(map.Width - 1f, map.Height - 1f, 0f) * 0.5f * _scale;
             for(int i =0; i < map.Width; i++)
@@ -52,7 +49,7 @@ namespace View.MapLogic
             }
         }
 
-        [Inject] private void Init(Map map)
+        [Inject] private void Init(ReadOnlyMap map)
         {
             _width = map.Width;
             _height = map.Height;
@@ -60,13 +57,6 @@ namespace View.MapLogic
 
             _quad.transform.localScale = new Vector3(_width, _height, 1f) * _scale;
             Render(map);
-        }
-
-
-        private void CleanUp()
-        {
-            foreach(MapTileView view in _tileContainer.GetComponents<MapTileView>())
-                Destroy(view);
         }
 
         public bool TryGetPosition(Ray ray, out Vector2Int position)
@@ -82,16 +72,6 @@ namespace View.MapLogic
 
             position = Vector2Int.zero;
             return false;
-        }
-
-        private void Update()
-        {
-            if(Input.GetMouseButtonUp(0))
-            {
-                Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-                if(TryGetPosition(ray, out Vector2Int position))
-                    OnTileClicked?.Invoke(position);
-            }
         }
     }
 }

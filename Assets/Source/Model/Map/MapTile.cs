@@ -1,6 +1,5 @@
 using System;
-using Model.BlockLogic;
-using UnityEngine;
+using Model.BlocksLogic;
 
 namespace Model.MapLogic
 {
@@ -34,5 +33,8 @@ namespace Model.MapLogic
             _block = null;
             OnBlockRemoved?.Invoke();
         }
+
+        public ReadOnlyMapTile AsReadOnly()
+            => new ReadOnlyMapTile(this);
     }
 }

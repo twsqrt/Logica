@@ -4,33 +4,24 @@ using System.Linq;
 using System;
 using Model.MapLogic;
 
-namespace Presenter.BuilderLogic
+namespace Presenter.Builder
 {
     public class BuilderPresenter
     {
-        private readonly Dictionary<BuilderPresenterStateType, BuilderPresenterState> _states;
+        private readonly BuilderPresenterState _placingState;
+        private readonly BuilderPresenterState _removingState;
         private readonly IEnumerable<Vector2Int> _allPositions;
 
+        private BuildingMode _currentMode;
         private BuilderPresenterState _currentState; 
-        private BuilderPresenterStateType _currentStateType;
-        private IEnumerable<Vector2Int> _correctPositions;
 
-        public IEnumerable<Vector2Int> CorrectPositions => _correctPositions;
+        public IEnumerable<Vector2Int> CorrectPositions 
+            => _allPositions.Where(_currentState.IsPositionCorrect);
+        
+        public BuildingMode Mode => _currentMode;
 
-        public event Action<BuilderPresenterStateType> OnStateChanged;
-        public event Action<IEnumerable<Vector2Int>> OnCorrectPositionsChanged;
-
-        private void UpdateCorrectPositions()
-        {
-            _correctPositions = _allPositions.Where(_currentState.IsPositionCorrect);
-            OnCorrectPositionsChanged?.Invoke(_correctPositions);
-        }
-
-        private void EnterCurrentState()
-        {
-            _currentState.Enter();
-            UpdateCorrectPositions();
-        }
+        public event Action<BuildingMode> OnModeChanged;
+        public event Action OnExecuted;
 
         public BuilderPresenter(Map map, PlacingPresenter placing, RemovingPresenter removing)
         {
@@ -38,35 +29,31 @@ namespace Presenter.BuilderLogic
             IEnumerable<int> heightRange = Enumerable.Range(0, map.Height);
             _allPositions = widthRange.SelectMany( _ => heightRange, (x, y) => new Vector2Int(x, y));
 
-            _states = new Dictionary<BuilderPresenterStateType, BuilderPresenterState>()
-            {
-                {BuilderPresenterStateType.PLACING, placing},
-                {BuilderPresenterStateType.REMOVING, removing},
-            };
-
-            _currentStateType = BuilderPresenterStateType.PLACING;
-            _currentState = _states[_currentStateType];
-            EnterCurrentState();
+            _placingState = placing;
+            _removingState = removing;
+            _currentState = placing;
+            _currentMode = BuildingMode.PLACING;
+            _currentState.Enter();
         }
 
-        public void ChangeState(BuilderPresenterStateType newStateType)
+        public void SetMode(BuildingMode mode)
         {
-            if(_currentStateType != newStateType)
-            {
-                _currentState.Exit();
+            _currentState.Exit();
 
-                _currentStateType = newStateType;
-                _currentState = _states[newStateType];
-                EnterCurrentState();
-
-                OnStateChanged?.Invoke(newStateType);
-            }
+            if(mode == BuildingMode.PLACING)
+                _currentState = _placingState;
+            else
+                _currentState = _removingState;
+            
+            _currentState.Enter();
+            _currentMode = mode;
+            OnModeChanged.Invoke(mode);
         }
 
         public void OnPositionSelected(Vector2Int position)
         {
             if(_currentState.TryExecute(position))
-                UpdateCorrectPositions();
+                OnExecuted?.Invoke();
         }
     }
 }

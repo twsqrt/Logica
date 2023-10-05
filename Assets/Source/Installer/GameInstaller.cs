@@ -1,4 +1,4 @@
-using Config;
+using Configs;
 using UnityEngine;
 using Zenject;
 

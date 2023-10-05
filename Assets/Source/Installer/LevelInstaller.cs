@@ -1,19 +1,18 @@
-using Config;
+using Configs.LevelConfigs;
 using Converter;
-using Model.BlockLogic.LogicOperationLogic;
-using Model.BlockLogic;
+using Model.BlocksLogic.OperationBlocksLogic;
+using Model.BlocksLogic;
 using Model.InventoryLogic;
-using Model.LevelTaskLogic;
+using Model.LevelTasksLogic;
 using Model.MapLogic;
 using Model.TreeLogic;
-using Presenter.BuilderLogic;
+using Presenter.Builder;
 using Presenter;
 using System;
 using UnityEngine;
-using Veiw.BuilderLogic;
-using View.BuilderLogic;
+using View.Builder;
 using View.InventoryLogic;
-using View.LevelTaskLogic;
+using View.LevelTasksLogic;
 using View.MapLogic;
 using View;
 using Zenject;
@@ -42,11 +41,6 @@ namespace InstallerLogic
 
         private void BindConverters()
         {
-            Container
-                .Bind<IConverter<Vector2Int, Direction>>()
-                .To<VectorToDirection>()
-                .AsSingle();
-            
             Container
                 .Bind<IConverter<string, Delegate>>()
                 .To<ConfigStringToDelegate>()
@@ -105,13 +99,13 @@ namespace InstallerLogic
             var amountTaskBuilder = new AmountTaskBuilder();
             AmountTask amountTask2Stars = amountTaskBuilder
                 .StartBuilding()
-                .RegisterOperation(LogicOperationType.NOT, 8)
-                .RegisterOperation(LogicOperationType.OR, 4)
+                .RegisterOperation(OperationBlockType.NOT, 8)
+                .RegisterOperation(OperationBlockType.OR, 4)
                 .Build(inventory);
 
             AmountTask amountTask3Stars = amountTaskBuilder
                 .StartBuilding()
-                .RegisterOperation(LogicOperationType.OR, 5)
+                .RegisterOperation(OperationBlockType.OR, 5)
                 .Build(inventory);
             
             var levelTasksBuilder = new LevelTasksBuilder();
