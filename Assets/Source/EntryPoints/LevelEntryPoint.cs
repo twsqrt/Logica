@@ -31,6 +31,7 @@ namespace EntryPoints
         [SerializeField] private RemovingButton _removingButton;
         [SerializeField] private InventoryView _inventoryView;
         [SerializeField] private PlayerFormulaView _playerFormulaView;
+        [SerializeField] private FormulaTaskView _formulaTaskView;
         [SerializeField] private TreeExecutionButton _treeExecutionButton;
         [SerializeField] private LevelTasksView _levelTasksView;
 
@@ -80,7 +81,10 @@ namespace EntryPoints
             Container.BindInstance(_mapView).NonLazy();
             Container.BindInstance(_builderView).NonLazy();
             Container.BindInstance(_inventoryView).NonLazy();
+
             Container.BindInstance(_playerFormulaView).NonLazy();
+            Container.BindInstance(_formulaTaskView).NonLazy();
+
             Container.BindInstance(_levelTasksView).NonLazy();
 
             Container.BindInstance(_removingButton).NonLazy();
@@ -91,10 +95,6 @@ namespace EntryPoints
         {
             BindConfigs();
             BindMappers();
-
-            FormulaMapper mapper = Container.Resolve<FormulaMapper>();
-            _taskViewFactory.Init(mapper);
-
             Container.BindInstance(_taskViewFactory);
             BindModel();
 

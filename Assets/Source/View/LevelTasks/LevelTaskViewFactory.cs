@@ -12,18 +12,10 @@ namespace View.LevelTasksLogic
         [SerializeField] private FormulaTaskView _formulataTaskPrefab;
         [SerializeField] private AmountTaskView _amountTaksPrefab;
 
-        private FormulaMapper _formulaMapper;
-
-        //template solution
-        public void Init(FormulaMapper formulaMapper)
-        {
-            _formulaMapper = formulaMapper;
-        }
-
         public LevelTaskView Visit(FormulaTask formulaTask)
         {
             FormulaTaskView view =  Instantiate(_formulataTaskPrefab);
-            view.Init(formulaTask.TaskConfig, _formulaMapper);
+            view.Init(formulaTask.TaskConfig);
             return view;
         }
 

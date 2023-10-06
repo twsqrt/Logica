@@ -396,6 +396,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 121169501}
   m_CullTransparentMesh: 1
+--- !u!114 &199478476 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6654310030581979926, guid: e7b8567766c8adf44b87cca348fbee85, type: 3}
+  m_PrefabInstance: {fileID: 883783212}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &253794525
 GameObject:
   m_ObjectHideFlags: 0
@@ -1387,7 +1398,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6654310030581979926, guid: e7b8567766c8adf44b87cca348fbee85, type: 3}
       propertyPath: m_text
-      value: "\xAC(x \u2227 z) \u2228 y"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6654310030581979926, guid: e7b8567766c8adf44b87cca348fbee85, type: 3}
       propertyPath: m_fontStyle
@@ -2458,6 +2469,7 @@ MonoBehaviour:
   _removingButton: {fileID: 8120737854257037826}
   _inventoryView: {fileID: 485455261}
   _playerFormulaView: {fileID: 1737655134}
+  _formulaTaskView: {fileID: 1680066011}
   _treeExecutionButton: {fileID: 1216331798}
   _levelTasksView: {fileID: 253794528}
 --- !u!114 &1654748140
@@ -2575,6 +2587,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1680066008 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3981822553273263458, guid: e7b8567766c8adf44b87cca348fbee85, type: 3}
+  m_PrefabInstance: {fileID: 883783212}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1680066011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680066008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8da041922d816e94391e7213b2c1f004, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _formulaText: {fileID: 199478476}
+  _parser: {fileID: 11400000, guid: e8cfec4c123083b4f86e26727aa39cb9, type: 2}
 --- !u!1 &1737655132 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3981822553273263458, guid: e7b8567766c8adf44b87cca348fbee85, type: 3}

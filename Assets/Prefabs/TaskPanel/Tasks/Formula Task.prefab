@@ -196,6 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _formulaText: {fileID: 6181406497322077707}
+  _parser: {fileID: 11400000, guid: e8cfec4c123083b4f86e26727aa39cb9, type: 2}
 --- !u!1001 &689085661256668445
 PrefabInstance:
   m_ObjectHideFlags: 0
