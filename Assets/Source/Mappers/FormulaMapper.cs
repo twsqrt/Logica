@@ -8,10 +8,10 @@ namespace Mappers
         private readonly FormulaParser _parser;
         private readonly TreeToFormula _treeConverter;
 
-        public FormulaMapper(FormulaConfig formulaConfig)
+        public FormulaMapper(FormulaConfig formulaConfig, FormulaParser parser)
         {
             _treeConverter = new TreeToFormula(formulaConfig);
-            _parser = new FormulaParser(formulaConfig.ParameterNames);
+            _parser = parser;
         }
 
         public string From(string configString)

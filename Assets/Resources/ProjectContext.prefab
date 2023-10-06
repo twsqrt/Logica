@@ -75,3 +75,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _formulaConfig: {fileID: 11400000, guid: fc540aa77f9160544af7a95d2720abae, type: 2}
+  _formulaParser: {fileID: 11400000, guid: e8cfec4c123083b4f86e26727aa39cb9, type: 2}
