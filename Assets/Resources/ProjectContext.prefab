@@ -74,5 +74,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f684b875533a6cd4cba3c713a589dfb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _parameterNamesConfig: {fileID: 11400000, guid: ef425b19b5069844eaca50b8f2b0572e, type: 2}
-  _taskViewFactory: {fileID: 11400000, guid: 7b205762f3067274098c4c7b01837f68, type: 2}
+  _formulaConfig: {fileID: 11400000, guid: fc540aa77f9160544af7a95d2720abae, type: 2}

@@ -6,11 +6,12 @@ namespace EntryPoints
 {
     public class GameEntryPoint : MonoInstaller
     {
-        [SerializeField] private ParameterNamesConfig _parameterNamesConfig;
+        [SerializeField] private FormulaConfig _formulaConfig;
 
         public override void InstallBindings()
         {
-            Container.BindInstance(_parameterNamesConfig);
+            Container.BindInstance(_formulaConfig);
+            Container.BindInstance(_formulaConfig.ParameterNames);
         }
     }
 }

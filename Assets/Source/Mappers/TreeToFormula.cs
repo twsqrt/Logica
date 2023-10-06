@@ -10,8 +10,8 @@ namespace Mappers
     {
         private class Visitor : IBlockVisitor<string>
         {
-            private const char DEFAULT_OPERAND_SYMBOL = '_';
-            private readonly ParameterNamesConfig _parametersConfig;
+            private const string NOT_SELECTED_OPERAND_TEXT = "_";
+            private readonly FormulaConfig _formulaConfig;
 
             private bool IsBracketsNeded(BlockType operation, BlockType operand)
             {
@@ -28,19 +28,19 @@ namespace Mappers
                 return (blocksThatNeedBrackets & operand) != 0;
             }
 
-            private string GetOperandText(BlockType operationType, IReadOnlyBlock operand)
+            private string GetOperandText(BlockType blockType, IReadOnlyBlock operand)
             {
                 if(operand == null)
-                    return DEFAULT_OPERAND_SYMBOL.ToString();
+                    return NOT_SELECTED_OPERAND_TEXT;
 
                 string operandText = operand.Accept(this);
-                bool isBracketsNeded = IsBracketsNeded(operationType, operand.BlockType);
+                bool isBracketsNeded = IsBracketsNeded(blockType, operand.BlockType);
                 return isBracketsNeded ? $"({operandText})" : operandText;
             }
 
-            public Visitor(ParameterNamesConfig parametersConfig)
+            public Visitor(FormulaConfig formulaConfig)
             {
-                _parametersConfig = parametersConfig;
+                _formulaConfig = formulaConfig;
             }
 
             public string Visit(IReadOnlyOperationNot operationNot)
@@ -48,32 +48,25 @@ namespace Mappers
 
             public string Visit(IReadOnlyBinaryOperation binaryOperation)
             {
-                OperationBlockType binaryOperationType = binaryOperation.OperationType;
-                char operationSymbol = binaryOperationType switch
-                {
-                    OperationBlockType.OR => '\u2228',
-                    OperationBlockType.AND => '\u2227',
-                    OperationBlockType.XOR => '\u2295',
-                    OperationBlockType.NOR => '\u2191',
-                    _ => throw new ArgumentException($"Binary operation {binaryOperationType} not found!"),
-                };
-
-                BlockType operationType = binaryOperationType.ToBlockType();
-                string leftOperandText = GetOperandText(operationType, binaryOperation.FirstOperand);
-                string rightOperandText = GetOperandText(operationType, binaryOperation.SecondOperand);
+                OperationBlockType operationType = binaryOperation.OperationType;
+                char operationSymbol = _formulaConfig.GetOperationChar(operationType);
+                BlockType blockType = binaryOperation.BlockType;
+                
+                string leftOperandText = GetOperandText(blockType, binaryOperation.FirstOperand);
+                string rightOperandText = GetOperandText(blockType, binaryOperation.SecondOperand);
 
                 return $"{leftOperandText} {operationSymbol} {rightOperandText}";
             }
 
             public string Visit(IReadOnlyParameterBlock parameter)
-                => _parametersConfig[parameter.Id];
+                => _formulaConfig.ParameterNames[parameter.Id];
         }
 
         private readonly Visitor _visitor;
 
-        public TreeToFormula(ParameterNamesConfig parametersConfig)
+        public TreeToFormula(FormulaConfig formulaConfig)
         {
-            _visitor = new Visitor(parametersConfig);
+            _visitor = new Visitor(formulaConfig);
         }
         
         public string Convert(BlockTree tree)
