@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Model.LevelStateLogic;
 
 namespace Model.LevelTasksLogic
 {
@@ -17,11 +18,11 @@ namespace Model.LevelTasksLogic
             }
         }
 
-        private bool IsAllTaskCompleted(IEnumerable<ILevelTask> tasks)
+        private bool IsAllTaskCompleted(LevelState levelState, IEnumerable<ILevelTask> tasks)
         {
             foreach(ILevelTask task in tasks)
             {
-                if(task.CheckCompletion() == false)
+                if(task.CheckCompletion(levelState) == false)
                     return false;
             }
 
@@ -33,12 +34,12 @@ namespace Model.LevelTasksLogic
             _scoreTasks = new SortedDictionary<LevelScore, IEnumerable<ILevelTask>>(scoreTasks);
         }
 
-        public LevelScore CalculateScore()
+        public LevelScore CalculateScore(LevelState levelState)
         {
             LevelScore result = LevelScore.NOT_FINISHED;
             foreach(var (score, tasks) in _scoreTasks)
             {
-                if(IsAllTaskCompleted(tasks))
+                if(IsAllTaskCompleted(levelState, tasks))
                     result = score;
                 else
                     return result;

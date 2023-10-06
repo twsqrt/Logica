@@ -18,6 +18,7 @@ using View;
 using Zenject;
 using Model.BlockLogic;
 using UnityEngine.Rendering;
+using Model.LevelStateLogic;
 
 namespace EntryPoints
 {
@@ -61,6 +62,7 @@ namespace EntryPoints
 
             Container.Bind<BlockTree>().AsSingle();
             Container.Bind<FormulaTask>().AsSingle();
+            Container.Bind<LevelState>().AsSingle();
         }
 
         private void BindPresenters()
@@ -104,12 +106,12 @@ namespace EntryPoints
                 .StartBuilding()
                 .RegisterOperation(LogicOperationType.NOT, 8)
                 .RegisterOperation(LogicOperationType.OR, 4)
-                .Build(inventory);
+                .Build();
 
             AmountTask amountTask3Stars = amountTaskBuilder
                 .StartBuilding()
                 .RegisterOperation(LogicOperationType.OR, 5)
-                .Build(inventory);
+                .Build();
             
             var levelTasksBuilder = new LevelTasksBuilder();
             LevelTasks levelTasks = levelTasksBuilder

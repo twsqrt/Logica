@@ -5,22 +5,21 @@ using Model.TreeLogic;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Model.LevelStateLogic;
 
 namespace Model.LevelTasksLogic
 {
     public class FormulaTask : ILevelTask
     {
         private readonly DelegateMapper _delegateMaper;
-        private readonly BlockTree _tree;
         private readonly IEnumerable<IEnumerable<bool>> _definitionArea;
         private readonly TruthTable _sourceTruthTable;
         private readonly FormulaTaskConfig _taskConfig;
 
         public FormulaTaskConfig TaskConfig => _taskConfig;
 
-        public FormulaTask(BlockTree tree, FormulaTaskConfig taskConfig, DelegateMapper delegateMapper)
+        public FormulaTask(FormulaTaskConfig taskConfig, DelegateMapper delegateMapper)
         {
-            _tree = tree;
             _delegateMaper = delegateMapper;
             _sourceTruthTable = taskConfig.TruthTable;
             _taskConfig = taskConfig;
@@ -31,9 +30,9 @@ namespace Model.LevelTasksLogic
 
         }
 
-        public bool CheckCompletion()
+        public bool CheckCompletion(LevelState levelState)
         {
-            Delegate playerFunction = _delegateMaper.From(_tree);
+            Delegate playerFunction = _delegateMaper.From(levelState.Tree);
             foreach(IEnumerable<bool> parameters in _definitionArea)
             {
                 object[] dynamicInvokeParameters = parameters.Cast<object>().ToArray();

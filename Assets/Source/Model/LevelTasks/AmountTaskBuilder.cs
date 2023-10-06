@@ -34,8 +34,8 @@ namespace Model.LevelTasksLogic
             return this;
         }
 
-        public AmountTask Build(Inventory inventory)
-            => new AmountTask(inventory, _registeredLimits.ToDictionary(p => p.Key, p => p.Value));
+        public AmountTask Build()
+            => new AmountTask(_registeredLimits.ToDictionary(p => p.Key, p => p.Value));
 
         internal object RegisterOperation(object nOT, int v)
         {
