@@ -5,13 +5,13 @@ using Model.InventoryLogic;
 
 namespace Model.LevelTasksLogic
 {
-    public class AmountTask : ILevelTask
+    public class AmountSaveTask : ILevelTask
     {
         private readonly Dictionary<IBlockData, int> _amountLimits;
 
         public IReadOnlyDictionary<IBlockData, int> AmountLimits => _amountLimits;
         
-        public AmountTask(Dictionary<IBlockData, int> amountLimits)
+        public AmountSaveTask(Dictionary<IBlockData, int> amountLimits)
         {
             _amountLimits = amountLimits;
         }

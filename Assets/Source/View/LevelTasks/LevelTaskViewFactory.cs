@@ -1,5 +1,5 @@
 using Model.LevelTasksLogic;
-using View.LevelTasksLogic.AmountTaskLogic;
+using View.LevelTasksLogic.AmountSaveTaskLogic;
 using UnityEngine;
 using Mappers;
 using Zenject;
@@ -10,7 +10,7 @@ namespace View.LevelTasksLogic
     public class LevelTaskViewFactory : ScriptableObject, ILevelTaskVisitor<LevelTaskView>
     {
         [SerializeField] private FormulaTaskView _formulataTaskPrefab;
-        [SerializeField] private AmountTaskView _amountTaksPrefab;
+        [SerializeField] private AmountSaveTaskView _amountSaveTaskPrefab;
 
         public LevelTaskView Visit(FormulaTask formulaTask)
         {
@@ -19,10 +19,10 @@ namespace View.LevelTasksLogic
             return view;
         }
 
-        public LevelTaskView Visit(AmountTask amountTask)
+        public LevelTaskView Visit(AmountSaveTask amountSaveTask)
         {
-            AmountTaskView view =  Instantiate(_amountTaksPrefab);
-            view.Init(amountTask);
+            AmountSaveTaskView view =  Instantiate(_amountSaveTaskPrefab);
+            view.Init(amountSaveTask);
             return view;
         }
     }

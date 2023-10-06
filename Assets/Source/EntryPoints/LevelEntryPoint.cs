@@ -100,14 +100,14 @@ namespace EntryPoints
 
             FormulaTask formulaTask = Container.Resolve<FormulaTask>();
 
-            var amountTaskBuilder = new AmountTaskBuilder();
-            AmountTask amountTask2Stars = amountTaskBuilder
+            var amountSaveTaskBuilder = new AmountSaveTaskBuilder();
+            AmountSaveTask amountSaveTask2Stars = amountSaveTaskBuilder
                 .StartBuilding()
                 .RegisterOperation(LogicOperationType.NOT, 8)
                 .RegisterOperation(LogicOperationType.OR, 4)
                 .Build();
 
-            AmountTask amountTask3Stars = amountTaskBuilder
+            AmountSaveTask amountSaveTask3Stars = amountSaveTaskBuilder
                 .StartBuilding()
                 .RegisterOperation(LogicOperationType.OR, 5)
                 .Build();
@@ -116,8 +116,8 @@ namespace EntryPoints
             LevelTasks levelTasks = levelTasksBuilder
                 .StartBuilding()
                 .RegisterForOneStar(formulaTask)
-                .RegisterForTwoStars(amountTask2Stars)
-                .RegisterForTreeStars(amountTask3Stars)
+                .RegisterForTwoStars(amountSaveTask2Stars)
+                .RegisterForTreeStars(amountSaveTask3Stars)
                 .Build();
             
             Container.BindInstance(levelTasks);

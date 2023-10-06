@@ -7,35 +7,35 @@ using Model.InventoryLogic;
 
 namespace Model.LevelTasksLogic
 {
-    public class AmountTaskBuilder
+    public class AmountSaveTaskBuilder
     {
         private Dictionary<IBlockData, int> _registeredLimits;
 
-        public AmountTaskBuilder()
+        public AmountSaveTaskBuilder()
         {
             _registeredLimits = new Dictionary<IBlockData, int>();
         }
 
-        public AmountTaskBuilder StartBuilding()
+        public AmountSaveTaskBuilder StartBuilding()
         {
             _registeredLimits.Clear();
             return this;
         }
 
-        public AmountTaskBuilder RegisterOperation(LogicOperationType operationType, int limit)
+        public AmountSaveTaskBuilder RegisterOperation(LogicOperationType operationType, int limit)
         {
             _registeredLimits.Add(new OperationData(operationType), limit);
             return this;
         }
 
-        public AmountTaskBuilder RegisterParameter(int parameterId, int limit)
+        public AmountSaveTaskBuilder RegisterParameter(int parameterId, int limit)
         {
             _registeredLimits.Add(new ParameterData(parameterId), limit);
             return this;
         }
 
-        public AmountTask Build()
-            => new AmountTask(_registeredLimits.ToDictionary(p => p.Key, p => p.Value));
+        public AmountSaveTask Build()
+            => new AmountSaveTask(_registeredLimits.ToDictionary(p => p.Key, p => p.Value));
 
         internal object RegisterOperation(object nOT, int v)
         {
