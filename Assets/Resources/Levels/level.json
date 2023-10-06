@@ -47,13 +47,18 @@
     },
     "tasks": {
         "formulaTask": {
-            "parameters": [
-                1,
-                2,
-                3
-            ],
-            "formulaViewText": "<not>(<param=1> <and> <param=3>) <or> <param=2>",
-            "formulaPraseText": "¬(x ∧ z) ∨ y"
+            "parametersId": [1, 2, 3],
+            "formulaText": "<not>(<param=1> <and> <param=3>) <or> <param=2>",
+            "truthTable": [
+                "0, 0, 0 => 1",
+                "0, 0, 1 => 1",
+                "0, 1, 0 => 1",
+                "0, 1, 1 => 1",
+                "1, 0, 0 => 1",
+                "1, 0, 1 => 0",
+                "1, 1, 0 => 1",
+                "1, 1, 1 => 1"
+            ]
         }
     }
 }

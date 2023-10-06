@@ -11,7 +11,7 @@ namespace View.LevelTasksLogic
 
         public void Init(FormulaTaskConfig taskConfig, FormulaMapper mapper)
         {
-            _formulaText.text= mapper.From(taskConfig.ViewText);
+            _formulaText.text= mapper.From(taskConfig.FormulaText);
         }
     }
 }

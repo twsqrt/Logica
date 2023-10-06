@@ -5,9 +5,8 @@ using Model.BlocksLogic.BlocksData;
 using Model.BlocksLogic.OperationBlocksLogic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Converters;
 
-namespace Configs.LevelConfigs.JsonConverter
+namespace Configs.LevelConfigs.JsonConverters
 {
     public class BlockDataConverter : JsonConverter<IBlockData>
     {

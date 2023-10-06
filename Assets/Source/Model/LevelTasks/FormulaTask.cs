@@ -13,7 +13,7 @@ namespace Model.LevelTasksLogic
         private readonly DelegateMapper _delegateMaper;
         private readonly BlockTree _tree;
         private readonly IEnumerable<IEnumerable<bool>> _definitionArea;
-        private readonly Delegate _sourceFunction;
+        private readonly TruthTable _sourceTruthTable;
         private readonly FormulaTaskConfig _taskConfig;
 
         public FormulaTaskConfig TaskConfig => _taskConfig;
@@ -22,13 +22,13 @@ namespace Model.LevelTasksLogic
         {
             _tree = tree;
             _delegateMaper = delegateMapper;
+            _sourceTruthTable = taskConfig.TruthTable;
             _taskConfig = taskConfig;
 
             IEnumerable<bool> booleanDomain = new[]{false, true};
             int numberOfParameters = taskConfig.ParametersId.Count();
             _definitionArea = booleanDomain.InPower(numberOfParameters).Select(s => s.ToArray());
 
-            _sourceFunction = _delegateMaper.From(taskConfig.ParseText);
         }
 
         public bool CheckCompletion()
@@ -38,9 +38,8 @@ namespace Model.LevelTasksLogic
             {
                 object[] dynamicInvokeParameters = parameters.Cast<object>().ToArray();
                 bool playerFunctionResult = (bool) playerFunction.DynamicInvoke(dynamicInvokeParameters);
-                bool sourceFunctionResult = (bool) _sourceFunction.DynamicInvoke(dynamicInvokeParameters);
 
-                if(playerFunctionResult != sourceFunctionResult)
+                if(playerFunctionResult != _sourceTruthTable[parameters])
                     return false;
             }
 

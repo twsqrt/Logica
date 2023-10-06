@@ -1,16 +1,17 @@
 using System.Collections.Generic;
+using Configs.LevelConfigs.JsonConverters;
 using Newtonsoft.Json;
 
 namespace Configs.LevelConfigs.LevelTasksConfigs
 {
     public class FormulaTaskConfig
     {
-        [JsonProperty("parameters")] private int[] _parametersId;
-        [JsonProperty("formulaViewText")] private string _viewText;
-        [JsonProperty("formulaParseText")] private string _parseText;
+        [JsonProperty("parametersId")] private int[] _parametersId;
+        [JsonProperty("formulaText")] private string _formulaText;
+        [JsonProperty("truthTable")] [JsonConverter(typeof(TruthTableConverter))] private TruthTable _truthTable;
 
         public IEnumerable<int> ParametersId => _parametersId;
-        public string ViewText => _viewText;
-        public string ParseText => _parseText;
+        public string FormulaText => _formulaText;
+        public TruthTable TruthTable => _truthTable;
     }
 }

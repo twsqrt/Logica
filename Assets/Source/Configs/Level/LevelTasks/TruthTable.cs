@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Configs.LevelConfigs.LevelTasksConfigs
 {
@@ -15,7 +14,7 @@ namespace Configs.LevelConfigs.LevelTasksConfigs
                 => obj.Sum(b => b.GetHashCode());
         }
 
-        private Dictionary<IEnumerable<bool>, bool> _table;
+        private readonly Dictionary<IEnumerable<bool>, bool> _table;
 
         public bool this[IEnumerable<bool> parameters]
             => _table[parameters];
