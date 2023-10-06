@@ -4,11 +4,11 @@ namespace Model.BlocksLogic.BlocksData
 {
     public readonly struct OperationData : IBlockData
     {
-        private readonly OperationBlockType _operationType;
+        private readonly LogicOperationType _operationType;
 
-        public OperationBlockType OperationType => _operationType;
+        public LogicOperationType OperationType => _operationType;
 
-        public OperationData(OperationBlockType operationType)
+        public OperationData(LogicOperationType operationType)
         {
             _operationType = operationType;
         }

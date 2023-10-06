@@ -18,7 +18,7 @@ namespace Configs.LevelConfigs.JsonConverter
             BlockType blockType = jo["blockType"].ToObject<BlockType>();
             if((blockType & BlockType.LOGIC_OPERATION) != 0)
             {
-                return new OperationData((OperationBlockType)blockType);
+                return new OperationData((LogicOperationType)blockType);
             }
             else if(blockType == BlockType.PARAMETER)
             {
@@ -41,7 +41,7 @@ namespace Configs.LevelConfigs.JsonConverter
                 string typeString = (string)reader.Value;
                 BlockType blockType = Enum.Parse<BlockType>(typeString);
                 if((blockType & BlockType.LOGIC_OPERATION) != 0)
-                    return new OperationData((OperationBlockType)blockType);
+                    return new OperationData((LogicOperationType)blockType);
             }
 
             throw new ArgumentException();

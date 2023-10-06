@@ -38,7 +38,7 @@ namespace Model.BlocksLogic.OperationBlocksLogic
             base.RemoveOperand(operand);
         }
 
-        public BinaryOperation(OperationBlockType type, BlockContext context) : base(type, context)
+        public BinaryOperation(LogicOperationType type, BlockContext context) : base(type, context)
         {
             _operands = new List<Block>();
 

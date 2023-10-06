@@ -2,11 +2,11 @@ namespace Model.BlocksLogic.OperationBlocksLogic
 {
     public abstract class OperationBlock : Block, IReadOnlyOperationBlock
     {
-        protected readonly OperationBlockType _operationType;
+        protected readonly LogicOperationType _operationType;
 
-        public OperationBlockType OperationType => _operationType;
+        public LogicOperationType OperationType => _operationType;
 
-        protected OperationBlock(OperationBlockType operationType, BlockContext context) 
+        protected OperationBlock(LogicOperationType operationType, BlockContext context) 
         : base(operationType.ToBlockType(), context)
         {
             _operationType = operationType;

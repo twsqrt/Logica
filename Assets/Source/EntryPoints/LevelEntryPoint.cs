@@ -102,13 +102,13 @@ namespace EntryPoints
             var amountTaskBuilder = new AmountTaskBuilder();
             AmountTask amountTask2Stars = amountTaskBuilder
                 .StartBuilding()
-                .RegisterOperation(OperationBlockType.NOT, 8)
-                .RegisterOperation(OperationBlockType.OR, 4)
+                .RegisterOperation(LogicOperationType.NOT, 8)
+                .RegisterOperation(LogicOperationType.OR, 4)
                 .Build(inventory);
 
             AmountTask amountTask3Stars = amountTaskBuilder
                 .StartBuilding()
-                .RegisterOperation(OperationBlockType.OR, 5)
+                .RegisterOperation(LogicOperationType.OR, 5)
                 .Build(inventory);
             
             var levelTasksBuilder = new LevelTasksBuilder();

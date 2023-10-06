@@ -12,7 +12,7 @@ namespace Configs
     {
         [Serializable] private class OperationCharacter
         {
-            public OperationBlockType Type;
+            public LogicOperationType Type;
             public string HexUnicode;
         }
 
@@ -20,7 +20,7 @@ namespace Configs
         [SerializeField] private char _unknownOperation;
         [SerializeField] private ParameterNamesConfig _parameterNames;
 
-        private Dictionary<OperationBlockType, char> _charactersDictionary = null;
+        private Dictionary<LogicOperationType, char> _charactersDictionary = null;
 
         public ParameterNamesConfig ParameterNames => _parameterNames;
 
@@ -30,7 +30,7 @@ namespace Configs
             return Convert.ToChar(code);
         }
 
-        public char GetOperationChar(OperationBlockType type)
+        public char GetOperationChar(LogicOperationType type)
         {
             if(_charactersDictionary == null)
                 _charactersDictionary = _characters.ToDictionary(c => c.Type, c => ParseHexUnicode(c.HexUnicode));

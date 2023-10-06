@@ -1,6 +1,6 @@
 namespace Model.BlocksLogic.OperationBlocksLogic
 {
-    public enum OperationBlockType
+    public enum LogicOperationType
     {
         NOT = 2,
         OR = 4,
@@ -11,7 +11,7 @@ namespace Model.BlocksLogic.OperationBlocksLogic
 
     public static class OperationBlockTypeExtension
     {
-        public static BlockType ToBlockType(this OperationBlockType operationType)
+        public static BlockType ToBlockType(this LogicOperationType operationType)
             => (BlockType) operationType;
     }
 }

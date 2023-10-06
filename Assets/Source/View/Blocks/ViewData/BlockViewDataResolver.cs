@@ -16,14 +16,14 @@ namespace View.Blocks.ViewData
 
         public ParameterViewData ParameterData => _parameter;
 
-        public OperationViewData GetOperationData(OperationBlockType operationType)
+        public OperationViewData GetOperationData(LogicOperationType operationType)
             => operationType switch
         {
-            OperationBlockType.NOT => _operationNot,
-            OperationBlockType.OR => _operationOr,
-            OperationBlockType.AND => _operationAnd,
-            OperationBlockType.XOR => _operationXor,
-            OperationBlockType.NOR => _operationNor,
+            LogicOperationType.NOT => _operationNot,
+            LogicOperationType.OR => _operationOr,
+            LogicOperationType.AND => _operationAnd,
+            LogicOperationType.XOR => _operationXor,
+            LogicOperationType.NOR => _operationNor,
             _ => throw new ArgumentException($"Operation Type {operationType} not found!"),
         };
     }

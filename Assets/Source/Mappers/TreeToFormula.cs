@@ -48,7 +48,7 @@ namespace Mappers
 
             public string Visit(IReadOnlyBinaryOperation binaryOperation)
             {
-                OperationBlockType operationType = binaryOperation.OperationType;
+                LogicOperationType operationType = binaryOperation.OperationType;
                 char operationSymbol = _formulaConfig.GetOperationChar(operationType);
                 BlockType blockType = binaryOperation.BlockType;
                 

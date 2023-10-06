@@ -6,7 +6,7 @@ namespace Model.BlocksLogic.OperationBlocksLogic
 
         public IReadOnlyBlock Operand => _operand;
 
-        public OperationNot(BlockContext context) : base(OperationBlockType.NOT, context)
+        public OperationNot(BlockContext context) : base(LogicOperationType.NOT, context)
         {
             _operand = null;
         }

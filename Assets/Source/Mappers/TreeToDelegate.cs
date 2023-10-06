@@ -40,13 +40,13 @@ namespace Mappers
                 Expression left = binaryOperation.FirstOperand.Accept(this);
                 Expression right = binaryOperation.SecondOperand.Accept(this);
 
-                OperationBlockType binaryOperationType = binaryOperation.OperationType;
+                LogicOperationType binaryOperationType = binaryOperation.OperationType;
                 return binaryOperationType switch
                 {
-                    OperationBlockType.OR => Expression.OrElse(left, right),
-                    OperationBlockType.AND => Expression.AndAlso(left, right),
-                    OperationBlockType.XOR => Expression.ExclusiveOr(left, right),
-                    OperationBlockType.NOR => CreateNorExpression(left, right),
+                    LogicOperationType.OR => Expression.OrElse(left, right),
+                    LogicOperationType.AND => Expression.AndAlso(left, right),
+                    LogicOperationType.XOR => Expression.ExclusiveOr(left, right),
+                    LogicOperationType.NOR => CreateNorExpression(left, right),
                     _ => throw new ArgumentException($"Binary operation {binaryOperationType} not found!"),
                 };
             }
