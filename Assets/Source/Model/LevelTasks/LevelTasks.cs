@@ -18,34 +18,9 @@ namespace Model.LevelTasksLogic
             }
         }
 
-        private bool IsAllTaskCompleted(LevelState levelState, IEnumerable<ILevelTask> tasks)
-        {
-            foreach(ILevelTask task in tasks)
-            {
-                if(task.CheckCompletion(levelState) == false)
-                    return false;
-            }
-
-            return true;
-        }
-
         public LevelTasks(Dictionary<LevelScore, IEnumerable<ILevelTask>> scoreTasks)
         {
             _scoreTasks = new SortedDictionary<LevelScore, IEnumerable<ILevelTask>>(scoreTasks);
-        }
-
-        public LevelScore CalculateScore(LevelState levelState)
-        {
-            LevelScore result = LevelScore.NOT_FINISHED;
-            foreach(var (score, tasks) in _scoreTasks)
-            {
-                if(IsAllTaskCompleted(levelState, tasks))
-                    result = score;
-                else
-                    return result;
-            }
-
-            return LevelScore.TREE_STARS;
         }
     }
 }

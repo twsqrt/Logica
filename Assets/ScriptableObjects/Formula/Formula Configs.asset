@@ -12,6 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 591b9112a85c73049bb287d52d943f34, type: 3}
   m_Name: Formula Configs
   m_EditorClassIdentifier: 
-  _characters: []
-  _unknownOperation: 0
-  _parameterNames: {fileID: 0}
+  _characters:
+  - Type: 2
+    HexUnicode: 00ac
+  - Type: 4
+    HexUnicode: 2228
+  - Type: 8
+    HexUnicode: 2227
+  - Type: 16
+    HexUnicode: 2295
+  - Type: 32
+    HexUnicode: 2191
+  _unknownOperation: 63
+  _parameterNames: {fileID: 11400000, guid: ef425b19b5069844eaca50b8f2b0572e, type: 2}

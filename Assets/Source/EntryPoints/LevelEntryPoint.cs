@@ -31,7 +31,7 @@ namespace EntryPoints
         [SerializeField] private RemovingButton _removingButton;
         [SerializeField] private InventoryView _inventoryView;
         [SerializeField] private PlayerFormulaView _playerFormulaView;
-        [SerializeField] private ExecutionButton _executionButton;
+        [SerializeField] private TreeExecutionButton _treeExecutionButton;
         [SerializeField] private LevelTasksView _levelTasksView;
 
         private void BindConfigs()
@@ -72,7 +72,7 @@ namespace EntryPoints
             Container.Bind<BuilderPresenter>().AsSingle();
 
             Container.Bind<PlayerFormulaPresenter>().AsSingle();
-            Container.Bind<ExecutionPresenter>().AsSingle();
+            Container.Bind<FinisherPresenter>().AsSingle();
         }
 
         private void BindView()
@@ -84,7 +84,7 @@ namespace EntryPoints
             Container.BindInstance(_levelTasksView).NonLazy();
 
             Container.BindInstance(_removingButton).NonLazy();
-            Container.BindInstance(_executionButton).NonLazy();
+            Container.BindInstance(_treeExecutionButton).NonLazy();
         }
 
         public override void InstallBindings()
@@ -98,7 +98,6 @@ namespace EntryPoints
             Container.BindInstance(_taskViewFactory);
             BindModel();
 
-            Inventory inventory = Container.Resolve<Inventory>();
             FormulaTask formulaTask = Container.Resolve<FormulaTask>();
 
             var amountTaskBuilder = new AmountTaskBuilder();
@@ -122,6 +121,7 @@ namespace EntryPoints
                 .Build();
             
             Container.BindInstance(levelTasks);
+            Container.Bind<ScoreCalculator>().AsSingle();
 
             BindPresenters();
             BindView();

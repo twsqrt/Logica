@@ -12,6 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96d587d9c0afdd149a61032d13af0cc5, type: 3}
   m_Name: Formula Parser
   m_EditorClassIdentifier: 
-  _formulaConfig: {fileID: 0}
-  _tags: []
-  _parameterTagStringFormat: 
+  _formulaConfig: {fileID: 11400000, guid: fc540aa77f9160544af7a95d2720abae, type: 2}
+  _tags:
+  - Word: <not>
+    OperationType: 2
+  - Word: <or>
+    OperationType: 4
+  - Word: <and>
+    OperationType: 8
+  - Word: <xor>
+    OperationType: 16
+  - Word: <nor>
+    OperationType: 32
+  _parameterTagStringFormat: <param={0}>
