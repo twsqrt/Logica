@@ -1,4 +1,5 @@
 using System;
+using Configs.LevelConfigs.LevelTasksConfigs;
 using Model.LevelStateLogic;
 using Model.MapLogic;
 using UnityEngine;
@@ -11,9 +12,9 @@ namespace Model.LevelTasksLogic
 
         public int AreaLimit => _areaLimit;
 
-        public RectangularAreaTask(int areaLimit)
+        public RectangularAreaTask(RectangularAreaTaskConfig config)
         {
-            _areaLimit = areaLimit;
+            _areaLimit = config.AreaLimit;
         }
 
         private int CalculateVerticalBorder(ReadOnlyMap map, Func<int, int> xTransform)

@@ -8,19 +8,11 @@ namespace Model.LevelTasksLogic
     {
         private readonly LevelState _levelState;
         private readonly LevelTasks _tasks;
-        private readonly IEnumerable<LevelScore> _allScores;
 
         public ScoreCalculator(LevelState levelState, LevelTasks tasks)
         {
             _levelState = levelState;
             _tasks = tasks;
-
-            _allScores = new[]
-            {
-                LevelScore.ONE_STAR, 
-                LevelScore.TWO_STARS, 
-                LevelScore.TREE_STARS
-            };
         }
 
         private bool IsAllTaskCompleted(IEnumerable<ILevelTask> tasks)
@@ -37,7 +29,7 @@ namespace Model.LevelTasksLogic
         public LevelScore CalculateScore()
         {
             LevelScore result = LevelScore.NOT_FINISHED;
-            foreach(LevelScore score in _allScores)
+            foreach(LevelScore score in _tasks.Scores)
             {
                 if(IsAllTaskCompleted(_tasks[score]))
                     result = score;

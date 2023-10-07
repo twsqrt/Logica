@@ -15,7 +15,7 @@ namespace Configs.LevelConfigs.LevelTasksConfigs
         
         public FormulaTaskConfig FormulaTask => _formulaTask;
 
-        public IEnumerable<ITaskConfig> ScoreTasks(LevelScore levelScore)
+        public IEnumerable<ITaskConfig> GetTasks(LevelScore levelScore)
         {
             IEnumerable<TypedTaskConfig> typedTasks = levelScore switch
             {
@@ -25,6 +25,8 @@ namespace Configs.LevelConfigs.LevelTasksConfigs
                 _ => throw new ArgumentException(),
             };
 
+            if(typedTasks == null)
+                return Enumerable.Empty<ITaskConfig>(); 
             return typedTasks.Select(t => t.TaskConfig);
         }
     }

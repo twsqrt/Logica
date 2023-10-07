@@ -2,8 +2,8 @@ namespace Configs.LevelConfigs.LevelTasksConfigs
 {
     public interface ITaskConfigBasedFactory<T>
     {
-        T Create(FormulaTaskConfig formulaTask);
-        T Create(AmountSaveTaskConfig amountSaveTask);
-        T Create(RectangularAreaTaskConfig rectangularAreaTask);
+        T Create(FormulaTaskConfig formulaTaskConfig);
+        T Create(AmountSaveTaskConfig amountSaveTaskConfig);
+        T Create(RectangularAreaTaskConfig rectangularAreaTaskConfig);
     }
 }

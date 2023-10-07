@@ -19,6 +19,7 @@ using Zenject;
 using Model.BlockLogic;
 using UnityEngine.Rendering;
 using Model.LevelStateLogic;
+using Model.LevelTasks;
 
 namespace EntryPoints
 {
@@ -39,9 +40,11 @@ namespace EntryPoints
         {
             LevelConfig levelConfig = LevelConfigLoader.Load("level");
 
+            Container.BindInstance(levelConfig);
             Container.BindInstance(levelConfig.Map);
             Container.BindInstance(levelConfig.Inventory);
             Container.BindInstance(levelConfig.Tree);
+            Container.BindInstance(levelConfig.Tasks);
             Container.BindInstance(levelConfig.Tasks.FormulaTask);
         }
 
@@ -53,17 +56,19 @@ namespace EntryPoints
 
         private void BindModel()
         {
-
             Container.Bind<Map>().AsSingle();
             Container.Bind<ReadOnlyMap>().AsSingle();
 
             Container.Bind<BlockFactory>().AsSingle();
             Container.Bind<BlockBuilder>().AsSingle();
-            Container.Bind<Inventory>().AsSingle();
 
+            Container.Bind<Inventory>().AsSingle();
             Container.Bind<BlockTree>().AsSingle();
-            Container.Bind<FormulaTask>().AsSingle();
             Container.Bind<LevelState>().AsSingle();
+
+            Container.Bind<LevelTaskFactory>().AsSingle();
+            Container.Bind<LevelTasks>().AsSingle();
+            Container.Bind<ScoreCalculator>().AsSingle();
         }
 
         private void BindPresenters()
@@ -95,35 +100,8 @@ namespace EntryPoints
         {
             BindConfigs();
             BindMappers();
-            Container.BindInstance(_taskViewFactory);
+
             BindModel();
-
-            FormulaTask formulaTask = Container.Resolve<FormulaTask>();
-
-            var amountSaveTaskBuilder = new AmountSaveTaskBuilder();
-            AmountSaveTask amountSaveTask2Stars = amountSaveTaskBuilder
-                .StartBuilding()
-                .RegisterOperation(LogicOperationType.NOT, 8)
-                .RegisterOperation(LogicOperationType.OR, 4)
-                .Build();
-
-            AmountSaveTask amountSaveTask3Stars = amountSaveTaskBuilder
-                .StartBuilding()
-                .RegisterOperation(LogicOperationType.OR, 5)
-                .Build();
-            
-            var levelTasksBuilder = new LevelTasksBuilder();
-            LevelTasks levelTasks = levelTasksBuilder
-                .StartBuilding()
-                .RegisterForOneStar(formulaTask)
-                .RegisterForTwoStars(amountSaveTask2Stars)
-                .RegisterForTreeStars(amountSaveTask3Stars)
-                .RegisterForTreeStars(new RectangularAreaTask(9))
-                .Build();
-            
-            Container.BindInstance(levelTasks);
-            Container.Bind<ScoreCalculator>().AsSingle();
-
             BindPresenters();
             BindView();
         }

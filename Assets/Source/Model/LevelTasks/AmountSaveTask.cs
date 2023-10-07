@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using Model.BlocksLogic.BlocksData;
 using Model.LevelStateLogic;
 using Model.InventoryLogic;
+using Configs.LevelConfigs.LevelTasksConfigs;
+using System.Linq;
 
 namespace Model.LevelTasksLogic
 {
@@ -11,9 +13,9 @@ namespace Model.LevelTasksLogic
 
         public IReadOnlyDictionary<IBlockData, int> AmountLimits => _amountLimits;
         
-        public AmountSaveTask(Dictionary<IBlockData, int> amountLimits)
+        public AmountSaveTask(AmountSaveTaskConfig config)
         {
-            _amountLimits = amountLimits;
+            _amountLimits = config.Limits.ToDictionary(c => c.Data, c => c.Limit);
         }
 
         public bool CheckCompletion(LevelState levelState)
