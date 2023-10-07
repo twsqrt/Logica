@@ -11,7 +11,7 @@ namespace Configs.LevelConfigs.LevelTasksConfigs
         [JsonProperty("formulaTask")] private FormulaTaskConfig _formulaTask;
         [JsonProperty("oneStarTasks")] private TypedTaskConfig[] _oneStarTasks;
         [JsonProperty("twoStarsTasks")] private TypedTaskConfig[] _twoStarsTasks;
-        [JsonProperty("treeStarsTasks")] private TypedTaskConfig[] _treeStarsTasks;
+        [JsonProperty("threeStarsTasks")] private TypedTaskConfig[] _threeStarsTasks;
         
         public FormulaTaskConfig FormulaTask => _formulaTask;
 
@@ -21,7 +21,7 @@ namespace Configs.LevelConfigs.LevelTasksConfigs
             {
                 LevelScore.ONE_STAR => _oneStarTasks,
                 LevelScore.TWO_STARS => _twoStarsTasks,
-                LevelScore.TREE_STARS => _treeStarsTasks,
+                LevelScore.THREE_STARS => _threeStarsTasks,
                 _ => throw new ArgumentException(),
             };
 

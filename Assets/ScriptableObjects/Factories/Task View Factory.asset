@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _formulataTaskPrefab: {fileID: 406815737855921960, guid: 5b0103ed8f3ebef45b25ff394befbf3e, type: 3}
   _amountSaveTaskPrefab: {fileID: 5952152416386775252, guid: 25e57f4e1d844084780b698f70c4cef0, type: 3}
+  _rectangularAreaTaskPrefab: {fileID: 125819084602484439, guid: b4482cfa348fa794e9a6587216bcb75a, type: 3}

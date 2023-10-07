@@ -75,7 +75,7 @@
                 ]
             }
         ],
-        "treeSTarsTasks": [
+        "threeStarsTasks": [
             {
                 "taskType": "AMOUNT_SAVE",
                 "limits": [

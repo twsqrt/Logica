@@ -23,7 +23,7 @@ namespace Model.LevelTasksLogic
             {
                 LevelScore.ONE_STAR, 
                 LevelScore.TWO_STARS, 
-                LevelScore.TREE_STARS
+                LevelScore.THREE_STARS
             };
 
             foreach(LevelScore score in scores)

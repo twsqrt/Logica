@@ -472,7 +472,7 @@ MonoBehaviour:
   _taskViewFactory: {fileID: 11400000, guid: 7b205762f3067274098c4c7b01837f68, type: 2}
   _oneStarHeaderPrefab: {fileID: 5431912910073619436, guid: 3597f390b2bbc084bb91fa905791ae7f, type: 3}
   _twoStarsHeaderPrefab: {fileID: 5431912910073619436, guid: f1e7562ffa6256b4ca9008473942c036, type: 3}
-  _treeStarsHeaderPrefab: {fileID: 5431912910073619436, guid: e442de0a69c9aaa4090e4a6f0410bcdd, type: 3}
+  _threeStarsHeaderPrefab: {fileID: 5431912910073619436, guid: e442de0a69c9aaa4090e4a6f0410bcdd, type: 3}
   _container: {fileID: 1061808158}
 --- !u!114 &253794529
 MonoBehaviour:

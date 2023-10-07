@@ -11,7 +11,7 @@ namespace View.LevelTasksLogic
         [SerializeField] private LevelTaskViewFactory _taskViewFactory;
         [SerializeField] private RectTransform _oneStarHeaderPrefab;
         [SerializeField] private RectTransform _twoStarsHeaderPrefab;
-        [SerializeField] private RectTransform _treeStarsHeaderPrefab;
+        [SerializeField] private RectTransform _threeStarsHeaderPrefab;
         [SerializeField] private Transform _container;
 
         private Dictionary<LevelScore, RectTransform> _headherPrefabs;
@@ -26,7 +26,7 @@ namespace View.LevelTasksLogic
             {
                 {LevelScore.ONE_STAR, _oneStarHeaderPrefab},
                 {LevelScore.TWO_STARS, _twoStarsHeaderPrefab},
-                {LevelScore.TREE_STARS, _treeStarsHeaderPrefab},
+                {LevelScore.THREE_STARS, _threeStarsHeaderPrefab},
             };
 
             _levelScores = _headherPrefabs.Keys;

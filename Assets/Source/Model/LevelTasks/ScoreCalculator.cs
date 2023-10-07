@@ -37,7 +37,7 @@ namespace Model.LevelTasksLogic
                     return result;
             }
 
-            return LevelScore.TREE_STARS;
+            return LevelScore.THREE_STARS;
         }
     }
 }
