@@ -1,8 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
+using Configs.LevelConfigs.JsonConverters;
+using Newtonsoft.Json;
 
 namespace Configs.LevelConfigs.LevelTasksConfigs
 {
+    [JsonConverter(typeof(TruthTableConverter))]
     public class TruthTable
     {
         private class Comparer : IEqualityComparer<IEnumerable<bool>>

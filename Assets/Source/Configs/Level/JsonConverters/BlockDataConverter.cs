@@ -25,7 +25,7 @@ namespace Configs.LevelConfigs.JsonConverters
                 return new ParameterData(id);
             }
 
-            throw new ArgumentException();
+            throw new ArgumentException("Block type not found!");
         }
 
         public override IBlockData ReadJson(JsonReader reader, Type objectType, IBlockData existingValue, bool hasExistingValue, JsonSerializer serializer)

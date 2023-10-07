@@ -59,6 +59,37 @@
                 "1, 1, 0 => 1",
                 "1, 1, 1 => 1"
             ]
-        }
+        },
+        "oneStarTasks": [],
+        "twoStarsTasks": [
+            {
+                "taskType": "AMOUNT_SAVE",
+                "limits": [
+                    {
+                        "data": "OPERATION_NOT",
+                        "limit": 8
+                    },
+                    {
+                        "data": "OPERATION_OR",
+                        "limit": 4
+                    }
+                ]
+            }
+        ],
+        "treeSTarsTasks": [
+            {
+                "taskType": "AMOUNT_SAVE",
+                "limits": [
+                    {
+                        "data": "OPERATION_OR",
+                        "limit": 5
+                    }
+                ]
+            },
+            {
+                "taskType": "RECTANGULAR_AREA",
+                "areaLimit": 9
+            }
+        ]
     }
 }

@@ -1,13 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Configs.LevelConfigs.LevelTasksConfigs;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Dependencies.Sqlite;
-using UnityEngine;
 
 namespace Configs.LevelConfigs.JsonConverters
 {
