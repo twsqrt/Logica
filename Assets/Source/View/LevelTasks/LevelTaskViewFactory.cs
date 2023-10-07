@@ -11,6 +11,7 @@ namespace View.LevelTasksLogic
     {
         [SerializeField] private FormulaTaskView _formulataTaskPrefab;
         [SerializeField] private AmountSaveTaskView _amountSaveTaskPrefab;
+        [SerializeField] private RectangularAreaTaskView _rectangularAreaTaskPrefab;
 
         public LevelTaskView Visit(FormulaTask formulaTask)
         {
@@ -23,6 +24,13 @@ namespace View.LevelTasksLogic
         {
             AmountSaveTaskView view =  Instantiate(_amountSaveTaskPrefab);
             view.Init(amountSaveTask);
+            return view;
+        }
+
+        public LevelTaskView Visit(RectangularAreaTask rectangularAreaTask)
+        {
+            RectangularAreaTaskView view = Instantiate(_rectangularAreaTaskPrefab);
+            view.Init(rectangularAreaTask);
             return view;
         }
     }

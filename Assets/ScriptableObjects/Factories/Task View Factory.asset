@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Task View Factory
   m_EditorClassIdentifier: 
   _formulataTaskPrefab: {fileID: 406815737855921960, guid: 5b0103ed8f3ebef45b25ff394befbf3e, type: 3}
-  _amountTaksPrefab: {fileID: 5952152416386775252, guid: 25e57f4e1d844084780b698f70c4cef0, type: 3}
+  _amountSaveTaskPrefab: {fileID: 5952152416386775252, guid: 25e57f4e1d844084780b698f70c4cef0, type: 3}

@@ -4,5 +4,6 @@ namespace Model.LevelTasksLogic
     {
         T Visit(FormulaTask formulaTask);
         T Visit(AmountSaveTask amountSaveTask);
+        T Visit(RectangularAreaTask rectangularAreaTask);
     }
 }

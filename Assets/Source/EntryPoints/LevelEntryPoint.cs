@@ -118,6 +118,7 @@ namespace EntryPoints
                 .RegisterForOneStar(formulaTask)
                 .RegisterForTwoStars(amountSaveTask2Stars)
                 .RegisterForTreeStars(amountSaveTask3Stars)
+                .RegisterForTreeStars(new RectangularAreaTask(9))
                 .Build();
             
             Container.BindInstance(levelTasks);
