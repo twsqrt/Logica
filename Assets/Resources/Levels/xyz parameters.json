@@ -1,8 +1,8 @@
 {
-    "name": "first level",
+    "name": "xyz parameters",
     "map": {
         "width": 5,
-        "height": 6
+        "height": 5
     },
     "tree": {
         "rootX": 1,

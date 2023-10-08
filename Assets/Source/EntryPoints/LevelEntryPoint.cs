@@ -1,14 +1,15 @@
 using Configs.LevelConfigs;
 using Mappers;
-using Model.BlocksLogic.OperationBlocksLogic;
+using Model.BlockLogic;
 using Model.BlocksLogic;
 using Model.InventoryLogic;
+using Model.LevelStateLogic;
+using Model.LevelTasks;
 using Model.LevelTasksLogic;
 using Model.MapLogic;
 using Model.TreeLogic;
 using Presenter.Builder;
 using Presenter;
-using System;
 using UnityEngine;
 using View.Builder;
 using View.InventoryLogic;
@@ -16,17 +17,11 @@ using View.LevelTasksLogic;
 using View.MapLogic;
 using View;
 using Zenject;
-using Model.BlockLogic;
-using UnityEngine.Rendering;
-using Model.LevelStateLogic;
-using Model.LevelTasks;
 
 namespace EntryPoints
 {
     public class LevelEntryPoint : MonoInstaller
     {
-        [SerializeField] private LevelTaskViewFactory _taskViewFactory;
-
         [SerializeField] private MapView _mapView;
         [SerializeField] private BuilderView _builderView;
         [SerializeField] private RemovingButton _removingButton;
@@ -38,7 +33,10 @@ namespace EntryPoints
 
         private void BindConfigs()
         {
-            LevelConfig levelConfig = LevelConfigLoader.Load("level");
+            //LevelConfig levelConfig = LevelConfigLoader.Load("xyz parameters");
+            //LevelConfig levelConfig = LevelConfigLoader.Load("abcd parameters");
+            //LevelConfig levelConfig = LevelConfigLoader.Load("Zhegalkin polynomials");
+            LevelConfig levelConfig = LevelConfigLoader.Load("circuitry");
 
             Container.BindInstance(levelConfig);
             Container.BindInstance(levelConfig.Map);

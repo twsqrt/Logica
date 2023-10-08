@@ -1,0 +1,78 @@
+{
+    "name": "circuitry",
+    "map": {
+        "width": 5,
+        "height": 5
+    },
+    "tree": {
+        "rootX": 1,
+        "rootY": 2
+    },
+    "inventory": {
+        "slots": [
+            {
+                "data": "OPERATION_NOR",
+                "amount": "INF"
+            },
+            {
+                "data": "OPERATION_NOT",
+                "amount": 6
+            },
+            {
+                "data": {
+                    "blockType": "PARAMETER",
+                    "id": 1
+                },
+                "amount": "INF"
+            },
+            {
+                "data": {
+                    "blockType": "PARAMETER",
+                    "id": 2
+                },
+                "amount": "INF"
+            },
+            {
+                "data": {
+                    "blockType": "PARAMETER",
+                    "id": 3
+                },
+                "amount": "INF"
+            }
+        ]
+    },
+    "tasks": {
+        "formulaTask": {
+            "parametersId": [1, 2, 3],
+            "formulaText": "<not>(<param=1> <and> <param=3>) <or> <param=2>",
+            "truthTable": [
+                "0, 0, 0 => 1",
+                "0, 0, 1 => 1",
+                "0, 1, 0 => 1",
+                "0, 1, 1 => 1",
+                "1, 0, 0 => 1",
+                "1, 0, 1 => 0",
+                "1, 1, 0 => 1",
+                "1, 1, 1 => 1"
+            ]
+        },
+        "oneStarTasks": [
+            {
+                "taskType": "RECTANGULAR_AREA",
+                "areaLimit": 20
+            }
+        ],
+        "twoStarsTasks": [
+            {
+                "taskType": "RECTANGULAR_AREA",
+                "areaLimit": 15
+            }
+        ],
+        "threeStarsTasks": [
+            {
+                "taskType": "RECTANGULAR_AREA",
+                "areaLimit": 12
+            }
+        ]
+    }
+}

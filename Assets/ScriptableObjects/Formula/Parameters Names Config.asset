@@ -19,3 +19,11 @@ MonoBehaviour:
     Name: y
   - Id: 3
     Name: z
+  - Id: 4
+    Name: A
+  - Id: 5
+    Name: B
+  - Id: 6
+    Name: C
+  - Id: 7
+    Name: D
