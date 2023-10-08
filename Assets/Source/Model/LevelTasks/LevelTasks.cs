@@ -30,7 +30,7 @@ namespace Model.LevelTasksLogic
             {
                 IEnumerable<ITaskConfig> configs = config.GetTasks(score);
                 if(score == LevelScore.ONE_STAR)
-                    configs = configs.Concat(new[]{config.FormulaTask});
+                    configs = new[]{config.FormulaTask}.Concat(configs);
 
                 scoreTasks.Add(score, configs.Select(c => c.Accept(factory)));
             }
