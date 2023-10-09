@@ -35,8 +35,8 @@ namespace EntryPoints
         {
             //LevelConfig levelConfig = LevelConfigLoader.Load("xyz parameters");
             //LevelConfig levelConfig = LevelConfigLoader.Load("abcd parameters");
-            //LevelConfig levelConfig = LevelConfigLoader.Load("Zhegalkin polynomials");
-            LevelConfig levelConfig = LevelConfigLoader.Load("circuitry");
+            LevelConfig levelConfig = LevelConfigLoader.Load("Zhegalkin polynomials");
+            //LevelConfig levelConfig = LevelConfigLoader.Load("circuitry");
 
             Container.BindInstance(levelConfig);
             Container.BindInstance(levelConfig.Map);
@@ -60,7 +60,7 @@ namespace EntryPoints
             Container.Bind<BlockFactory>().AsSingle();
             Container.Bind<BlockBuilder>().AsSingle();
 
-            Container.Bind<Inventory>().AsSingle();
+            Container.BindInterfacesAndSelfTo<Inventory>().AsSingle();
             Container.Bind<BlockTree>().AsSingle();
             Container.Bind<LevelState>().AsSingle();
 

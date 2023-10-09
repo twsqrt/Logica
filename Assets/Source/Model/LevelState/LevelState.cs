@@ -18,7 +18,7 @@ namespace Model.LevelStateLogic
         }
 
         public ReadOnlyMap Map => _map.AsReadOnly();
-        public Inventory Inventory => _inventory;
+        public IReadOnlyInventory Inventory => _inventory;
         public BlockTree Tree => _tree;
     }
 }

@@ -9,7 +9,7 @@ using System;
 
 namespace Model.InventoryLogic
 {
-    public class Inventory
+    public class Inventory : IReadOnlyInventory
     {
         private readonly Dictionary<IBlockData, IAmount> _amounts;
         private readonly BlockBuilder _builder;

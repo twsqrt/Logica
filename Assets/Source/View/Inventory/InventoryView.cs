@@ -34,7 +34,7 @@ namespace View.InventoryLogic
         }
 
         [Inject] private void Init(
-            Inventory inventory, 
+            IReadOnlyInventory inventory, 
             BuilderPresenter builderPresenter, 
             PlacingPresenter placingPresenter)
         {
